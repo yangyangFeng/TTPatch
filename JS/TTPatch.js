@@ -45,6 +45,23 @@ class JSObject {
         this.__metaIsa;
         this.__className = className;
         this.__isInstance = instance ? true : false;
+        this.__count=0;
+        this.__instanceFlag='';
+    }
+    release(){
+        if(this.__count == 0){
+            
+            return true;
+        }
+        this.__count -= 1;
+        if(this.__count == 0){
+            // this=null;
+            return true;
+        }
+        return true;
+    }
+    retain(){
+        this.__count+=1;
     }
 }
 
@@ -106,8 +123,6 @@ class TTSize {
             result = oc_sendMsg(this.__isa,msg,params);
         }else{
             result = oc_sendMsg(this.__className,msg,params);
-            // this.__isa = result;
-            // this.__isInstance = true;
         }
         
         
@@ -124,15 +139,13 @@ class TTSize {
             var test = Object.valueOf(file);
             pv__import(file);
         });
-        console.log('引入文件：'+files);
-    
-
     }
 
     var pv__import = function(clsName) {
         if (!global[clsName]) {
           global[clsName] = new JSObject(clsName);
         } 
+        console.log('引入文件：'+clsName);
         return global[clsName]
       }
 
@@ -149,18 +162,47 @@ class TTSize {
     // js API
     // Oc 消息转发至 js
     global.js_msgSend=function(instance,className,method,args){
-        // 记录当前self
-        self = new JSObject(className,instance);
-        
-        console.log(instance+'调用到js func');
+        // retain self
+        var curSelf = new JSObject(className,instance);
+        curSelf.__instanceFlag = className+'-'+method;
+        pv_retainJsObject(curSelf);
+
+        console.log('🍎🍎🍎🍎oc------------->js'+'    _func_ '+className+' ************** '+method+'');
         // oc_sendMsg(instance);
         var obj         = CLASS_MAP[className];
         var imp         = obj.__methodList[method];
         var result      = imp();
-        //清空
-        self=null;
+        // release self
+        pv_releaseJsObject(curSelf);
+        console.log('self-->'+method+'释放');
         return result;
     };
+
+    pv_retainJsObject=function(obj){
+        obj.retain();
+        if(!self && !lastSelf){
+            self=obj;
+            lastSelf=obj;
+        }else{
+            self=obj;
+        }
+    }
+
+    pv_releaseJsObject=function(obj){
+        if(obj.release()){
+            if(obj.__instanceFlag==lastSelf.__instanceFlag){
+                console.log(obj.__instanceFlag+'--------self、lastSelf 已释放');
+                self=lastSelf=null;
+                
+            }else{
+                
+                console.log(obj.__instanceFlag+'--------self 已释放, lastSelf替换self');
+                obj=null;
+                self = lastSelf;
+                
+            }
+        }
+    }
 
     /**
       * 查询是否是本地JS方法，如果是则直接执行
@@ -221,6 +263,7 @@ class TTSize {
     
     global.CLASS_MAP={};
     global.self = null;
+    global.lastSelf = null;
  })();
 
 

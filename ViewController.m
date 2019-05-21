@@ -55,8 +55,8 @@
     [self performSelector:@selector(countA) withObject:nil];
     
     
-    [self addView];
-    [self.view addSubview:self.tableview];
+//    [self addView];
+//    [self.view addSubview:self.tableview];
     NSLog(@"--------%d",[self customtableView:self.tableview numberOfRowsInSection:0]);
 }
 

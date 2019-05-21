@@ -21,6 +21,7 @@ defineClass('ViewController:UIViewController',{
     },
     viewDidLoad:function(){
         self.call('ttviewDidLoad');
+        
         self.call('view').call('addSubview_',self.call('tableview'));
         // self.call('tableview')
         console.log('js调用 viewDidLoad');
@@ -30,7 +31,7 @@ defineClass('ViewController:UIViewController',{
         return 666666666;
     },
     countA:function(){
-        
+
     }
     // tableView_cellForRowAtIndexPath_:function(tableview,indexPath){
     //     var cell = UITableViewCell.call('alloc').call('initWithStyle_reuseIdentifier_',0,'cell');
