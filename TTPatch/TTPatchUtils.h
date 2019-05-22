@@ -8,11 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import <objc/runtime.h>
-
+@class JSValue;
 extern const struct TTPatchUtils {
     id          (*TTPatchDynamicMethodInvocation)           (id classOrInstance, NSString *method, NSArray *arguments);
     char *      (*TTPatchGetMethodTypes)                    (NSString *method,NSArray *arguments);
     NSString *  (*TTPatchMethodFormatterToOcFunc)           (NSString *method);
+//    id          (*TTPatchToJsObject)                        (id returnValue);
     NSString *  (*TTPatchMethodFormatterToJSFunc)           (NSString *method);
     Method      (*TTPatchGetInstanceOrClassMethodInfo)      (Class aClass,SEL aSel);
     

@@ -204,7 +204,7 @@ static IMP aspect_getMsgForwardIMP(Class aclass, SEL selector,BOOL isInstanceMet
         method = class_getClassMethod(aclass, selector);
     }
     
-    const char *encoding = method_getTypeEncoding(method)?:"v@:@";
+    const char *encoding = method_getTypeEncoding(method)?:"v@:";
     BOOL methodReturnsStructValue = encoding[0] == _C_STRUCT_B;
     if (methodReturnsStructValue) {
         @try {
@@ -227,6 +227,19 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
     if(checkRegistedMethod(method, className, !isInstanceMethod)){
         return;
     }
+    static NSSet *disallowedSelectorList;
+    static dispatch_once_t pred;
+    dispatch_once(&pred, ^{
+        disallowedSelectorList = [NSSet setWithObjects:@"retain", @"release", @"autorelease", @"forwardInvocation:", nil];
+    });
+    
+    
+    if ([disallowedSelectorList containsObject:method]) {
+        NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", method];
+//        AspectError(AspectErrorSelectorBlacklisted, errorDescription);
+        NSCAssert(NO, errorDescription);
+    }
+
     
     NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
     Class aClass = NSClassFromString(className);
@@ -279,14 +292,14 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
 #define WRAP_INVOCATION_AND_RETURN(argType,vauleType)\
 case argType:{  \
 vauleType tempArg; \
-[invocation getArgument:&tempArg atIndex:i];    \
+[invocation getArgument:&tempArg atIndex:(i)];    \
 [tempArguments addObject:@(tempArg)];  \
 }break
 
 #define WRAP_INVOCATION_ID_AND_RETURN(argType,vauleType)\
 case argType:{  \
 vauleType tempArg; \
-[invocation getArgument:&tempArg atIndex:i];    \
+[invocation getArgument:&tempArg atIndex:(i)];    \
 [tempArguments addObject:tempArg];  \
 }break
 
@@ -305,26 +318,34 @@ valueType result = [jsValue toValueFunc];    \
 
 static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL invocation_selector, NSInvocation *invocation) {
     @synchronized (self) {
-        NSLog(@"\n--------------------------- JS 调用 OC ----------------\n %@      %@",NSStringFromSelector(invocation.selector),self);
+        
         JSValue * func = [TTPatch shareInstance].context[@"js_msgSend"];
         Method methodInfo = TTPatchUtils.TTPatchGetInstanceOrClassMethodInfo([self class],invocation.selector);
-        NSLog(@"%s",method_getTypeEncoding(methodInfo));
+        
         char *returnValueType=(char *)malloc(sizeof(char *));
         strcpy(returnValueType, [invocation.methodSignature methodReturnType]);
-        unsigned int indexOffset = 2;
+        unsigned int indexOffset = 0;
         unsigned int systemMethodArgCount = (unsigned int)invocation.methodSignature.numberOfArguments;
-        if (systemMethodArgCount>indexOffset) {
-            systemMethodArgCount-=indexOffset;
-        }else{
-            systemMethodArgCount=0;
+//        if (systemMethodArgCount>indexOffset) {
+//            systemMethodArgCount-=indexOffset;
+//        }else{
+//            systemMethodArgCount=0;
+//        }
+        if (systemMethodArgCount>2) {
+            indexOffset = 2;
         }
-        
+        NSLog(@"\n--------------------------- JS 调用 OC ----------------%s \n----->%@      \n----->%@  \n----->%d",method_getTypeEncoding(methodInfo),NSStringFromSelector(invocation.selector),self,systemMethodArgCount);
         NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
         
-        for (unsigned i = 0; i < systemMethodArgCount; i++) {
-            const char *argumentType = method_copyArgumentType(methodInfo, i+indexOffset);
+        for (unsigned i = indexOffset; i < systemMethodArgCount; i++) {
+            const char *argumentType = method_copyArgumentType(methodInfo, i);
             switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
-                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
+//                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
+                case _C_ID:{  \
+                    id tempArg; \
+                    [invocation getArgument:&tempArg atIndex:(i)];    \
+                    [tempArguments addObject:tempArg];  \
+                }break;
                     WRAP_INVOCATION_AND_RETURN(_C_INT, int);
                     WRAP_INVOCATION_AND_RETURN(_C_SHT, short);
                     WRAP_INVOCATION_AND_RETURN(_C_USHT, unsigned short);
@@ -345,7 +366,7 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
         
         NSMutableArray * params = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],NSStringFromClass([self class]),TTPatchUtils.TTPatchMethodFormatterToJSFunc(NSStringFromSelector(invocation.selector))] mutableCopy];
         [params addObjectsFromArray:tempArguments];
-        JSValue *jsValue = [func callWithArguments:params];
+        __unsafe_unretained JSValue *jsValue = [func callWithArguments:params];
         guard(strcmp(returnValueType, "v")==0) else{
             switch(returnValueType[0] == 'r' ? returnValueType[1] : returnValueType[0]) {
                     WRAP_INVOCATION_ID_RETURN_VALUE(_C_ID, id, toObject);
@@ -371,9 +392,9 @@ static NSString *const AspectsForwardInvocationSelectorName = @"__aspects_forwar
 static void aspect_swizzleForwardInvocation(Class klass) {
     NSCParameterAssert(klass);
     // If there is no method, replace will act like class_addMethod.
-    IMP originalImplementation = class_replaceMethod(klass, @selector(forwardInvocation:), (IMP)__ASPECTS_ARE_BEING_CALLED__, "v@:@");
+    IMP originalImplementation = class_replaceMethod(klass, @selector(forwardInvocation:), (IMP)__ASPECTS_ARE_BEING_CALLED__, "v@:");
     if (originalImplementation) {
-        class_addMethod(klass, NSSelectorFromString(AspectsForwardInvocationSelectorName), originalImplementation, "v@:@");
+        class_addMethod(klass, NSSelectorFromString(AspectsForwardInvocationSelectorName), originalImplementation, "v@:");
     }
 //    AspectLog(@"Aspects: %@ is now aspect aware.", NSStringFromClass(klass));
 }
@@ -382,7 +403,7 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     NSCParameterAssert(selector);
     Method targetMethod = isInstanceMethod?class_getInstanceMethod(cls, selector):class_getClassMethod(cls, selector);
     IMP targetMethodIMP = method_getImplementation(targetMethod);
-    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:"v@:@";
+    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:"v@:";
     guard(aspect_isMsgForwardIMP(targetMethodIMP))else{
         
         SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, NSStringFromSelector(selector)]);
@@ -405,9 +426,9 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
                  };
     };
     
-    self[@"oc_sendMsg"] = ^(id obj,NSString* method,NSArray *arguments){
+    self[@"oc_sendMsg"] = ^(id obj,NSString* method,JSValue *arguments){
         __unsafe_unretained id __self;
-        __unsafe_unretained id params = arguments;
+        __unsafe_unretained id params = [arguments toObject];
         __self = obj;
         return TTPatchUtils.TTPatchDynamicMethodInvocation(__self,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),params);
         

@@ -78,6 +78,10 @@ static TTPatch *instance = nil;
     return script;
 }
 
+- (void)clearContext{
+    self.context = nil;
+}
+
 - (void)loadTTJSKit{
     if (!_context) {
         _context = [TTContext new];

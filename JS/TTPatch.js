@@ -37,6 +37,9 @@ class Class_obj {
             return funcImp;
         }
     }
+    __toOcObject(){
+        return this.__isa?this.__className.__isa:null;
+    }
 }
 
 class JSObject {
@@ -62,6 +65,17 @@ class JSObject {
     }
     retain(){
         this.__count+=1;
+    }
+}
+
+class MetaObject {
+    constructor(className,instance) {
+        this.__isa = instance ? instance : null;
+        this.__metaIsa;
+        this.__className = className;
+        this.__isInstance = instance ? true : false;
+        this.__count=0;
+        this.__instanceFlag='';
     }
 }
 
@@ -95,12 +109,24 @@ class TTSize {
     toOcString(){
         return '{'+this.size.width+', '+this.size.height+'}';
     }
+}
+
+class TTEdgeInsets {
+    constructor(top,left,bottom,right){
+        this.top = top;
+        this.left = left;
+        this.bottom = bottom;
+        this.right = right;
+    }
+    toOcString(){
+        return '{'+this.top+',' + this.left + ',' + this.bottom + ',' + this.right + '}';
+    }
     
 }
 
  (function() {
-
-    JSObject.prototype.call = function(msg){
+    Object.prototype = new MetaObject();
+    Object.prototype.call = function(msg){
         var obj = CLASS_MAP[this.__className];
         var isInstance = this.__isInstance;
         var result;
@@ -126,11 +152,65 @@ class TTSize {
         }
         
         
-        var jsObj = new JSObject('JSObject',result);
-        return jsObj;
+        // var jsObj = new JSObject('JSObject',result);
+        return pv_toJSObject(result);
     }
+    // JSObject.prototype=new Object();
     
-   
+   pv_toJSObject=function(arg){
+    //    if(arg instanceof Array){
+    //        var result = new Array();
+    //        arg.forEach(element => {
+    //             var jsObj = new JSObject('JSObject',element);
+    //             result.push(jsObj);
+    //        });
+    //        return result;
+    //    }else 
+       if(arg instanceof Object){
+        if(arg.hasOwnProperty('__isa')){
+            if(arg['__isInstance']){
+                 // return new JSObject(arg['__className'],arg.__isa);
+                 var cls = arg['__className'];
+                 var value = arg['__isa'];
+                 if (value instanceof Array){
+                    var result = new Array();
+                    arg.__isa.forEach(element => {
+                        var jsObj = new JSObject('JSObject',element);
+                        result.push(jsObj);
+                    });
+                    return result
+                 }
+                 else if(cls == 'react'){
+                     return new TTReact(value.x,value.y,value.width,value.height);
+                 }else if(cls == 'point'){
+                     return new TTPoint(value.x,value.y);
+                 }else if(cls == 'size'){
+                     return new TTSize(value.width,value.height);
+                 }else if(cls == 'edge'){
+                     return new TTEdgeInsets(value.top,value.left,value.bottom.value.right);
+                 }else if(  cls == 'NSArray' ||
+                            cls == 'NSMutableArray'){
+                    var result = new Array();
+                    arg.forEach(element => {
+                        var jsObj = new JSObject('JSObject',element);
+                        result.push(jsObj);
+                    });
+                    return result
+                }else if (  cls == 'NSDictionary' ||
+                            cls == 'NSMutableDictionary'){
+                    return arg.__isa;
+                }
+ 
+               
+            }
+            return new JSObject(arg.__className,arg.__isa);
+        }
+        return new JSObject('JSObject',arg);
+       }else{
+            // return new JSObject('JSObject',null);
+            return null;
+       }
+   }
 
     // 引入 UIKit class
     global._import=function(name){

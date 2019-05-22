@@ -96,40 +96,42 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
         return;
     }
     guard(systemMethodArgCount == arguments.count)else{
-//        NSAssert(NO, [NSString stringWithFormat:@"参数个数不匹配,请检查!"]);
+        NSCAssert(NO, [NSString stringWithFormat:@"参数个数不匹配,请检查!"]);
     }
     
     for (int i = 0; i < systemMethodArgCount; i++) {
         const char *argumentType = method_copyArgumentType(method, i+indexOffset);
-        switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
+        char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
+        switch(flag) {
             case _C_ID:
             {
                 __unsafe_unretained id argument = ([arguments objectAtIndex:i]);
-                guard([argument isKindOfClass:NSDictionary.class]) else{
-                    [invocation setArgument:&argument atIndex:(indexOffset + i)];
-                    continue;
-                }
+                [invocation setArgument:&argument atIndex:(2 + i)];
+                
+            }break;
+            case _C_STRUCT_B:
+            {
+                __unsafe_unretained id argument = ([arguments objectAtIndex:i]);
+             
                 NSString * clsType = [argument objectForKey:@"__className"];
-                if (clsType) {
-                    NSString *str = [argument objectForKey:@"__isa"];
-                    if ([clsType isEqualToString:@"react"]){
-                        CGRect ocBaseData = toOcCGReact(str);
-                        
-                        [invocation setArgument:&ocBaseData atIndex:(2 + i)];
-                    }else if ([clsType isEqualToString:@"point"]){
-                        CGPoint ocBaseData = toOcCGPoint(str);
-                        [invocation setArgument:&ocBaseData atIndex:(2 + i)];
-                    }
-                    else if ([clsType isEqualToString:@"size"]){
-                        CGSize ocBaseData = toOcCGSize(str);
-                        [invocation setArgument:&ocBaseData atIndex:(2 + i)];
-                    }
+                guard(clsType)else{
+                   NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
                 }
-                else{
-                    [invocation setArgument:&argument atIndex:(2 + i)];
+                NSString *str = [argument objectForKey:@"__isa"];
+                if ([clsType isEqualToString:@"react"]){
+                    CGRect ocBaseData = toOcCGReact(str);
+                    
+                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
+                }else if ([clsType isEqualToString:@"point"]){
+                    CGPoint ocBaseData = toOcCGPoint(str);
+                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
                 }
-
-            }
+                else if ([clsType isEqualToString:@"size"]){
+                    CGSize ocBaseData = toOcCGSize(str);
+                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
+                }
+                
+            }break;
             case 'c':
             {
                 JSValue *jsObj = arguments[i];
@@ -209,9 +211,67 @@ static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
     return instanceMethodInfo?instanceMethodInfo:classMethodInfo;
 }
 
+static NSDictionary* CGPointToJSObject(CGPoint point){
+    return @{@"x":@(point.x),
+             @"y":@(point.y)
+             };
+}
+
+static NSDictionary* CGSizeToJSObject(CGSize size){
+    return @{@"width":@(size.width),
+             @"height":@(size.height)
+             };
+}
+
+static NSDictionary* CGReactToJSObject(CGRect react){
+    NSMutableDictionary *reactDic = [NSMutableDictionary dictionaryWithDictionary:CGPointToJSObject(react.origin)];
+    [reactDic setDictionary:CGSizeToJSObject(react.size)];
+    return reactDic;
+}
+
+
+static NSString* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
+    return @{@"top":@(edge.top),
+             @"left":@(edge.left),
+             @"bottom":@(edge.bottom),
+             @"right":@(edge.right)
+             };
+}
+@interface TTJSObject : NSObject
++ (NSDictionary *)createJSObject:(id)__isa
+                       className:(NSString *)__className
+                      isInstance:(BOOL)__isInstance;
+@end
+@implementation TTJSObject
+
++ (NSDictionary *)createJSObject:(id)__isa
+                       className:(NSString *)__className
+                      isInstance:(BOOL)__isInstance{
+    return @{@"__isa":__isa?:[NSNull null],
+             @"__className":__className,
+             @"__isInstance":@(__isInstance)
+             };
+}
+
+@end
+
+static id ToJsObject(id returnValue,NSString *clsName){
+    if (returnValue) {
+        return [TTJSObject createJSObject:returnValue className:clsName isInstance:YES];;
+    }
+    return [TTJSObject createJSObject:nil className:clsName isInstance:NO];;
+}
+
+#define TT_RETURN_WRAP(typeChar,type)\
+case typeChar:{   \
+type instance; \
+[invocation getReturnValue:&instance];  \
+return @(instance); \
+}break;
+
 static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray *arguments){
     
-    __autoreleasing id instance = nil;
+    
     BOOL hasArgument = NO;
     TTCheckArguments(hasArgument,arguments);
     if([classOrInstance isKindOfClass:NSString.class]){
@@ -229,7 +289,7 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
         [invocation setTarget:classOrInstance];
-        NSLog(@"%@参数个数:%ld----------%@>>>>> %@",method,signature.numberOfArguments,[NSString stringWithUTF8String:signature.methodReturnType],signature);
+//        NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
         [invocation setSelector:sel_method];
         if (hasArgument) {
 //            setInvocationArguments(invocation, arguments);
@@ -237,17 +297,71 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
         }
         [invocation invoke];
         guard(strcmp(signature.methodReturnType,"v") == 0)else{
-            [invocation getReturnValue:&instance];
+            
+            const char *argumentType = signature.methodReturnType;
+            char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
+
+            switch (flag) {
+                case _C_ID:{
+                    __autoreleasing id instance = nil;
+                    [invocation getReturnValue:&instance];
+                    return ToJsObject(instance,NSStringFromClass([instance class]));
+                }break;
+                case _C_CLASS:{
+                    Class instance = nil;
+                    [invocation getReturnValue:&instance];
+                    return ToJsObject(nil,NSStringFromClass(instance));
+                }break;
+                case _C_STRUCT_B:{
+                    NSString * returnStypeStr = [NSString stringWithUTF8String:signature.methodReturnType];
+                    if ([returnStypeStr hasPrefix:@"{CGRect"]){
+                        CGRect instance;
+                        [invocation getReturnValue:&instance];
+                        return ToJsObject(CGReactToJSObject(instance),@"react");
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{CGPoint"]){
+                        CGPoint instance;
+                        [invocation getReturnValue:&instance];
+                        return ToJsObject(CGPointToJSObject(instance),@"point");
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{CGSize"]){
+                        CGSize instance;
+                        [invocation getReturnValue:&instance];
+                        return ToJsObject(CGSizeToJSObject(instance),@"size");
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{UIEdgeInsets"]){
+                        UIEdgeInsets instance;
+                        [invocation getReturnValue:&instance];
+                        return NSStringFromUIEdgeInsets(instance);
+                        return ToJsObject(UIEdgeInsetsToJSObject(instance),@"edge");
+                    }
+                    NSCAssert(NO, @"*******%@---当前结构体暂不支持",returnStypeStr);
+                }break;
+                    TT_RETURN_WRAP(_C_SHT, short);
+                    TT_RETURN_WRAP(_C_USHT, unsigned short);
+                    TT_RETURN_WRAP(_C_INT, int);
+                    TT_RETURN_WRAP(_C_UINT, unsigned int);
+                    TT_RETURN_WRAP(_C_LNG, long);
+                    TT_RETURN_WRAP(_C_ULNG, unsigned long);
+                    TT_RETURN_WRAP(_C_LNG_LNG, long long);
+                    TT_RETURN_WRAP(_C_ULNG_LNG, unsigned long long);
+                    TT_RETURN_WRAP(_C_FLT, float);
+                    TT_RETURN_WRAP(_C_DBL, double);
+                    TT_RETURN_WRAP(_C_BOOL, BOOL);
+                default:
+                    break;
+            }
+            
+           
+//            return ToJsObject(instance,signature.methodReturnType);
         }
     }else{
         
     }
 
-    return instance;
+    return nil;
     
 }
-
-
 
 
 
@@ -258,7 +372,8 @@ const struct TTPatchUtils TTPatchUtils = {
     .TTPatchGetMethodTypes                        = GetMethodTypes,
     .TTPatchMethodFormatterToOcFunc               = MethodFormatterToOcFunc,
     .TTPatchMethodFormatterToJSFunc               = MethodFormatterToJSFunc,
-    .TTPatchGetInstanceOrClassMethodInfo          = GetInstanceOrClassMethodInfo
+    .TTPatchGetInstanceOrClassMethodInfo          = GetInstanceOrClassMethodInfo,
+//    .TTPatchToJsObject                            = ToJsObject
 };
 
 

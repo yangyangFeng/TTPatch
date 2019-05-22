@@ -17,6 +17,7 @@
 - (void)evaluateScript:(NSString *)script;
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL;
 
+- (void)clearContext;
 - (NSString *)formatterJS:(NSString *)script;
 @property(nonatomic,strong,readonly)TTContext *context;
 @end

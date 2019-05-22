@@ -102,6 +102,11 @@
 //    NSLog(@"long : %s", @encode(long));
 //    
 //    NSLog(@"short : %s", @encode(short));
+
+    NSLog(@"UIEdgeInsets : %s", @encode(UIEdgeInsets));
+    NSLog(@"NSDirectionalEdgeInsets : %s", @encode(NSDirectionalEdgeInsets));
+    NSLog(@"UIOffset : %s", @encode(UIOffset));
+
 }
 
 
@@ -184,5 +189,10 @@
     return _tableview;
 }
 
-
+- (UITableView*)getTableview{
+    _tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+    _tableview.delegate =self;
+    _tableview.dataSource = self;
+    return _tableview;
+}
 @end
