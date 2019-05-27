@@ -22,7 +22,7 @@ defineClass('ViewController:UIViewController',{
         self.call('tableview').call('reloadData');
     },
     viewDidLoad:function(){
-        // self.call('ttviewDidLoad');
+        self.call('ttviewDidLoad');
         var tableview = self.call('getTableview')
         self.call('setTableview_',tableview);
         self.call('view').call('addSubview_',tableview);
@@ -31,21 +31,21 @@ defineClass('ViewController:UIViewController',{
         log('JS--------viewDidLoad');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
-        return 15;
+        return 10;
     },
     countA:function(){
 
     }
-    // ,
-    // tableView_cellForRowAtIndexPath_:function(tableview,indexPath){
-    //     var cell = UITableViewCell.call('alloc').call('initWithStyle_reuseIdentifier_',0,'cell');
-    //     // cell.call('textLabel').call('setText_',"我是第----------")
-    //     // cell.textLabel.text = "我是第----------",indexPath.call('row')+'名';
-    //     // if (indexPath.call('row') == 1) {
-    //     //     self.call('cell') = cell;
-    //     // }
-    //     return cell.__toOcObject();
-    // }
+    ,
+    tableView_cellForRowAtIndexPath_:function(tableview,indexPath){
+        let cell = UITableViewCell.call('alloc').call('initWithStyle_reuseIdentifier_',0,'cell');
+        cell.call('textLabel').call('setText_',"我是第----------"+indexPath.call('row')+'名');
+		// cell.call('textLabel').call('setText_',"我是第----------"+'名');
+        // if (indexPath.call('row') === 1) {
+        //     self.call('setCell',cell);
+        // }
+        return cell;
+    }
     
 },{
     

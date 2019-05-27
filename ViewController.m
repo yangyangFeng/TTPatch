@@ -13,11 +13,11 @@
 #import "TTPatchUtils.h"
 #import <objc/runtime.h>
 #import "TTView.h"
-
+#import "TTTableView.h"
 #define guard(condfion) if(condfion){}
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,ttprotocol>
 
-@property(nonatomic,strong)UITableView *tableview;
+@property(nonatomic,strong)TTTableView *tableview;
 @property(nonatomic,strong)NSMutableArray *watchDogs;
 @property(nonatomic,strong)UIView *cell;
 @end
@@ -180,17 +180,17 @@
     [self initJSContxtPath];
 }
 
--(UITableView *)tableview{
-    if (!_tableview) {
-        _tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
-        _tableview.delegate =self;
-        _tableview.dataSource = self;
-    }
-    return _tableview;
-}
+//-(TTTableView *)tableview{
+//    if (!_tableview) {
+//        _tableview = [[TTTableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+//        _tableview.delegate =self;
+//        _tableview.dataSource = self;
+//    }
+//    return _tableview;
+//}
 
-- (UITableView*)getTableview{
-    _tableview = [[UITableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
+- (TTTableView*)getTableview{
+    _tableview = [[TTTableView alloc] initWithFrame:self.view.bounds style:(UITableViewStylePlain)];
     _tableview.delegate =self;
     _tableview.dataSource = self;
     return _tableview;

@@ -1,4 +1,4 @@
-var global = this;
+let global = this;
 
 class Class_obj {
     constructor(className, superClassName, instancesMethods, classMethods) {
@@ -11,9 +11,9 @@ class Class_obj {
         this.__methodCache=new Array(3);
     }
     __findMethod(method,isInstanceMethod){
-        var cacheImp;
+        let cacheImp;
         this.__methodCache.forEach(({method_key,value})=>{
-            if(method == method_key){
+            if(method === method_key){
                 cacheImp=value;
             }
         });
@@ -26,39 +26,37 @@ class Class_obj {
             return cacheImp;
         }
         if (isInstanceMethod) {
-            var funcImp = this.__methodList[method];
+            let funcImp = this.__methodList[method];
             funcImp?
             this.__methodCache.push({[method]:funcImp}):null;
             return funcImp;
         }else{
-            var funcImp = this.__cls.__methodList[method];
+            let funcImp = this.__cls.__methodList[method];
             funcImp?
             this.__methodCache.push({[method]:funcImp}):null;
             return funcImp;
         }
     }
-    __toOcObject(){
-        return this.__isa?this.__className.__isa:null;
-    }
+
 }
 
 class JSObject {
     constructor(className,instance) {
         this.__isa = instance ? instance : null;
-        this.__metaIsa;
+        // this.__metaIsa;
         this.__className = className;
-        this.__isInstance = instance ? true : false;
+        // this.__isInstance = instance ? true : false;
+		this.__isInstance = !!instance;
         this.__count=0;
         this.__instanceFlag='';
     }
     release(){
-        if(this.__count == 0){
+        if(this.__count === 0){
             
             return true;
         }
         this.__count -= 1;
-        if(this.__count == 0){
-            // this=null;
+        if(this.__count === 0){
             return true;
         }
         return true;
@@ -66,14 +64,19 @@ class JSObject {
     retain(){
         this.__count+=1;
     }
+
+	__toOcObject(){
+		return this.__isa?this.__isa:null;
+	}
 }
 
 class MetaObject {
     constructor(className,instance) {
         this.__isa = instance ? instance : null;
-        this.__metaIsa;
+        // this.__metaIsa;
         this.__className = className;
-        this.__isInstance = instance ? true : false;
+        // this.__isInstance = instance ? true : false;
+		this.__isInstance = !!instance;
         this.__count=0;
         this.__instanceFlag='';
     }
@@ -97,7 +100,7 @@ class TTPoint {
         this.y = y;
     }
     toOcString(){
-        return '{'+this.origin.x+', '+this.origin.y+'}';
+        return '{'+this.x+', '+this.y+'}';
     }
 }
 
@@ -107,7 +110,7 @@ class TTSize {
         this.height = height;
     }
     toOcString(){
-        return '{'+this.size.width+', '+this.size.height+'}';
+        return '{'+this.width+', '+this.height+'}';
     }
 }
 
@@ -127,12 +130,12 @@ class TTEdgeInsets {
  (function() {
     Object.prototype = new MetaObject();
     Object.prototype.call = function(msg){
-        var obj = CLASS_MAP[this.__className];
-        var isInstance = this.__isInstance;
-        var result;
-        var params;
+        let obj = CLASS_MAP[this.__className];
+		let isInstance = this.__isInstance;
+		let result;
+		let params;
 
-        var jsMethod_IMP = pv_findJSMethodMap(obj,msg,isInstance);
+		let jsMethod_IMP = pv_findJSMethodMap(obj,msg,isInstance);
 
         for (var i=1;i< arguments.length;i++){
             if(!params) params = new Array();
@@ -154,111 +157,72 @@ class TTEdgeInsets {
         
         // var jsObj = new JSObject('JSObject',result);
         return pv_toJSObject(result);
-    }
+    };
     // JSObject.prototype=new Object();
     
-   pv_toJSObject=function(arg){
-    //    if(arg instanceof Array){
-    //        var result = new Array();
-    //        arg.forEach(element => {
-    //             var jsObj = new JSObject('JSObject',element);
-    //             result.push(jsObj);
-    //        });
-    //        return result;
-    //    }else 
-       if(arg instanceof Object){
-        if(arg.hasOwnProperty('__isa')){
-            if(arg['__isInstance']){
-                 // return new JSObject(arg['__className'],arg.__isa);
-                 var cls = arg['__className'];
-                 var value = arg['__isa'];
-                 if (value instanceof Array){
-                    var result = new Array();
-                    arg.__isa.forEach(element => {
-                        var jsObj = new JSObject('JSObject',element);
-                        result.push(jsObj);
-                    });
-                    return result
-                 }
-                 else if(cls == 'react'){
-                     return new TTReact(value.x,value.y,value.width,value.height);
-                 }else if(cls == 'point'){
-                     return new TTPoint(value.x,value.y);
-                 }else if(cls == 'size'){
-                     return new TTSize(value.width,value.height);
-                 }else if(cls == 'edge'){
-                     return new TTEdgeInsets(value.top,value.left,value.bottom.value.right);
-                 }else if(  cls == 'NSArray' ||
-                            cls == 'NSMutableArray'){
-                    var result = new Array();
-                    arg.forEach(element => {
-                        var jsObj = new JSObject('JSObject',element);
-                        result.push(jsObj);
-                    });
-                    return result
-                }else if (  cls == 'NSDictionary' ||
-                            cls == 'NSMutableDictionary'){
-                    return arg.__isa;
-                }
- 
-               
-            }
-            return new JSObject(arg.__className,arg.__isa);
-        }
-        return new JSObject('JSObject',arg);
-       }else{
-            // return new JSObject('JSObject',null);
-            return null;
-       }
-   }
+
 
     // 引入 UIKit class
     global._import=function(name){
-        var files = name.split(',').forEach((file) => {
-            var jsClassObj = new JSObject(file);
-            var test = Object.valueOf(file);
+		let files = name.split(',').forEach((file) => {
+			let jsClassObj = new JSObject(file);
+			let test = Object.valueOf(file);
             pv__import(file);
         });
-    }
+    };
 
-    var pv__import = function(clsName) {
+	 let pv__import = function(clsName) {
         if (!global[clsName]) {
           global[clsName] = new JSObject(clsName);
         } 
         console.log('引入文件：'+clsName);
         return global[clsName]
-      }
+      };
 
     // 定义Class
     global.defineClass=function(interface,instanceMethods,classMethods){
-        var classInfo = oc_define(interface)
+		let classInfo = oc_define(interface);
         // 注册JS类
-        var obj = pv_registClass(classInfo['self'],classInfo['super'],instanceMethods,classMethods);
+		let obj = pv_registClass(classInfo['self'],classInfo['super'],instanceMethods,classMethods);
         // 注册方法
         pv_registMethods(obj);
 
     };
 
+
     // js API
     // Oc 消息转发至 js
-    global.js_msgSend=function(instance,className,method,args){
+    global.js_msgSend=function(instance,className,method){
         // retain self
-        var curSelf = new JSObject(className,instance);
+		let curSelf = new JSObject(className,instance);
         curSelf.__instanceFlag = className+'-'+method;
         pv_retainJsObject(curSelf);
 
+        let params;
+		for (let i=3;i< arguments.length;i++){
+			if(!params) params = new Array();
+			params.push(pv_toJSObject(arguments[i]));
+		}
         console.log('🍎🍎🍎🍎oc------------->js'+'    _func_ '+className+' ************** '+method+'');
         // oc_sendMsg(instance);
-        var obj         = CLASS_MAP[className];
-        var imp         = obj.__methodList[method];
-        var result      = imp();
+		let obj         = CLASS_MAP[className];
+		let imp         = obj.__methodList[method];
+		let result      = imp.apply(undefined,pv_toConsumableArray(params));
+
         // release self
         pv_releaseJsObject(curSelf);
         console.log('self-->'+method+'释放');
-        return result;
+
+		if (result instanceof JSObject) {
+			return result.__toOcObject();
+		} else {
+			return result;
+		}
+
+
     };
 
-    pv_retainJsObject=function(obj){
+    function pv_retainJsObject(obj){
         obj.retain();
         if(!self && !lastSelf){
             self=obj;
@@ -268,9 +232,9 @@ class TTEdgeInsets {
         }
     }
 
-    pv_releaseJsObject=function(obj){
+    function pv_releaseJsObject(obj){
         if(obj.release()){
-            if(obj.__instanceFlag==lastSelf.__instanceFlag){
+            if(obj.__instanceFlag===lastSelf.__instanceFlag){
                 console.log(obj.__instanceFlag+'--------self、lastSelf 已释放');
                 self=lastSelf=null;
                 
@@ -282,12 +246,12 @@ class TTEdgeInsets {
                 
             }
         }
-    }
+    };
 
     /**
       * 查询是否是本地JS方法，如果是则直接执行
       */
-     pv_findJSMethodMap=function(obj,msg,isInstanceMethod){
+     function pv_findJSMethodMap(obj,msg,isInstanceMethod){
         if (obj){
             return obj.__findMethod(msg,isInstanceMethod);
         }
@@ -297,8 +261,8 @@ class TTEdgeInsets {
     /**
       * 注册 jsClassObj
       */
-    pv_registClass=function(className,superClassName,instancesMethods,classMethods){
-        var obj = new Class_obj(className,superClassName,instancesMethods,classMethods);
+    function pv_registClass(className,superClassName,instancesMethods,classMethods){
+		let obj = new Class_obj(className,superClassName,instancesMethods,classMethods);
         console.log('register------'+className);
         CLASS_MAP[obj.__className]=obj;
         return obj;
@@ -307,8 +271,8 @@ class TTEdgeInsets {
     /**
       * 注册 jsClassObj Method
       */
-    pv_registMethods=function(cls){
-        var isInstanceMethod = true;
+    function pv_registMethods(cls){
+		let isInstanceMethod = true;
         if(cls.__cls == null){
             isInstanceMethod = false;
         }
@@ -321,10 +285,20 @@ class TTEdgeInsets {
         return isInstanceMethod?pv_registMethods(cls.__cls):null;
     }
 
+	 function pv_toConsumableArray(arr) {
+		 if (Array.isArray(arr)) {
+			 for (let i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
+				 arr2[i] = arr[i];
+			 }
+			 return arr2;
+		 } else {
+			 return Array.from(arr);
+		 }
+	 }
     /**
       * 将JS对象 转为OC 可用对象
       */
-    pv_toOcObject=function(arg){
+    function pv_toOcObject(arg){
         if(arg instanceof JSObject){
             return arg.__isa?arg.__isa:null;
         }else if(arg instanceof TTReact){
@@ -340,6 +314,53 @@ class TTEdgeInsets {
             return arg;
         }
     }
+
+	 function pv_toJSObject(arg){
+		 if(arg instanceof Object){
+			 if(arg.hasOwnProperty('__isa')){
+				 if(arg['__isInstance']){
+					 // return new JSObject(arg['__className'],arg.__isa);
+					 let cls = arg['__className'];
+					 let value = arg['__isa'];
+					 if (value instanceof Array){
+						 let result = new Array();
+						 arg.__isa.forEach(element => {
+							 let jsObj = new JSObject('JSObject',element);
+							 result.push(jsObj);
+						 });
+						 return result
+					 }
+					 else if(cls === 'react'){
+						 return new TTReact(value.x,value.y,value.width,value.height);
+					 }else if(cls === 'point'){
+						 return new TTPoint(value.x,value.y);
+					 }else if(cls === 'size'){
+						 return new TTSize(value.width,value.height);
+					 }else if(cls === 'edge'){
+						 return new TTEdgeInsets(value.top,value.left,value.bottom.value.right);
+					 }else if(  cls === 'NSArray' ||
+						 cls === 'NSMutableArray'){
+						 let result = new Array();
+						 arg.forEach(element => {
+							 let jsObj = new JSObject('JSObject',element);
+							 result.push(jsObj);
+						 });
+						 return result
+					 }else if (  cls === 'NSDictionary' ||
+						 cls === 'NSMutableDictionary'){
+						 return arg.__isa;
+					 }
+
+
+				 }
+				 return new JSObject(arg.__className,arg.__isa);
+			 }
+			 return new JSObject('JSObject',arg);
+		 }else{
+			 console.log('基础数据类型:'+arg);
+			 return arg;
+		 }
+	 }
     
     global.CLASS_MAP={};
     global.self = null;

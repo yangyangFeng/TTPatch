@@ -298,7 +298,7 @@ vauleType tempArg; \
 
 #define WRAP_INVOCATION_ID_AND_RETURN(argType,vauleType)\
 case argType:{  \
-vauleType tempArg; \
+__unsafe_unretained vauleType tempArg; \
 [invocation getArgument:&tempArg atIndex:(i)];    \
 [tempArguments addObject:tempArg];  \
 }break
@@ -311,7 +311,7 @@ valueType result = [[jsValue toNumber] toValueFunc];    \
 
 #define WRAP_INVOCATION_ID_RETURN_VALUE(argType,valueType,toValueFunc) \
 case argType:{  \
-valueType result = [jsValue toValueFunc];    \
+__unsafe_unretained valueType result = [jsValue toValueFunc];    \
 [invocation setReturnValue:&result];    \
 }break;
 
@@ -342,7 +342,7 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
             switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
 //                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
                 case _C_ID:{  \
-                    id tempArg; \
+                    __unsafe_unretained id tempArg; \
                     [invocation getArgument:&tempArg atIndex:(i)];    \
                     [tempArguments addObject:tempArg];  \
                 }break;
@@ -426,10 +426,11 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
                  };
     };
     
-    self[@"oc_sendMsg"] = ^(id obj,NSString* method,JSValue *arguments){
-        __unsafe_unretained id __self;
-        __unsafe_unretained id params = [arguments toObject];
-        __self = obj;
+    self[@"oc_sendMsg"] = ^(id obj,NSString* method,id arguments){
+//        __unsafe_unretained id __self = [obj toObject];
+//        __unsafe_unretained id params = [arguments toObject];
+        __unsafe_unretained id __self = obj;
+        __unsafe_unretained id params = arguments;
         return TTPatchUtils.TTPatchDynamicMethodInvocation(__self,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),params);
         
     };

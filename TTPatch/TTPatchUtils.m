@@ -289,12 +289,12 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
         [invocation setTarget:classOrInstance];
-//        NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+        NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
         [invocation setSelector:sel_method];
         if (hasArgument) {
-//            setInvocationArguments(invocation, arguments);
             setInvocationArgumentsMethod(invocation, arguments, methodInfo);
         }
+        
         [invocation invoke];
         guard(strcmp(signature.methodReturnType,"v") == 0)else{
             
@@ -303,12 +303,12 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
 
             switch (flag) {
                 case _C_ID:{
-                    __autoreleasing id instance = nil;
+                    __unsafe_unretained id instance = nil;
                     [invocation getReturnValue:&instance];
-                    return ToJsObject(instance,NSStringFromClass([instance class]));
+                    return instance?ToJsObject(instance,NSStringFromClass([instance class])):[NSNull null];
                 }break;
                 case _C_CLASS:{
-                    Class instance = nil;
+                    __unsafe_unretained Class instance = nil;
                     [invocation getReturnValue:&instance];
                     return ToJsObject(nil,NSStringFromClass(instance));
                 }break;
