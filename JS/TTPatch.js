@@ -207,7 +207,7 @@ class TTEdgeInsets {
         // oc_sendMsg(instance);
 		let obj         = CLASS_MAP[className];
 		let imp         = obj.__methodList[method];
-		let result      = imp.apply(undefined,pv_toConsumableArray(params));
+		let result      = imp.apply(undefined,params);
 
         // release self
         pv_releaseJsObject(curSelf);
@@ -285,16 +285,6 @@ class TTEdgeInsets {
         return isInstanceMethod?pv_registMethods(cls.__cls):null;
     }
 
-	 function pv_toConsumableArray(arr) {
-		 if (Array.isArray(arr)) {
-			 for (let i = 0, arr2 = Array(arr.length); i < arr.length; i++) {
-				 arr2[i] = arr[i];
-			 }
-			 return arr2;
-		 } else {
-			 return Array.from(arr);
-		 }
-	 }
     /**
       * 将JS对象 转为OC 可用对象
       */
