@@ -1,5 +1,17 @@
 let global = this;
 
+class MessageQueue{
+}
+MessageQueue.call=function (obj,msg,params) {
+	return MessageQueue_oc_sendMsg(obj,msg,params);
+};
+MessageQueue.define=function (className) {
+	return MessageQueue_oc_define(className);
+};
+MessageQueue.replaceMethod=function (className,superClassName,key,isInstanceMethod) {
+	return MessageQueue_oc_replaceMethod(className,superClassName,key,isInstanceMethod);
+};
+
 class Class_obj {
     constructor(className, superClassName, instancesMethods, classMethods) {
         this.__cls;
@@ -137,7 +149,7 @@ class TTEdgeInsets {
 
 		let jsMethod_IMP = pv_findJSMethodMap(obj,msg,isInstance);
 
-        for (var i=1;i< arguments.length;i++){
+        for (let i=1;i< arguments.length;i++){
             if(!params) params = new Array();
             params.push(
                 jsMethod_IMP?
@@ -148,10 +160,14 @@ class TTEdgeInsets {
         if (jsMethod_IMP){
             result = jsMethod_IMP(params?params:null);
         }
+        else if(!this.__isa && !this.__className){
+        	jsMethod_IMP=this[msg];
+        	jsMethod_IMP.apply(this,params);
+		}
         else if (isInstance){
-            result = oc_sendMsg(this.__isa,msg,params);
+            result = MessageQueue.call(this.__isa,msg,params);
         }else{
-            result = oc_sendMsg(this.__className,msg,params);
+            result = MessageQueue.call(this.__className,msg,params);
         }
         
         
@@ -181,7 +197,7 @@ class TTEdgeInsets {
 
     // 定义Class
     global.defineClass=function(interface,instanceMethods,classMethods){
-		let classInfo = oc_define(interface);
+		let classInfo = MessageQueue.define(interface);
         // 注册JS类
 		let obj = pv_registClass(classInfo['self'],classInfo['super'],instanceMethods,classMethods);
         // 注册方法
@@ -204,7 +220,6 @@ class TTEdgeInsets {
 			params.push(pv_toJSObject(arguments[i]));
 		}
         console.log('🍎🍎🍎🍎oc------------->js'+'    _func_ '+className+' ************** '+method+'');
-        // oc_sendMsg(instance);
 		let obj         = CLASS_MAP[className];
 		let imp         = obj.__methodList[method];
 		let result      = imp.apply(undefined,params);
@@ -279,7 +294,7 @@ class TTEdgeInsets {
         for (const key in cls.__methodList) {
             if (cls.__methodList.hasOwnProperty(key)) {
                 const method = cls.__methodList[key];
-                oc_replaceMethod(cls.__className,cls.__superClassName,key,isInstanceMethod);
+                MessageQueue.replaceMethod(cls.__className,cls.__superClassName,key,isInstanceMethod);
             }
         }
         return isInstanceMethod?pv_registMethods(cls.__cls):null;
@@ -289,20 +304,23 @@ class TTEdgeInsets {
       * 将JS对象 转为OC 可用对象
       */
     function pv_toOcObject(arg){
+    	let obj;
         if(arg instanceof JSObject){
             return arg.__isa?arg.__isa:null;
         }else if(arg instanceof TTReact){
-            return new JSObject('react',arg.toOcString());
+			obj = new JSObject('react',arg.toOcString());
         }
         else if(arg instanceof TTSize){
-            return new JSObject('size',arg.toOcString());
+			obj = new JSObject('size',arg.toOcString());
         }
         else if(arg instanceof TTPoint){
-            return new JSObject('point',arg.toOcString());
+			obj = new JSObject('point',arg.toOcString());
         }
         else {
             return arg;
         }
+        obj.call=null;
+        return obj;
     }
 
 	 function pv_toJSObject(arg){
@@ -340,8 +358,6 @@ class TTEdgeInsets {
 						 cls === 'NSMutableDictionary'){
 						 return arg.__isa;
 					 }
-
-
 				 }
 				 return new JSObject(arg.__className,arg.__isa);
 			 }
