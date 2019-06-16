@@ -274,11 +274,23 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
 //        }
 //    }
     
-    
+    /**
+     *  这里为什么要替换 `ForwardInvocation` 而不是替换对应方法要解释一下
+     *  因为添加的 `IMP` 是固定的函数,而函数的返回值类型,以及返回值有无,在写的时候就已经固定了.所以我们会面临两个问题
+     *  1.要根据当前被替换方法返回值类型,提前注册好对应的`IMP`函数,使得函数能拿到正确的数据类型.
+     *  2.要如何知道当前方法是否有返回值,以及返回值的类型是什么?
+     *
+     *  因为这两个原因很麻烦,当然是用 穷举+方法返回值加标识 可以解决这个问题,但是我感觉这么做是一个坑.最后找到根据 `aspect` 和 `JSPatch`的作者blog,为什么他们都要hook `ForwardInvocation` 这个方法.其实原因很简单,在这个时候我们能够拿到当前系统调用中方法的 `invocation` 对象,也就意味着能够拿到当前方法的全部信息,而且我们此时也能去根据`js`替换后方法的返回值去`set`当前`invocation`对象的返回值,使当前无论返回值使什么类型,我们都可以根据当前的方法签名来对应为其转换为相应类型.
+     */
     aspect_swizzleForwardInvocation(aClass);
+    /**
+     *  将要我换的方法IMP替换成`_objc_msgForward`,这么做的原因其实是为了优化方法调用时间.
+     *  假如我们不做方法替换,系统在执行`objc_msgSend`函数,这样会根据当前的对象的继承链去查找方法然后执行,这里就涉及到一个查找的过程
+     *  如果查找不到方法,会走消息转发也就是`_objc_msgForward`函数做的事情,所以那我们为什么不直接将方法的`IMP`替换为`_objc_msgForward`直接走消息转发呢
+     */
     aspect_prepareClassAndHookSelector(aClass, original_SEL, isInstanceMethod);
     
-    
+    //将已经替换的class做记录
     registerMethod(method, className, !isInstanceMethod);
     
     if (needRegistClass) {
@@ -316,7 +328,7 @@ __unsafe_unretained valueType result = [jsValue toValueFunc];    \
 }break;
 
 
-static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL invocation_selector, NSInvocation *invocation) {
+static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocation_selector, NSInvocation *invocation) {
     @synchronized (self) {
         
         JSValue * func = [TTPatch shareInstance].context[@"js_msgSend"];
@@ -326,11 +338,7 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
         strcpy(returnValueType, [invocation.methodSignature methodReturnType]);
         unsigned int indexOffset = 0;
         unsigned int systemMethodArgCount = (unsigned int)invocation.methodSignature.numberOfArguments;
-//        if (systemMethodArgCount>indexOffset) {
-//            systemMethodArgCount-=indexOffset;
-//        }else{
-//            systemMethodArgCount=0;
-//        }
+
         if (systemMethodArgCount>2) {
             indexOffset = 2;
         }
@@ -388,15 +396,14 @@ static void __ASPECTS_ARE_BEING_CALLED__(__unsafe_unretained NSObject *self, SEL
 }
 
 
-static NSString *const AspectsForwardInvocationSelectorName = @"__aspects_forwardInvocation:";
+static NSString *const ForwardInvocationSelectorName = @"__ttpatch_forwardInvocation:";
 static void aspect_swizzleForwardInvocation(Class klass) {
     NSCParameterAssert(klass);
-    // If there is no method, replace will act like class_addMethod.
-    IMP originalImplementation = class_replaceMethod(klass, @selector(forwardInvocation:), (IMP)__ASPECTS_ARE_BEING_CALLED__, "v@:");
+    IMP originalImplementation = class_replaceMethod(klass, @selector(forwardInvocation:), (IMP)OC_MSG_SEND_HANDLE, "v@:");
     if (originalImplementation) {
-        class_addMethod(klass, NSSelectorFromString(AspectsForwardInvocationSelectorName), originalImplementation, "v@:");
+        class_addMethod(klass, NSSelectorFromString(ForwardInvocationSelectorName), originalImplementation, "v@:");
     }
-//    AspectLog(@"Aspects: %@ is now aspect aware.", NSStringFromClass(klass));
+
 }
 
 static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isInstanceMethod) {
@@ -407,8 +414,8 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     guard(aspect_isMsgForwardIMP(targetMethodIMP))else{
         
         SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, NSStringFromSelector(selector)]);
-        BOOL success = class_addMethod(cls, new_SEL, method_getImplementation(targetMethod), typeEncoding);
-//        NSCAssert(success, @"Original implementation for %@ is already copied to %@ on %@", NSStringFromSelector(selector), NSStringFromSelector(new_SEL), cls);
+        class_addMethod(cls, new_SEL, method_getImplementation(targetMethod), typeEncoding);
+
     }
     class_replaceMethod(cls, selector, aspect_getMsgForwardIMP(cls, selector, isInstanceMethod), typeEncoding);
 
@@ -416,17 +423,17 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
 
 
 - (void)configJSBrigeActions{
-    self[@"log"] = ^(JSValue *msg){
-        NSLog(@"callback----->%@",[msg toObject]);
+    self[@"log"] = ^(id msg){
+        NSLog(@"🍎🍎🍎🍎🍎🍎🍎-------------->%@",msg);
     };
-    self[@"oc_define"] = ^(NSString * interface){
+    self[@"MessageQueue_oc_define"] = ^(NSString * interface){
         NSArray * classAndSuper = [interface componentsSeparatedByString:@":"];
         return @{@"self":[classAndSuper firstObject],
                  @"super":[classAndSuper lastObject]
                  };
     };
     
-    self[@"oc_sendMsg"] = ^(id obj,NSString* method,id arguments){
+    self[@"MessageQueue_oc_sendMsg"] = ^(id obj,NSString* method,id arguments){
 //        __unsafe_unretained id __self = [obj toObject];
 //        __unsafe_unretained id params = [arguments toObject];
         __unsafe_unretained id __self = obj;
@@ -435,7 +442,7 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
         
     };
     
-    self[@"oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod){
+    self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod){
 //        registerJsMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod);
         hookClassMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod);
         

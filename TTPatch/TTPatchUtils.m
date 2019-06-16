@@ -288,8 +288,10 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
+#if DEBUG
+            NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+#endif
         [invocation setTarget:classOrInstance];
-        NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
         [invocation setSelector:sel_method];
         if (hasArgument) {
             setInvocationArgumentsMethod(invocation, arguments, methodInfo);
