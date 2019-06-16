@@ -23,8 +23,7 @@
     
     [self initJSContxtPath];
     [self watch];
-    
-    // Do any additional setup after loading the view.
+
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -41,7 +40,7 @@
     [[TTPatch shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
     
     self.watchDogs = [[NSMutableArray alloc] init];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS/source"];
     NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
 
 
@@ -55,7 +54,7 @@
 - (void)watch{
     
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS/source"];
     NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"TTViewController.js"];
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
