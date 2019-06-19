@@ -8,9 +8,12 @@
     "esprima": "^4.0.1",
     "estraverse": "^4.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.4.5"
+  },
   "scripts": {
-    "build": "npx node build.js"
+    "build": "npx node build.js",
+    "test": "sh aaa.sh hello"
   },
   "keywords": [],
   "author": "bty",

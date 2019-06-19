@@ -19,7 +19,7 @@
 
 @property(nonatomic,strong)TTTableView *tableview;
 @property(nonatomic,strong)NSMutableArray *watchDogs;
-@property(nonatomic,strong)UIView *cell;
+@property(nonatomic,strong)UITableViewCell *cell;
 @end
 
 @implementation ViewController

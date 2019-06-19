@@ -140,7 +140,7 @@ class TTEdgeInsets {
 }
 
  (function() {
-    Object.prototype = new MetaObject();
+    // Object.prototype = new MetaObject();
     Object.prototype.call = function(msg){
         let obj = CLASS_MAP[this.__className];
 		let isInstance = this.__isInstance;
@@ -181,8 +181,6 @@ class TTEdgeInsets {
     // 引入 UIKit class
     global._import=function(name){
 		let files = name.split(',').forEach((file) => {
-			let jsClassObj = new JSObject(file);
-			let test = Object.valueOf(file);
             pv__import(file);
         });
     };
