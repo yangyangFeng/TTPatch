@@ -64,21 +64,21 @@ UIView.c('alloc').().c('init').()
 
 
 ## Commit问题记录
-###### 1.内存问题
+#### 1.内存问题
 
 解决方式 使用 `__unsafe_unretained` 修饰临时变量，防止 `strong`修饰的临时变量在局部方法结束时隐式调用 `release`，导致出现僵尸对象
 
-###### 2.Oc调用js方法，多参数传递问题
+#### 2.Oc调用js方法，多参数传递问题
 
 这里面利用arguments和js中的```apply```,就可以以多参数调用，而不是一个为数组的```obj```对象
 
-###### 3.关于添加`addTarget——action`方法
+#### 3.关于添加`addTarget——action`方法
 
 为View对象添加手势响应以及button添加action时，`action(sender){sender为当前控制器 self}` 为什么`Oc`中使用的时候`sender`为当前的手势orbutton对象？
 如果```Native```未实现```action```方法，那么会导致获取方法签名失败而导致我们无法拿到正确参数，所以获得的参数为当前```self```.
 这里要记录强调一下，如添加不存在的```action```时，要注意```action```参数不为当前的事件响应者.
 
-###### 4.JS调用Oc方法，如何支持 `多参数`、`多类型` 调用
+#### 4.JS调用Oc方法，如何支持 `多参数`、`多类型` 调用
 
 首先，我们要讲目标`Class`的`forwardingInvocation:`方法替换成我们自己的实现`TTPatch_Message_handle`，
 然后通过替换方法的方式，将目标方法的`IMP`替换为`msg__objc_msgForward`,直接开始消息住转发，这样直接通过消息转发最终会运行到我们的`TTPatch_Message_handle`函数中，在函数中我们可以拿到当前正在执行方法的`invocation`对象，这也就意味着我们可以拿到当前调用方法的全部信息，并且可以操作以及修改。我们也是通过这个方法来实现，返回值类型转换。返回值类型转发这里涉及到
