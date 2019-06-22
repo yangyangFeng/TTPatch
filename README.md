@@ -4,6 +4,8 @@
 
 [简书地址](https://www.jianshu.com/p/1daf20977c4a)
 
+[使用文档](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md)
+
 ---
 
 ## 关系方法注册和方法覆盖设计方案
