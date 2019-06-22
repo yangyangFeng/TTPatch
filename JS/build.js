@@ -55,7 +55,10 @@ function estraverse_traverse(ast) {
 				}break;
 				case "CallExpression":{
 					if (node.callee && node.callee.object){
-
+						let targetName = node.callee.object.name;
+						if (targetName === 'Util'){
+							return;
+						}
 						// console.log('*******'+JSON.stringify(node));
 						let newCallee = node.callee;
 						// JSON.parse(JSON.stringify(node.callee));
@@ -66,7 +69,9 @@ function estraverse_traverse(ast) {
 						// 	"type":"Identifier",
 						// 	"name":"call"
 						// }
+
 					}
+
 				}break;
 			}
 		},

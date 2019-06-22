@@ -18,7 +18,7 @@ defineClass('ViewController:UIViewController', {
         var tableview = self.call('call', 'getTableview');
         self.call('call', 'setTableview_', tableview);
         self.call('call', 'view').call('call', 'addSubview_', tableview);
-        console.call('log', 'js调用 viewDidLoad');
+        Util.log('js调用 viewDidLoad');
         log('JS--------viewDidLoad');
     },
     tableView_numberOfRowsInSection_: function (tableview, section) {

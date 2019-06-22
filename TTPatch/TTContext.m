@@ -12,6 +12,9 @@
 #import <objc/message.h>
 #import "TTPatch.h"
 #import <libkern/OSAtomic.h>
+/**
+ *  TTPatch 动态方法前缀
+ */
 NSString *const TTPatchChangeMethodPrefix = @"tt";
 
 #define guard(condfion) if(condfion){}
@@ -22,7 +25,6 @@ NSString *const TTPatchChangeMethodPrefix = @"tt";
 @end
 
 @implementation TTContext
-static NSMutableDictionary *__replaceMethodMap;
 
 static void aspect_performLocked(dispatch_block_t block) {
     static OSSpinLock aspect_lock = OS_SPINLOCK_INIT;
@@ -30,6 +32,13 @@ static void aspect_performLocked(dispatch_block_t block) {
     block();
     OSSpinLockUnlock(&aspect_lock);
 }
+
+
+
+static NSMutableDictionary *__replaceMethodMap;
+
+
+
 
 void registerMethod(NSString *method,NSString *class,BOOL isClass){
     if (!__replaceMethodMap) {
@@ -99,10 +108,6 @@ id OC_MSG_SEND_HANDLE_ID(id self, SEL _cmd,...){
             }
         }
         va_end(argList);
-
-        
-    
-//        NSLog(@"-----%@",_cmd);
  
         
         NSMutableArray * params = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],NSStringFromClass([self class]),TTPatchUtils.TTPatchMethodFormatterToJSFunc(NSStringFromSelector(_cmd)),@"params"] mutableCopy];
@@ -161,25 +166,7 @@ static void replaceOcOriginalMethod(NSString *className,NSString *superClassName
         objc_registerClassPair(aClass);
     }
     
-    unsigned int count;
-    Method *methods = class_copyMethodList(aClass, &count);
-    for (int i = 0; i < count; i++) {
-        Method method = methods[i];
-        SEL selector = method_getName(method);
-        NSString *name = NSStringFromSelector(selector);
-        NSLog(@"%@ method_getName:%@",NSStringFromClass(aClass),name);
-    }
-    
-    unsigned int numIvars;
-    Ivar *vars = class_copyIvarList(aClass, &numIvars);
-    NSString *key=nil;
-    for(int i = 0; i < numIvars; i++) {
-        
-        Ivar thisIvar = vars[i];
-        key = [NSString stringWithUTF8String:ivar_getName(thisIvar)];
-        NSLog(@"%@ variable_name :%@", NSStringFromClass(aClass),key);
-    }
-    free(vars);
+
 }
 
 static BOOL aspect_isMsgForwardIMP(IMP impl) {
@@ -192,6 +179,7 @@ static BOOL aspect_isMsgForwardIMP(IMP impl) {
 
 static IMP aspect_getMsgForwardIMP(Class aclass, SEL selector,BOOL isInstanceMethod) {
     IMP msgForwardIMP = _objc_msgForward;
+    //在非 arm64 下都会存在 Special Struct
 #if !defined(__arm64__)
     // As an ugly internal runtime implementation detail in the 32bit runtime, we need to determine of the method we hook returns a struct or anything larger than id.
     // https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/LowLevelABI/000-Introduction/introduction.html
@@ -223,7 +211,41 @@ static IMP aspect_getMsgForwardIMP(Class aclass, SEL selector,BOOL isInstanceMet
     return msgForwardIMP;
 }
 
-static void hookClassMethod(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod){
+static void TTPATCH_addPropertys(NSString *className,NSString *superClassName,NSArray *propertys){
+    Class aClass = NSClassFromString(className);
+    
+    BOOL needRegistClass=NO;
+    if (aClass) {
+    }else{
+        aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
+        needRegistClass = YES;
+    }
+    for (NSDictionary * property in propertys) {
+        NSString *propertyName = [property objectForKey:@"__name"];
+        /**
+         targetClass:   表示要添加的属性的类
+         propertyName:  表示要添加的属性名
+         attrs：        类特性列表
+         attrsCount:    类特性个数
+         */
+        
+        NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
+        
+        if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
+            NSLog(@"Get添加成功");
+        }
+        if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
+            NSLog(@"Set添加成功");
+        }
+    }
+    
+    if (needRegistClass) {
+        objc_registerClassPair(aClass);
+    }
+}
+
+
+static void TTPATCH_hookClassMethod(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys){
     if(checkRegistedMethod(method, className, !isInstanceMethod)){
         return;
     }
@@ -236,7 +258,6 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
     
     if ([disallowedSelectorList containsObject:method]) {
         NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", method];
-//        AspectError(AspectErrorSelectorBlacklisted, errorDescription);
         NSCAssert(NO, errorDescription);
     }
 
@@ -246,33 +267,14 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
     SEL original_SEL = NSSelectorFromString(method);
     Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
     
-    BOOL needRegistClass=NO;
-    if (aClass) {
-    }else{
-        aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
-        needRegistClass = YES;
-    }
     
-    //如果是实例方法
+//    tt_addPropertys(className, superClassName, propertys);
+    
+    //如果是静态方法,要取 MetaClass
     guard(isInstanceMethod) else{
         originalMethodInfo = class_getClassMethod(aClass, original_SEL);
         aClass = object_getClass(aClass);
     }
-//    const char *methodTypes = method_getTypeEncoding(originalMethodInfo)?: "v@:";
-//    NSLog(@"--------方法描述:%s\n 返回值描述:%s",method_getTypeEncoding(originalMethodInfo),method_copyReturnType(originalMethodInfo));
-//
-//    IMP original_IMP = class_getMethodImplementation(aClass, original_SEL);
-//    SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, method]);
-//    //如果不存在直接添加方法
-//    BOOL status = class_addMethod(aClass, original_SEL, aspect_getMsgForwardIMP(aClass,original_SEL,isInstanceMethod), methodTypes);
-//    if (!status) {
-//        class_replaceMethod(aClass, original_SEL, aspect_getMsgForwardIMP(aClass,original_SEL,isInstanceMethod), methodTypes);
-//        if (class_addMethod(aClass, new_SEL, original_IMP, methodTypes)) {
-//
-//        }else{
-//            class_replaceMethod(aClass, new_SEL, original_IMP, methodTypes);
-//        }
-//    }
     
     /**
      *  这里为什么要替换 `ForwardInvocation` 而不是替换对应方法要解释一下
@@ -293,13 +295,20 @@ static void hookClassMethod(NSString *className,NSString *superClassName,NSStrin
     //将已经替换的class做记录
     registerMethod(method, className, !isInstanceMethod);
     
-    if (needRegistClass) {
-        objc_registerClassPair(aClass);
-    }
+
     
   
 }
 
+static void TT_Patch_Property_Setter(id self,SEL _cmd,id obj){
+    NSString *key = NSStringFromSelector(_cmd);
+    key = [[key substringWithRange:NSMakeRange(3, key.length-4)] lowercaseString];
+    objc_setAssociatedObject(self, (__bridge const void * _Nonnull)(key), obj, OBJC_ASSOCIATION_RETAIN);
+}
+static id TT_Patch_Property_getter(id self,SEL _cmd){
+    NSString *key = NSStringFromSelector(_cmd);
+    return objc_getAssociatedObject(self, (__bridge const void * _Nonnull)(key));
+}
 
 #define WRAP_INVOCATION_AND_RETURN(argType,vauleType)\
 case argType:{  \
@@ -342,18 +351,14 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         if (systemMethodArgCount>2) {
             indexOffset = 2;
         }
-        NSLog(@"\n--------------------------- JS 调用 OC ----------------%s \n----->%@      \n----->%@  \n----->%d",method_getTypeEncoding(methodInfo),NSStringFromSelector(invocation.selector),self,systemMethodArgCount);
+        NSString * selectNameStr = NSStringFromSelector(invocation.selector);
+        NSLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| %@      \n| %@  \n| %d",method_getTypeEncoding(methodInfo),selectNameStr,self,systemMethodArgCount);
         NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
         
         for (unsigned i = indexOffset; i < systemMethodArgCount; i++) {
             const char *argumentType = method_copyArgumentType(methodInfo, i);
             switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
-//                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
-                case _C_ID:{  \
-                    __unsafe_unretained id tempArg; \
-                    [invocation getArgument:&tempArg atIndex:(i)];    \
-                    [tempArguments addObject:tempArg];  \
-                }break;
+                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
                     WRAP_INVOCATION_AND_RETURN(_C_INT, int);
                     WRAP_INVOCATION_AND_RETURN(_C_SHT, short);
                     WRAP_INVOCATION_AND_RETURN(_C_USHT, unsigned short);
@@ -365,7 +370,12 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
                     WRAP_INVOCATION_AND_RETURN(_C_FLT, float);
                     WRAP_INVOCATION_AND_RETURN(_C_DBL, double);
                     WRAP_INVOCATION_AND_RETURN(_C_BOOL, BOOL);
-                    
+//                case _C_SEL:{  \
+//                    SEL tempArg; \
+//                    [invocation getArgument:&tempArg atIndex:(i)];    \
+//                    [tempArguments addObject:NSStringFromSelector(tempArg)];  \
+//                
+//                }break;
             }
         }
         
@@ -414,7 +424,7 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     guard(aspect_isMsgForwardIMP(targetMethodIMP))else{
         
         SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, NSStringFromSelector(selector)]);
-        class_addMethod(cls, new_SEL, method_getImplementation(targetMethod), typeEncoding);
+        BOOL succes = class_addMethod(cls, new_SEL, method_getImplementation(targetMethod), typeEncoding);
 
     }
     class_replaceMethod(cls, selector, aspect_getMsgForwardIMP(cls, selector, isInstanceMethod), typeEncoding);
@@ -422,6 +432,9 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
 }
 
 
+
+
+#pragma makr- Native API
 - (void)configJSBrigeActions{
     self[@"log"] = ^(id msg){
         NSLog(@"🍎🍎🍎🍎🍎🍎🍎-------------->%@",msg);
@@ -434,21 +447,27 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     };
     
     self[@"MessageQueue_oc_sendMsg"] = ^(id obj,NSString* method,id arguments){
-//        __unsafe_unretained id __self = [obj toObject];
-//        __unsafe_unretained id params = [arguments toObject];
-        __unsafe_unretained id __self = obj;
-        __unsafe_unretained id params = arguments;
-        return TTPatchUtils.TTPatchDynamicMethodInvocation(__self,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),params);
+        return TTPatchUtils.TTPatchDynamicMethodInvocation(obj,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),arguments);
+    };
+    
+    self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){
+        TTPATCH_hookClassMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod, propertys);
+    };
+    self[@"MessageQueue_oc_addPropertys"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
+
+        TTPATCH_addPropertys(className, superClassName,propertys);
+        
+    };
+    self[@"APP_IsDebug"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
+#if DEBUG
+        return YES;
+#else
+        return NO;
+#endif
         
     };
     
-    self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod){
-//        registerJsMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod);
-        hookClassMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod);
-        
-    };
 }
-
 
 
 -(NSMutableDictionary *)replaceMethodMap{

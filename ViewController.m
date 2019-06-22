@@ -40,6 +40,8 @@
     if (indexPath.row == 1) {
         self.cell = cell;
     }
+//    UITapGestureRecognizer *tap = [UITapGestureRecognizer new];
+    
     return cell;
 }
 
@@ -54,13 +56,19 @@
     NSString * str = [NSString string];
     [self performSelector:@selector(countA) withObject:nil];
     
-    
+    UIButton * btn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    btn.backgroundColor = [UIColor blackColor];
+    [btn setTitle:@"测试" forState:(UIControlStateNormal)];
+    [btn setFrame:CGRectMake(0, 400, 50, 50)];
+    [btn addTarget:self action:@selector(btnDidAction:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:btn];
+    [btn setTitle:@"" forState:0];
 //    [self addView];
 //    [self.view addSubview:self.tableview];
     NSLog(@"--------%d",[self customtableView:self.tableview numberOfRowsInSection:0]);
 }
 
-
+- (void)btnDidAction:(id)sener{}
 - (void)addView{
     NSLog(@"s原生方法  addView");
 }

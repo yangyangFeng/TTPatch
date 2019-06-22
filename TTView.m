@@ -17,6 +17,8 @@
 //        self.frame = CGRectMake(100, 100, 100, 100);
         self.backgroundColor = [UIColor redColor];
         
+        [self class];
+        [super class];
         NSLog(@"TTView----->创建成功~~~~~~~~~~~~~~~~~~~~~~~~~");
     }
     return self;

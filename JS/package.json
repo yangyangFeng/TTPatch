@@ -12,8 +12,7 @@
     "@babel/core": "^7.4.5"
   },
   "scripts": {
-    "build": "npx node build.js",
-    "test": "sh aaa.sh hello"
+    "build": "npx node build.js"
   },
   "keywords": [],
   "author": "bty",

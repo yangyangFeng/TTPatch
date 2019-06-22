@@ -105,13 +105,13 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
         switch(flag) {
             case _C_ID:
             {
-                __unsafe_unretained id argument = ([arguments objectAtIndex:i]);
+                 id argument = ([arguments objectAtIndex:i]);
                 [invocation setArgument:&argument atIndex:(2 + i)];
                 
             }break;
             case _C_STRUCT_B:
             {
-                __unsafe_unretained id argument = ([arguments objectAtIndex:i]);
+                 id argument = ([arguments objectAtIndex:i]);
              
                 NSString * clsType = [argument objectForKey:@"__className"];
                 guard(clsType)else{
@@ -132,14 +132,16 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                 }
                 
             }break;
-            case 'c':
-            {
+            case 'c':{
                 JSValue *jsObj = arguments[i];
                 char argument[1000];
                 strcpy(argument,(char *)[[jsObj toString] UTF8String]);
                 [invocation setArgument:&argument atIndex:(2 + i)];
-            }
-                break;
+            }break;
+            case _C_SEL:{
+                 SEL argument = NSSelectorFromString([arguments objectAtIndex:i]);
+                [invocation setArgument:&argument atIndex:(2 + i)];
+            }break;
                 TT_ARG_Injection(_C_SHT, short, shortValue);
                 TT_ARG_Injection(_C_USHT, unsigned short, unsignedShortValue);
                 TT_ARG_Injection(_C_INT, int, intValue);
@@ -151,6 +153,8 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                 TT_ARG_Injection(_C_FLT, float, floatValue);
                 TT_ARG_Injection(_C_DBL, double, doubleValue);
                 TT_ARG_Injection(_C_BOOL, BOOL, boolValue);
+                
+                
             default:
                 break;
         }
@@ -289,7 +293,7 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
 #if DEBUG
-            NSLog(@"动态调用------------->%@ \n----->参数个数:%ld \n----->%s \n----->%@",method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+            NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 #endif
         [invocation setTarget:classOrInstance];
         [invocation setSelector:sel_method];

@@ -1,29 +1,28 @@
-
-
-
-_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer')
+_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton')
 
 var screenWidth = UIScreen.mainScreen().bounds().size.width;
 var screenHeight = UIScreen.mainScreen().bounds().size.height;
 
 defineClass('TTViewController:UIViewController', {
-    loadJSCode: function() {
-        // self.call('cleanSubviews');
-        self.addSomeTestView();
-    },
-    cleanSubviews:function(){
 
-    },
-    addSomeTestView:function(){
-		self.view().subviews().forEach(subview=>{
+	name: property(),
+	loadJSCode: function () {
+		// self.call('cleanSubviews');
+		self.addSomeTestView();
+	},
+	cleanSubviews: function () {
+
+	},
+	addSomeTestView: function () {
+		self.view().subviews().forEach(subview => {
 			subview.removeFromSuperview()
 		})
 
-        for (var i =0;i < 9;i++){
-			let width = screenWidth/3.5;
-			let react = new TTReact(10+(i%3)*(width+10),64+15+(i/3)*(width+10),width,width);
+		for (var i = 0; i < 9; i++) {
+			let width = screenWidth / 3.5;
+			let react = new TTReact(10 + (i % 3) * (width + 10), 64 + 15 + (i / 3) * (width + 10), width, width);
 			let witdh = react.size.width;
-			let view =UIView.alloc().initWithFrame_(react);
+			let view = UIView.alloc().initWithFrame_(react);
 			view.setBackgroundColor_(UIColor.redColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
@@ -31,22 +30,47 @@ defineClass('TTViewController:UIViewController', {
 			label.setFont_(UIFont.systemFontOfSize_(20))
 			label.setTextColor_(UIColor.whiteColor())
 			label.setTextAlignment_(1);
-            self.view().addSubview_(view);
+			self.view().addSubview_(view);
 			self.view().addSubview_(label);
-			// var  tap = UITapGestureRecognizer.alloc().initWithTarget_action(view, "action:") ;
-			// view.addGestureRecognizer_(tap);
+			var tap = UITapGestureRecognizer.alloc().initWithTarget_action_(self, "action:");
+			view.addGestureRecognizer_(tap);
+			view.setUserInteractionEnabled_(true);
+			label.setUserInteractionEnabled_(false);
 
 
 		}
 
-		// var selfView = self.call('view');
-		// var views = selfView.call('subviews');
-		// views.call('forEach', subview => {
-		// 	subview.call('removeFromSuperview');
-		// });
-    },
-	action_:function (view) {
-		view.setBackgroundColor_(UIColor.redColor());
-		console.log('--------点击---------')
+		var btn = UIButton.buttonWithType_(0);
+		btn.setBackgroundColor_(UIColor.blackColor());
+		btn.setTitle_forState_("测试1111", 0);
+		btn.setFrame_(new TTReact(0, 500, screenWidth, 50));
+		btn.addTarget_action_forControlEvents_(self, "btnDidAction:", 1 << 6);
+		self.view().addSubview_(btn);
+		self.params1_params2_params3_params4_params5_params6_params7_(2, 2, 2, 2, 2, 2, 2);
+		self.ttparams1_params2_params3_params4_params5_params6_params7_(33333, 2, 2, 2, 2, 2, 2);
+	},
+	action_: function (tap) {
+		// tap.view().setBackgroundColor_(UIColor.whiteColor());
+		Util.log('--------name---------'+self.name());
+		self.view().subviews().forEach(subview => {
+			if (tap.view() !== subview) {
+				subview.removeFromSuperview()
+			}
+		})
+
+	},
+	btnDidAction_: function (btn) {
+		// tap.view().setBackgroundColor_(UIColor.whiteColor());
+		self.setName_('我是你老爹');
+		// console.log('--------点击---------')
+		// console.log('--------name---------'+self.name());
+		let  str = self.name();
+		btn.setTitle_forState_(str, 0);
+		btn.setBackgroundColor_(UIColor.blueColor());
+		// btn.setTitle_forState_("测试111", 0);
+	},
+	params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
+		Util.log('--------多参数测试---------')
+		Util.log(params1, params2, params3, params4, params5, params6, params7)
 	}
-},{})
+}, {})

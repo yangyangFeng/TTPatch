@@ -29,7 +29,7 @@ defineClass('ViewController:UIViewController',{
         self.call('setTableview_',tableview);
         self.call('view').call('addSubview_',tableview);
         // self.call('tableview')
-        console.log('js调用 viewDidLoad');
+		Util.log('js调用 viewDidLoad');
         log('JS--------viewDidLoad');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
