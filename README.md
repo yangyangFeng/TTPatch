@@ -57,16 +57,16 @@ UIView.c('alloc').().c('init').()
 
 
 ## Commit问题记录
-**1.内存问题**
+###### 1.内存问题
 
 解决方式 使用 `__unsafe_unretained` 修饰临时变量，防止 `strong`修饰的临时变量在局部方法结束时隐式调用 `release`，导致出现僵尸对象
 
-**2.Oc调用js方法，多参数传递问题**
+###### 2.Oc调用js方法，多参数传递问题
 
-**3.关于添加`addTarget——action`方法**
+###### 3.关于添加`addTarget——action`方法
 
 为View对象添加手势响应以及button添加action时，`action(sender){sender为当前控制器 self}` 为什么`Oc`中使用的时候`sender`为当前的手势orbutton对象？
 
-**4.JS调用Oc方法，如何支持 `多参数`、`多类型` 调用**
+###### 4.JS调用Oc方法，如何支持 `多参数`、`多类型` 调用
 
 待补充
