@@ -15,9 +15,11 @@
 
 1、Class能被识别(非`undefined`)
 2、Class能调用方法
+
 **第一步让我们看看怎么做，如何让Oc Class能被JS识别呢？**
 
 我们可以将Oc Class注册到global中，这样我们的Class就能被JS识别，而不是`undefined`类型.
+
 **Class能识别了，那么在JS中如何才能调用Oc的方法而不报错呢？**
 
 这个问题其实很简单,我的解决方案将 `impoet Class`包装成类似于`NSObject`的`JSObject`
