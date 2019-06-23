@@ -56,12 +56,7 @@ BOOL checkRegistedMethod(NSString *method, NSString *class, BOOL isClass){
     return NO;
 }
     
-void OC_MSG_SEND_HANDLE_VOID(id self, SEL _cmd,...){
-    @synchronized (self) {
-        JSValue * func = [TTPatch shareInstance].context[@"js_msgSend"];
-         [func callWithArguments:@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],NSStringFromClass([self class]),TTPatchUtils.TTPatchMethodFormatterToJSFunc(NSStringFromSelector(_cmd)),@"params"]];
-    }
-}
+
 
 #define WRAP_AND_RETURN(argType,vauleType)\
 case argType:{  \
@@ -380,9 +375,15 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         }
         
    
+        BOOL isInstance = YES;
+        if (![self isMemberOfClass:[self class]]) {
+            isInstance=NO;
+        }
         
-        
-        NSMutableArray * params = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],NSStringFromClass([self class]),TTPatchUtils.TTPatchMethodFormatterToJSFunc(NSStringFromSelector(invocation.selector))] mutableCopy];
+        NSMutableArray * params = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],
+                                     NSStringFromClass([self class]),
+                                     TTPatchUtils.TTPatchMethodFormatterToJSFunc(NSStringFromSelector(invocation.selector)),
+                                     @(isInstance)] mutableCopy];
         [params addObjectsFromArray:tempArguments];
         __unsafe_unretained JSValue *jsValue = [func callWithArguments:params];
         guard(strcmp(returnValueType, "v")==0) else{

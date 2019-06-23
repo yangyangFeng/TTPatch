@@ -1,7 +1,7 @@
 _import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton')
 
-var screenWidth = UIScreen.mainScreen().bounds().size.width;
-var screenHeight = UIScreen.mainScreen().bounds().size.height;
+let screenWidth = UIScreen.mainScreen().bounds().size.width;
+let screenHeight = UIScreen.mainScreen().bounds().size.height;
 
 defineClass('TTViewController:UIViewController', {
 
@@ -20,7 +20,7 @@ defineClass('TTViewController:UIViewController', {
 
 		for (var i = 0; i < 9; i++) {
 			let width = screenWidth / 3.5;
-			let react = new TTReact(10 + (i % 3) * (width + 10), 64 + 15 + (i / 3) * (width + 10), width, width);
+			let react = new TTReact(10 + (i % 3) * (width + 10), 64 + 15 + parseInt((i / 3)) * (width + 10), width, width);
 			let witdh = react.size.width;
 			let view = UIView.alloc().initWithFrame_(react);
 			view.setBackgroundColor_(UIColor.redColor());
@@ -50,14 +50,7 @@ defineClass('TTViewController:UIViewController', {
 		self.ttparams1_params2_params3_params4_params5_params6_params7_(33333, 2, 2, 2, 2, 2, 2);
 	},
 	action_: function (tap) {
-		// tap.view().setBackgroundColor_(UIColor.whiteColor());
-		Util.log('--------name---------'+self.name());
-		self.view().subviews().forEach(subview => {
-			if (tap.view() !== subview) {
-				subview.removeFromSuperview()
-			}
-		})
-
+		tap.view().setBackgroundColor_(UIColor.whiteColor());
 	},
 	btnDidAction_: function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
@@ -73,4 +66,8 @@ defineClass('TTViewController:UIViewController', {
 		Util.log('--------多参数测试---------')
 		Util.log(params1, params2, params3, params4, params5, params6, params7)
 	}
-}, {})
+}, {
+	//静态方法
+	testAction_:function (str) {
+	}
+})

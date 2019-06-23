@@ -60,17 +60,31 @@ function estraverse_traverse(ast) {
 							return;
 						}
 						// console.log('*******'+JSON.stringify(node));
-						let newCallee = node.callee;
-						// JSON.parse(JSON.stringify(node.callee));
-
-						node.arguments.splice(0,0,createNode(node.callee.property.name))
-						node.callee.property.name = "call";
-						// {
-						// 	"type":"Identifier",
-						// 	"name":"call"
+						var str=node.callee.property.name;
+						var argCount = 0;
+						for (let i = 0; i < str.length; i++) {
+							if (str.charAt(i) === '_') {
+								argCount++;
+							}
+						}
+						var argumentsCount =0;
+						for (var i in node.arguments) {
+							argumentsCount ++;
+						}
+						// if (argCount < argumentsCount){
+						// 	node.arguments.splice(0,0,createNode((node.callee.property.name+'_')));
+						//
+						// }else {
+						// 	node.arguments.splice(0,0,createNode(node.callee.property.name))
 						// }
+						node.arguments.splice(0,0,createNode(node.callee.property.name))
+							// console.log("出现最多次数的是:"+argCount+'实际参数: '+argumentsCount)
 
+						// node.arguments.splice(0,0,createNode(node.callee.property.name))
+						node.callee.property.name = "call";
 					}
+
+
 
 				}break;
 			}

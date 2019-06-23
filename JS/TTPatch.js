@@ -46,22 +46,14 @@ class Class_obj {
 		this.__cls = classMethods ? new Class_obj(className, superClassName, classMethods, false,null) : null;
 	}
 
-	__findPropertys(){
-		let property_list = [];
-		let methodList = [];
-		for (const key in this.__methodList) {
-			let value = this.__methodList[key];
-			if (value instanceof Property) {
-				value['__name'] = key;
-				property_list.push(value);
-			}else {
-				methodList.push(value);
-			}
+	__obj(isInstance){
+		if (isInstance){
+			return this;
+		}else {
+			return this.__cls;
 		}
-		this.__methodList = methodList;
-		// this.__property_list = property_list;
-		return property_list;
 	}
+
 	__findMethod(method, isInstanceMethod) {
 		let cacheImp;
 		this.__methodCache.forEach(({method_key, value}) => {
@@ -262,19 +254,21 @@ class TTEdgeInsets {
 
 	// js API
 	// Oc 消息转发至 js
-	global.js_msgSend = function (instance, className, method) {
+	global.js_msgSend = function (instance, className, method, isInstance) {
+		//当前方法显示参数长度，解析 params 时使用
+		let funcTargetActionLength = 4;
 		// retain self
 		let curSelf = new JSObject(className, instance);
 		curSelf.__instanceFlag = className + '-' + method;
 		pv_retainJsObject(curSelf);
 
 		let params;
-		for (let i = 3; i < arguments.length; i++) {
+		for (let i = funcTargetActionLength; i < arguments.length; i++) {
 			if (!params) params = new Array();
 			params.push(pv_toJSObject(arguments[i]));
 		}
 		Util.log('🍎🍎🍎🍎oc------------->js' + '    _func_ ' + className + ' ************** ' + method + '');
-		let obj = CLASS_MAP[className];
+		let obj = CLASS_MAP[className].__obj(isInstance);
 		let imp = obj.__methodList[method];
 		let result = imp.apply(undefined, params);
 
@@ -369,7 +363,7 @@ class TTEdgeInsets {
 				MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
 			}
 		}
-		return isInstanceMethod ?null: pv_registMethods(cls.__cls);
+		return isInstanceMethod ? pv_registMethods(cls.__cls) : null;
 	}
 
 	/**

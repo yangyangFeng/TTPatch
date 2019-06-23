@@ -20,7 +20,7 @@ defineClass('ViewController:UIViewController',{
         tempCellText.call('setText_','我是DJ喜洋洋，青青草原我最狂~~~~~~');
         // // self.call('tableview').call('removeFromSuperview');
         // self.call('view').call('addSubview:',self.call('tableview'));
-        
+
         // self.call('tableview').call('reloadData');
     },
     viewDidLoad:function(){
@@ -48,7 +48,7 @@ defineClass('ViewController:UIViewController',{
         }
         return cell;
     }
-    
+
 },{
-    
+
 });

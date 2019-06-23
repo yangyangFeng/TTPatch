@@ -18,13 +18,16 @@
 @end
 
 @implementation TTViewController
-
+-(void)dealloc{
+    NSLog(@"dealloc -------- Oc");
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [self initJSContxtPath];
     [self watch];
-    [self params1:1 params2:2 params3:3 params4:4 params5:5 params6:6 params7:7];
+    
+
 }
 
 -(void)params1:(int)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7{
@@ -80,5 +83,12 @@
     }];
     [watchDog start];
     [self.watchDogs addObject:watchDog];
+}
+
++ (void)testAction:(NSString *)str{
+    NSLog(@"--------静态方法测试--------- %@",str);
+}
+- (void)testAction:(NSString *)str{
+    NSLog(@"--------实例方法测试--------- %@",str);
 }
 @end
