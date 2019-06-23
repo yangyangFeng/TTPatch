@@ -7,6 +7,8 @@
 //
 
 #import "TTView.h"
+#import <objc/runtime.h>
+#import <objc/message.h>
 
 @implementation TTView
 
@@ -20,6 +22,8 @@
         [self class];
         [super class];
         NSLog(@"TTView----->创建成功~~~~~~~~~~~~~~~~~~~~~~~~~");
+//        objc_msgSuper
+//        objc_msgSendSuper()
     }
     return self;
 }

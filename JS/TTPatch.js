@@ -1,10 +1,21 @@
 let global = this;
 
+class TTPatch_Super_Obj{
+
+}
+
 class MessageQueue {
 }
 
-MessageQueue.call = function (obj, msg, params) {
-	return MessageQueue_oc_sendMsg(obj, msg, params);
+MessageQueue.call = function (obj,isSuperInvoke,isInstance, msg, params) {
+	/***
+	 * 	params1	: target
+	 * 			: 是否是super()
+	 * 			: 是否是实例方法
+	 * 			: 方法名
+	 * 			: 参数
+	 */
+	return MessageQueue_oc_sendMsg(obj,isSuperInvoke,isInstance, msg, params);
 };
 MessageQueue.define = function (className) {
 	return MessageQueue_oc_define(className);
@@ -42,7 +53,6 @@ class Class_obj {
 		this.__property_list = propertys;
 		// this.__findPropertys();
 		this.__methodCache = new Array(3);
-
 		this.__cls = classMethods ? new Class_obj(className, superClassName, classMethods, false,null) : null;
 	}
 
@@ -209,13 +219,14 @@ class TTEdgeInsets {
 			jsMethod_IMP.apply(this, params);
 		}
 		else if (isInstance) {
-			result = MessageQueue.call(this.__isa, msg, params);
+			result = MessageQueue.call(this.__isa, ttpatch__isSuperInvoke, isInstance,msg, params);
 		} else {
-			result = MessageQueue.call(this.__className, msg, params);
+			result = MessageQueue.call(this.__className, ttpatch__isSuperInvoke, isInstance,msg, params);
 		}
 
-
 		// var jsObj = new JSObject('JSObject',result);
+		//super调用已完成，将状态重新置为false
+		global.ttpatch__isSuperInvoke=false;
 		return pv_toJSObject(result);
 	};
 	// JSObject.prototype=new Object();
@@ -434,9 +445,15 @@ class TTEdgeInsets {
 		}
 	}
 
+
 	global.CLASS_MAP = {};
 	global.self = null;
 	global.lastSelf = null;
+	global.ttpatch__isSuperInvoke = false;
+	global.Super=function () {
+		ttpatch__isSuperInvoke = true;
+		return self;
+	}
 })();
 
 

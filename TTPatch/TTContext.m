@@ -447,8 +447,8 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
                  };
     };
     
-    self[@"MessageQueue_oc_sendMsg"] = ^(id obj,NSString* method,id arguments){
-        return TTPatchUtils.TTPatchDynamicMethodInvocation(obj,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),arguments);
+    self[@"MessageQueue_oc_sendMsg"] = ^(id obj,BOOL isSuper,BOOL isInstance,NSString* method,id arguments){
+        return TTPatchUtils.TTPatchDynamicMethodInvocation(obj, isSuper,isInstance,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),arguments);
     };
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){

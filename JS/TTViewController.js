@@ -6,9 +6,16 @@ let screenHeight = UIScreen.mainScreen().bounds().size.height;
 defineClass('TTViewController:UIViewController', {
 
 	name: property(),
+	viewDidLoad:function () {
+
+	},
 	loadJSCode: function () {
+		Super().testSuper();
+		self.testSuper();
 		// self.call('cleanSubviews');
 		self.addSomeTestView();
+
+
 	},
 	cleanSubviews: function () {
 

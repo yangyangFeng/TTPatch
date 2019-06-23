@@ -11,6 +11,9 @@
 #import <UIKit/UIKit.h>
 
 #import <JavaScriptCore/JavaScriptCore.h>
+
+#define TTPATCH_DERIVE_PRE @"TTPatch_Derive_"
+
 #define guard(condfion) if(condfion){}
 #define TTPatchInvocationException @"TTPatchInvocationException"
 #define TTCheckArguments(flag,arguments)\
@@ -266,6 +269,57 @@ static id ToJsObject(id returnValue,NSString *clsName){
     return [TTJSObject createJSObject:nil className:clsName isInstance:NO];;
 }
 
+static NSString * ttpatch_get_derive_class_originalName(NSString *curName){
+    if ([curName hasPrefix:TTPATCH_DERIVE_PRE]) {
+        return [curName stringByReplacingOccurrencesOfString:TTPATCH_DERIVE_PRE withString:@""];
+    }
+    return curName;
+}
+
+static NSString * ttpatch_create_derive_class_name(NSString *curName){
+    if ([curName hasPrefix:TTPATCH_DERIVE_PRE]) {
+        return curName;
+    }
+    return [NSString stringWithFormat:@"%@%@",TTPATCH_DERIVE_PRE,curName];
+}
+
+static void ttpatch_exchange_method(Class self_class, Class super_class, SEL selector, BOOL isInstance) {
+    NSCParameterAssert(selector);
+    //获取父类方法实现
+    Method targetMethodSuper = isInstance
+    ? class_getInstanceMethod(super_class, selector) : class_getClassMethod(super_class, selector);
+    Method targetMethodSelf = isInstance
+    ? class_getInstanceMethod(self_class, selector) : class_getClassMethod(self_class, selector);
+    
+    {
+        IMP targetMethodIMP = method_getImplementation(targetMethodSuper);
+        const char *typeEncoding = method_getTypeEncoding(targetMethodSuper)?:"v@:";
+        class_replaceMethod(self_class, selector, targetMethodIMP, typeEncoding);
+    }
+    {
+        IMP targetMethodIMP = method_getImplementation(targetMethodSelf);
+        const char *typeEncoding = method_getTypeEncoding(targetMethodSelf)?:"v@:";
+        class_replaceMethod(super_class, selector, targetMethodIMP, typeEncoding);
+    }
+}
+
+static void ttpatch_clean_derive_history(id classOrInstance,Class self_class, Class super_class, SEL selector,BOOL isInstance){
+    ttpatch_exchange_method(super_class, self_class, selector, isInstance);
+    Class originalClass = NSClassFromString(ttpatch_get_derive_class_originalName(NSStringFromClass([classOrInstance class])));
+    object_setClass(classOrInstance, originalClass);
+    objc_disposeClassPair(self_class);
+}
+
+static Class ttpatch_create_derive_class(id classOrInstance){
+    Class aClass = objc_allocateClassPair([classOrInstance class], [ttpatch_create_derive_class_name(NSStringFromClass([classOrInstance class])) UTF8String], 0);
+    objc_registerClassPair(aClass);
+    object_setClass(classOrInstance, aClass);
+    return aClass;
+}
+
+
+
+
 #define TT_RETURN_WRAP(typeChar,type)\
 case typeChar:{   \
 type instance; \
@@ -273,9 +327,14 @@ type instance; \
 return @(instance); \
 }break;
 
-static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray *arguments){
-    
-    
+static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstance, NSString *method, NSArray *arguments){
+    Class ttpatch_drive_class;
+    Class ttpatch_drive_super_class;
+    if (isSuper) {
+        ttpatch_drive_super_class = [classOrInstance superclass];
+        ttpatch_drive_class = ttpatch_create_derive_class(classOrInstance);
+        ttpatch_exchange_method(ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method), isInstance);
+    }
     BOOL hasArgument = NO;
     TTCheckArguments(hasArgument,arguments);
     if([classOrInstance isKindOfClass:NSString.class]){
@@ -365,9 +424,21 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *method, NSArray 
         
     }
 
+    if (isSuper) {
+        ttpatch_clean_derive_history(classOrInstance,ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method),isInstance);
+    }
     return nil;
     
 }
+
+//static BOOL aspect_isMsgForwardIMP(IMP impl) {
+//    return impl == _objc_msgForward
+//#if !defined(__arm64__)
+//    || impl == (IMP)_objc_msgForward_stret
+//#endif
+//    ;
+//}
+
 
 
 

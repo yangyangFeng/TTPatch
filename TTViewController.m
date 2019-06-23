@@ -27,7 +27,7 @@
     [self initJSContxtPath];
     [self watch];
     
-
+    
 }
 
 -(void)params1:(int)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7{
@@ -90,5 +90,9 @@
 }
 - (void)testAction:(NSString *)str{
     NSLog(@"--------实例方法测试--------- %@",str);
+}
+
+- (void)testSuper{
+    NSLog(@"[self testSuper]");
 }
 @end
