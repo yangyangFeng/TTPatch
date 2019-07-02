@@ -7,8 +7,8 @@
 //
 
 #import "TTViewController.h"
-#import "libs/SGDirWatchdog.h"
-#import "TTPatch/TTPatch.h"
+#import "SGDirWatchdog.h"
+#import "TTPatch.h"
 #import "TTPatchUtils.h"
 
 @interface TTViewController ()
@@ -26,7 +26,7 @@
     
     [self initJSContxtPath];
     [self watch];
-        [self loadJSCode];
+    [self loadJSCode];
     
 }
 
@@ -37,26 +37,28 @@
     
 }
 - (void)viewWillAppear:(BOOL)animated{
-//    [self loadJSCode];
+    [self loadJSCode];
 }
 
 - (void)loadJSCode{}
 
 - (void)initJSContxtPath{
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"TTPatch" ofType:@"js"];
+    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
     [[TTPatch shareInstance] clearContext];
     [[TTPatch shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
     
     self.watchDogs = [[NSMutableArray alloc] init];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS/source"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
     NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
 
 
     for (NSString *aPath in contentOfFolder) {
-        NSString * fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
-        [self watchFolder:fullPath mainScriptPath:path];
+        if ([aPath isEqualToString:@"Playground.js"]) {
+            NSString * fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
+            [self watchFolder:fullPath mainScriptPath:path];
+        }
     }
     
 }
@@ -64,12 +66,12 @@
 - (void)watch{
     
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"JS/source"];
-    NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"TTViewController.js"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+    NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"Playground.js"];
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
 
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"TTViewController.js"]];
+    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"Playground.js"]];
     
     [self loadJSCode];
     

@@ -3,15 +3,15 @@ _import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UI
 defineClass('ViewController:UIViewController',{
     data:property(),
 	loadJSCode:function(){
-		let dataSource = ['加载下发模块',1];
+		let dataSource = ['加载下发模块','点击加载更多'];
         self.setData_(dataSource);
 		let data = self.data();
         let tableview = self.getTableview();
         self.setTableview_(tableview);
         self.view().addSubview_(tableview);
-		let aaa = TTView.new();
-		aaa.__isa = null;
-		aaa=null;
+		// let aaa = TTView.new();
+		// aaa.__isa = null;
+		// aaa=null;
 		Util.log('js调用 viewDidLoad');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
@@ -27,7 +27,7 @@ defineClass('ViewController:UIViewController',{
     },
 	tableView_didSelectRowAtIndexPath_:function (tableview,indexPath) {
 		if (indexPath.row() === 0){
-			let vc = RootViewController.new();
+			let vc = JSRootViewController.new();
 			self.navigationController().pushViewController_animated_(vc,true);
 			vc=null;
 		}else {
@@ -52,7 +52,7 @@ defineClass('ViewController:UIViewController',{
 
 });
 
-defineClass('RootViewController:UIViewController',{
+defineClass('JSRootViewController:UIViewController',{
 	dealloc:function () {
 		Util.log('TestViewController->已释放');
 	},

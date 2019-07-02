@@ -1,30 +1,29 @@
 _import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton');
-let screenWidth = UIScreen.call('mainScreen').call('bounds').size.width;
-let screenHeight = UIScreen.call('mainScreen').call('bounds').size.height;
 defineClass('TTViewController:UIViewController', {
     name: property(),
     viewDidLoad: function () {
     },
     loadJSCode: function () {
-        Super().call('testSuper');
-        self.call('testSuper');
+        self.call('cleanSubviews');
         self.call('addSomeTestView');
     },
     cleanSubviews: function () {
-    },
-    addSomeTestView: function () {
         self.call('view').call('subviews').call('forEach', subview => {
             subview.call('removeFromSuperview');
         });
+    },
+    addSomeTestView: function () {
+        let screenWidth = UIScreen.call('mainScreen').call('bounds').size.width;
+        let screenHeight = UIScreen.call('mainScreen').call('bounds').size.height;
         for (var i = 0; i < 9; i++) {
             let width = screenWidth / 3.5;
             let react = new TTReact(10 + i % 3 * (width + 10), 64 + 15 + parseInt(i / 3) * (width + 10), width, width);
             let witdh = react.size.width;
             let view = UIView.call('alloc').call('initWithFrame_', react);
-            view.call('setBackgroundColor_', UIColor.call('blackColor'));
+            view.call('setBackgroundColor_', UIColor.call('redColor'));
             let label = UILabel.call('alloc').call('init');
             label.call('setFrame_', react);
-            label.call('setText_', String(i));
+            label.call('setText_', String(i) + '');
             label.call('setFont_', UIFont.call('systemFontOfSize_', 20));
             label.call('setTextColor_', UIColor.call('whiteColor'));
             label.call('setTextAlignment_', 1);

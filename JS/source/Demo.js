@@ -4,16 +4,13 @@ defineClass('ViewController:UIViewController', {
     loadJSCode: function () {
         let dataSource = [
             '加载下发模块',
-            1
+            '点击加载更多'
         ];
         self.call('setData_', dataSource);
         let data = self.call('data');
         let tableview = self.call('getTableview');
         self.call('setTableview_', tableview);
         self.call('view').call('addSubview_', tableview);
-        let aaa = TTView.call('new');
-        aaa.__isa = null;
-        aaa = null;
         Util.log('js调用 viewDidLoad');
     },
     tableView_numberOfRowsInSection_: function (tableview, section) {
@@ -28,7 +25,7 @@ defineClass('ViewController:UIViewController', {
     },
     tableView_didSelectRowAtIndexPath_: function (tableview, indexPath) {
         if (indexPath.call('row') === 0) {
-            let vc = RootViewController.call('new');
+            let vc = JSRootViewController.call('new');
             self.call('navigationController').call('pushViewController_animated_', vc, true);
             vc = null;
         } else {
@@ -49,7 +46,7 @@ defineClass('ViewController:UIViewController', {
         Util.log(params1, params2, params3, params4, params5, params6, params7);
     }
 }, {});
-defineClass('RootViewController:UIViewController', {
+defineClass('JSRootViewController:UIViewController', {
     dealloc: function () {
         Util.log('TestViewController->已释放');
     },
