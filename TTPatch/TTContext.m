@@ -12,11 +12,13 @@
 #import <objc/message.h>
 #import "TTPatch.h"
 #import <libkern/OSAtomic.h>
+#import <pthread.h>
 /**
  *  TTPatch 动态方法前缀
  */
 NSString *const TTPatchChangeMethodPrefix = @"tt";
-
+static dispatch_semaphore_t ttpatch_lock;
+static NSMutableDictionary *__replaceMethodMap;
 #define guard(condfion) if(condfion){}
 
 
@@ -26,18 +28,12 @@ NSString *const TTPatchChangeMethodPrefix = @"tt";
 
 @implementation TTContext
 
-static void aspect_performLocked(dispatch_block_t block) {
-    static OSSpinLock aspect_lock = OS_SPINLOCK_INIT;
-    OSSpinLockLock(&aspect_lock);
+static void ttpatch_performLocked(dispatch_block_t block) {
+    ttpatch_lock = dispatch_semaphore_create(1);
+    dispatch_semaphore_wait(ttpatch_lock, DISPATCH_TIME_FOREVER);
     block();
-    OSSpinLockUnlock(&aspect_lock);
+    dispatch_semaphore_signal(ttpatch_lock);
 }
-
-
-
-static NSMutableDictionary *__replaceMethodMap;
-
-
 
 
 void registerMethod(NSString *method,NSString *class,BOOL isClass){
@@ -121,8 +117,10 @@ static void replaceOcOriginalMethod(NSString *className,NSString *superClassName
     if(checkRegistedMethod(method, className, !isInstanceMethod)){
         return;
     }
-    
+#if TTPATCH_LOG
     NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
+#endif
+    
     Class aClass = NSClassFromString(className);
     SEL original_SEL = NSSelectorFromString(method);
     Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
@@ -207,91 +205,102 @@ static IMP aspect_getMsgForwardIMP(Class aclass, SEL selector,BOOL isInstanceMet
 }
 
 static void TTPATCH_addPropertys(NSString *className,NSString *superClassName,NSArray *propertys){
-    Class aClass = NSClassFromString(className);
-    
-    BOOL needRegistClass=NO;
-    if (aClass) {
-    }else{
-        aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
-        needRegistClass = YES;
-    }
-    for (NSDictionary * property in propertys) {
-        NSString *propertyName = [property objectForKey:@"__name"];
-        /**
-         targetClass:   表示要添加的属性的类
-         propertyName:  表示要添加的属性名
-         attrs：        类特性列表
-         attrsCount:    类特性个数
-         */
+    ttpatch_performLocked(^{
         
-        NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
+        Class aClass = NSClassFromString(className);
         
-        if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
-            NSLog(@"Get添加成功");
+        BOOL needRegistClass=NO;
+        if (aClass) {
+        }else{
+            aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
+            needRegistClass = YES;
         }
-        if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
-            NSLog(@"Set添加成功");
+        for (NSDictionary * property in propertys) {
+            NSString *propertyName = [property objectForKey:@"__name"];
+            /**
+             targetClass:   表示要添加的属性的类
+             propertyName:  表示要添加的属性名
+             attrs：        类特性列表
+             attrsCount:    类特性个数
+             */
+            
+            NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
+            
+            if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
+                #if TTPATCH_LOG
+                NSLog(@"Get添加成功");
+#endif
+            }
+            if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
+#if TTPATCH_LOG
+                NSLog(@"Set添加成功");
+#endif
+            }
         }
-    }
-    
-    if (needRegistClass) {
-        objc_registerClassPair(aClass);
-    }
+        
+        if (needRegistClass) {
+            objc_registerClassPair(aClass);
+        }
+        
+    });
 }
 
 
 static void TTPATCH_hookClassMethod(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys){
-    if(checkRegistedMethod(method, className, !isInstanceMethod)){
-        return;
-    }
-    static NSSet *disallowedSelectorList;
-    static dispatch_once_t pred;
-    dispatch_once(&pred, ^{
-        disallowedSelectorList = [NSSet setWithObjects:@"retain", @"release", @"autorelease", @"forwardInvocation:", nil];
+    ttpatch_performLocked(^{
+        
+        if(checkRegistedMethod(method, className, !isInstanceMethod)){
+            return;
+        }
+        static NSSet *disallowedSelectorList;
+        static dispatch_once_t pred;
+        dispatch_once(&pred, ^{
+            disallowedSelectorList = [NSSet setWithObjects:@"retain", @"release", @"autorelease", @"forwardInvocation:", nil];
+        });
+        
+        
+        if ([disallowedSelectorList containsObject:method]) {
+            NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", method];
+            NSCAssert(NO, errorDescription);
+        }
+        
+        #if TTPATCH_LOG
+        NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
+        #endif
+        Class aClass = NSClassFromString(className);
+        SEL original_SEL = NSSelectorFromString(method);
+        Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
+        
+        
+        //    tt_addPropertys(className, superClassName, propertys);
+        
+        //如果是静态方法,要取 MetaClass
+        guard(isInstanceMethod) else{
+            originalMethodInfo = class_getClassMethod(aClass, original_SEL);
+            aClass = object_getClass(aClass);
+        }
+        
+        /**
+         *  这里为什么要替换 `ForwardInvocation` 而不是替换对应方法要解释一下
+         *  因为添加的 `IMP` 是固定的函数,而函数的返回值类型,以及返回值有无,在写的时候就已经固定了.所以我们会面临两个问题
+         *  1.要根据当前被替换方法返回值类型,提前注册好对应的`IMP`函数,使得函数能拿到正确的数据类型.
+         *  2.要如何知道当前方法是否有返回值,以及返回值的类型是什么?
+         *
+         *  因为这两个原因很麻烦,当然是用 穷举+方法返回值加标识 可以解决这个问题,但是我感觉这么做是一个坑.最后找到根据 `aspect` 和 `JSPatch`的作者blog,为什么他们都要hook `ForwardInvocation` 这个方法.其实原因很简单,在这个时候我们能够拿到当前系统调用中方法的 `invocation` 对象,也就意味着能够拿到当前方法的全部信息,而且我们此时也能去根据`js`替换后方法的返回值去`set`当前`invocation`对象的返回值,使当前无论返回值使什么类型,我们都可以根据当前的方法签名来对应为其转换为相应类型.
+         */
+        aspect_swizzleForwardInvocation(aClass);
+        /**
+         *  将要我换的方法IMP替换成`_objc_msgForward`,这么做的原因其实是为了优化方法调用时间.
+         *  假如我们不做方法替换,系统在执行`objc_msgSend`函数,这样会根据当前的对象的继承链去查找方法然后执行,这里就涉及到一个查找的过程
+         *  如果查找不到方法,会走消息转发也就是`_objc_msgForward`函数做的事情,所以那我们为什么不直接将方法的`IMP`替换为`_objc_msgForward`直接走消息转发呢
+         */
+        aspect_prepareClassAndHookSelector(aClass, original_SEL, isInstanceMethod);
+        
+        //将已经替换的class做记录
+        registerMethod(method, className, !isInstanceMethod);
+        
+        
     });
-    
-    
-    if ([disallowedSelectorList containsObject:method]) {
-        NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", method];
-        NSCAssert(NO, errorDescription);
-    }
-
-    
-    NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
-    Class aClass = NSClassFromString(className);
-    SEL original_SEL = NSSelectorFromString(method);
-    Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
-    
-    
-//    tt_addPropertys(className, superClassName, propertys);
-    
-    //如果是静态方法,要取 MetaClass
-    guard(isInstanceMethod) else{
-        originalMethodInfo = class_getClassMethod(aClass, original_SEL);
-        aClass = object_getClass(aClass);
-    }
-    
-    /**
-     *  这里为什么要替换 `ForwardInvocation` 而不是替换对应方法要解释一下
-     *  因为添加的 `IMP` 是固定的函数,而函数的返回值类型,以及返回值有无,在写的时候就已经固定了.所以我们会面临两个问题
-     *  1.要根据当前被替换方法返回值类型,提前注册好对应的`IMP`函数,使得函数能拿到正确的数据类型.
-     *  2.要如何知道当前方法是否有返回值,以及返回值的类型是什么?
-     *
-     *  因为这两个原因很麻烦,当然是用 穷举+方法返回值加标识 可以解决这个问题,但是我感觉这么做是一个坑.最后找到根据 `aspect` 和 `JSPatch`的作者blog,为什么他们都要hook `ForwardInvocation` 这个方法.其实原因很简单,在这个时候我们能够拿到当前系统调用中方法的 `invocation` 对象,也就意味着能够拿到当前方法的全部信息,而且我们此时也能去根据`js`替换后方法的返回值去`set`当前`invocation`对象的返回值,使当前无论返回值使什么类型,我们都可以根据当前的方法签名来对应为其转换为相应类型.
-     */
-    aspect_swizzleForwardInvocation(aClass);
-    /**
-     *  将要我换的方法IMP替换成`_objc_msgForward`,这么做的原因其实是为了优化方法调用时间.
-     *  假如我们不做方法替换,系统在执行`objc_msgSend`函数,这样会根据当前的对象的继承链去查找方法然后执行,这里就涉及到一个查找的过程
-     *  如果查找不到方法,会走消息转发也就是`_objc_msgForward`函数做的事情,所以那我们为什么不直接将方法的`IMP`替换为`_objc_msgForward`直接走消息转发呢
-     */
-    aspect_prepareClassAndHookSelector(aClass, original_SEL, isInstanceMethod);
-    
-    //将已经替换的class做记录
-    registerMethod(method, className, !isInstanceMethod);
-    
-
-    
   
 }
 
@@ -347,11 +356,13 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
             indexOffset = 2;
         }
         NSString * selectNameStr = NSStringFromSelector(invocation.selector);
+        #if TTPATCH_LOG
         NSLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| %@      \n| %@  \n| %d",method_getTypeEncoding(methodInfo),selectNameStr,self,systemMethodArgCount);
+        #endif
         NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
         
         for (unsigned i = indexOffset; i < systemMethodArgCount; i++) {
-            const char *argumentType = method_copyArgumentType(methodInfo, i);
+            const char *argumentType = [invocation.methodSignature getArgumentTypeAtIndex:i];
             switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
                     WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
                     WRAP_INVOCATION_AND_RETURN(_C_INT, int);

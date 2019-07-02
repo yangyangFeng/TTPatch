@@ -9,7 +9,7 @@
 #import "TTPatchUtils.h"
 #include <stdio.h>
 #import <UIKit/UIKit.h>
-
+#import "TTView.h"
 #import <JavaScriptCore/JavaScriptCore.h>
 
 #define TTPATCH_DERIVE_PRE @"TTPatch_Derive_"
@@ -328,12 +328,16 @@ return @(instance); \
 }break;
 
 static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstance, NSString *method, NSArray *arguments){
-    Class ttpatch_drive_class;
-    Class ttpatch_drive_super_class;
+    Class ttpatch_cur_class = [classOrInstance class];
+//    Class ttpatch_drive_class;
+//    Class ttpatch_drive_super_class;
     if (isSuper) {
-        ttpatch_drive_super_class = [classOrInstance superclass];
-        ttpatch_drive_class = ttpatch_create_derive_class(classOrInstance);
-        ttpatch_exchange_method(ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method), isInstance);
+        //通过创建派生类的方式实现super
+//        ttpatch_drive_super_class = [classOrInstance superclass];
+//        ttpatch_drive_class = ttpatch_create_derive_class(classOrInstance);
+//        ttpatch_exchange_method(ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method), isInstance);
+        //通过直接替换当前isa为父类isa,实现super语法
+        object_setClass(classOrInstance, [classOrInstance superclass]);
     }
     BOOL hasArgument = NO;
     TTCheckArguments(hasArgument,arguments);
@@ -351,7 +355,7 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
-#if DEBUG
+#if TTPATCH_LOG
             NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 #endif
         [invocation setTarget:classOrInstance];
@@ -368,9 +372,16 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
 
             switch (flag) {
                 case _C_ID:{
-                    __unsafe_unretained id instance = nil;
-                    [invocation getReturnValue:&instance];
-                    return instance?ToJsObject(instance,NSStringFromClass([instance class])):[NSNull null];
+                    id returnValue;
+                    void *result;
+                    [invocation getReturnValue:&result];
+                    if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
+                        returnValue = (__bridge_transfer id)result;
+//                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+                    } else {
+                        returnValue = (__bridge id)result;
+                    }
+                    return returnValue?ToJsObject(returnValue,NSStringFromClass([returnValue class])):[NSNull null];
                 }break;
                 case _C_CLASS:{
                     __unsafe_unretained Class instance = nil;
@@ -425,7 +436,8 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
     }
 
     if (isSuper) {
-        ttpatch_clean_derive_history(classOrInstance,ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method),isInstance);
+//        ttpatch_clean_derive_history(classOrInstance,ttpatch_drive_class, ttpatch_drive_super_class, NSSelectorFromString(method),isInstance);
+        object_setClass(classOrInstance, ttpatch_cur_class);
     }
     return nil;
     

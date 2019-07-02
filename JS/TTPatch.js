@@ -1,9 +1,5 @@
 let global = this;
 
-class TTPatch_Super_Obj{
-
-}
-
 class MessageQueue {
 }
 
@@ -211,10 +207,11 @@ class TTEdgeInsets {
 					pv_toOcObject(arguments[i]));
 		}
 
-		if (jsMethod_IMP) {
+
+		if (jsMethod_IMP && !ttpatch__isSuperInvoke) {
 			result = jsMethod_IMP.apply(this, params ? params : null);
 		}
-		else if (!this.__isa && !this.__className) {
+		else if (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) {
 			jsMethod_IMP = this[msg];
 			jsMethod_IMP.apply(this, params);
 		}
@@ -227,10 +224,19 @@ class TTEdgeInsets {
 		// var jsObj = new JSObject('JSObject',result);
 		//super调用已完成，将状态重新置为false
 		global.ttpatch__isSuperInvoke=false;
+		// this.__isa=null;
 		return pv_toJSObject(result);
 	};
-	// JSObject.prototype=new Object();
 
+
+	pv__getFuncParams=function (arguments) {
+		let params;
+		for (let i = 1; i < arguments.length; i++) {
+			if (!params) params = new Array();
+			params.push(arguments[i]);
+		}
+		return params;
+	}
 
 	// 引入 UIKit class
 	global._import = function (name) {
@@ -350,6 +356,7 @@ class TTEdgeInsets {
 		let obj = new Class_obj(className, superClassName, methodList, classMethods, property_list);
 		Util.log('register------' + className);
 		CLASS_MAP[obj.__className] = obj;
+		pv__import(className);
 		return obj;
 	}
 
@@ -393,8 +400,16 @@ class TTEdgeInsets {
 		else if (arg instanceof TTPoint) {
 			obj = new JSObject('point', arg.toOcString());
 		}
+		else if (arg instanceof Array) {
+			let result = new Array();
+			arg.forEach(element => {
+				let jsObj = pv_toOcObject(element);
+				result.push(jsObj);
+			});
+			return result;
+		}
 		else {
-			return arg;
+			obj = arg;
 		}
 		obj.call = null;
 		return obj;
@@ -410,7 +425,7 @@ class TTEdgeInsets {
 					if (value instanceof Array) {
 						let result = new Array();
 						arg.__isa.forEach(element => {
-							let jsObj = new JSObject('JSObject', element);
+							let jsObj = pv_toJSObject(element);
 							result.push(jsObj);
 						});
 						return result
@@ -427,7 +442,7 @@ class TTEdgeInsets {
 						cls === 'NSMutableArray') {
 						let result = new Array();
 						arg.forEach(element => {
-							let jsObj = new JSObject('JSObject', element);
+							let jsObj = pv_toJSObject(element);
 							result.push(jsObj);
 						});
 						return result
@@ -436,8 +451,11 @@ class TTEdgeInsets {
 						return arg.__isa;
 					}
 				}
-				return new JSObject(arg.__className, arg.__isa);
+				let obj = new JSObject(arg.__className, arg.__isa);
+				arg=null;
+				return obj;
 			}
+			// return arg;
 			return new JSObject('JSObject', arg);
 		} else {
 			// console.log('基础数据类型:'+arg);

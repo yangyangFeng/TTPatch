@@ -30,7 +30,7 @@ defineClass('TTViewController:UIViewController', {
 			let react = new TTReact(10 + (i % 3) * (width + 10), 64 + 15 + parseInt((i / 3)) * (width + 10), width, width);
 			let witdh = react.size.width;
 			let view = UIView.alloc().initWithFrame_(react);
-			view.setBackgroundColor_(UIColor.redColor());
+			view.setBackgroundColor_(UIColor.blackColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
 			label.setText_(String(i));
@@ -53,15 +53,15 @@ defineClass('TTViewController:UIViewController', {
 		btn.setFrame_(new TTReact(0, 500, screenWidth, 50));
 		btn.addTarget_action_forControlEvents_(self, "btnDidAction:", 1 << 6);
 		self.view().addSubview_(btn);
-		self.params1_params2_params3_params4_params5_params6_params7_(2, 2, 2, 2, 2, 2, 2);
-		self.ttparams1_params2_params3_params4_params5_params6_params7_(33333, 2, 2, 2, 2, 2, 2);
+		// self.params1_params2_params3_params4_params5_params6_params7_(2, 2, 2, 2, 2, 2, 2);
+		// self.ttparams1_params2_params3_params4_params5_params6_params7_(33333, 2, 2, 2, 2, 2, 2);
 	},
 	action_: function (tap) {
 		tap.view().setBackgroundColor_(UIColor.whiteColor());
 	},
 	btnDidAction_: function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
-		self.setName_('我是你老爹');
+		self.setName_('我是你老爹11111');
 		// console.log('--------点击---------')
 		// console.log('--------name---------'+self.name());
 		let  str = self.name();

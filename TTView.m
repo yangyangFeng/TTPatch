@@ -11,19 +11,27 @@
 #import <objc/message.h>
 
 @implementation TTView
-
++ (id)createView{
+    NSLog(@"TTView----->工厂方法~~~~~~~~~~~~~~~~~~~~~~~~~");
+    return [[TTView alloc] initWithFrame:CGRectZero];
+}
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-//        self.frame = CGRectMake(100, 100, 100, 100);
-        self.backgroundColor = [UIColor redColor];
-        
-        [self class];
-        [super class];
+
         NSLog(@"TTView----->创建成功~~~~~~~~~~~~~~~~~~~~~~~~~");
-//        objc_msgSuper
-//        objc_msgSendSuper()
+
+//        NSObject *a = [NSObject alloc];
+//        
+//        NSInvocation *invocation = [NSInvocation new];
+//        [invocation invoke];
+//        id returnValue;
+//        void *result;
+//        [invocation getReturnValue:&result];
+//
+//        returnValue = (__bridge id)result;
+        
     }
     return self;
 }

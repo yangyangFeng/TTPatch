@@ -9,6 +9,8 @@
 #ifndef TTPatchKit_h
 #define TTPatchKit_h
 #define guard(condfion) if(condfion){}
+
+#define TTPATCH_LOG 0
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "TTContext.h"

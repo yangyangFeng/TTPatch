@@ -26,7 +26,7 @@
     
     [self initJSContxtPath];
     [self watch];
-    
+        [self loadJSCode];
     
 }
 
@@ -37,7 +37,7 @@
     
 }
 - (void)viewWillAppear:(BOOL)animated{
-    [self loadJSCode];
+//    [self loadJSCode];
 }
 
 - (void)loadJSCode{}
@@ -68,7 +68,7 @@
     NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"TTViewController.js"];
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-    NSLog(@"%@",[[TTPatch shareInstance] formatterJS:jsCode]);
+
     [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"TTViewController.js"]];
     
     [self loadJSCode];

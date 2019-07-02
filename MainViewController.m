@@ -1,32 +1,27 @@
 //
-//  RootViewController.m
+//  MainViewController.m
 //  TTPatch
 //
-//  Created by ty on 2019/6/23.
+//  Created by ty on 2019/6/27.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import "RootViewController.h"
-
-@interface RootViewController ()
+#import "MainViewController.h"
+#import "TTPatch.h"
+@interface MainViewController ()
 
 @end
 
-@implementation RootViewController
-
--(void)dealloc{
-    NSLog(@"----");
+@implementation MainViewController
+- (IBAction)refresh:(id)sender {
+    [[TTPatch shareInstance] clearContext];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"[super viewDidLoad]");
     // Do any additional setup after loading the view.
 }
 
-- (void)testSuper{
-    NSLog(@"[super testSuper]");
-}
 /*
 #pragma mark - Navigation
 

@@ -12,19 +12,7 @@
 
 
 #define guard(condfion) if(condfion){}
-//static NSString *_replaceStr = @".call(\"$1\"";
-//static NSString *_regexStr =
-////@"\?=.+)$";
-//@"(?<!\\\\)\\.\\s*(\\w+)\\s*\\";
-static NSString *_regexStr = @"(?<!\\\\)\\.\\s*(\\w+)\\s*\\(";
-static NSString *_replaceStr = @".call(\"$1\")(";
 
-static NSString *_regexStr2 = @"[())]{3}";
-static NSString *_replaceStr2 = @")";
-
-
-static NSString *_regexStr3 = @"$$|\\)\\(";
-static NSString *_replaceStr3 = @",";
 
 static NSRegularExpression* _regex;
 static TTPatch *instance = nil;
@@ -65,16 +53,6 @@ static TTPatch *instance = nil;
 }
 
 - (NSString *)formatterJS:(NSString *)script{
-//    if (!_regex) {
-//        _regex = [NSRegularExpression regularExpressionWithPattern:_regexStr options:0 error:nil];
-//    }
-//    NSString *formatedScript = [NSString stringWithFormat:@"%@", [_regex stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:_replaceStr]];
-//
-//    _regex = [NSRegularExpression regularExpressionWithPattern:_regexStr2 options:0 error:nil];
-//NSString *formatedScript2 = [NSString stringWithFormat:@"%@", [_regex stringByReplacingMatchesInString:formatedScript options:0 range:NSMakeRange(0, script.length) withTemplate:_replaceStr2]];
-//
-//_regex = [NSRegularExpression regularExpressionWithPattern:_regexStr3 options:0 error:nil];
-//NSString *formatedScript3 = [NSString stringWithFormat:@"%@", [_regex stringByReplacingMatchesInString:formatedScript2 options:0 range:NSMakeRange(0, script.length) withTemplate:_replaceStr3]];
     return script;
 }
 
