@@ -1,15 +1,15 @@
+////
+////  ViewController.h
+////  TTPatch
+////
+////  Created by ty on 2019/5/17.
+////  Copyright © 2019 TianyuBing. All rights reserved.
+////
 //
-//  ViewController.h
-//  TTPatch
+//#import <UIKit/UIKit.h>
 //
-//  Created by ty on 2019/5/17.
-//  Copyright © 2019 TianyuBing. All rights reserved.
+//@interface ViewController : UIViewController
 //
-
-#import <UIKit/UIKit.h>
-
-@interface ViewController : UIViewController
-
-
-@end
-
+//
+//@end
+//

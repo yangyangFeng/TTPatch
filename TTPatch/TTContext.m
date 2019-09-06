@@ -23,6 +23,10 @@ static NSMutableDictionary *__replaceMethodMap;
 
 
 
+
+
+
+
 @interface TTContext ()
 @end
 
@@ -223,11 +227,10 @@ static void TTPATCH_addPropertys(NSString *className,NSString *superClassName,NS
              attrs：        类特性列表
              attrsCount:    类特性个数
              */
-            
             NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
             
             if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
-                #if TTPATCH_LOG
+#if TTPATCH_LOG
                 NSLog(@"Get添加成功");
 #endif
             }
@@ -340,7 +343,7 @@ __unsafe_unretained valueType result = [jsValue toValueFunc];    \
 [invocation setReturnValue:&result];    \
 }break;
 
-
+#pragma mark- native call JS
 static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocation_selector, NSInvocation *invocation) {
     @synchronized (self) {
         
@@ -355,8 +358,8 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         if (systemMethodArgCount>2) {
             indexOffset = 2;
         }
-        NSString * selectNameStr = NSStringFromSelector(invocation.selector);
         #if TTPATCH_LOG
+        NSString * selectNameStr = NSStringFromSelector(invocation.selector);
         NSLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| %@      \n| %@  \n| %d",method_getTypeEncoding(methodInfo),selectNameStr,self,systemMethodArgCount);
         #endif
         NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
@@ -364,7 +367,7 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         for (unsigned i = indexOffset; i < systemMethodArgCount; i++) {
             const char *argumentType = [invocation.methodSignature getArgumentTypeAtIndex:i];
             switch(argumentType[0] == 'r' ? argumentType[1] : argumentType[0]) {
-                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
+//                    WRAP_INVOCATION_ID_AND_RETURN(_C_ID, id);
                     WRAP_INVOCATION_AND_RETURN(_C_INT, int);
                     WRAP_INVOCATION_AND_RETURN(_C_SHT, short);
                     WRAP_INVOCATION_AND_RETURN(_C_USHT, unsigned short);
@@ -376,12 +379,47 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
                     WRAP_INVOCATION_AND_RETURN(_C_FLT, float);
                     WRAP_INVOCATION_AND_RETURN(_C_DBL, double);
                     WRAP_INVOCATION_AND_RETURN(_C_BOOL, BOOL);
-//                case _C_SEL:{  \
-//                    SEL tempArg; \
-//                    [invocation getArgument:&tempArg atIndex:(i)];    \
-//                    [tempArguments addObject:NSStringFromSelector(tempArg)];  \
-//                
-//                }break;
+                case _C_ID:{
+                    
+                    if ('?' == argumentType[1]) {
+                        NSLog(@"🍎当前参数为block");
+                        __unsafe_unretained id tempArg;
+                        [invocation getArgument:&tempArg atIndex:(i)];
+                        TTPatchBlockModel *block = [TTPatchBlockModel new];
+                        block.__isa = tempArg;
+                        [tempArguments addObject:ToJsObject(block, @"block")];
+
+                    }else{
+                        __unsafe_unretained id tempArg;
+                        [invocation getArgument:&tempArg atIndex:(i)];
+                        [tempArguments addObject:tempArg];
+                    }
+                }break;
+                  case _C_STRUCT_B:{
+                    NSString * returnStypeStr = [NSString stringWithUTF8String:argumentType];
+                    if ([returnStypeStr hasPrefix:@"{CGRect"]){
+                        CGRect instance;
+                        [invocation getArgument:&instance atIndex:(i)];
+                        [tempArguments addObject:ToJsObject(CGReactToJSObject(instance),@"react")];
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{CGPoint"]){
+                        CGPoint instance;
+                        [invocation getArgument:&instance atIndex:(i)];
+                        [tempArguments addObject:ToJsObject(CGPointToJSObject(instance),@"point")];
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{CGSize"]){
+                        CGSize instance;
+                        [invocation getArgument:&instance atIndex:(i)];
+                        [tempArguments addObject:ToJsObject(CGSizeToJSObject(instance),@"size")];
+                    }
+                    else if ([returnStypeStr hasPrefix:@"{UIEdgeInsets"]){
+                        UIEdgeInsets instance;
+                        [invocation getArgument:&instance atIndex:(i)];
+                        [tempArguments addObject:ToJsObject(UIEdgeInsetsToJSObject(instance),@"edge")];
+                    }else{
+                        NSCAssert(NO, @"*******%@---当前结构体暂不支持",returnStypeStr);
+                    }
+                }break;
             }
         }
         
@@ -506,4 +544,5 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
 }
 
 @end
+
 

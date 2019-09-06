@@ -84,32 +84,39 @@ case charAbbreviation:\
 {\
 NSNumber *jsObj = arguments[i];  \
 type argument=[jsObj func]; \
-[invocation setArgument:&argument atIndex:(2 + i)]; \
+[invocation setArgument:&argument atIndex:(startIndex + i)]; \
 }   \
 break;
-static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *arguments,Method method){
+static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *arguments,BOOL isBlock){
+    //默认 target->0,_cmd->1,arg->2..
+    int startIndex = 2;
     //@:@ count=3 参数个数1
     int indexOffset = 2;
-    int systemMethodArgCount = method_getNumberOfArguments(method);
+    if (isBlock) {
+        startIndex = 1;
+        indexOffset = 1;
+    }
+    int systemMethodArgCount = (int)invocation.methodSignature.numberOfArguments;
     if (systemMethodArgCount>indexOffset) {
         systemMethodArgCount-=indexOffset;
     }else{
-        
         systemMethodArgCount=0;
         return;
     }
+   
     guard(systemMethodArgCount == arguments.count)else{
         NSCAssert(NO, [NSString stringWithFormat:@"参数个数不匹配,请检查!"]);
     }
     
     for (int i = 0; i < systemMethodArgCount; i++) {
-        const char *argumentType = method_copyArgumentType(method, i+indexOffset);
+        const char *argumentType = [invocation.methodSignature getArgumentTypeAtIndex:i+indexOffset];
         char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
         switch(flag) {
+            case _C_PTR:
             case _C_ID:
             {
                  id argument = ([arguments objectAtIndex:i]);
-                [invocation setArgument:&argument atIndex:(2 + i)];
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
                 
             }break;
             case _C_STRUCT_B:
@@ -124,14 +131,14 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                 if ([clsType isEqualToString:@"react"]){
                     CGRect ocBaseData = toOcCGReact(str);
                     
-                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
                 }else if ([clsType isEqualToString:@"point"]){
                     CGPoint ocBaseData = toOcCGPoint(str);
-                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
                 }
                 else if ([clsType isEqualToString:@"size"]){
                     CGSize ocBaseData = toOcCGSize(str);
-                    [invocation setArgument:&ocBaseData atIndex:(2 + i)];
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
                 }
                 
             }break;
@@ -139,11 +146,11 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                 JSValue *jsObj = arguments[i];
                 char argument[1000];
                 strcpy(argument,(char *)[[jsObj toString] UTF8String]);
-                [invocation setArgument:&argument atIndex:(2 + i)];
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
             }break;
             case _C_SEL:{
                  SEL argument = NSSelectorFromString([arguments objectAtIndex:i]);
-                [invocation setArgument:&argument atIndex:(2 + i)];
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
             }break;
                 TT_ARG_Injection(_C_SHT, short, shortValue);
                 TT_ARG_Injection(_C_USHT, unsigned short, unsignedShortValue);
@@ -164,6 +171,92 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
     
     }
 }
+
+static void setInvocationArgumentsBlock(NSInvocation *invocation,NSArray *arguments){
+    //默认 target->0,arg->1..
+    int startIndex = 1;
+    //    //如果block调用,selector则为nil,所以 index从 1 开始
+    //    if (!invocation.selector) {
+    //        int systemMethodArgCount = (int)invocation.methodSignature.numberOfArguments;
+    //        startIndex = 1;
+    //        indexOffset = 1;
+    //    }
+    int indexOffset = 1;
+    int systemMethodArgCount = (int)invocation.methodSignature.numberOfArguments;
+    if (systemMethodArgCount>indexOffset) {
+        systemMethodArgCount-=indexOffset;
+    }else{
+        systemMethodArgCount=0;
+        return;
+    }
+   
+    guard(systemMethodArgCount == arguments.count)else{
+        NSCAssert(NO, [NSString stringWithFormat:@"参数个数不匹配,请检查!"]);
+    }
+    
+    for (int i = 0; i < systemMethodArgCount; i++) {
+        const char *argumentType = [invocation.methodSignature getArgumentTypeAtIndex:i+indexOffset];
+        char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
+        switch(flag) {
+            case _C_ID:
+            {
+                 id argument = ([arguments objectAtIndex:i]);
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
+                
+            }break;
+            case _C_STRUCT_B:
+            {
+                 id argument = ([arguments objectAtIndex:i]);
+             
+                NSString * clsType = [argument objectForKey:@"__className"];
+                guard(clsType)else{
+                   NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
+                }
+                NSString *str = [argument objectForKey:@"__isa"];
+                if ([clsType isEqualToString:@"react"]){
+                    CGRect ocBaseData = toOcCGReact(str);
+                    
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
+                }else if ([clsType isEqualToString:@"point"]){
+                    CGPoint ocBaseData = toOcCGPoint(str);
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
+                }
+                else if ([clsType isEqualToString:@"size"]){
+                    CGSize ocBaseData = toOcCGSize(str);
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
+                }
+                
+            }break;
+            case 'c':{
+                JSValue *jsObj = arguments[i];
+                char argument[1000];
+                strcpy(argument,(char *)[[jsObj toString] UTF8String]);
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
+            }break;
+            case _C_SEL:{
+                 SEL argument = NSSelectorFromString([arguments objectAtIndex:i]);
+                [invocation setArgument:&argument atIndex:(startIndex + i)];
+            }break;
+                TT_ARG_Injection(_C_SHT, short, shortValue);
+                TT_ARG_Injection(_C_USHT, unsigned short, unsignedShortValue);
+                TT_ARG_Injection(_C_INT, int, intValue);
+                TT_ARG_Injection(_C_UINT, unsigned int, unsignedIntValue);
+                TT_ARG_Injection(_C_LNG, long, longValue);
+                TT_ARG_Injection(_C_ULNG, unsigned long, unsignedLongValue);
+                TT_ARG_Injection(_C_LNG_LNG, long long, longLongValue);
+                TT_ARG_Injection(_C_ULNG_LNG, unsigned long long, unsignedLongLongValue);
+                TT_ARG_Injection(_C_FLT, float, floatValue);
+                TT_ARG_Injection(_C_DBL, double, doubleValue);
+                TT_ARG_Injection(_C_BOOL, BOOL, boolValue);
+                
+                
+            default:
+                break;
+        }
+    
+    }
+}
+
 
 static char * GetMethodTypes(NSString *method,NSArray *arguments){
     BOOL hasReturnValue = NO;
@@ -218,37 +311,8 @@ static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
     return instanceMethodInfo?instanceMethodInfo:classMethodInfo;
 }
 
-static NSDictionary* CGPointToJSObject(CGPoint point){
-    return @{@"x":@(point.x),
-             @"y":@(point.y)
-             };
-}
-
-static NSDictionary* CGSizeToJSObject(CGSize size){
-    return @{@"width":@(size.width),
-             @"height":@(size.height)
-             };
-}
-
-static NSDictionary* CGReactToJSObject(CGRect react){
-    NSMutableDictionary *reactDic = [NSMutableDictionary dictionaryWithDictionary:CGPointToJSObject(react.origin)];
-    [reactDic setDictionary:CGSizeToJSObject(react.size)];
-    return reactDic;
-}
 
 
-static NSString* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
-    return @{@"top":@(edge.top),
-             @"left":@(edge.left),
-             @"bottom":@(edge.bottom),
-             @"right":@(edge.right)
-             };
-}
-@interface TTJSObject : NSObject
-+ (NSDictionary *)createJSObject:(id)__isa
-                       className:(NSString *)__className
-                      isInstance:(BOOL)__isInstance;
-@end
 @implementation TTJSObject
 
 + (NSDictionary *)createJSObject:(id)__isa
@@ -262,12 +326,13 @@ static NSString* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
 
 @end
 
-static id ToJsObject(id returnValue,NSString *clsName){
-    if (returnValue) {
-        return [TTJSObject createJSObject:returnValue className:clsName isInstance:YES];;
-    }
-    return [TTJSObject createJSObject:nil className:clsName isInstance:NO];;
+@implementation TTPatchBlockModel
+- (void)invote{
+    NSInvocation *originalInvocation = objc_getAssociatedObject(self, "invocation");
+    TTPatchUtils.TTDynamicBlockWithInvocation(self.__isa,originalInvocation);
 }
+@end
+
 
 static NSString * ttpatch_get_derive_class_originalName(NSString *curName){
     if ([curName hasPrefix:TTPATCH_DERIVE_PRE]) {
@@ -317,15 +382,103 @@ static Class ttpatch_create_derive_class(id classOrInstance){
     return aClass;
 }
 
-
-
-
 #define TT_RETURN_WRAP(typeChar,type)\
 case typeChar:{   \
 type instance; \
 [invocation getReturnValue:&instance];  \
 return @(instance); \
 }break;
+static id WrapInvocationResult(NSInvocation *invocation,NSMethodSignature *signature){
+    NSString * method;
+    if (invocation.selector) {
+        method = NSStringFromSelector(invocation.selector);
+    }
+   const char *argumentType = signature.methodReturnType;
+    char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
+
+    switch (flag) {
+        case _C_ID:{
+            id returnValue;
+            void *result;
+            [invocation getReturnValue:&result];
+            if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
+                returnValue = (__bridge_transfer id)result;
+//                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+            } else {
+                returnValue = (__bridge id)result;
+            }
+            return returnValue?ToJsObject(returnValue,NSStringFromClass([returnValue class])):[NSNull null];
+        }break;
+        case _C_CLASS:{
+            __unsafe_unretained Class instance = nil;
+            [invocation getReturnValue:&instance];
+            return ToJsObject(nil,NSStringFromClass(instance));
+        }break;
+        case _C_STRUCT_B:{
+            NSString * returnStypeStr = [NSString stringWithUTF8String:signature.methodReturnType];
+            if ([returnStypeStr hasPrefix:@"{CGRect"]){
+                CGRect instance;
+                [invocation getReturnValue:&instance];
+                return ToJsObject(CGReactToJSObject(instance),@"react");
+            }
+            else if ([returnStypeStr hasPrefix:@"{CGPoint"]){
+                CGPoint instance;
+                [invocation getReturnValue:&instance];
+                return ToJsObject(CGPointToJSObject(instance),@"point");
+            }
+            else if ([returnStypeStr hasPrefix:@"{CGSize"]){
+                CGSize instance;
+                [invocation getReturnValue:&instance];
+                return ToJsObject(CGSizeToJSObject(instance),@"size");
+            }
+            else if ([returnStypeStr hasPrefix:@"{UIEdgeInsets"]){
+                UIEdgeInsets instance;
+                [invocation getReturnValue:&instance];
+                return ToJsObject(UIEdgeInsetsToJSObject(instance),@"edge");
+            }
+            NSCAssert(NO, @"*******%@---当前结构体暂不支持",returnStypeStr);
+        }break;
+            TT_RETURN_WRAP(_C_SHT, short);
+            TT_RETURN_WRAP(_C_USHT, unsigned short);
+            TT_RETURN_WRAP(_C_INT, int);
+            TT_RETURN_WRAP(_C_UINT, unsigned int);
+            TT_RETURN_WRAP(_C_LNG, long);
+            TT_RETURN_WRAP(_C_ULNG, unsigned long);
+            TT_RETURN_WRAP(_C_LNG_LNG, long long);
+            TT_RETURN_WRAP(_C_ULNG_LNG, unsigned long long);
+            TT_RETURN_WRAP(_C_FLT, float);
+            TT_RETURN_WRAP(_C_DBL, double);
+            TT_RETURN_WRAP(_C_BOOL, BOOL);
+        default:
+            break;
+    }
+    return nil;
+}
+
+
+static id DynamicBlock(id block, NSArray *arguments){
+    TTPatchBlockRef blockLayout = (__bridge void *)block;
+    void *desc = blockLayout->descriptor;
+    desc += 2 * sizeof(unsigned long int);
+    guard((blockLayout->flags & TTPATCH_BLOCK_HAS_SIGNATURE)) else{
+        @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"block 结构体中无法获取 signature"] userInfo:nil];
+        return nil;
+    }
+    if (blockLayout->flags & TTPATCH_BLOCK_HAS_COPY_DISPOSE) {
+        desc += 2 *sizeof(void *);
+    }
+    const char * c_signature = (*(const char **)desc);
+    NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:c_signature];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    [invocation setTarget:block];
+    setInvocationArgumentsMethod(invocation, arguments,YES);
+    [invocation invoke];
+    
+    guard(strcmp(signature.methodReturnType,"v") == 0)else{
+        return WrapInvocationResult(invocation, signature);
+    }
+    return nil;
+}
 
 static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstance, NSString *method, NSArray *arguments){
     Class ttpatch_cur_class = [classOrInstance class];
@@ -346,14 +499,18 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
     }
     SEL sel_method = NSSelectorFromString(method);
     NSMethodSignature *signature = [classOrInstance methodSignatureForSelector:sel_method];
-    Method classMethod = class_getClassMethod([classOrInstance class], sel_method);
-    Method instanceMethod = class_getInstanceMethod([classOrInstance class], sel_method);
-    Method methodInfo = classMethod?classMethod:instanceMethod;
+//    Method classMethod = class_getClassMethod([classOrInstance class], sel_method);
+//    Method instanceMethod = class_getInstanceMethod([classOrInstance class], sel_method);
+//    Method methodInfo = classMethod?classMethod:instanceMethod;
     guard(signature) else{
         @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"没有找到 '%@' 中的 %@ 方法", classOrInstance,  method] userInfo:nil];
     }
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+    if (isInstance && [classOrInstance isKindOfClass:NSClassFromString(@"TTPatchBlockModel")]) {
+        TTPatchBlockModel *blockModel = (TTPatchBlockModel *)classOrInstance;
+        return DynamicBlock(blockModel.__isa, arguments);
+     }
     if ([classOrInstance respondsToSelector:sel_method]) {
 #if TTPATCH_LOG
             NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
@@ -361,75 +518,12 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
         [invocation setTarget:classOrInstance];
         [invocation setSelector:sel_method];
         if (hasArgument) {
-            setInvocationArgumentsMethod(invocation, arguments, methodInfo);
+            setInvocationArgumentsMethod(invocation, arguments,NO);
         }
         
         [invocation invoke];
         guard(strcmp(signature.methodReturnType,"v") == 0)else{
-            
-            const char *argumentType = signature.methodReturnType;
-            char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
-
-            switch (flag) {
-                case _C_ID:{
-                    id returnValue;
-                    void *result;
-                    [invocation getReturnValue:&result];
-                    if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
-                        returnValue = (__bridge_transfer id)result;
-//                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
-                    } else {
-                        returnValue = (__bridge id)result;
-                    }
-                    return returnValue?ToJsObject(returnValue,NSStringFromClass([returnValue class])):[NSNull null];
-                }break;
-                case _C_CLASS:{
-                    __unsafe_unretained Class instance = nil;
-                    [invocation getReturnValue:&instance];
-                    return ToJsObject(nil,NSStringFromClass(instance));
-                }break;
-                case _C_STRUCT_B:{
-                    NSString * returnStypeStr = [NSString stringWithUTF8String:signature.methodReturnType];
-                    if ([returnStypeStr hasPrefix:@"{CGRect"]){
-                        CGRect instance;
-                        [invocation getReturnValue:&instance];
-                        return ToJsObject(CGReactToJSObject(instance),@"react");
-                    }
-                    else if ([returnStypeStr hasPrefix:@"{CGPoint"]){
-                        CGPoint instance;
-                        [invocation getReturnValue:&instance];
-                        return ToJsObject(CGPointToJSObject(instance),@"point");
-                    }
-                    else if ([returnStypeStr hasPrefix:@"{CGSize"]){
-                        CGSize instance;
-                        [invocation getReturnValue:&instance];
-                        return ToJsObject(CGSizeToJSObject(instance),@"size");
-                    }
-                    else if ([returnStypeStr hasPrefix:@"{UIEdgeInsets"]){
-                        UIEdgeInsets instance;
-                        [invocation getReturnValue:&instance];
-                        return NSStringFromUIEdgeInsets(instance);
-                        return ToJsObject(UIEdgeInsetsToJSObject(instance),@"edge");
-                    }
-                    NSCAssert(NO, @"*******%@---当前结构体暂不支持",returnStypeStr);
-                }break;
-                    TT_RETURN_WRAP(_C_SHT, short);
-                    TT_RETURN_WRAP(_C_USHT, unsigned short);
-                    TT_RETURN_WRAP(_C_INT, int);
-                    TT_RETURN_WRAP(_C_UINT, unsigned int);
-                    TT_RETURN_WRAP(_C_LNG, long);
-                    TT_RETURN_WRAP(_C_ULNG, unsigned long);
-                    TT_RETURN_WRAP(_C_LNG_LNG, long long);
-                    TT_RETURN_WRAP(_C_ULNG_LNG, unsigned long long);
-                    TT_RETURN_WRAP(_C_FLT, float);
-                    TT_RETURN_WRAP(_C_DBL, double);
-                    TT_RETURN_WRAP(_C_BOOL, BOOL);
-                default:
-                    break;
-            }
-            
-           
-//            return ToJsObject(instance,signature.methodReturnType);
+            return WrapInvocationResult(invocation, signature);
         }
     }else{
         
@@ -443,14 +537,56 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
     
 }
 
-//static BOOL aspect_isMsgForwardIMP(IMP impl) {
-//    return impl == _objc_msgForward
-//#if !defined(__arm64__)
-//    || impl == (IMP)_objc_msgForward_stret
-//#endif
-//    ;
-//}
 
+
+static id DynamicBlockWithInvocation(id block, NSInvocation *invocation){
+    TTPatchBlockRef blockLayout = (__bridge void *)block;
+    void *desc = blockLayout->descriptor;
+    desc += 2 * sizeof(unsigned long int);
+    guard((blockLayout->flags & TTPATCH_BLOCK_HAS_SIGNATURE)) else{
+        @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"block 结构体中无法获取 signature"] userInfo:nil];
+        return nil;
+    }
+    if (blockLayout->flags & TTPATCH_BLOCK_HAS_COPY_DISPOSE) {
+        desc += 2 *sizeof(void *);
+    }
+    const char * c_signature = (*(const char **)desc);
+    NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:c_signature];
+//    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
+//    [invocation setTarget:block];
+////    setInvocationArgumentsMethod(invocation, arguments,YES);
+//    [invocation invoke];
+    NSInvocation *blockInvocation = [NSInvocation invocationWithMethodSignature:signature];
+    NSInvocation *originalInvocation = invocation;
+    NSUInteger numberOfArguments = signature.numberOfArguments;
+    NSUInteger originalNumberOfArguments = originalInvocation.methodSignature.numberOfArguments;
+//    if (numberOfArguments > 1) {
+//         [blockInvocation setArgument:&info atIndex:1];
+//     }
+    id argBuf = NULL;
+    for (NSUInteger idx = 1; idx < numberOfArguments; idx++) {
+        const char *type = [blockInvocation.methodSignature getArgumentTypeAtIndex:idx];
+        NSUInteger argSize;
+        NSGetSizeAndAlignment(type, &argSize, NULL);
+        
+//        if (!(argBuf = reallocf(argBuf, argSize))) {
+//            AspectLogError(@"Failed to allocate memory for block invocation.");
+//            return NO;
+//        }
+        
+        [originalInvocation getArgument:&argBuf atIndex:idx+1];
+        [blockInvocation setArgument:&argBuf atIndex:idx];
+    }
+    [blockInvocation invokeWithTarget:block];
+    
+//    if (argBuf != NULL) {
+//          free(argBuf);
+//    }
+    guard(strcmp(signature.methodReturnType,"v") == 0)else{
+        return WrapInvocationResult(invocation, signature);
+    }
+    return nil;
+}
 
 
 
@@ -458,6 +594,8 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
 
 const struct TTPatchUtils TTPatchUtils = {
     .TTPatchDynamicMethodInvocation               = DynamicMethodInvocation,
+    .TTPatchDynamicBlock                          = DynamicBlock,
+    .TTDynamicBlockWithInvocation                 = DynamicBlockWithInvocation,
     .TTPatchGetMethodTypes                        = GetMethodTypes,
     .TTPatchMethodFormatterToOcFunc               = MethodFormatterToOcFunc,
     .TTPatchMethodFormatterToJSFunc               = MethodFormatterToJSFunc,

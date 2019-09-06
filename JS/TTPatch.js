@@ -90,7 +90,7 @@ class Class_obj {
 
 }
 
-class JSObject {
+class MetaObject {
 	constructor(className, instance) {
 		this.__isa = instance ? instance : null;
 		// this.__metaIsa;
@@ -99,6 +99,12 @@ class JSObject {
 		this.__isInstance = !!instance;
 		this.__count = 0;
 		this.__instanceFlag = '';
+	}
+}
+
+class JSObject extends MetaObject{
+	constructor(className, instance) {
+		super(className, instance);
 	}
 
 	release() {
@@ -122,17 +128,42 @@ class JSObject {
 	}
 }
 
-class MetaObject {
+class Block extends JSObject{
 	constructor(className, instance) {
-		this.__isa = instance ? instance : null;
-		// this.__metaIsa;
-		this.__className = className;
-		// this.__isInstance = instance ? true : false;
-		this.__isInstance = !!instance;
-		this.__count = 0;
-		this.__instanceFlag = '';
+		super(className,instance);
+	}
+	invocate(){
+		
+		let params;
+		for (let i = 0; i < arguments.length; i++) {
+			if (!params) params = new Array();
+			params.push(arguments[i]);
+		}
+		Util.log('-------'+params);
+		// return this.__isa.apply(null,params);
+		return this.__isa(params);
+	}
+	getBlock(){
+		for (let i = 1; i < arguments.length; i++) {
+			if (!params) params = new Array();
+			params.push(
+					arguments[i] 
+					);
+		}
+		
+		//jsfunction
+		if (typeof this.__isa === 'function'){
+			return this.__isa.apply(null,params);
+		}else{
+			return this.__isa.invote(params);
+		}
 	}
 }
+
+function block(){
+
+}
+
 
 class Property {
 	constructor(adorn, instance) {
@@ -207,7 +238,10 @@ class TTEdgeInsets {
 					pv_toOcObject(arguments[i]));
 		}
 
-
+		// if (this instanceof Block | typeof this === 'NSBlock'){
+		// 	this.__isa.apply(this.params);
+		// }
+		// else
 		if (jsMethod_IMP && !ttpatch__isSuperInvoke) {
 			result = jsMethod_IMP.apply(this, params ? params : null);
 		}
@@ -269,7 +303,7 @@ class TTEdgeInsets {
 		return new Property(adorn, obj);
 	};
 
-	// js API
+	// native call js
 	// Oc 消息转发至 js
 	global.js_msgSend = function (instance, className, method, isInstance) {
 		//当前方法显示参数长度，解析 params 时使用
@@ -389,9 +423,10 @@ class TTEdgeInsets {
 	 */
 	function pv_toOcObject(arg) {
 		let obj;
-		if (arg instanceof JSObject) {
-			return arg.__isa ? arg.__isa : null;
-		} else if (arg instanceof TTReact) {
+		if (arg instanceof Block) {
+			obj = arg.__isa ? arg.__isa : null;
+		}
+		else if (arg instanceof TTReact) {
 			obj = new JSObject('react', arg.toOcString());
 		}
 		else if (arg instanceof TTSize) {
@@ -408,9 +443,13 @@ class TTEdgeInsets {
 			});
 			return result;
 		}
+		else if (arg instanceof JSObject) {
+			return arg.__isa ? arg.__isa : null;
+		}
 		else {
 			obj = arg;
 		}
+		
 		obj.call = null;
 		return obj;
 	}
@@ -429,6 +468,10 @@ class TTEdgeInsets {
 							result.push(jsObj);
 						});
 						return result
+					}
+					else if (cls === 'block') {
+						let block = new Block('block', arg);
+						return block.getBlock;
 					}
 					else if (cls === 'react') {
 						return new TTReact(value.x, value.y, value.width, value.height);

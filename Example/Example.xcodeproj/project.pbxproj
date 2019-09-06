@@ -15,18 +15,19 @@
 		1014C26D22CB16C400132618 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C26C22CB16C400132618 /* main.m */; };
 		1014C2A022CB17E700132618 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29822CB17E600132618 /* RootViewController.m */; };
 		1014C2A122CB17E700132618 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29922CB17E600132618 /* MainViewController.m */; };
-		1014C2A222CB17E700132618 /* TTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29A22CB17E600132618 /* TTViewController.m */; };
+		1014C2A222CB17E700132618 /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29A22CB17E600132618 /* TTPlaygroundController.m */; };
 		1014C2A322CB17E700132618 /* TTTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29E22CB17E700132618 /* TTTableView.m */; };
-		1014C2A422CB17E700132618 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29F22CB17E700132618 /* TTView.m */; };
 		1014C2B022CB1B3B00132618 /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AB22CB1B3B00132618 /* TTContext.m */; };
 		1014C2B122CB1B3B00132618 /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AC22CB1B3B00132618 /* TTPatch.m */; };
 		1014C2B222CB1B3B00132618 /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */; };
-		1014C2B322CB1B3B00132618 /* TTPatchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */; };
+		1014C2B322CB1B3B00132618 /* TTPatchUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AF22CB1B3B00132618 /* TTPatchUtils.mm */; };
 		1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2B622CB1B5000132618 /* SGDirWatchdog.m */; };
 		1014C2BF22CB1B5800132618 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 1014C2BA22CB1B5800132618 /* main.js */; };
 		1014C2C022CB1B5800132618 /* Demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 1014C2BB22CB1B5800132618 /* Demo.js */; };
 		1014C2C222CB1B5800132618 /* plugin.js in Resources */ = {isa = PBXBuildFile; fileRef = 1014C2BD22CB1B5800132618 /* plugin.js */; };
 		1014C2C422CB243400132618 /* Playground.js in Resources */ = {isa = PBXBuildFile; fileRef = 1014C2C322CB243400132618 /* Playground.js */; };
+		103C12C0230F7E97003718EF /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 103C12BF230F7E97003718EF /* TTPatch.js */; };
+		1053F70A23223DB900DBD8A6 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F70823223DB800DBD8A6 /* TTView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,15 +42,13 @@
 		1014C26B22CB16C400132618 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1014C26C22CB16C400132618 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1014C29622CB17E600132618 /* TTTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTableView.h; sourceTree = "<group>"; };
-		1014C29722CB17E600132618 /* TTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
 		1014C29822CB17E600132618 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		1014C29922CB17E600132618 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		1014C29A22CB17E600132618 /* TTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTViewController.m; sourceTree = "<group>"; };
+		1014C29A22CB17E600132618 /* TTPlaygroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPlaygroundController.m; sourceTree = "<group>"; };
 		1014C29B22CB17E600132618 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
-		1014C29C22CB17E700132618 /* TTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTViewController.h; sourceTree = "<group>"; };
+		1014C29C22CB17E700132618 /* TTPlaygroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPlaygroundController.h; sourceTree = "<group>"; };
 		1014C29D22CB17E700132618 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		1014C29E22CB17E700132618 /* TTTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTableView.m; sourceTree = "<group>"; };
-		1014C29F22CB17E700132618 /* TTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
 		1014C2A722CB1B3B00132618 /* TTPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatch.h; sourceTree = "<group>"; };
 		1014C2A822CB1B3B00132618 /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
 		1014C2A922CB1B3B00132618 /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchMethodCleaner.h; sourceTree = "<group>"; };
@@ -58,13 +57,16 @@
 		1014C2AC22CB1B3B00132618 /* TTPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatch.m; sourceTree = "<group>"; };
 		1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchMethodCleaner.m; sourceTree = "<group>"; };
 		1014C2AE22CB1B3B00132618 /* TTPatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchKit.h; sourceTree = "<group>"; };
-		1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchUtils.m; sourceTree = "<group>"; };
+		1014C2AF22CB1B3B00132618 /* TTPatchUtils.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TTPatchUtils.mm; sourceTree = "<group>"; };
 		1014C2B522CB1B5000132618 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
 		1014C2B622CB1B5000132618 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
 		1014C2BA22CB1B5800132618 /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 		1014C2BB22CB1B5800132618 /* Demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Demo.js; sourceTree = "<group>"; };
 		1014C2BD22CB1B5800132618 /* plugin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = plugin.js; sourceTree = "<group>"; };
 		1014C2C322CB243400132618 /* Playground.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Playground.js; sourceTree = "<group>"; };
+		103C12BF230F7E97003718EF /* TTPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = TTPatch.js; path = ../JS/TTPatch.js; sourceTree = "<group>"; };
+		1053F70823223DB800DBD8A6 /* TTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
+		1053F70923223DB900DBD8A6 /* TTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,11 +111,11 @@
 				1014C29B22CB17E600132618 /* RootViewController.h */,
 				1014C29822CB17E600132618 /* RootViewController.m */,
 				1014C29622CB17E600132618 /* TTTableView.h */,
+				1053F70923223DB900DBD8A6 /* TTView.h */,
+				1053F70823223DB800DBD8A6 /* TTView.m */,
 				1014C29E22CB17E700132618 /* TTTableView.m */,
-				1014C29722CB17E600132618 /* TTView.h */,
-				1014C29F22CB17E700132618 /* TTView.m */,
-				1014C29C22CB17E700132618 /* TTViewController.h */,
-				1014C29A22CB17E600132618 /* TTViewController.m */,
+				1014C29C22CB17E700132618 /* TTPlaygroundController.h */,
+				1014C29A22CB17E600132618 /* TTPlaygroundController.m */,
 				1014C26322CB16C000132618 /* Main.storyboard */,
 				1014C26622CB16C400132618 /* Assets.xcassets */,
 				1014C26822CB16C400132618 /* LaunchScreen.storyboard */,
@@ -126,15 +128,16 @@
 		1014C2A622CB1B3B00132618 /* TTPatch */ = {
 			isa = PBXGroup;
 			children = (
-				1014C2A722CB1B3B00132618 /* TTPatch.h */,
-				1014C2A822CB1B3B00132618 /* TTContext.h */,
-				1014C2A922CB1B3B00132618 /* TTPatchMethodCleaner.h */,
-				1014C2AA22CB1B3B00132618 /* TTPatchUtils.h */,
-				1014C2AB22CB1B3B00132618 /* TTContext.m */,
-				1014C2AC22CB1B3B00132618 /* TTPatch.m */,
-				1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */,
+				103C12BF230F7E97003718EF /* TTPatch.js */,
 				1014C2AE22CB1B3B00132618 /* TTPatchKit.h */,
-				1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */,
+				1014C2A722CB1B3B00132618 /* TTPatch.h */,
+				1014C2AC22CB1B3B00132618 /* TTPatch.m */,
+				1014C2A822CB1B3B00132618 /* TTContext.h */,
+				1014C2AB22CB1B3B00132618 /* TTContext.m */,
+				1014C2A922CB1B3B00132618 /* TTPatchMethodCleaner.h */,
+				1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */,
+				1014C2AA22CB1B3B00132618 /* TTPatchUtils.h */,
+				1014C2AF22CB1B3B00132618 /* TTPatchUtils.mm */,
 			);
 			name = TTPatch;
 			path = ../../TTPatch;
@@ -224,6 +227,7 @@
 				1014C2C222CB1B5800132618 /* plugin.js in Resources */,
 				1014C2C022CB1B5800132618 /* Demo.js in Resources */,
 				1014C2C422CB243400132618 /* Playground.js in Resources */,
+				103C12C0230F7E97003718EF /* TTPatch.js in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
 				1014C2BF22CB1B5800132618 /* main.js in Resources */,
 			);
@@ -238,15 +242,15 @@
 			files = (
 				1014C26222CB16C000132618 /* ViewController.m in Sources */,
 				1014C26D22CB16C400132618 /* main.m in Sources */,
-				1014C2B322CB1B3B00132618 /* TTPatchUtils.m in Sources */,
+				1014C2B322CB1B3B00132618 /* TTPatchUtils.mm in Sources */,
 				1014C2B122CB1B3B00132618 /* TTPatch.m in Sources */,
-				1014C2A222CB17E700132618 /* TTViewController.m in Sources */,
+				1014C2A222CB17E700132618 /* TTPlaygroundController.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
 				1014C2B022CB1B3B00132618 /* TTContext.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
 				1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */,
 				1014C2A322CB17E700132618 /* TTTableView.m in Sources */,
-				1014C2A422CB17E700132618 /* TTView.m in Sources */,
+				1053F70A23223DB900DBD8A6 /* TTView.m in Sources */,
 				1014C25F22CB16C000132618 /* AppDelegate.m in Sources */,
 				1014C2B222CB1B3B00132618 /* TTPatchMethodCleaner.m in Sources */,
 			);

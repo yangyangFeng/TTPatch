@@ -7,9 +7,6 @@
 //
 
 #import "TTView.h"
-#import <objc/runtime.h>
-#import <objc/message.h>
-
 @implementation TTView
 + (id)createView{
     NSLog(@"TTView----->工厂方法~~~~~~~~~~~~~~~~~~~~~~~~~");

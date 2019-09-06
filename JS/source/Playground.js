@@ -1,5 +1,5 @@
-_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton');
-defineClass('TTViewController:UIViewController', {
+_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel');
+defineClass('TTPlaygroundController:UIViewController', {
     name: property(),
     viewDidLoad: function () {
     },
@@ -20,7 +20,7 @@ defineClass('TTViewController:UIViewController', {
             let react = new TTReact(10 + i % 3 * (width + 10), 64 + 15 + parseInt(i / 3) * (width + 10), width, width);
             let witdh = react.size.width;
             let view = UIView.call('alloc').call('initWithFrame_', react);
-            view.call('setBackgroundColor_', UIColor.call('redColor'));
+            view.call('setBackgroundColor_', UIColor.call('blueColor'));
             let label = UILabel.call('alloc').call('init');
             label.call('setFrame_', react);
             label.call('setText_', String(i) + '');
@@ -49,6 +49,32 @@ defineClass('TTViewController:UIViewController', {
         let str = self.call('name');
         btn.call('setTitle_forState_', str, 0);
         btn.call('setBackgroundColor_', UIColor.call('blueColor'));
+        self.call('testCallVID_', function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
+            Util.log('--------JS接受回调---------' + arg1 + arg2 + arg3 + arg4 + arg5 + arg6 + arg7 + arg8, arg9);
+        });
+        self.call('runBlock');
+    },
+    testCallVID_: function (callBack) {
+        if (callBack) {
+            callBack('方法签名 (void/id)', 1, 2, 3, 4, 5, 6, 7, '最后一个参数');
+        }
+    },
+    callBlock_: function (callBack) {
+        if (callBack) {
+            callBack.call('invote', 'aaaaaaaaaaaaaaaaaaaa');
+        }
+    },
+    callBlock_block2_: function (block1, block2) {
+        block1.call('invote', '参数一');
+        block2.call('invote', '参数二');
+    },
+    configViewSize_: function (size) {
+        Util.log('size');
+        Util.log(size);
+    },
+    configView_: function (view) {
+        Util.log('view');
+        Util.log(view);
     },
     params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
         Util.log('--------多参数测试---------');

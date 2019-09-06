@@ -1,5 +1,5 @@
 //
-//  TTViewController.h
+//  TTPlaygroundController.h
 //  TTPatch
 //
 //  Created by ty on 2019/5/22.
@@ -10,7 +10,7 @@
 #import "RootViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TTViewController : RootViewController
+@interface TTPlaygroundController : RootViewController
 
 @end
 
