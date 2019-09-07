@@ -4,6 +4,7 @@ defineClass('ViewController:UIViewController', {
     loadJSCode: function () {
         let dataSource = [
             '加载下发模块',
+            'JS-OC间block',
             '点击加载更多'
         ];
         self.call('setData_', dataSource);
@@ -26,6 +27,10 @@ defineClass('ViewController:UIViewController', {
     tableView_didSelectRowAtIndexPath_: function (tableview, indexPath) {
         if (indexPath.call('row') === 0) {
             let vc = JSRootViewController.call('new');
+            self.call('navigationController').call('pushViewController_animated_', vc, true);
+            vc = null;
+        } else if (indexPath.call('row') === 1) {
+            let vc = BlockViewController.call('new');
             self.call('navigationController').call('pushViewController_animated_', vc, true);
             vc = null;
         } else {
@@ -68,5 +73,77 @@ defineClass('JSRootViewController:UIViewController', {
         title.call('setCenter_', new TTPoint(screenWidth / 2, 270));
         self.call('view').call('addSubview_', logo);
         self.call('view').call('addSubview_', title);
+    }
+}, {});
+defineClass('BlockViewController:UITableViewController', {
+    dealloc: function () {
+        Util.log('BlockViewController->已释放');
+    },
+    viewDidLoad: function () {
+        Super().call('viewDidLoad');
+        self.call('setTitle_', '动态下发模块');
+        self.call('view').call('setBackgroundColor_', UIColor.call('whiteColor'));
+        let screenWidth = UIScreen.call('mainScreen').call('bounds').size.width;
+        let screenHeight = UIScreen.call('mainScreen').call('bounds').size.height;
+        let logo = UIImageView.call('new');
+        logo.call('setImage_', UIImage.call('imageNamed_', 'applelogo'));
+        logo.call('setFrame_', new TTReact(50, 50, 100, 100));
+        logo.call('setCenter_', new TTPoint(screenWidth / 2, 150));
+        let title = UILabel.call('new');
+        title.call('setText_', 'Apple');
+        title.call('setFont_', UIFont.call('fontWithName_size_', 'GillSans-UltraBold', 25));
+        title.call('setTextAlignment_', 1);
+        title.call('setFrame_', new TTReact(50, 150, 100, 100));
+        title.call('setCenter_', new TTPoint(screenWidth / 2, 270));
+        self.call('view').call('addSubview_', logo);
+        self.call('view').call('addSubview_', title);
+    },
+    btnAction_: function (index) {
+        switch (index) {
+        case 0: {
+                self.call('testCall0_', function () {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
+                });
+            }
+            break;
+        case 1: {
+                self.call('testCall1_', function (arg) {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  ' + arg);
+                });
+            }
+            break;
+        case 2: {
+                self.call('testCall2_', function (arg) {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  ' + arg);
+                    return '这是有返回值的哦';
+                });
+            }
+            break;
+        case 3: {
+                self.call('testCall3_', function () {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  ');
+                    return '这是有返回值的哦';
+                });
+            }
+            break;
+        case 4: {
+                self.call('runBlock');
+            }
+            break;
+        default: {
+                self.call('testCallVID_', function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
+                    Util.log('--------JS传入OC方法,接受到回调---------' + arg1 + arg2 + arg3 + arg4 + arg5 + arg6 + arg7 + arg8, arg9);
+                });
+                self.call('OCcallBlock_', function (arg1) {
+                    Util.log('js与js block回调' + arg1);
+                });
+            }
+            break;
+        }
+    },
+    callBlock_: function (callback) {
+        if (callback) {
+            callback('js object');
+        }
     }
 }, {});

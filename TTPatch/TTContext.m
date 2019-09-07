@@ -7,12 +7,12 @@
 //
 
 #import "TTContext.h"
-#import "TTPatchUtils.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "TTPatch.h"
 #import <libkern/OSAtomic.h>
 #import <pthread.h>
+#import "TTPatchUtils.h"
 /**
  *  TTPatch 动态方法前缀
  */
@@ -380,7 +380,6 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
                     WRAP_INVOCATION_AND_RETURN(_C_DBL, double);
                     WRAP_INVOCATION_AND_RETURN(_C_BOOL, BOOL);
                 case _C_ID:{
-                    
                     if ('?' == argumentType[1]) {
                         NSLog(@"🍎当前参数为block");
                         __unsafe_unretained id tempArg;
@@ -496,8 +495,14 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
                  };
     };
     
-    self[@"MessageQueue_oc_sendMsg"] = ^(id obj,BOOL isSuper,BOOL isInstance,NSString* method,id arguments){
-        return TTPatchUtils.TTPatchDynamicMethodInvocation(obj, isSuper,isInstance,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),arguments);
+    self[@"MessageQueue_oc_sendMsg"] = ^(id obj,BOOL isSuper,BOOL isBlock,NSString* method,id arguments){
+        return TTPatchUtils.TTPatchDynamicMethodInvocation(obj, isSuper,isBlock,TTPatchUtils.TTPatchMethodFormatterToOcFunc(method),arguments);
+    };
+    
+    self[@"MessageQueue_oc_block"] = ^(id obj, id arguments){
+        TTPatchBlockModel *blockModel = (TTPatchBlockModel *)obj;
+     
+        return TTPatchUtils.TTPatchDynamicBlock(blockModel.__isa, arguments);
     };
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){
@@ -508,6 +513,9 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
         TTPATCH_addPropertys(className, superClassName,propertys);
         
     };
+//    self[@"MessageQueue_oc_setBlock"] = ^(JSValue *jsFunc){
+//        NSLog(@"jsfunc-----%@",jsFunc);
+//    };
     self[@"APP_IsDebug"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
 #if DEBUG
         return YES;
@@ -519,6 +527,17 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     
 }
 
+- (JSValue *)getBlockFunc{
+    return self[@"jsBlock"];
+}
+
+- (id)execFuncParamsBlockWithBlockKey:(NSString *)key
+                            arguments:(NSArray *)arguments{
+    JSValue *func = [self getBlockFunc];
+    NSMutableArray *tempArguments = [NSMutableArray arrayWithObject:key];
+    [tempArguments addObjectsFromArray:arguments];
+    return [func callWithArguments:tempArguments];
+}
 
 -(NSMutableDictionary *)replaceMethodMap{
     return __replaceMethodMap;

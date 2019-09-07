@@ -14,8 +14,8 @@
             filePath = "../TTPatch/TTPatchUtils.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "560"
-            endingLineNumber = "560"
+            startingLineNumber = "572"
+            endingLineNumber = "572"
             landmarkName = "DynamicBlockWithInvocation(block, invocation)"
             landmarkType = "9">
          </BreakpointContent>
@@ -23,15 +23,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "43499248-A5C1-49E6-A289-FBA494874CCE"
+            uuid = "562A0956-99A1-4907-B72A-75BD42E6E850"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Example/TTPlaygroundController.m"
+            filePath = "Example/BlockViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-runBlock"
             landmarkType = "7">
          </BreakpointContent>

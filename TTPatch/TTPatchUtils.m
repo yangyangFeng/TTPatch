@@ -9,9 +9,9 @@
 #import "TTPatchUtils.h"
 #include <stdio.h>
 #import <UIKit/UIKit.h>
-#import "TTView.h"
 #import <JavaScriptCore/JavaScriptCore.h>
-
+#import "TTPatch.h"
+#import "TTContext.h"
 #define TTPATCH_DERIVE_PRE @"TTPatch_Derive_"
 
 #define guard(condfion) if(condfion){}
@@ -26,6 +26,8 @@ flag = YES;  \
 #define CONDIF_ARGUMENT_TYPES_ENCODE(__clsTypeStr,__cls)\
 else if ([clsType isEqualToString:__clsTypeStr]){\
 [methodTypes appendString:[NSString stringWithUTF8String:@encode(__cls)]];}
+
+typedef id(^TTPATCH_OC_BLOCK)(id arg0,...);
 
 static CGRect toOcCGReact(NSString *jsObjValue){
 
@@ -79,6 +81,10 @@ static void setInvocationArguments(NSInvocation *invocation,NSArray *arguments){
     }
 }
 
+static id execFuncParamsBlockWithKeyAndParams(NSString *key,NSArray *params){
+    return [[TTPatch shareInstance].context execFuncParamsBlockWithBlockKey:key arguments:params];
+}
+
 #define TT_ARG_Injection(charAbbreviation,type,func)\
 case charAbbreviation:\
 {\
@@ -115,8 +121,35 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
             case _C_PTR:
             case _C_ID:
             {
-                 id argument = ([arguments objectAtIndex:i]);
-                [invocation setArgument:&argument atIndex:(startIndex + i)];
+                if ('?' == argumentType[1]) {
+                    __block NSDictionary *blockDic = ([arguments objectAtIndex:i]);
+                    TTPATCH_OC_BLOCK block;
+                    if ([[blockDic objectForKey:@"__isHasParams"] boolValue]) {
+                    block = (id)^(id arg0,...){
+                         NSMutableArray *tempArguments = [NSMutableArray array];
+                         [tempArguments addObject:arg0];
+                            va_list argList;
+                            va_start(argList, arg0);
+                            for (int i = 0; i < systemMethodArgCount; i++) {
+                                id tempArg = va_arg(argList, id);
+                                [tempArguments addObject:tempArg];
+                            }
+                            va_end(argList);
+                         return execFuncParamsBlockWithKeyAndParams([blockDic objectForKey:@"__key"], tempArguments);
+                    };
+                    }else{
+                        block = (id)^(void){
+                            return execFuncParamsBlockWithKeyAndParams([blockDic objectForKey:@"__key"], @[]);
+                        };
+                    }
+          
+                    
+                    [invocation setArgument:&block atIndex:(startIndex + i)];
+                    objc_setAssociatedObject(invocation , CFBridgingRetain([NSString stringWithFormat:@"TTPATCH_OC_BLOCK%@",[blockDic objectForKey:@"__key"]]), block, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+                }else{
+                    id argument = ([arguments objectAtIndex:i]);
+                    [invocation setArgument:&argument atIndex:(startIndex + i)];
+                }
                 
             }break;
             case _C_STRUCT_B:
@@ -313,25 +346,7 @@ static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
 
 
 
-@implementation TTJSObject
 
-+ (NSDictionary *)createJSObject:(id)__isa
-                       className:(NSString *)__className
-                      isInstance:(BOOL)__isInstance{
-    return @{@"__isa":__isa?:[NSNull null],
-             @"__className":__className,
-             @"__isInstance":@(__isInstance)
-             };
-}
-
-@end
-
-@implementation TTPatchBlockModel
-- (void)invote{
-    NSInvocation *originalInvocation = objc_getAssociatedObject(self, "invocation");
-    TTPatchUtils.TTDynamicBlockWithInvocation(self.__isa,originalInvocation);
-}
-@end
 
 
 static NSString * ttpatch_get_derive_class_originalName(NSString *curName){
@@ -480,7 +495,7 @@ static id DynamicBlock(id block, NSArray *arguments){
     return nil;
 }
 
-static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstance, NSString *method, NSArray *arguments){
+static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, NSString *method, NSArray *arguments){
     Class ttpatch_cur_class = [classOrInstance class];
 //    Class ttpatch_drive_class;
 //    Class ttpatch_drive_super_class;
@@ -507,10 +522,6 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isInstanc
     }
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    if (isInstance && [classOrInstance isKindOfClass:NSClassFromString(@"TTPatchBlockModel")]) {
-        TTPatchBlockModel *blockModel = (TTPatchBlockModel *)classOrInstance;
-        return DynamicBlock(blockModel.__isa, arguments);
-     }
     if ([classOrInstance respondsToSelector:sel_method]) {
 #if TTPATCH_LOG
             NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);

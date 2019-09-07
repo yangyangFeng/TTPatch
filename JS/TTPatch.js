@@ -13,6 +13,9 @@ MessageQueue.call = function (obj,isSuperInvoke,isInstance, msg, params) {
 	 */
 	return MessageQueue_oc_sendMsg(obj,isSuperInvoke,isInstance, msg, params);
 };
+MessageQueue.block = function (obj, params) {
+	return MessageQueue_oc_block(obj, params);
+};
 MessageQueue.define = function (className) {
 	return MessageQueue_oc_define(className);
 };
@@ -21,6 +24,9 @@ MessageQueue.replaceMethod = function (className, superClassName, key, isInstanc
 };
 MessageQueue.registerProperty = function (className, superClassName, propertys) {
 	return MessageQueue_oc_addPropertys(className, superClassName, propertys);
+};
+MessageQueue.MessageQueue_oc_setBlock = function (jsFunc) {
+	return MessageQueue_oc_setBlock(jsFunc);
 };
 
 class Util {
@@ -129,8 +135,10 @@ class JSObject extends MetaObject{
 }
 
 class Block extends JSObject{
-	constructor(className, instance) {
+	constructor(className, instance,key,isHasParams) {
 		super(className,instance);
+		this.__isHasParams = isHasParams;
+		this.__key = key;
 	}
 	invocate(){
 		
@@ -144,25 +152,32 @@ class Block extends JSObject{
 		return this.__isa(params);
 	}
 	getBlock(){
-		for (let i = 1; i < arguments.length; i++) {
+		let isJsFunc = false;
+		if (typeof this.__isa === 'function'){isJsFunc = true}
+		let params;
+		for (let i = 0; i < arguments.length; i++) {
 			if (!params) params = new Array();
-			params.push(
-					arguments[i] 
-					);
+				params.push(
+					isJsFunc ?
+					arguments[i] :
+					pv_toOcObject(arguments[i])
+				);
 		}
 		
 		//jsfunction
-		if (typeof this.__isa === 'function'){
+		if (isJsFunc){
 			return this.__isa.apply(null,params);
 		}else{
-			return this.__isa.invote(params);
+			return MessageQueue.block(this.__isa,params);
 		}
 	}
 }
 
-function block(){
-
-}
+// class BlockOC {
+// 	constructor(key, isHasParams) {
+	
+// 	}
+// }
 
 
 class Property {
@@ -230,14 +245,27 @@ class TTEdgeInsets {
 
 		let jsMethod_IMP = pv_findJSMethodMap(obj, msg, isInstance);
 
+		let paramsIsHasBlock = false;
 		for (let i = 1; i < arguments.length; i++) {
 			if (!params) params = new Array();
-			params.push(
-				jsMethod_IMP ?
-					arguments[i] :
-					pv_toOcObject(arguments[i]));
+			if (jsMethod_IMP){
+				params.push(arguments[i]);
+			}else{
+				let param = arguments[i];
+				if (typeof param === 'function'){
+					let blockKey = msg+i;
+					let isHasParams = false;
+					if (param.length){
+						isHasParams = true;
+					}
+					let blockOC = new Block('block',param,blockKey,isHasParams);
+					global.curExecFuncArguments[blockKey] = blockOC;
+					params.push(blockOC);
+				}else{
+					params.push(pv_toOcObject(param));
+				}
+			}
 		}
-
 		// if (this instanceof Block | typeof this === 'NSBlock'){
 		// 	this.__isa.apply(this.params);
 		// }
@@ -261,7 +289,6 @@ class TTEdgeInsets {
 		// this.__isa=null;
 		return pv_toJSObject(result);
 	};
-
 
 	pv__getFuncParams=function (arguments) {
 		let params;
@@ -417,11 +444,11 @@ class TTEdgeInsets {
 		}
 		return isInstanceMethod ? pv_registMethods(cls.__cls) : null;
 	}
-
+	
 	/**
 	 * 将JS对象 转为OC 可用对象
 	 */
-	function pv_toOcObject(arg) {
+	pv_toOcObject=function (arg) {
 		let obj;
 		if (arg instanceof Block) {
 			obj = arg.__isa ? arg.__isa : null;
@@ -445,6 +472,11 @@ class TTEdgeInsets {
 		}
 		else if (arg instanceof JSObject) {
 			return arg.__isa ? arg.__isa : null;
+		}
+		else if (typeof arg === 'function') {
+			//暂时不做多余处理
+			// MessageQueue.MessageQueue_oc_setBlock(arg);
+			return arg;
 		}
 		else {
 			obj = arg;
@@ -470,8 +502,8 @@ class TTEdgeInsets {
 						return result
 					}
 					else if (cls === 'block') {
-						let block = new Block('block', arg);
-						return block.getBlock;
+						let block = new Block('block', arg.__isa);
+						return block.getBlock.bind(block);
 					}
 					else if (cls === 'react') {
 						return new TTReact(value.x, value.y, value.width, value.height);
@@ -506,8 +538,20 @@ class TTEdgeInsets {
 		}
 	}
 
+	jsBlock=function(index){
+		let params;
+		for (let i = 1; i < arguments.length; i++) {
+			if (!params) params = new Array();
+				params.push(
+					arguments[i] 
+				);
+		}
+		let funcBlock = curExecFuncArguments[index];//block
+		return funcBlock.__isa.apply(null,params);
+	}
 
 	global.CLASS_MAP = {};
+	global.curExecFuncArguments = {};
 	global.self = null;
 	global.lastSelf = null;
 	global.ttpatch__isSuperInvoke = false;
@@ -522,3 +566,19 @@ class TTEdgeInsets {
 
 
 
+
+
+// 获取函数的参数名
+// function getParameterName(fn) {
+//     if(typeof fn !== 'object' && typeof fn !== 'function' ) return;
+//     const COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
+//     const DEFAULT_PARAMS = /=[^,)]+/mg;
+//     const FAT_ARROWS = /=>.*$/mg;
+//     let code = fn.prototype ? fn.prototype.constructor.toString() : fn.toString();
+//     code = code
+//         .replace(COMMENTS, '')
+//         .replace(FAT_ARROWS, '')
+//         .replace(DEFAULT_PARAMS, '');
+//     let result = code.slice(code.indexOf('(') + 1, code.indexOf(')')).match(/([^\s,]+)/g);
+//     return result === null ? [] :result;
+// }

@@ -25,8 +25,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)configJSBrigeActions;
 
+- (JSValue *)getBlockFunc;
 
-
+- (id)execFuncParamsBlockWithBlockKey:(NSString *)key
+                            arguments:(NSArray *)arguments;
 @property(nonatomic,strong)NSMutableDictionary *replaceMethodMap;
 @end
 

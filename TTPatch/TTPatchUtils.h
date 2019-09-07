@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
+#import "TTPatchModels.h"
+
 typedef enum {
     // Set to true on blocks that have captures (and thus are not true
     // global blocks) but are known not to escape for various other
@@ -43,32 +45,6 @@ typedef struct TTPatchBlock {
     // imported variables
 } *TTPatchBlockRef;
 
-@class JSValue;
-extern const struct TTPatchUtils {
-    id          (*TTPatchDynamicMethodInvocation)           (id classOrInstance,BOOL isSuper,BOOL isInstance,NSString *method, NSArray *arguments);
-    id          (*TTPatchDynamicBlock)                      (id block,NSArray *arguments);
-    id          (*TTDynamicBlockWithInvocation)             (id block,NSInvocation *invocation);
-    char *      (*TTPatchGetMethodTypes)                    (NSString *method,NSArray *arguments);
-    NSString *  (*TTPatchMethodFormatterToOcFunc)           (NSString *method);
-//    id          (*TTPatchToJsObject)                        (id returnValue);
-    NSString *  (*TTPatchMethodFormatterToJSFunc)           (NSString *method);
-    Method      (*TTPatchGetInstanceOrClassMethodInfo)      (Class aClass,SEL aSel);
-    
-} TTPatchUtils;
-
-@interface TTPatchBlockModel : NSObject
-@property(nonatomic,strong)id __isa;
-@property(nonatomic,strong)NSInvocation *invocation;
-@property(nonatomic,strong)NSArray *arguments;
-- (void)invote;
-@end
-
-
-@interface TTJSObject : NSObject
-+ (NSDictionary *)createJSObject:(id)__isa
-                       className:(NSString *)__className
-                      isInstance:(BOOL)__isInstance;
-@end
 
 static id ToJsObject(id returnValue,NSString *clsName){
     if (returnValue) {
@@ -104,4 +80,15 @@ static NSDictionary* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
              };
 }
 
-static
+@class JSValue;
+extern const struct TTPatchUtils {
+    id          (*TTPatchDynamicMethodInvocation)           (id classOrInstance,BOOL isSuper,BOOL isBlock,NSString *method, NSArray *arguments);
+    id          (*TTPatchDynamicBlock)                      (id block,NSArray *arguments);
+    id          (*TTDynamicBlockWithInvocation)             (id block,NSInvocation *invocation);
+    char *      (*TTPatchGetMethodTypes)                    (NSString *method,NSArray *arguments);
+    NSString *  (*TTPatchMethodFormatterToOcFunc)           (NSString *method);
+//    id          (*TTPatchToJsObject)                        (id returnValue);
+    NSString *  (*TTPatchMethodFormatterToJSFunc)           (NSString *method);
+    Method      (*TTPatchGetInstanceOrClassMethodInfo)      (Class aClass,SEL aSel);
+    
+} TTPatchUtils;
