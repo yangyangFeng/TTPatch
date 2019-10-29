@@ -8,7 +8,9 @@
 
 [基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
+![TTPatch2.gif](https://upload-images.jianshu.io/upload_images/1249329-51e4aa804270a308.gif)
 ---
+
 
 ## 关于方法注册和方法覆盖设计方案
 * Oc 不存在的方法，无需注册到Oc中，只在Js端保留方法信息，供Js端代码直接调用
