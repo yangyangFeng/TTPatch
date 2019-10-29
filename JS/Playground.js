@@ -17,9 +17,9 @@ defineClass('TTPlaygroundController:UIViewController', {
 
 	},
 	cleanSubviews: function () {
-		// self.view().subviews().forEach(subview => {
-		// 	subview.removeFromSuperview()
-		// })
+		self.view().subviews().forEach(subview => {
+			subview.removeFromSuperview()
+		})
 	},
 	addSomeTestView: function () {
 		let screenWidth = UIScreen.mainScreen().bounds().size.width;
@@ -30,10 +30,11 @@ defineClass('TTPlaygroundController:UIViewController', {
 			let react = new TTReact(10 + (i % 3) * (width + 10), 64 + 15 + parseInt((i / 3)) * (width + 10), width, width);
 			let witdh = react.size.width;
 			let view = UIView.alloc().initWithFrame_(react);
+			//greenColor blackColor blueColor
 			view.setBackgroundColor_(UIColor.blueColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
-			label.setText_(String(i)+'');
+			label.setText_(String(i)+'');
 			label.setFont_(UIFont.systemFontOfSize_(20))
 			label.setTextColor_(UIColor.whiteColor())
 			label.setTextAlignment_(1);

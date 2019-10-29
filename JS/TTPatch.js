@@ -253,14 +253,18 @@ class TTEdgeInsets {
 			}else{
 				let param = arguments[i];
 				if (typeof param === 'function'){
-					let blockKey = msg+i;
-					let isHasParams = false;
-					if (param.length){
-						isHasParams = true;
+					if(this[msg]){
+						params.push(pv_toOcObject(param));
+					}else{
+						let blockKey = msg+i;
+						let isHasParams = false;
+						if (param.length){
+							isHasParams = true;
+						}
+						let blockOC = new Block('block',param,blockKey,isHasParams);
+						global.curExecFuncArguments[blockKey] = blockOC;
+						params.push(blockOC);
 					}
-					let blockOC = new Block('block',param,blockKey,isHasParams);
-					global.curExecFuncArguments[blockKey] = blockOC;
-					params.push(blockOC);
 				}else{
 					params.push(pv_toOcObject(param));
 				}

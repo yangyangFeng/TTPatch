@@ -8,6 +8,9 @@ defineClass('TTPlaygroundController:UIViewController', {
         self.call('addSomeTestView');
     },
     cleanSubviews: function () {
+        self.call('view').call('subviews').call('forEach', subview => {
+            subview.call('removeFromSuperview');
+        });
     },
     addSomeTestView: function () {
         let screenWidth = UIScreen.call('mainScreen').call('bounds').size.width;
@@ -20,7 +23,7 @@ defineClass('TTPlaygroundController:UIViewController', {
             view.call('setBackgroundColor_', UIColor.call('blueColor'));
             let label = UILabel.call('alloc').call('init');
             label.call('setFrame_', react);
-            label.call('setText_', String(i) + '');
+            label.call('setText_', String(i) + '\uF8FF');
             label.call('setFont_', UIFont.call('systemFontOfSize_', 20));
             label.call('setTextColor_', UIColor.call('whiteColor'));
             label.call('setTextAlignment_', 1);
