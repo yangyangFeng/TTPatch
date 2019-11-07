@@ -8,7 +8,7 @@
 
 [基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
-![TTPatch2.gif](https://upload-images.jianshu.io/upload_images/1249329-51e4aa804270a308.gif)
+![效果图.gif](http://code.cocoachina.com/uploads/attachments/20191030/1000267/1ef16348536be6c1a901ced275d8d387.gif)
 ---
 
 
