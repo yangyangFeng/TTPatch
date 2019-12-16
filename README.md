@@ -8,7 +8,9 @@
 
 [基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
+![效果图.gif](http://code.cocoachina.com/uploads/attachments/20191030/1000267/1ef16348536be6c1a901ced275d8d387.gif)
 ---
+
 
 ## 关于方法注册和方法覆盖设计方案
 * Oc 不存在的方法，无需注册到Oc中，只在Js端保留方法信息，供Js端代码直接调用
@@ -111,4 +113,8 @@ UIView.c('alloc').().c('init').()
 因为上述方案存在一个缺点，需要动态创建，销毁派生类，造成额外开销。
 所以在调用`Super`时，将当前`isa`直接指向父类的`class`这样在方法查找时，就会从父类的方法列表中查找。
 
+
+
+### 支持BLOCK语法
+支持OC与JS,BLOCK双向传递,支持多参数,多类型,有无返回值.
 
