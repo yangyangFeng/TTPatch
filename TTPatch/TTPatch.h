@@ -12,6 +12,8 @@
 
 @class TTContext;
 @interface TTPatch : NSObject
++ (void )initSDK;
+
 + (TTPatch *)shareInstance;
 
 - (void)evaluateScript:(NSString *)script;

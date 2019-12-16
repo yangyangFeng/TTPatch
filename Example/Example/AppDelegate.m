@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "TTPatch.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [TTPatch initSDK];
+    
+    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
+    {
+        NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+        NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"Home.js"];
+        
+        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+        
+        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"Home.js"]];
+    }
     
     return YES;
 }

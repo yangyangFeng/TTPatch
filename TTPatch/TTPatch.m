@@ -21,6 +21,10 @@ static TTPatch *instance = nil;
 
 @implementation TTPatch
 
++ (void)initSDK{
+    [[self shareInstance] loadTTJSKit];
+}
+
 + (TTPatch *)shareInstance{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -62,8 +66,15 @@ static TTPatch *instance = nil;
     if (!_context) {
         _context = [TTContext new];
         [_context configJSBrigeActions];
+        [self runMainJS];
     }
 }
 
+- (void)runMainJS{
+    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
+    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
+    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
+    [self evaluateScript:jsCode];
+}
 
 @end

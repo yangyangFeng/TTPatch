@@ -94,8 +94,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "520"
-            endingLineNumber = "520"
+            startingLineNumber = "523"
+            endingLineNumber = "523"
             landmarkName = "-configJSBrigeActions"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +110,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "517"
-            endingLineNumber = "517"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
             landmarkName = "-configJSBrigeActions"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "511"
-            endingLineNumber = "511"
+            startingLineNumber = "514"
+            endingLineNumber = "514"
             landmarkName = "-configJSBrigeActions"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
             landmarkName = "-configJSBrigeActions"
             landmarkType = "7">
          </BreakpointContent>

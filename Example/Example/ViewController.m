@@ -42,8 +42,7 @@
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
     NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    [[TTPatch shareInstance] clearContext];
-    [[TTPatch shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
+
     
     self.watchDogs = [[NSMutableArray alloc] init];
     NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
