@@ -323,7 +323,7 @@ class TTEdgeInsets {
 		let classInfo = MessageQueue.define(interface);
 		// 在JS全局声明Class
 		let obj = pv_registClass(classInfo['self'], classInfo['super'], instanceMethods, classMethods);
-
+		pv__import(classInfo['self']);
 		pv_addPropertys(obj);
 		// 在Native环境中创建并注册方法
 		pv_registMethods(obj);

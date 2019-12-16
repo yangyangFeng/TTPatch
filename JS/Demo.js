@@ -13,6 +13,7 @@ defineClass('ViewController:UIViewController',{
 		// aaa.__isa = null;
 		// aaa=null;
 		Util.log('js调用 viewDidLoad');
+		self.setTitle_('Demo.js');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
         let data = self.data();
@@ -81,6 +82,17 @@ defineClass('JSRootViewController:UIViewController',{
 		title.setCenter_(new TTPoint(screenWidth/2,270));
 		self.view().addSubview_(logo);
 		self.view().addSubview_(title);
+
+		{
+			let title = UILabel.new();
+			title.setText_("------关于我们------");
+			// title.setFont_(UIFont.fontWithName_size_("GillSans-UltraBold", 25));
+			title.setTextAlignment_(1);
+			title.setFrame_(new TTReact(50, 150, 200, 100));
+			title.setCenter_(new TTPoint(screenWidth/2,370));
+			// self.view().addSubview_(logo);
+			self.view().addSubview_(title);
+		}
 	}
 },{});
 

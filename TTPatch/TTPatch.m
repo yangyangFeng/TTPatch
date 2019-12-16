@@ -7,11 +7,8 @@
 //
 
 #import "TTPatch.h"
-#import "TTContext.h"
-#import "TTPatchMethodCleaner.h"
+#import "TTPatchKit.h"
 
-
-#define guard(condfion) if(condfion){}
 
 
 static NSRegularExpression* _regex;
@@ -33,12 +30,12 @@ static TTPatch *instance = nil;
 }
 
 - (void)evaluateScript:(NSString *)script{
+    [self loadTTJSKit];
     [self evaluateScript:script withSourceURL:nil];
 }
 
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL{
     [self loadTTJSKit];
-    [TTPatchMethodCleaner clean];
     guard(script) else{
         NSAssert(NO, @"执行脚本为空,请检查");
     }
@@ -57,6 +54,7 @@ static TTPatch *instance = nil;
 }
 
 - (void)clearContext{
+    [TTPatchMethodCleaner clean];
     self.context = nil;
 }
 

@@ -11,8 +11,7 @@
 #import <objc/message.h>
 #import "TTPatch.h"
 #import <libkern/OSAtomic.h>
-#import <pthread.h>
-#import "TTPatchUtils.h"
+#import "TTPatchKit.h"
 /**
  *  TTPatch 动态方法前缀
  */
@@ -214,11 +213,11 @@ static void TTPATCH_addPropertys(NSString *className,NSString *superClassName,NS
         Class aClass = NSClassFromString(className);
         
         BOOL needRegistClass=NO;
-        if (aClass) {
-        }else{
+        if (!aClass) {
             aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
             needRegistClass = YES;
         }
+        
         for (NSDictionary * property in propertys) {
             NSString *propertyName = [property objectForKey:@"__name"];
             /**
@@ -231,12 +230,12 @@ static void TTPATCH_addPropertys(NSString *className,NSString *superClassName,NS
             
             if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
 #if TTPATCH_LOG
-                NSLog(@"Get添加成功");
+                NSLog(@"Get添加成功:%@",propertyForSetter);
 #endif
             }
             if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
 #if TTPATCH_LOG
-                NSLog(@"Set添加成功");
+                NSLog(@"Set添加成功:set%@",propertyForSetter);
 #endif
             }
         }
@@ -306,14 +305,23 @@ static void TTPATCH_hookClassMethod(NSString *className,NSString *superClassName
     });
   
 }
+static NSMutableDictionary * __dic;
+static NSMutableDictionary * propertyMap(){
+    if (!__dic) {
+        __dic = [NSMutableDictionary dictionary];
+    }
+    return __dic;
+}
 
 static void TT_Patch_Property_Setter(id self,SEL _cmd,id obj){
     NSString *key = NSStringFromSelector(_cmd);
     key = [[key substringWithRange:NSMakeRange(3, key.length-4)] lowercaseString];
     objc_setAssociatedObject(self, (__bridge const void * _Nonnull)(key), obj, OBJC_ASSOCIATION_RETAIN);
+    [propertyMap() setObject:key forKey:key];
 }
 static id TT_Patch_Property_getter(id self,SEL _cmd){
-    NSString *key = NSStringFromSelector(_cmd);
+    NSString *key = [NSStringFromSelector(_cmd) lowercaseString];
+    key = [propertyMap() objectForKey:key];
     return objc_getAssociatedObject(self, (__bridge const void * _Nonnull)(key));
 }
 
@@ -469,7 +477,10 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     NSCParameterAssert(selector);
     Method targetMethod = isInstanceMethod?class_getInstanceMethod(cls, selector):class_getClassMethod(cls, selector);
     IMP targetMethodIMP = method_getImplementation(targetMethod);
-    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:"v@:";
+    /**
+     *这里将native不存在的方法,默认签名为 入参 @, return @,防止因签名原因无法获取参数列表.
+     */
+    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:"@@:@";
     guard(aspect_isMsgForwardIMP(targetMethodIMP))else{
         
         SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, NSStringFromSelector(selector)]);
@@ -509,9 +520,7 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
         TTPATCH_hookClassMethod(className, superClassName, TTPatchUtils.TTPatchMethodFormatterToOcFunc(method), isInstanceMethod, propertys);
     };
     self[@"MessageQueue_oc_addPropertys"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
-
         TTPATCH_addPropertys(className, superClassName,propertys);
-        
     };
 //    self[@"MessageQueue_oc_setBlock"] = ^(JSValue *jsFunc){
 //        NSLog(@"jsfunc-----%@",jsFunc);

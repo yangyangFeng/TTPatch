@@ -35,9 +35,7 @@
 -(void)params1:(int)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7{
     NSLog(@"---------1,2,3,43,45,6,");
 }
-- (void)btnDidAction:(id)sender{
-    
-}
+
 - (void)viewWillAppear:(BOOL)animated{
     [self loadJSCode];
 }

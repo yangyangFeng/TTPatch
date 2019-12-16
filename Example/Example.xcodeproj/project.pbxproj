@@ -30,6 +30,7 @@
 		1053F70A23223DB900DBD8A6 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F70823223DB800DBD8A6 /* TTView.m */; };
 		1053F713232244F300DBD8A6 /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F712232244F300DBD8A6 /* TTPatchModels.m */; };
 		1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F71523234B3900DBD8A6 /* BlockViewController.m */; };
+		10E3931923A73A3400C1CB11 /* Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 10E3931823A73A3400C1CB11 /* Home.js */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,7 @@
 		1053F712232244F300DBD8A6 /* TTPatchModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchModels.m; sourceTree = "<group>"; };
 		1053F71423234B3900DBD8A6 /* BlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
 		1053F71523234B3900DBD8A6 /* BlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
+		10E3931823A73A3400C1CB11 /* Home.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Home.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		1014C2B822CB1B5700132618 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				10E3931823A73A3400C1CB11 /* Home.js */,
 				1014C2C322CB243400132618 /* Playground.js */,
 				1014C2BA22CB1B5800132618 /* main.js */,
 				1014C2BB22CB1B5800132618 /* Demo.js */,
@@ -232,6 +235,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10E3931923A73A3400C1CB11 /* Home.js in Resources */,
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
 				1014C26722CB16C400132618 /* Assets.xcassets in Resources */,
 				1014C2C222CB1B5800132618 /* plugin.js in Resources */,

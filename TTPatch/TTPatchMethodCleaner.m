@@ -9,9 +9,9 @@
 #import "TTPatchMethodCleaner.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
-#import "TTContext.h"
 #import "TTPatch.h"
-#define guard(condfion) if(condfion){}
+#import "TTPatchKit.h"
+
 @implementation TTPatchMethodCleaner
 
 + (void)clean{
@@ -28,6 +28,9 @@
         NSString *selectorName = node.methodName;
         NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, selectorName];
         
+#if TTPATCH_LOG
+        NSLog(@"class:%@ message:[%@] cleaned",node.clsName,selectorName);
+#endif
         SEL selector = NSSelectorFromString(selectorName);
         SEL originalSelector = NSSelectorFromString(originalSelectorName);
         IMP originalImp = class_respondsToSelector(cls, originalSelector) ? class_getMethodImplementation(cls, originalSelector) : NULL;

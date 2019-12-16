@@ -13,6 +13,7 @@ defineClass('ViewController:UIViewController', {
         self.call('setTableview_', tableview);
         self.call('view').call('addSubview_', tableview);
         Util.log('js调用 viewDidLoad');
+        self.call('setTitle_', 'Demo.js');
     },
     tableView_numberOfRowsInSection_: function (tableview, section) {
         let data = self.call('data');
@@ -73,6 +74,14 @@ defineClass('JSRootViewController:UIViewController', {
         title.call('setCenter_', new TTPoint(screenWidth / 2, 270));
         self.call('view').call('addSubview_', logo);
         self.call('view').call('addSubview_', title);
+        {
+            let title = UILabel.call('new');
+            title.call('setText_', '------关于我们------');
+            title.call('setTextAlignment_', 1);
+            title.call('setFrame_', new TTReact(50, 150, 200, 100));
+            title.call('setCenter_', new TTPoint(screenWidth / 2, 370));
+            self.call('view').call('addSubview_', title);
+        }
     }
 }, {});
 defineClass('BlockViewController:UITableViewController', {

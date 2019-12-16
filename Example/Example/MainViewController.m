@@ -17,9 +17,33 @@
     [[TTPatch shareInstance] clearContext];
 }
 
+- (IBAction)openHomeAction:(id)sender {
+    
+    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
+    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
+    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
+    [[TTPatch shareInstance] clearContext];
+    [[TTPatch shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
+    
+    {
+        NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+        NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"Home.js"];
+        
+        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+
+        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"Home.js"]];
+    }
+    
+    Class homeVCClass = NSClassFromString(@"HomeViewController");
+    id homeVC = [homeVCClass new];
+    [self.navigationController pushViewController:homeVC animated:YES];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    
 }
 
 /*
