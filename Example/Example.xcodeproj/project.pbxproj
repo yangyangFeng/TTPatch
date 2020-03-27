@@ -202,7 +202,6 @@
 				1014C25622CB16C000132618 /* Sources */,
 				1014C25722CB16C000132618 /* Frameworks */,
 				1014C25822CB16C000132618 /* Resources */,
-				10B102A4242DFE7300D62E6E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -270,23 +269,6 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		10505DB123CF0305000CBBF0 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#appledoc Xcode script\n\n# Start constants\n\ncompany=\"TTPatch\";\n\ncompanyID=\"com.TTPatch\";\n\ncompanyURL=\"http://公司网址\";\n\ntarget=\"iphoneos\";\n\n#target=\"macosx\";\n\noutputPath=\"~/help\";\n\n# End constants\n\n/usr/local/bin/appledoc \\\n\n--project-name \"${PROJECT_NAME}\" \\\n\n--project-company \"${company}\" \\\n\n--company-id \"${companyID}\" \\\n\n--docset-atom-filename \"${company}.atom\" \\\n\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n\n--docset-fallback-url \"${companyURL}/${company}\" \\\n\n--output \"${outputPath}\" \\\n\n--publish-docset \\\n\n--docset-platform-family \"${target}\" \\\n\n--logformat xcode \\\n\n--keep-intermediate-files \\\n\n--no-repeat-first-par \\\n\n--no-warn-invalid-crossref \\\n\n--exit-threshold 2 \\\n\n\"${PROJECT_DIR}\"\n\n\n";
-		};
-		10B102A4242DFE7300D62E6E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
