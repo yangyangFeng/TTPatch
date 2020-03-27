@@ -5,14 +5,7 @@ defineClass('HomeViewController:UIViewController',{
 	viewDidLoad:function(){
 		Super().viewDidLoad();
 		let dataSource = ['加载下发模块','JS-OC间block','点击加载更多',];
-		
-        // self.setData_(dataSource);
-        // let tableview = self.getTableview();,
-        // self.setTableview_(tableview);
-        // self.view().addSubview_(tableview);
-		// let aaa = TTView.new();
-		// aaa.__isa = null;
-		// aaa=null;
+
 		self.view().setBackgroundColor_(UIColor.whiteColor());
 		Util.log('js调用 viewDidLoad');
 		self.setTitle_('TTPatch.js');

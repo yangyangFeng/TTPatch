@@ -80,6 +80,13 @@ defineClass('TTPlaygroundController:UIViewController', {
 		let  str = self.name();
 		btn.setTitle_forState_(str, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
+		
+		self.test();
+		// self.jsInvocationOcWithBlock_(null);
+		self.jsInvocationOcWithBlock_(block(""),function(){
+			Util.log('--------多参数测试---------')
+		}
+		);
 	},
 	params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
 		Util.log('--------多参数测试---------')

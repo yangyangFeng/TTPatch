@@ -3,13 +3,14 @@ defineClass('ViewController:UIViewController', {
     data: property(),
     loadJSCode: function () {
         let dataSource = [
-            '加载下发模块',
-            'JS-OC间block',
-            '点击加载更多'
+            '加载纯JS模块',
+            'JS-OC block调用示例',
+            '动态添加数据'
         ];
         self.call('setData_', dataSource);
         let data = self.call('data');
         let tableview = self.call('getTableview');
+        tableview.call('setTableHeaderView_', self.call('createPageHeader'));
         self.call('setTableview_', tableview);
         self.call('view').call('addSubview_', tableview);
         Util.log('js调用 viewDidLoad');
@@ -36,7 +37,7 @@ defineClass('ViewController:UIViewController', {
             vc = null;
         } else {
             let dataSource = self.call('data');
-            dataSource.call('push', '新增Cell');
+            dataSource.call('push', '点击加载更多Cell');
             self.call('setData_', dataSource);
             self.call('tableview').call('reloadData');
         }
@@ -50,6 +51,16 @@ defineClass('ViewController:UIViewController', {
     params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
         Util.log('--------多参数测试---------');
         Util.log(params1, params2, params3, params4, params5, params6, params7);
+    },
+    createPageHeader: function () {
+        var label = UILabel.call('new');
+        label.call('setFont_', UIFont.call('systemFontOfSize_', 18));
+        label.call('setTextColor_', UIColor.call('whiteColor'));
+        label.call('setBackgroundColor_', UIColor.call('systemGreenColor'));
+        label.call('setFrame_', new TTReact(10, self.call('view').call('frame').size.width * 0.75, self.call('view').call('bounds').size.width - 20, self.call('view').call('frame').size.height * 0.15));
+        label.call('setText_', '具体功能实例 \n\n    动态加载纯JS页面, JS与OC之间的Block传递,调用');
+        label.call('setNumberOfLines_', 0);
+        return label;
     }
 }, {});
 defineClass('JSRootViewController:UIViewController', {
@@ -76,9 +87,10 @@ defineClass('JSRootViewController:UIViewController', {
         self.call('view').call('addSubview_', title);
         {
             let title = UILabel.call('new');
-            title.call('setText_', '------关于我们------');
+            title.call('setText_', '------------------------\n本页面由纯JS编写,具体使用场景可结合自身业务使用\n------------------------');
+            title.call('setNumberOfLines_', 0);
             title.call('setTextAlignment_', 1);
-            title.call('setFrame_', new TTReact(50, 150, 200, 100));
+            title.call('setFrame_', new TTReact(50, 150, 200, 300));
             title.call('setCenter_', new TTPoint(screenWidth / 2, 370));
             self.call('view').call('addSubview_', title);
         }
@@ -97,40 +109,40 @@ defineClass('BlockViewController:UITableViewController', {
         let logo = UIImageView.call('new');
         logo.call('setImage_', UIImage.call('imageNamed_', 'applelogo'));
         logo.call('setFrame_', new TTReact(50, 50, 100, 100));
-        logo.call('setCenter_', new TTPoint(screenWidth / 2, 150));
+        logo.call('setCenter_', new TTPoint(screenWidth / 2, screenHeight - 250));
         let title = UILabel.call('new');
         title.call('setText_', 'Apple');
         title.call('setFont_', UIFont.call('fontWithName_size_', 'GillSans-UltraBold', 25));
         title.call('setTextAlignment_', 1);
-        title.call('setFrame_', new TTReact(50, 150, 100, 100));
-        title.call('setCenter_', new TTPoint(screenWidth / 2, 270));
+        title.call('setFrame_', new TTReact(50, 150, 150, 100));
+        title.call('setCenter_', new TTPoint(screenWidth / 2, screenHeight - 150));
         self.call('view').call('addSubview_', logo);
         self.call('view').call('addSubview_', title);
     },
     btnAction_: function (index) {
         switch (index) {
         case 0: {
-                self.call('testCall0_', function () {
+                self.call('testCall0_', block(''), function () {
                     Util.log('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
                 });
             }
             break;
         case 1: {
-                self.call('testCall1_', function (arg) {
-                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  ' + arg);
+                self.call('testCall1_', block('void,NSString*,int'), function (arg1, arg2) {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  ' + arg1 + arg2);
                 });
             }
             break;
         case 2: {
-                self.call('testCall2_', function (arg) {
+                self.call('testCall2_', block('NSString*,NSString*'), function (arg) {
                     Util.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  ' + arg);
                     return '这是有返回值的哦';
                 });
             }
             break;
         case 3: {
-                self.call('testCall3_', function () {
-                    Util.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  ');
+                self.call('testCall3_', block('NSString*,void'), function () {
+                    Util.log('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
                     return '这是有返回值的哦';
                 });
             }
@@ -140,10 +152,10 @@ defineClass('BlockViewController:UITableViewController', {
             }
             break;
         default: {
-                self.call('testCallVID_', function (arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9) {
-                    Util.log('--------JS传入OC方法,接受到回调---------' + arg1 + arg2 + arg3 + arg4 + arg5 + arg6 + arg7 + arg8, arg9);
+                self.call('testCallVID_', block(',NSString *, NSString *, int, bool, float , NSNumber* '), function (arg1, arg2, arg3, arg4, arg5, arg6) {
+                    Util.log('--------JS传入OC方法,接受到回调---------' + arg1 + '\n' + arg2 + '\n' + arg3 + '\n' + arg4 + '\n' + arg5 + '\n' + arg6);
                 });
-                self.call('OCcallBlock_', function (arg1) {
+                self.call('OCcallBlock_', block(''), function (arg1) {
                     Util.log('js与js block回调' + arg1);
                 });
             }
@@ -152,7 +164,7 @@ defineClass('BlockViewController:UITableViewController', {
     },
     callBlock_: function (callback) {
         if (callback) {
-            callback('js object');
+            callback(10);
         }
     }
 }, {});

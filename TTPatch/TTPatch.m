@@ -34,17 +34,14 @@ static TTPatch *instance = nil;
 }
 
 - (void)evaluateScript:(NSString *)script{
-    [self loadTTJSKit];
     [self evaluateScript:script withSourceURL:nil];
 }
 
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL{
-    [self loadTTJSKit];
     guard(script) else{
         NSAssert(NO, @"执行脚本为空,请检查");
     }
  
-    
     if (sourceURL) {
         [self.context evaluateScript:script withSourceURL:sourceURL];
     }else{
@@ -74,7 +71,7 @@ static TTPatch *instance = nil;
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
     NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    [self evaluateScript:jsCode];
+    [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"main.js"]];
 }
 
 @end

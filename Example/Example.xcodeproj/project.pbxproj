@@ -6,6 +6,20 @@
 	objectVersion = 50;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		10505DAD23CF02FF000CBBF0 /* appdoc */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 10505DAE23CF02FF000CBBF0 /* Build configuration list for PBXAggregateTarget "appdoc" */;
+			buildPhases = (
+				10505DB123CF0305000CBBF0 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = appdoc;
+			productName = appdoc;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		1014C25F22CB16C000132618 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C25E22CB16C000132618 /* AppDelegate.m */; };
 		1014C26222CB16C000132618 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C26122CB16C000132618 /* ViewController.m */; };
@@ -188,6 +202,7 @@
 				1014C25622CB16C000132618 /* Sources */,
 				1014C25722CB16C000132618 /* Frameworks */,
 				1014C25822CB16C000132618 /* Resources */,
+				10B102A4242DFE7300D62E6E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -210,6 +225,9 @@
 					1014C25922CB16C000132618 = {
 						CreatedOnToolsVersion = 10.2.1;
 					};
+					10505DAD23CF02FF000CBBF0 = {
+						CreatedOnToolsVersion = 11.3;
+					};
 				};
 			};
 			buildConfigurationList = 1014C25522CB16C000132618 /* Build configuration list for PBXProject "Example" */;
@@ -226,6 +244,7 @@
 			projectRoot = "";
 			targets = (
 				1014C25922CB16C000132618 /* Example */,
+				10505DAD23CF02FF000CBBF0 /* appdoc */,
 			);
 		};
 /* End PBXProject section */
@@ -248,6 +267,43 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		10505DB123CF0305000CBBF0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n\n# Start constants\n\ncompany=\"TTPatch\";\n\ncompanyID=\"com.TTPatch\";\n\ncompanyURL=\"http://公司网址\";\n\ntarget=\"iphoneos\";\n\n#target=\"macosx\";\n\noutputPath=\"~/help\";\n\n# End constants\n\n/usr/local/bin/appledoc \\\n\n--project-name \"${PROJECT_NAME}\" \\\n\n--project-company \"${company}\" \\\n\n--company-id \"${companyID}\" \\\n\n--docset-atom-filename \"${company}.atom\" \\\n\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n\n--docset-fallback-url \"${companyURL}/${company}\" \\\n\n--output \"${outputPath}\" \\\n\n--publish-docset \\\n\n--docset-platform-family \"${target}\" \\\n\n--logformat xcode \\\n\n--keep-intermediate-files \\\n\n--no-repeat-first-par \\\n\n--no-warn-invalid-crossref \\\n\n--exit-threshold 2 \\\n\n\"${PROJECT_DIR}\"\n\n\n";
+		};
+		10B102A4242DFE7300D62E6E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc Xcode script\n\n# Start constants\n\ncompany=\"TTPatch\";\n\ncompanyID=\"com.TTPatch\";\n\ncompanyURL=\"http://公司网址\";\n\ntarget=\"iphoneos\";\n\n#target=\"macosx\";\n\noutputPath=\"~/help\";\n\n# End constants\n\n/usr/local/bin/appledoc \\\n\n--project-name \"${PROJECT_NAME}\" \\\n\n--project-company \"${company}\" \\\n\n--company-id \"${companyID}\" \\\n\n--docset-atom-filename \"${company}.atom\" \\\n\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n\n--docset-fallback-url \"${companyURL}/${company}\" \\\n\n--output \"${outputPath}\" \\\n\n--publish-docset \\\n\n--docset-platform-family \"${target}\" \\\n\n--logformat xcode \\\n\n--keep-intermediate-files \\\n\n--no-repeat-first-par \\\n\n--no-warn-invalid-crossref \\\n\n--exit-threshold 2 \\\n\n\"${PROJECT_DIR}\"\n\n\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1014C25622CB16C000132618 /* Sources */ = {
@@ -447,6 +503,24 @@
 			};
 			name = Release;
 		};
+		10505DAF23CF02FF000CBBF0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		10505DB023CF02FF000CBBF0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -464,6 +538,15 @@
 			buildConfigurations = (
 				1014C27122CB16C400132618 /* Debug */,
 				1014C27222CB16C400132618 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		10505DAE23CF02FF000CBBF0 /* Build configuration list for PBXAggregateTarget "appdoc" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				10505DAF23CF02FF000CBBF0 /* Debug */,
+				10505DB023CF02FF000CBBF0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

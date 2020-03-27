@@ -8,7 +8,7 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 
-extern NSString *const TTPatchChangeMethodPrefix;
+extern NSString * _Nonnull const TTPatchChangeMethodPrefix;
 
 NS_ASSUME_NONNULL_BEGIN
 @interface TTMethodList_Node : NSObject

@@ -14,22 +14,21 @@
 
 
 @interface TTPlaygroundController ()
-@property(nonatomic,strong)NSMutableArray *watchDogs;
-@property(nonatomic,strong)SGDirWatchdog *watchDog;
 - (void)params1:(int)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7;
 @end
 
 @implementation TTPlaygroundController
+
+- (NSString *)jsFileName{
+    return @"Playground.js";
+}
+
 -(void)dealloc{
     NSLog(@"dealloc -------- Oc");
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initJSContxtPath];
-    [self watch];
-    [self loadJSCode];
-    
+        
 }
 
 -(void)params1:(int)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7{
@@ -40,48 +39,15 @@
     [self loadJSCode];
 }
 
-- (void)loadJSCode{}
 
-- (void)initJSContxtPath{
-    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
-    
-    self.watchDogs = [[NSMutableArray alloc] init];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
-    NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
-
-
-    for (NSString *aPath in contentOfFolder) {
-        if ([aPath isEqualToString:@"Playground.js"]) {
-            NSString * fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
-            [self watchFolder:fullPath mainScriptPath:path];
-        }
-    }
-    
-}
-
-- (void)watch{
-    
-    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
-    NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"Playground.js"];
-    
-    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"Playground.js"]];
-    
-    [self loadJSCode];
-    
-}
-
-- (void)watchFolder:(NSString *)folderPath mainScriptPath:(NSString *)mainScriptPath
+- (void)jsInvocationOcWithBlock:(void(^)(void))block
 {
-    SGDirWatchdog *watchDog = [[SGDirWatchdog alloc] initWithPath:folderPath update:^{
-        NSLog(@"--------------------\n reload");
-        [self watch];
-    }];
-    [watchDog start];
-    [self.watchDogs addObject:watchDog];
+    NSLog(@"%s",__func__);
+    block();
+}
+
+- (void)test{
+    NSLog(@"%s",__func__);
 }
 
 + (void)testAction:(NSString *)str{

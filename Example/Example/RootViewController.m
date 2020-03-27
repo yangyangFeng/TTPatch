@@ -7,12 +7,19 @@
 //
 
 #import "RootViewController.h"
-#import <WebKit/WebKit.h>
-@interface RootViewController ()
+#import "SGDirWatchdog.h"
+#import "TTPatch.h"
+#import "TTPatchUtils.h"
 
+@interface RootViewController ()
+@property(nonatomic,strong)SGDirWatchdog *watchDog;
 @end
 
 @implementation RootViewController
+
+- (NSString *)jsFileName{
+    return @"";
+}
 
 -(void)dealloc{
     NSLog(@"----");
@@ -20,14 +27,58 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    NSLog(@"[super viewDidLoad]");
-    // Do any additional setup after loading the view.
+    
+    [self initJSContxtPath];
+    [self watch];
+    [self loadJSCode];
+
 }
 
-- (void)testSuper{
-    NSLog(@"[super testSuper]");
+- (void)initJSContxtPath{
+    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
+    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
+
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+    NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
+
+
+    for (NSString *aPath in contentOfFolder) {
+        if ([aPath isEqualToString:@"Playground.js"]) {
+            NSString * fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
+            [self watchFolder:fullPath mainScriptPath:path];
+        }
+    }
+    
 }
 
+- (void)watch{
+    
+    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+    NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:self.jsFileName];
+    
+    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+
+    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+    
+    [self loadJSCode];
+    
+    
+    
+}
+
+- (void)watchFolder:(NSString *)folderPath mainScriptPath:(NSString *)mainScriptPath
+{
+    SGDirWatchdog *watchDog = [[SGDirWatchdog alloc] initWithPath:folderPath update:^{
+        NSLog(@"--------------------\n reload");
+        [self watch];
+    }];
+    [watchDog start];
+    self.watchDog = watchDog;
+//    [self.watchDogs addObject:watchDog];
+}
+
+- (void)loadJSCode{}
 /*
 #pragma mark - Navigation
 

@@ -46,6 +46,10 @@ Util.isDebug=function () {
 	return APP_IsDebug();
 };
 
+this.block=function(signature){
+	return new Block(signature)
+}
+
 class Class_obj {
 	constructor(className, superClassName, instancesMethods, classMethods, propertys) {
 		this.__cls;
@@ -135,10 +139,11 @@ class JSObject extends MetaObject{
 }
 
 class Block extends JSObject{
-	constructor(className, instance,key,isHasParams) {
-		super(className,instance);
+	constructor(signature, instance,key,isHasParams) {
+		super('block',instance);
 		this.__isHasParams = isHasParams;
 		this.__key = key;
+		this.__signature = signature;
 	}
 	invocate(){
 		
@@ -170,6 +175,9 @@ class Block extends JSObject{
 		}else{
 			return MessageQueue.block(this.__isa,params);
 		}
+	}
+	getFuncSignature(){
+		return this.__signature;
 	}
 }
 
@@ -252,20 +260,21 @@ class TTEdgeInsets {
 				params.push(arguments[i]);
 			}else{
 				let param = arguments[i];
-				if (typeof param === 'function'){
-					if(this[msg]){
-						params.push(pv_toOcObject(param));
-					}else{
-						let blockKey = msg+i;
-						let isHasParams = false;
-						if (param.length){
-							isHasParams = true;
-						}
-						let blockOC = new Block('block',param,blockKey,isHasParams);
-						global.curExecFuncArguments[blockKey] = blockOC;
-						params.push(blockOC);
+				if (param instanceof Block) {
+					let blockKey = msg+i;
+					let isHasParams = false;
+					if (param.length){
+						isHasParams = true;
 					}
-				}else{
+					if (i+1 >= arguments) {
+						Util.log('error 参数个数不匹配');
+					}
+					let blockImp = arguments[i+1];
+					let blockOC = new Block(param.getFuncSignature(),blockImp,blockKey,isHasParams);
+					global.curExecFuncArguments[blockKey] = blockOC;
+					params.push(pv_toOcObject(blockOC));
+					i++;
+				}else {
 					params.push(pv_toOcObject(param));
 				}
 			}
@@ -453,9 +462,13 @@ class TTEdgeInsets {
 	 * 将JS对象 转为OC 可用对象
 	 */
 	pv_toOcObject=function (arg) {
+		if (arg == null) {
+			return null;
+		}
 		let obj;
 		if (arg instanceof Block) {
-			obj = arg.__isa ? arg.__isa : null;
+			obj = arg;
+			MessageQueue.MessageQueue_oc_setBlock(arg.__isa);
 		}
 		else if (arg instanceof TTReact) {
 			obj = new JSObject('react', arg.toOcString());
@@ -480,13 +493,12 @@ class TTEdgeInsets {
 		else if (typeof arg === 'function') {
 			//暂时不做多余处理
 			// MessageQueue.MessageQueue_oc_setBlock(arg);
-			return arg;
+			obj=arg;
 		}
 		else {
 			obj = arg;
 		}
-		
-		obj.call = null;
+		obj.call=null;
 		return obj;
 	}
 
@@ -553,6 +565,8 @@ class TTEdgeInsets {
 		let funcBlock = curExecFuncArguments[index];//block
 		return funcBlock.__isa.apply(null,params);
 	}
+
+	
 
 	global.CLASS_MAP = {};
 	global.curExecFuncArguments = {};

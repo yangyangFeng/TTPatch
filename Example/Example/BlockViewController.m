@@ -18,7 +18,7 @@
 @end
 
 
-#define data @[@"block-返回值void,入参void",@"block-返回值void,入参id",@"block-返回值id,入参id",@"block-返回值id,入参id",@"block-js调用OC传入block",@"同一js方法多次调用OC-block方法"]
+#define data @[@"JS:block 传入Oc [void:void]",@"JS:block 传入Oc [void:obj]",@"JS:block 传入Oc [obj:obj]",@"JS:block 传入Oc [obj:void]",@"Oc:block 传入JS [void:int]",@"JS:block 传入Oc 多参数&多类型[void:void]"]
 @interface BlockViewController ()
 
 @end
@@ -54,9 +54,9 @@
     }
 }
 
-- (void)testCall1:(void(^)(NSString *str))call{
+- (void)testCall1:(void(^)(NSString * str,int inta))call{
     if (call) {
-        call(@"58同城");
+        call(@"asdhsdfjhsdbf",999);
     }
 }
 
@@ -79,11 +79,7 @@
     [self testCallVV:^{
         NSLog(@"接受回调");
     }];
-    
-//    [self testCallVID:^(NSString *str) {
-//        NSLog(@"接受回调 -- %@",str);
-//    }];
-    
+
     [self testCallIDID:^TTPlaygroundModel *(NSString *str) {
         NSLog(@"接受回调 -- %@",str);
         TTPlaygroundModel *model = [TTPlaygroundModel new];
@@ -101,18 +97,14 @@
     }
 }
 
-- (void)testCallVID:(void(^)(NSString *str,NSString *str2))call{
+- (void)testCallVID:(void(^)(NSString *arg0,NSString *arg1,int arg2,bool arg3, float arg4, NSNumber* arg5))call{
     if (call) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            call(@"arg",@"arg2");
-        });
+        call(@"arg0",@"arg1 ",24,NO,1.99,@(58));
     }else{
         NSLog(@"--------Call 方法未实现---------");
     }
 }
 
-- (void)callBlock:(void(^)(NSString *str))block{
-}
 
 - (void)OCcallBlock:(void(^)(NSString *str))block{
     if (block) {
@@ -128,16 +120,16 @@
     }
 }
 
+- (void)callBlock:(void(^)(NSString *str))block{
+}
+
 - (void)runBlock{
-    id cb = ^void(void *p0) {
-        id str = (__bridge id)p0;
-        NSLog(@"%@,%d", str);
+
+    id cbInt = ^void(int arg) {
+        NSLog(@"js方法回调----------%d", arg);
     };
-    id cbStr = ^void(NSString *str) {
-        NSLog(@"js方法回调----------%@,%d", str);
-    };
-    [self callBlock:cbStr]; //it's OK
-//    [self callBlock:cb];    //it's not OK
+
+    [self callBlock:cbInt]; //it's OK
 }
 
 - (void)configViewSize:(CGSize )size{
