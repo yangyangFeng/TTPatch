@@ -21,10 +21,13 @@ NS_ASSUME_NONNULL_BEGIN
                              isClass:(BOOL)isClass;
 @end
 
+/// JS上下文与Native交互 核心管理类
 @interface TTContext : JSContext
 
+/// 配置JS-OC通信
 - (void)configJSBrigeActions;
 
+/// 获取当前正在调用的block
 - (JSValue *)getBlockFunc;
 
 - (id)execFuncParamsBlockWithBlockKey:(NSString *)key

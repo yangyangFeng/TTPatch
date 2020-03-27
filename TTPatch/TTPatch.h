@@ -12,7 +12,7 @@
 
 @class TTContext;
 /**
- *TTPatch
+ *TTPatch 声明周期,初始化u入口
  */
 @interface TTPatch : NSObject
 
