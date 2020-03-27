@@ -1,10 +1,11 @@
-_import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,TTTableView,UIScreen,UIImageView');
+_import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,TTTableView,UIScreen,UIImageView,TaoBaoHome');
 defineClass('ViewController:UIViewController', {
     data: property(),
     loadJSCode: function () {
         let dataSource = [
             '加载纯JS模块',
             'JS-OC block调用示例',
+            '淘宝大事故修复方案',
             '动态添加数据'
         ];
         self.call('setData_', dataSource);
@@ -33,6 +34,10 @@ defineClass('ViewController:UIViewController', {
             vc = null;
         } else if (indexPath.call('row') === 1) {
             let vc = BlockViewController.call('new');
+            self.call('navigationController').call('pushViewController_animated_', vc, true);
+            vc = null;
+        } else if (indexPath.call('row') === 2) {
+            let vc = TaoBaoHome.call('new');
             self.call('navigationController').call('pushViewController_animated_', vc, true);
             vc = null;
         } else {

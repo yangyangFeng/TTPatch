@@ -44,6 +44,8 @@
 		1053F70A23223DB900DBD8A6 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F70823223DB800DBD8A6 /* TTView.m */; };
 		1053F713232244F300DBD8A6 /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F712232244F300DBD8A6 /* TTPatchModels.m */; };
 		1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F71523234B3900DBD8A6 /* BlockViewController.m */; };
+		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
+		10B102AF242E330E00D62E6E /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B102AE242E330E00D62E6E /* bugPatch.js */; };
 		10E3931923A73A3400C1CB11 /* Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 10E3931823A73A3400C1CB11 /* Home.js */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,9 @@
 		1053F712232244F300DBD8A6 /* TTPatchModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchModels.m; sourceTree = "<group>"; };
 		1053F71423234B3900DBD8A6 /* BlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
 		1053F71523234B3900DBD8A6 /* BlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
+		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
+		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
+		10B102AE242E330E00D62E6E /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
 		10E3931823A73A3400C1CB11 /* Home.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Home.js; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -130,6 +135,7 @@
 				1014C26122CB16C000132618 /* ViewController.m */,
 				1014C29D22CB17E700132618 /* MainViewController.h */,
 				1014C29922CB17E600132618 /* MainViewController.m */,
+				10B102AA242E28EE00D62E6E /* bugfix */,
 				1014C29B22CB17E600132618 /* RootViewController.h */,
 				1014C29822CB17E600132618 /* RootViewController.m */,
 				1053F71423234B3900DBD8A6 /* BlockViewController.h */,
@@ -182,6 +188,7 @@
 		1014C2B822CB1B5700132618 /* source */ = {
 			isa = PBXGroup;
 			children = (
+				10B102AE242E330E00D62E6E /* bugPatch.js */,
 				10E3931823A73A3400C1CB11 /* Home.js */,
 				1014C2C322CB243400132618 /* Playground.js */,
 				1014C2BA22CB1B5800132618 /* main.js */,
@@ -190,6 +197,15 @@
 			);
 			name = source;
 			path = ../../JS/source;
+			sourceTree = "<group>";
+		};
+		10B102AA242E28EE00D62E6E /* bugfix */ = {
+			isa = PBXGroup;
+			children = (
+				10B102AB242E294E00D62E6E /* TaoBaoHome.h */,
+				10B102AC242E294E00D62E6E /* TaoBaoHome.m */,
+			);
+			path = bugfix;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -202,6 +218,7 @@
 				1014C25622CB16C000132618 /* Sources */,
 				1014C25722CB16C000132618 /* Frameworks */,
 				1014C25822CB16C000132618 /* Resources */,
+				10B102A5242E0A5300D62E6E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -261,6 +278,7 @@
 				1014C2C422CB243400132618 /* Playground.js in Resources */,
 				103C12C0230F7E97003718EF /* TTPatch.js in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
+				10B102AF242E330E00D62E6E /* bugPatch.js in Resources */,
 				1014C2BF22CB1B5800132618 /* main.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -283,7 +301,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#appledoc Xcode script\n\n# Start constants\n\ncompany=\"TTPatch\";\n\ncompanyID=\"com.TTPatch\";\n\ncompanyURL=\"http://公司网址\";\n\ntarget=\"iphoneos\";\n\n#target=\"macosx\";\n\noutputPath=\"~/help\";\n\n# End constants\n\n/usr/local/bin/appledoc \\\n\n--project-name \"${PROJECT_NAME}\" \\\n\n--project-company \"${company}\" \\\n\n--company-id \"${companyID}\" \\\n\n--docset-atom-filename \"${company}.atom\" \\\n\n--docset-feed-url \"${companyURL}/${company}/%DOCSETATOMFILENAME\" \\\n\n--docset-package-url \"${companyURL}/${company}/%DOCSETPACKAGEFILENAME\" \\\n\n--docset-fallback-url \"${companyURL}/${company}\" \\\n\n--output \"${outputPath}\" \\\n\n--publish-docset \\\n\n--docset-platform-family \"${target}\" \\\n\n--logformat xcode \\\n\n--keep-intermediate-files \\\n\n--no-repeat-first-par \\\n\n--no-warn-invalid-crossref \\\n\n--exit-threshold 2 \\\n\n\"${PROJECT_DIR}\"\n\n\n";
+			shellScript = "
+";
+		};
+		10B102A5242E0A5300D62E6E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc --no-create-docset --output ./doc --project-name Example --project-company \"TTPatch\" --company-id \"com.ttpatch\" .\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -298,6 +334,7 @@
 				1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */,
 				1014C2B122CB1B3B00132618 /* TTPatch.m in Sources */,
 				1014C2A222CB17E700132618 /* TTPlaygroundController.m in Sources */,
+				10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
 				1014C2B022CB1B3B00132618 /* TTContext.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
