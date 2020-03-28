@@ -29,7 +29,7 @@
         NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, selectorName];
         
 #if TTPATCH_LOG
-        NSLog(@"class:%@ message:[%@] cleaned",node.clsName,selectorName);
+        TTLog(@"class:%@ message:[%@] cleaned",node.clsName,selectorName);
 #endif
         SEL selector = NSSelectorFromString(selectorName);
         SEL originalSelector = NSSelectorFromString(originalSelectorName);

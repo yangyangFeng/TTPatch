@@ -84,13 +84,13 @@ defineClass('TTPlaygroundController:UIViewController', {
 		self.test();
 		// self.jsInvocationOcWithBlock_(null);
 		self.jsInvocationOcWithBlock_(block(""),function(){
-			Util.log('--------多参数测试---------')
+			Utils.log('--------多参数测试---------')
 		}
 		);
 	},
 	params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
-		Util.log('--------多参数测试---------')
-		Util.log(params1, params2, params3, params4, params5, params6, params7)
+		Utils.log('--------多参数测试---------')
+		Utils.log(params1, params2, params3, params4, params5, params6, params7)
 	}
 }, {
 	//静态方法

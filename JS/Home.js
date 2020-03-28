@@ -7,7 +7,7 @@ defineClass('HomeViewController:UIViewController',{
 		let dataSource = ['加载下发模块','JS-OC间block','点击加载更多',];
 
 		self.view().setBackgroundColor_(UIColor.whiteColor());
-		Util.log('js调用 viewDidLoad');
+		Utils.log('js调用 viewDidLoad');
 		self.setTitle_('TTPatch.js');
 		self.getScorllView().addSubview_(self.getHomeModule1());
 		self.scrollView().addSubview_(self.getHomeModule2());

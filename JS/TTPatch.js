@@ -29,22 +29,34 @@ MessageQueue.MessageQueue_oc_setBlock = function (jsFunc) {
 	return MessageQueue_oc_setBlock(jsFunc);
 };
 
-class Util {
+class Utils {
 }
+log_level_debug=1;
+log_level_info=2;
+log_level_error=3;
 
-Util.log=function (msg) {
-	if (Util.isDebug()){
+Utils.log_error = function (params) {
+	Utils_Log(log_level_error,params);
+}
+Utils.log_info = function (params) {
+	Utils_Log(log_level_info,params);
+	Utils.log(params);
+}
+Utils.log=function (msg) {
+	if (Utils.isDebug()){
 		let params;
 		for (let i = 0; i < arguments.length; i++) {
 			if (!params) params = new Array();
 			params.push(arguments[i]);
 		}
-		console.log.apply(null,params);
+		console.debug.apply(null,params);
 	}
 };
-Util.isDebug=function () {
+
+Utils.isDebug=function () {
 	return APP_IsDebug();
 };
+
 
 this.block=function(signature){
 	return new Block(signature)
@@ -152,7 +164,7 @@ class Block extends JSObject{
 			if (!params) params = new Array();
 			params.push(arguments[i]);
 		}
-		Util.log('-------'+params);
+		// Utils.log('-------'+params);
 		// return this.__isa.apply(null,params);
 		return this.__isa(params);
 	}
@@ -245,7 +257,7 @@ class TTEdgeInsets {
 
 (function () {
 	// Object.prototype = new MetaObject();
-	Object.prototype.call = function (msg) {
+	Object.prototype.c = function (msg) {
 		let obj = CLASS_MAP[this.__className];
 		let isInstance = this.__isInstance;
 		let result;
@@ -267,7 +279,7 @@ class TTEdgeInsets {
 						isHasParams = true;
 					}
 					if (i+1 >= arguments) {
-						Util.log('error 参数个数不匹配');
+						Utils.log_error('error 参数个数不匹配');
 					}
 					let blockImp = arguments[i+1];
 					let blockOC = new Block(param.getFuncSignature(),blockImp,blockKey,isHasParams);
@@ -322,8 +334,8 @@ class TTEdgeInsets {
 	let pv__import = function (clsName) {
 		if (!global[clsName]) {
 			global[clsName] = new JSObject(clsName);
+			Utils.log_info('import：' + clsName);
 		}
-		Util.log('引入文件：' + clsName);
 		return global[clsName]
 	};
 
@@ -358,14 +370,14 @@ class TTEdgeInsets {
 			if (!params) params = new Array();
 			params.push(pv_toJSObject(arguments[i]));
 		}
-		Util.log('🍎🍎🍎🍎oc------------->js' + '    _func_ ' + className + ' ************** ' + method + '');
+		// Utils.log('oc------------->js' + '[' + className + ']:' + method + '');
 		let obj = CLASS_MAP[className].__obj(isInstance);
 		let imp = obj.__methodList[method];
 		let result = imp.apply(undefined, params);
 
 		// release self
 		pv_releaseJsObject(curSelf);
-		Util.log('self-->' + method + '释放');
+		// Utils.log('[self] ' + method + ' release');
 
 		if (result instanceof JSObject) {
 			return result.__toOcObject();
@@ -389,15 +401,13 @@ class TTEdgeInsets {
 	function pv_releaseJsObject(obj) {
 		if (obj.release()) {
 			if (obj.__instanceFlag === lastSelf.__instanceFlag) {
-				Util.log(obj.__instanceFlag + '--------self、lastSelf 已释放');
+				// Utils.log(obj.__instanceFlag + 'self and lastSelf release');
 				self = lastSelf = null;
 
 			} else {
-
-				Util.log(obj.__instanceFlag + '--------self 已释放, lastSelf替换self');
+				// Utils.log(obj.__instanceFlag + 'self release, lastSelf replace self');
 				obj = null;
 				self = lastSelf;
-
 			}
 		}
 	};
@@ -428,7 +438,7 @@ class TTEdgeInsets {
 			}
 		}
 		let obj = new Class_obj(className, superClassName, methodList, classMethods, property_list);
-		Util.log('register------' + className);
+		Utils.log_info('register: [ ' + className+' ]');
 		CLASS_MAP[obj.__className] = obj;
 		pv__import(className);
 		return obj;

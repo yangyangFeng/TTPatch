@@ -18,6 +18,11 @@
 #define TTPATCH_DERIVE_PRE @"TTPatch_Derive_"
 #define TTPatchInvocationException @"TTPatchInvocationException"
 
+typedef enum : NSUInteger {
+    log_level_debug=1,
+    log_level_info,
+    log_level_error,
+} log_level;
 
 typedef enum {
     // Set to true on blocks that have captures (and thus are not true
@@ -397,7 +402,7 @@ static id WrapInvocationResult(NSInvocation *invocation,NSMethodSignature *signa
             [invocation getReturnValue:&result];
             if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
                 returnValue = (__bridge_transfer id)result;
-//                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+//                        TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
             } else {
                 returnValue = (__bridge id)result;
             }
@@ -495,7 +500,7 @@ static NSArray* WrapInvocationArgs(NSInvocation *invocation,bool isBlock){
                      [invocation getArgument:&result atIndex:i];
                      if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
                          returnValue = (__bridge_transfer id)result;
-         //                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+         //                        TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
                      } else {
                          returnValue = (__bridge id)result;
                      }
@@ -621,7 +626,7 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
 #if TTPATCH_LOG
-//            NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+//            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 #endif
         [invocation setTarget:classOrInstance];
         [invocation setSelector:sel_method];
@@ -765,12 +770,12 @@ static void AddPropertys(NSString *className,NSString *superClassName,NSArray *p
             
             if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
 #if TTPATCH_LOG
-                NSLog(@"Get添加成功:%@",propertyForSetter);
+                TTLog(@"Get添加成功:%@",propertyForSetter);
 #endif
             }
             if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
 #if TTPATCH_LOG
-                NSLog(@"Set添加成功:set%@",propertyForSetter);
+                TTLog(@"Set添加成功:set%@",propertyForSetter);
 #endif
             }
         }
@@ -832,7 +837,7 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         
         #if TTPATCH_LOG
         NSString * selectNameStr = isBlock?@"block":NSStringFromSelector(invocation.selector);
-        NSLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| func: %@      \n| instance: %@  \n| arg: %d",isBlock?"block": method_getTypeEncoding(methodInfo),selectNameStr,self,isBlock?0:systemMethodArgCount-2);
+        TTLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| func: %@      \n| instance: %@  \n| arg: %d",isBlock?"block": method_getTypeEncoding(methodInfo),selectNameStr,self,isBlock?0:systemMethodArgCount-2);
         #endif
         NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
         
@@ -982,7 +987,7 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
         }
         
         #if TTPATCH_LOG
-        NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
+        TTLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
         #endif
         Class aClass = NSClassFromString(className);
         SEL original_SEL = NSSelectorFromString(method);
@@ -1025,8 +1030,22 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
 
 #pragma makr- Native API
 - (void)configJSBrigeActions{
-    self[@"log"] = ^(id msg){
-        NSLog(@"🍎🍎🍎🍎🍎🍎🍎-------------->%@",msg);
+    self[@"Utils_Log"] = ^(log_level level,id msg){
+        switch (level) {
+            case log_level_debug:
+                TTLog(@"%@",msg);
+                break;
+            case log_level_info:
+                TTLog_Info(@"%@",msg);
+                break;
+            case log_level_error:
+                TTLog_Error(@"%@",msg);
+                break;
+            default:
+                TTLog(@"%@",msg);
+                break;
+        }
+//        TTLog(@"🍎🍎🍎🍎🍎🍎🍎-------------->%@",msg);
     };
     self[@"MessageQueue_oc_define"] = ^(NSString * interface){
         NSArray * classAndSuper = [interface componentsSeparatedByString:@":"];
@@ -1052,7 +1071,7 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
         AddPropertys(className, superClassName,propertys);
     };
     self[@"MessageQueue_oc_setBlock"] = ^(id jsFunc){
-//        NSLog(@"jsfunc-----%p",jsFunc);
+//        TTLog(@"jsfunc-----%p",jsFunc);
     };
     self[@"APP_IsDebug"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
 #if DEBUG

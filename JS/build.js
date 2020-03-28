@@ -10,7 +10,7 @@ const esprima = require('esprima');
 const estraverse = require('estraverse');
 const escodegen = require("escodegen");
 const fs = require("fs");
-
+let invokeFunc = 'c';
 
 fs.exists("source",function (exists) {
 	if(exists){
@@ -64,7 +64,7 @@ function estraverse_traverse(ast) {
 				case "CallExpression":{
 					if (node.callee && node.callee.object){
 						let targetName = node.callee.object.name;
-						if (targetName === 'Util'){
+						if (targetName === 'Utils'){
 							return;
 						}
 						// console.log('*******'+JSON.stringify(node));
@@ -89,7 +89,7 @@ function estraverse_traverse(ast) {
 							// console.log("出现最多次数的是:"+argCount+'实际参数: '+argumentsCount)
 
 						// node.arguments.splice(0,0,createNode(node.callee.property.name))
-						node.callee.property.name = "call";
+						node.callee.property.name = invokeFunc;
 					}
 
 
@@ -100,7 +100,7 @@ function estraverse_traverse(ast) {
 		Identifier(path) {
 			const name = path.node.name;
 			// console.log('Identifier-----' + JSON.stringify(path.node))
-			if (path.node.name === 'call') {
+			if (path.node.name === invokeFunc) {
 				// console.log('Identifier-----' + JSON.stringify(path.node))
 				path.findParent((superPath) => {
 					// console.log('-----'+superPath.node.name)
@@ -110,8 +110,8 @@ function estraverse_traverse(ast) {
 
 			if (path.key === 'property') {
 				let name = path.node.name;
-				path.node.name = "call";
-				path.node.loc.identifierName = "call";
+				path.node.name = invokeFunc;
+				path.node.loc.identifierName = invokeFunc;
 			}
 		}
 	});
@@ -119,10 +119,6 @@ function estraverse_traverse(ast) {
 
 // const MytransformCode = escodegen.generate(ast)
 // console.log("--------转换后"+MytransformCode)
-
-
-
-
 
 
 
@@ -164,8 +160,13 @@ fs.readdir("./",function (err,data) {
 								+filePath
 								+"\n--------------"
 							);
-							//       要写入的文件   要写入的内容       a追加|w写入（默认）|r（读取）  回调函数
-							fs.writeFile(filePath,code.toString(),{flag:"w"},function (err) {
+							
+							let codeStr = code.toString();
+							codeStr = codeStr.replace(/  /g,"");
+							codeStr = codeStr.replace(/[\n]/g,"");
+							
+							//要写入的文件   要写入的内容       a追加|w写入（默认）|r（读取）  回调函数
+							fs.writeFile(filePath,codeStr,{flag:"w"},function (err) {
 								if(err){
 									console.log("----------------------写入失败"+filename);
 									return console.log(err);

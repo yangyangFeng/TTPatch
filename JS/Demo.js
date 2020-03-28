@@ -13,7 +13,6 @@ defineClass('ViewController:UIViewController',{
 		// let aaa = TTView.new();
 		// aaa.__isa = null;
 		// aaa=null;
-		Util.log('js调用 viewDidLoad');
 		self.setTitle_('Demo.js');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
@@ -56,7 +55,7 @@ defineClass('ViewController:UIViewController',{
 		return _tableview;
 	},
 	params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
-		Util.log('--------多参数测试---------')
+		Util.nLog(0,'--------多参数测试---------')
 		Util.log(params1, params2, params3, params4, params5, params6, params7)
 	},
 	createPageHeader: function(){
@@ -77,7 +76,7 @@ defineClass('ViewController:UIViewController',{
 //动态生成模块
 defineClass('JSRootViewController:UIViewController',{
 	dealloc:function () {
-		Util.log('TestViewController->已释放');
+		Utils.log('TestViewController->已释放');
 	},
 	viewDidLoad:function () {
 		Super().viewDidLoad();
@@ -114,7 +113,7 @@ defineClass('JSRootViewController:UIViewController',{
 
 defineClass('BlockViewController:UITableViewController',{
 	dealloc:function () {
-		Util.log('BlockViewController->已释放');
+		Utils.log('BlockViewController->已释放');
 	},
 	viewDidLoad:function () {
 		Super().viewDidLoad();
@@ -141,23 +140,27 @@ defineClass('BlockViewController:UITableViewController',{
 		switch (index){
 			case 0:{
 				self.testCall0_(block(""),function(){
-					Util.log('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
+					Utils.log('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
+					Utils.log_info('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
 				});
 			}break;
 			case 1:{
 				self.testCall1_(block('void,NSString*,int'),function(arg1,arg2){
-					Util.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+arg1+arg2);
+					Utils.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+arg1+arg2);
+					Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+arg1+arg2);
 				});
 			}break;
 			case 2:{
 				self.testCall2_(block("NSString*,NSString*"),function(arg){
-					Util.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
+					Utils.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
+					Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
 					return '这是有返回值的哦';
 				});
 			}break;
 			case 3:{
 				self.testCall3_(block("NSString*,void"),function(){
-					Util.log('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
+					Utils.log('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
+					Utils.log_info('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
 					return '这是有返回值的哦';
 				});
 			}break;
@@ -168,10 +171,12 @@ defineClass('BlockViewController:UITableViewController',{
 			default:{
 				//方法签名第一位 是返回值,如果返回为void可以不填,但是要以","分割
 				self.testCallVID_(block(",NSString *, NSString *, int, bool, float , NSNumber* "),function(arg1,arg2,arg3,arg4,arg5,arg6){
-					Util.log('--------JS传入OC方法,接受到回调---------'+arg1+"\n"+arg2+"\n"+arg3+"\n"+arg4+"\n"+arg5+"\n"+arg6);
+					Utils.log('--------JS传入OC方法,接受到回调---------'+arg1+"\n"+arg2+"\n"+arg3+"\n"+arg4+"\n"+arg5+"\n"+arg6);
+					Utils.log_info('--------JS传入OC方法,接受到回调---------'+arg1+"\n"+arg2+"\n"+arg3+"\n"+arg4+"\n"+arg5+"\n"+arg6);
 				});
-				self.OCcallBlock_(block(""),function(arg1){
-					Util.log("js与js block回调"+arg1);
+				self.OCcallBlock_(block(",NSString *"),function(arg1){
+					Utils.log("js与js block回调"+arg1);
+					Utils.log_info("js与js block回调"+arg1);
 				})
 			}break;
 		}

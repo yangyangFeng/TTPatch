@@ -1,9 +1,1 @@
-_import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,TTTableView,UIScreen,UIImageView,TaoBaoHome');
-defineClass('TaoBaoHome:UIViewController', {
-    viewDidLoad: function () {
-        Super().call('viewDidLoad');
-        var home = UIImageView.call('alloc').call('initWithImage_', UIImage.call('imageNamed_', 'tianmao.jpg'));
-        home.call('setFrame_', self.call('view').call('bounds'));
-        self.call('view').call('addSubview_', home);
-    }
-}, {});
+_import('UIView,UILabel,UIImage,UIColor,TTView,UITableViewCell,UITableView,NSIndexPath,UIFont,TTTableView,UIScreen,UIImageView,TaoBaoHome');defineClass('TaoBaoHome:UIViewController', {viewDidLoad: function () {Super().c('viewDidLoad');var home = UIImageView.c('alloc').c('initWithImage_', UIImage.c('imageNamed_', 'tianmao.jpg'));home.c('setFrame_', self.c('view').c('bounds'));self.c('view').c('addSubview_', home);}}, {});

@@ -24,8 +24,12 @@
     [self.navigationController pushViewController:homeVC animated:YES];
 }
 
+- (NSString *)jsFileName{
+    return @"Home.js";
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 
     

@@ -535,7 +535,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //            [invocation getReturnValue:&result];
 //            if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
 //                returnValue = (__bridge_transfer id)result;
-////                        NSLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+////                        TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
 //            } else {
 //                returnValue = (__bridge id)result;
 //            }
@@ -641,7 +641,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
 //    if ([classOrInstance respondsToSelector:sel_method]) {
 //#if TTPATCH_LOG
-//            NSLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+//            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 //#endif
 //        [invocation setTarget:classOrInstance];
 //        [invocation setSelector:sel_method];
@@ -808,7 +808,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //        return;
 //    }
 //#if TTPATCH_LOG
-//    NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
+//    TTLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
 //#endif
 //
 //    Class aClass = NSClassFromString(className);
@@ -829,7 +829,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //    }
 //    const char *methodTypes = method_getTypeEncoding(originalMethodInfo)?: "v@:";
 //#if TTPATCH_LOG
-//    NSLog(@"--------方法描述:%s\n 返回值描述:%s",method_getTypeEncoding(originalMethodInfo),method_copyReturnType(originalMethodInfo));
+//    TTLog(@"--------方法描述:%s\n 返回值描述:%s",method_getTypeEncoding(originalMethodInfo),method_copyReturnType(originalMethodInfo));
 //#endif
 //    IMP original_IMP = class_getMethodImplementation(aClass, original_SEL);
 //    SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, method]);
@@ -942,12 +942,12 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //
 //            if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
 //#if TTPATCH_LOG
-//                NSLog(@"Get添加成功:%@",propertyForSetter);
+//                TTLog(@"Get添加成功:%@",propertyForSetter);
 //#endif
 //            }
 //            if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
 //#if TTPATCH_LOG
-//                NSLog(@"Set添加成功:set%@",propertyForSetter);
+//                TTLog(@"Set添加成功:set%@",propertyForSetter);
 //#endif
 //            }
 //        }
@@ -1002,7 +1002,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //        }
 //        #if TTPATCH_LOG
 //        NSString * selectNameStr = NSStringFromSelector(invocation.selector);
-//        NSLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| func: %@      \n| instance: %@  \n| arg: %d",method_getTypeEncoding(methodInfo),selectNameStr,self,systemMethodArgCount-2);
+//        TTLog(@"\n--------------------------- Message Queue Call JS ----------------%s \n| func: %@      \n| instance: %@  \n| arg: %d",method_getTypeEncoding(methodInfo),selectNameStr,self,systemMethodArgCount-2);
 //        #endif
 //        NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
 //
@@ -1142,7 +1142,7 @@ else if ([clsType isEqualToString:__clsTypeStr]){\
 //        }
 //
 //        #if TTPATCH_LOG
-//        NSLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
+//        TTLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
 //        #endif
 //        Class aClass = NSClassFromString(className);
 //        SEL original_SEL = NSSelectorFromString(method);
