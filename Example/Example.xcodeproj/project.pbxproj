@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -31,13 +31,8 @@
 		1014C2A122CB17E700132618 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29922CB17E600132618 /* MainViewController.m */; };
 		1014C2A222CB17E700132618 /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29A22CB17E600132618 /* TTPlaygroundController.m */; };
 		1014C2A322CB17E700132618 /* TTTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C29E22CB17E700132618 /* TTTableView.m */; };
-		1014C2B022CB1B3B00132618 /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AB22CB1B3B00132618 /* TTContext.m */; };
-		1014C2B122CB1B3B00132618 /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AC22CB1B3B00132618 /* TTPatch.m */; };
-		1014C2B222CB1B3B00132618 /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */; };
-		1014C2B322CB1B3B00132618 /* TTPatchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */; };
 		1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1014C2B622CB1B5000132618 /* SGDirWatchdog.m */; };
 		1053F70A23223DB900DBD8A6 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F70823223DB800DBD8A6 /* TTView.m */; };
-		1053F713232244F300DBD8A6 /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F712232244F300DBD8A6 /* TTPatchModels.m */; };
 		1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F71523234B3900DBD8A6 /* BlockViewController.m */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		10B110B5242EFD5D00D62E6E /* build.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110AF242EFD5C00D62E6E /* build.js */; };
@@ -46,7 +41,7 @@
 		10B110B8242EFD5D00D62E6E /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B2242EFD5C00D62E6E /* bugPatch.js */; };
 		10B110B9242EFD5D00D62E6E /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B3242EFD5C00D62E6E /* main.js */; };
 		10B110BA242EFD5D00D62E6E /* Demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B4242EFD5C00D62E6E /* Demo.js */; };
-		10B110BC242EFD6B00D62E6E /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110BB242EFD6B00D62E6E /* TTPatch.js */; };
+		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,21 +63,10 @@
 		1014C29C22CB17E700132618 /* TTPlaygroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPlaygroundController.h; sourceTree = "<group>"; };
 		1014C29D22CB17E700132618 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		1014C29E22CB17E700132618 /* TTTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTableView.m; sourceTree = "<group>"; };
-		1014C2A722CB1B3B00132618 /* TTPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatch.h; sourceTree = "<group>"; };
-		1014C2A822CB1B3B00132618 /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
-		1014C2A922CB1B3B00132618 /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchMethodCleaner.h; sourceTree = "<group>"; };
-		1014C2AA22CB1B3B00132618 /* TTPatchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchUtils.h; sourceTree = "<group>"; };
-		1014C2AB22CB1B3B00132618 /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
-		1014C2AC22CB1B3B00132618 /* TTPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatch.m; sourceTree = "<group>"; };
-		1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchMethodCleaner.m; sourceTree = "<group>"; };
-		1014C2AE22CB1B3B00132618 /* TTPatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchKit.h; sourceTree = "<group>"; };
-		1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchUtils.m; sourceTree = "<group>"; };
 		1014C2B522CB1B5000132618 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
 		1014C2B622CB1B5000132618 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
 		1053F70823223DB800DBD8A6 /* TTView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTView.m; sourceTree = "<group>"; };
 		1053F70923223DB900DBD8A6 /* TTView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTView.h; sourceTree = "<group>"; };
-		1053F711232244F300DBD8A6 /* TTPatchModels.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPatchModels.h; sourceTree = "<group>"; };
-		1053F712232244F300DBD8A6 /* TTPatchModels.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchModels.m; sourceTree = "<group>"; };
 		1053F71423234B3900DBD8A6 /* BlockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
 		1053F71523234B3900DBD8A6 /* BlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
@@ -93,7 +77,9 @@
 		10B110B2242EFD5C00D62E6E /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
 		10B110B3242EFD5C00D62E6E /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
 		10B110B4242EFD5C00D62E6E /* Demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Demo.js; sourceTree = "<group>"; };
-		10B110BB242EFD6B00D62E6E /* TTPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TTPatch.js; sourceTree = "<group>"; };
+		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		67A6FD84A8BE9A2F1720D1E5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
+		E85B47CF39DC3B5A404C9FCE /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +99,8 @@
 			children = (
 				1014C25C22CB16C000132618 /* Example */,
 				1014C25B22CB16C000132618 /* Products */,
+				495018408DBFB9381C922E98 /* Pods */,
+				A6A49EC2EFCC9E65DD4B8B25 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -128,7 +117,6 @@
 			children = (
 				10B110AE242EFD5C00D62E6E /* src */,
 				1014C2B422CB1B5000132618 /* libs */,
-				1014C2A622CB1B3B00132618 /* TTPatch */,
 				1014C25D22CB16C000132618 /* AppDelegate.h */,
 				1014C25E22CB16C000132618 /* AppDelegate.m */,
 				1014C26022CB16C000132618 /* ViewController.h */,
@@ -153,26 +141,6 @@
 				1014C26C22CB16C400132618 /* main.m */,
 			);
 			path = Example;
-			sourceTree = "<group>";
-		};
-		1014C2A622CB1B3B00132618 /* TTPatch */ = {
-			isa = PBXGroup;
-			children = (
-				1014C2AE22CB1B3B00132618 /* TTPatchKit.h */,
-				1014C2A722CB1B3B00132618 /* TTPatch.h */,
-				10B110BB242EFD6B00D62E6E /* TTPatch.js */,
-				1014C2AC22CB1B3B00132618 /* TTPatch.m */,
-				1014C2A822CB1B3B00132618 /* TTContext.h */,
-				1014C2AB22CB1B3B00132618 /* TTContext.m */,
-				1014C2A922CB1B3B00132618 /* TTPatchMethodCleaner.h */,
-				1014C2AD22CB1B3B00132618 /* TTPatchMethodCleaner.m */,
-				1014C2AA22CB1B3B00132618 /* TTPatchUtils.h */,
-				1014C2AF22CB1B3B00132618 /* TTPatchUtils.m */,
-				1053F711232244F300DBD8A6 /* TTPatchModels.h */,
-				1053F712232244F300DBD8A6 /* TTPatchModels.m */,
-			);
-			name = TTPatch;
-			path = ../../TTPatch;
 			sourceTree = "<group>";
 		};
 		1014C2B422CB1B5000132618 /* libs */ = {
@@ -208,6 +176,23 @@
 			path = ../../JS/src;
 			sourceTree = "<group>";
 		};
+		495018408DBFB9381C922E98 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				67A6FD84A8BE9A2F1720D1E5 /* Pods-Example.debug.xcconfig */,
+				E85B47CF39DC3B5A404C9FCE /* Pods-Example.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		A6A49EC2EFCC9E65DD4B8B25 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				474D1358ED147C13E1337BEA /* Pods_Example.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -215,10 +200,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1014C27022CB16C400132618 /* Build configuration list for PBXNativeTarget "Example" */;
 			buildPhases = (
+				987BD3957D65A85079578143 /* [CP] Check Pods Manifest.lock */,
 				1014C25622CB16C000132618 /* Sources */,
 				1014C25722CB16C000132618 /* Frameworks */,
 				1014C25822CB16C000132618 /* Resources */,
 				10B102A5242E0A5300D62E6E /* ShellScript */,
+				EABB9685B3B84768A40FC37B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -277,7 +264,6 @@
 				10B110B8242EFD5D00D62E6E /* bugPatch.js in Resources */,
 				10B110B5242EFD5D00D62E6E /* build.js in Resources */,
 				10B110BA242EFD5D00D62E6E /* Demo.js in Resources */,
-				10B110BC242EFD6B00D62E6E /* TTPatch.js in Resources */,
 				10B110B7242EFD5D00D62E6E /* Playground.js in Resources */,
 				10B110B9242EFD5D00D62E6E /* main.js in Resources */,
 			);
@@ -301,8 +287,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		10B102A5242E0A5300D62E6E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -321,6 +306,45 @@
 			shellPath = /bin/sh;
 			shellScript = "#appledoc --no-create-docset --output ./doc --project-name Example --project-company \"TTPatch\" --company-id \"com.ttpatch\" .\n";
 		};
+		987BD3957D65A85079578143 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Example-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EABB9685B3B84768A40FC37B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -330,20 +354,15 @@
 			files = (
 				1014C26222CB16C000132618 /* ViewController.m in Sources */,
 				1014C26D22CB16C400132618 /* main.m in Sources */,
-				1014C2B322CB1B3B00132618 /* TTPatchUtils.m in Sources */,
 				1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */,
-				1014C2B122CB1B3B00132618 /* TTPatch.m in Sources */,
 				1014C2A222CB17E700132618 /* TTPlaygroundController.m in Sources */,
 				10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
-				1014C2B022CB1B3B00132618 /* TTContext.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
 				1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */,
 				1014C2A322CB17E700132618 /* TTTableView.m in Sources */,
-				1053F713232244F300DBD8A6 /* TTPatchModels.m in Sources */,
 				1053F70A23223DB900DBD8A6 /* TTView.m in Sources */,
 				1014C25F22CB16C000132618 /* AppDelegate.m in Sources */,
-				1014C2B222CB1B3B00132618 /* TTPatchMethodCleaner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +502,7 @@
 		};
 		1014C27122CB16C400132618 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 67A6FD84A8BE9A2F1720D1E5 /* Pods-Example.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -504,6 +524,7 @@
 		};
 		1014C27222CB16C400132618 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E85B47CF39DC3B5A404C9FCE /* Pods-Example.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;

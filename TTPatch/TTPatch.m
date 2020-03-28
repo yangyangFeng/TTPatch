@@ -39,7 +39,7 @@ static TTPatch *instance = nil;
 
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL{
     guard(script != nil && script.length) else{
-        NSAssert(NO, @"执行脚本为空,请检查");
+        TTAssert(NO, @"执行脚本为空,请检查");
     }
  
     if (sourceURL) {
@@ -68,7 +68,8 @@ static TTPatch *instance = nil;
 }
 
 - (void)runMainJS{
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"TTPatch" ofType:@"js"];
+    NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
+    NSString *path = [myBundle pathForResource:@"TTPatch" ofType:@"js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
     [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
 }

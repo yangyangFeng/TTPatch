@@ -17,6 +17,8 @@
 #endif
 #define TTLog_Info(ARGS, ...) NSLog((@"[%s:%d] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
 #define TTLog_Error(ARGS, ...) NSLog((@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
+#define TTAssert(con,ARGS, ...) NSAssert(con,(@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
+
 /**
  *日志开关
  */
@@ -26,7 +28,7 @@
 #import "TTContext.h"
 #import "TTPatchUtils.h"
 #import "TTPatchMethodCleaner.h"
-//#import "TTPatch.h"
+
 
 
 #endif /* TTPatchKit_h */
