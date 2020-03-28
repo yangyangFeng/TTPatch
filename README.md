@@ -6,6 +6,13 @@
 
 [2. 基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
+
+
+
+
+
+## 1. 功能列表
+
 |功能特性|备注限制|
 |-|-|
 |**替换指定`ObjectC`方法实现**          | 实例/静态方法均可替换实现|
