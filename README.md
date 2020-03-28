@@ -28,7 +28,9 @@
 ![效果图.gif](http://code.cocoachina.com/uploads/attachments/20191030/1000267/1ef16348536be6c1a901ced275d8d387.gif)
 
 
-![taobao.gif](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQ5MzI5LTVlZjA2MGU1MjBlZDFkZTguZ2lm)
+![在线下发补丁执行.gif](https://i.postimg.cc/pd2Pzwj0/demo1.gif)
+![重启后加载已下发补丁.gif](https://i.postimg.cc/7PT1pdCt/demo4.gif)
+
 
 ## 2. 安装
 
