@@ -310,7 +310,9 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
 
 static NSString * MethodFormatterToOcFunc(NSString *method){
     if ([method rangeOfString:@"_"].length > 0) {
+        method = [method stringByReplacingOccurrencesOfString:@"__" withString:@"$$"];
         method = [method stringByReplacingOccurrencesOfString:@"_" withString:@":"];
+        method = [method stringByReplacingOccurrencesOfString:@"$$" withString:@"_"];
     }
     return method;
 }

@@ -257,7 +257,7 @@ class TTEdgeInsets {
 
 (function () {
 	// Object.prototype = new MetaObject();
-	Object.prototype.c = function (msg) {
+	Object.prototype._c = function (msg) {
 		let obj = CLASS_MAP[this.__className];
 		let isInstance = this.__isInstance;
 		let result;
@@ -508,7 +508,7 @@ class TTEdgeInsets {
 		else {
 			obj = arg;
 		}
-		obj.call=null;
+		obj._c=null;
 		return obj;
 	}
 

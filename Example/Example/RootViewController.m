@@ -38,7 +38,7 @@
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
     NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
 
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
     NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
 
 
@@ -54,7 +54,7 @@
 - (void)watch{
     
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/source"];
+    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
     NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:self.jsFileName];
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];

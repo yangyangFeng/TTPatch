@@ -13,7 +13,7 @@ const estraverse = require('estraverse');
 const escodegen = require("escodegen");
 const fs = require("fs");
 
-let invokeFunc = 'c';
+let invokeFunc = '_c';
 let outputPath = 'outputs';
 let srcPath    = 'src';
 
@@ -85,7 +85,7 @@ function estraverse_traverse(ast) {
 						}
 						// if (argCount < argumentsCount){
 						// 	node.arguments.splice(0,0,createNode((node.callee.property.name+'_')));
-						//
+						
 						// }else {
 						// 	node.arguments.splice(0,0,createNode(node.callee.property.name))
 						// }
@@ -176,9 +176,7 @@ fs.readdir("./"+srcPath,function (err,data) {
 									console.log("----------------------写入失败"+filename);
 									return console.log(err);
 								}else {
-									console.log(filePath+" 转换完成~！");
-									console.log("[outputs] 目录js转义输出,可直接下发供 app 使用");
-
+									console.log(filePath+" 转换完成~！, 可直接下发供 app 使用");
 								}
 							})
 						}
