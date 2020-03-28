@@ -6,17 +6,13 @@ console.log("   ██║      ██║   ██║     ██║  ██║   
 console.log("   ╚═╝      ╚═╝   ╚═╝     ╚═╝  ╚═╝   ╚═╝    ╚═════╝╚═╝  ╚═╝");
 console.log("                                                           ");
 
-console.log("\n[src] 目录,为工作空间,需执行build.js 转以后下发\n");
-
 const esprima = require('esprima');
 const estraverse = require('estraverse');
 const escodegen = require("escodegen");
 const fs = require("fs");
-
 let invokeFunc = 'c';
-let outputPath = 'outputs';
-let srcPath    = 'src';
-
+let outputPath='output';
+let srcPath='src';
 fs.exists(outputPath,function (exists) {
 	if(exists){
 		console.log("该文件夹已经存在");
@@ -30,6 +26,7 @@ fs.exists(outputPath,function (exists) {
 		})
 	}
 })
+
 
 
 // const ast = "";
@@ -127,7 +124,7 @@ function estraverse_traverse(ast) {
 
 
 
-fs.readdir("./"+srcPath,function (err,data) {
+fs.readdir("./src",function (err,data) {
 	if(err){
 		console.log(err);
 	}else {
@@ -141,8 +138,9 @@ fs.readdir("./"+srcPath,function (err,data) {
 					if(filename === "build.js"){return}
 					if(filename === "TTPatch.js"){return}
 
-					console.log("->"+filename.toString());
-					let filePath = "./"+outputPath+"/"+filename;
+					
+					let filePath = "./"+outputPath+'/'+filename;
+					console.log("->"+filePath);
 					// fs.unlink(filePath,function (err) {
 					// 	if(err){
 					// 		console.log(filename+"删除失败");
@@ -151,7 +149,6 @@ fs.readdir("./"+srcPath,function (err,data) {
 					// 		console.log(filePath+"删除成功");
 					// 	}
 					// })
-					filename='./'+srcPath+'/'+filename;
 					fs.readFile(filename.toString(),function (err,data) {
 						if(err){
 							console.log("----------------------读取"+filename);
@@ -176,9 +173,7 @@ fs.readdir("./"+srcPath,function (err,data) {
 									console.log("----------------------写入失败"+filename);
 									return console.log(err);
 								}else {
-									console.log(filePath+" 转换完成~！");
-									console.log("[outputs] 目录js转义输出,可直接下发供 app 使用");
-
+									console.log(filename+" 转换完成~！");
 								}
 							})
 						}
