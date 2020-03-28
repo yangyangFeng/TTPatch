@@ -21,7 +21,21 @@
 |**支持基础数据类型**                   |非id类型,如`int`,`bool`均已支持|
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
 
-----
+---------------------------------------------------
+
+**演示项目**:Example.xcodeproj 
+
 ![效果图.gif](http://code.cocoachina.com/uploads/attachments/20191030/1000267/1ef16348536be6c1a901ced275d8d387.gif)
 
+
+![taobao.gif](https://imgconvert.csdnimg.cn/aHR0cHM6Ly91cGxvYWQtaW1hZ2VzLmppYW5zaHUuaW8vdXBsb2FkX2ltYWdlcy8xMjQ5MzI5LTVlZjA2MGU1MjBlZDFkZTguZ2lm)
+
+## 2. 安装
+
+
+### CocoaPods
+
+1. 在 Podfile 中添加  `pod 'TTPatch'`。
+2. 执行 `pod install` 或 `pod update`。
+3. 导入 "TTPatch.h"
 
