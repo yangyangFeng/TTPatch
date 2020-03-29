@@ -22,14 +22,18 @@ static TTPatch *instance = nil;
 @implementation TTPatch
 
 + (void)initSDK{
-    [[self shareInstance] loadTTJSKit];
-}
-
-+ (TTPatch *)shareInstance{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [TTPatch new];
     });
+    [instance loadTTJSKit];
+}
+
++ (void)deInitSDK{
+    [[TTPatch shareInstance] clearContext];
+}
+
++ (TTPatch *)shareInstance{
     return instance;
 }
 

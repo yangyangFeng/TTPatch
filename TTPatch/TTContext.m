@@ -165,19 +165,22 @@ static id CreateBlockWithSignatureString(NSString *signatureStr){
         i = (i == lt.count-1) ? 0 : i+1;
     }
     
-    
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        
-        Class cls = NSClassFromString(@"NSBlock");
-        #define JP_HOOK_METHOD(selector, func) {Method method = class_getInstanceMethod([NSObject class], selector); \
-        BOOL success = class_addMethod(cls, selector, (IMP)func, method_getTypeEncoding(method)); \
-        if (!success) { class_replaceMethod(cls, selector, (IMP)func, method_getTypeEncoding(method));}}
-        //此处在执行forwardInvocation流程时确保能拿到我们动态构造的函数签名
-        JP_HOOK_METHOD(@selector(methodSignatureForSelector:), block_methodSignatureForSelector);
-        JP_HOOK_METHOD(@selector(forwardInvocation:), OC_MSG_SEND_HANDLE);
-    });
-    
+    //bugfix: framework下,静态函数调用中多次遇到 `static dispatch_once_t onceToken;` 会crash,增加安全拦截
+    static BOOL isExchanged=NO;
+    if (!isExchanged) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            Class cls = NSClassFromString(@"NSBlock");
+            #define JP_HOOK_METHOD(selector, func) {Method method = class_getInstanceMethod([NSObject class], selector); \
+            BOOL success = class_addMethod(cls, selector, (IMP)func, method_getTypeEncoding(method)); \
+            if (!success) { class_replaceMethod(cls, selector, (IMP)func, method_getTypeEncoding(method));}}
+            //此处在执行forwardInvocation流程时确保能拿到我们动态构造的函数签名
+            JP_HOOK_METHOD(@selector(methodSignatureForSelector:), block_methodSignatureForSelector);
+            JP_HOOK_METHOD(@selector(forwardInvocation:), OC_MSG_SEND_HANDLE);
+            isExchanged = YES;
+        });
+    }
+
     
     void (^block)(void) = ^(void){};
     TTPatchBlockRef blockLayout = (__bridge void*)block;

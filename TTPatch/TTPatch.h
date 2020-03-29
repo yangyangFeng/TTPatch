@@ -19,6 +19,9 @@
 /// SDK 初始化, 建议程序启动时优先初始化,以保证能修复更多场景
 + (void )initSDK;
 
+/// 析构组件
++ (void)deInitSDK;
+
 /// 获取当前JS 上下文
 + (TTPatch *)shareInstance;
 
@@ -33,8 +36,6 @@
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL;
 
 
-/// 清理全部交换过的方法
-- (void)clearContext;
 - (NSString *)formatterJS:(NSString *)script;
 @property(nonatomic,strong,readonly)TTContext *context;
 @end

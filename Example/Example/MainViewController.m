@@ -14,7 +14,7 @@
 
 @implementation MainViewController
 - (IBAction)refresh:(id)sender {
-    [[TTPatch shareInstance] clearContext];
+    [TTPatch deInitSDK];
 }
 
 - (IBAction)openHomeAction:(id)sender {

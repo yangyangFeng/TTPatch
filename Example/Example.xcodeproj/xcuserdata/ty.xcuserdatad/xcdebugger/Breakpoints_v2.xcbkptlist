@@ -144,7 +144,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1093"
             endingLineNumber = "1093"
-            landmarkName = "-execFuncParamsBlockWithBlockKey:arguments:"
+            landmarkName = "-getBlockFunc"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -162,22 +162,6 @@
             endingLineNumber = "1064"
             landmarkName = "-configJSBrigeActions"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "EC44732A-6B98-4E55-B2C0-C9F3AF057B39"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../TTPatch/TTContext.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "910"
-            endingLineNumber = "910"
-            landmarkName = "OC_MSG_SEND_HANDLE(self, invocation_selector, invocation)"
-            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
