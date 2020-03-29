@@ -1,0 +1,16 @@
+PODS:
+  - TTPatch (0.2.1)
+
+DEPENDENCIES:
+  - TTPatch (from `../TTPatch.podspec`)
+
+EXTERNAL SOURCES:
+  TTPatch:
+    :path: "../TTPatch.podspec"
+
+SPEC CHECKSUMS:
+  TTPatch: 0976d0deaf01a174a40bc8f5f3deaf04524931f8
+
+PODFILE CHECKSUM: cf72a87a4b978b3e047312e502b1b97a59be4629
+
+COCOAPODS: 1.7.5

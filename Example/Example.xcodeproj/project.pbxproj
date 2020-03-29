@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -35,7 +35,6 @@
 		1053F70A23223DB900DBD8A6 /* TTView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F70823223DB800DBD8A6 /* TTView.m */; };
 		1053F71623234B3900DBD8A6 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1053F71523234B3900DBD8A6 /* BlockViewController.m */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
-		10B110B5242EFD5D00D62E6E /* build.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110AF242EFD5C00D62E6E /* build.js */; };
 		10B110B6242EFD5D00D62E6E /* Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B0242EFD5C00D62E6E /* Home.js */; };
 		10B110B7242EFD5D00D62E6E /* Playground.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B1242EFD5C00D62E6E /* Playground.js */; };
 		10B110B8242EFD5D00D62E6E /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10B110B2242EFD5C00D62E6E /* bugPatch.js */; };
@@ -71,7 +70,6 @@
 		1053F71523234B3900DBD8A6 /* BlockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
-		10B110AF242EFD5C00D62E6E /* build.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = build.js; sourceTree = "<group>"; };
 		10B110B0242EFD5C00D62E6E /* Home.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Home.js; sourceTree = "<group>"; };
 		10B110B1242EFD5C00D62E6E /* Playground.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Playground.js; sourceTree = "<group>"; };
 		10B110B2242EFD5C00D62E6E /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 		10B110AE242EFD5C00D62E6E /* src */ = {
 			isa = PBXGroup;
 			children = (
-				10B110AF242EFD5C00D62E6E /* build.js */,
 				10B110B0242EFD5C00D62E6E /* Home.js */,
 				10B110B1242EFD5C00D62E6E /* Playground.js */,
 				10B110B2242EFD5C00D62E6E /* bugPatch.js */,
@@ -262,7 +259,6 @@
 				10B110B6242EFD5D00D62E6E /* Home.js in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
 				10B110B8242EFD5D00D62E6E /* bugPatch.js in Resources */,
-				10B110B5242EFD5D00D62E6E /* build.js in Resources */,
 				10B110BA242EFD5D00D62E6E /* Demo.js in Resources */,
 				10B110B7242EFD5D00D62E6E /* Playground.js in Resources */,
 				10B110B9242EFD5D00D62E6E /* main.js in Resources */,
@@ -287,7 +283,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		10B102A5242E0A5300D62E6E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

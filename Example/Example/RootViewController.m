@@ -58,8 +58,9 @@
     NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:self.jsFileName];
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+    if (jsCode.length) {
+        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+    }
     
     [self loadJSCode];
     

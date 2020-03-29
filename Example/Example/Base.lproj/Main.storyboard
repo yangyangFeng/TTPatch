@@ -35,7 +35,7 @@
                                         <rect key="frame" x="0.0" y="158" width="375" height="149.5"/>
                                         <color key="backgroundColor" red="0.34852197159999998" green="0.66666668650000005" blue="0.35849633930000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
-                                        <state key="normal" title="Open JSPlayground">
+                                        <state key="normal" title="基础用法模板">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <connections>
@@ -47,7 +47,7 @@
                                         <color key="backgroundColor" red="1" green="0.79995009027669961" blue="0.54570452733078378" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                         <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <state key="normal" title="TTPathSystem Debug"/>
+                                        <state key="normal" title="实际场景实例"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="push" id="VbW-av-qAX"/>
                                         </connections>

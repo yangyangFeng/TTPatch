@@ -1,13 +1,37 @@
+/**
+ * 引入UI组件,不引入无法直接使用
+ */ 
 _import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
-
-
+/**
+ *  @params:1.要替换的Class名,`:`标识继承关系
+ *  @params:2.声明实例方法
+ *  @params:3.声明静态方法
+ *  声明Class,如无需在Oc中动态创建,可不设置父类,直接在js中创建类
+ *  声明Class,如Native不存在,则动态创建Class
+ */
 defineClass('TTPlaygroundController:UIViewController', {
-
+    /**
+	 * 添加属性,自动生成`setter`/`getter`方法,取值和赋值必须使用`setter`/`getter`方法.
+	 */ 
 	name: property(),
+	/**
+	 * 声明实例方法,如已存在则替换原有方法,如Native不存在,直接在js中添加方法实现
+	 */ 
 	viewDidLoad:function () {
-
-	},
+		/**
+		 * super 使用
+		 */
+		Super().viewDidLoad();
+		/**
+		 * self 使用
+		 */ 
+		self.loadJSCode();
+	}
+	/**
+	 * 方法与方法之间 使用 , 分割
+	 */
+	,
 	loadJSCode: function () {
 		// Super().testSuper();
 		// self.testSuper();
@@ -87,10 +111,6 @@ defineClass('TTPlaygroundController:UIViewController', {
 			Utils.log('--------多参数测试---------')
 		}
 		);
-	},
-	params1_params2_params3_params4_params5_params6_params7_: function (params1, params2, params3, params4, params5, params6, params7) {
-		Utils.log('--------多参数测试---------')
-		Utils.log(params1, params2, params3, params4, params5, params6, params7)
 	}
 }, {
 	//静态方法

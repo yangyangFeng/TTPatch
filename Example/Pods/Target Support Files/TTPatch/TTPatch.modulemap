@@ -1,0 +1,6 @@
+framework module TTPatch {
+  umbrella header "TTPatch-umbrella.h"
+
+  export *
+  module * { export * }
+}
