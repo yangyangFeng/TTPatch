@@ -11,7 +11,7 @@
 
 
 
-## 1. 功能列表
+## 1. 功能列表 
 
 |功能特性|备注限制|
 |-|-|
@@ -20,8 +20,19 @@
 |**支持添加属性**                     |为已存在的`class`添加属性|
 |**支持基础数据类型**                   |非id类型,如`int`,`bool`均已支持|
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
-
+|**实现协议**          | 2020年04月01日新增|
 ---------------------------------------------------
+
+
+## 2. 安装
+
+
+### CocoaPods `pod 0.3.0`
+
+1. 在 Podfile 中添加  `pod 'TTPatch'`。
+2. 执行 `pod install` 或 `pod update`。
+3. 导入 "TTPatch.h"
+
 
 **演示项目**:Example.xcodeproj 
 #### 运行效果图
@@ -37,12 +48,5 @@
 ![重启后加载已下发补丁.gif](https://i.postimg.cc/7PT1pdCt/demo4.gif)
 
 
-## 2. 安装
 
-
-### CocoaPods
-
-1. 在 Podfile 中添加  `pod 'TTPatch'`。
-2. 执行 `pod install` 或 `pod update`。
-3. 导入 "TTPatch.h"
 
