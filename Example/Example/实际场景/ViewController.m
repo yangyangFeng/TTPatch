@@ -11,13 +11,12 @@
 
 #import "TTPatch.h"
 #import "TTPatchUtils.h"
-#import "TTView.h"
-#import "TTTableView.h"
+
 #import "SGDirWatchdog.h"
 #define guard(condfion) if(condfion){}
-@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface ViewController ()
 
-@property(nonatomic,strong)TTTableView *tableview;
+@property(nonatomic,strong)UITableView *tableview;
 @property(nonatomic,strong)NSMutableArray *watchDogs;
 @property(nonatomic,strong)UITableViewCell *cell;
 -(void)params1:(NSString*)params1 params2:(int)params2 params3:(int)params3 params4:(int)params4 params5:(int)params5 params6:(int)params6 params7:(int)params7;
@@ -40,6 +39,7 @@
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"bugfix"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self presentViewController:_alert animated:YES completion:nil];
+
 }
 
 -(NSString *)jsFileName{
@@ -48,7 +48,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+        [self conformsToProtocol:nil];
+        if ([self conformsToProtocol:@protocol(UITableViewDelegate)]) {
+            NSLog(@"1");
+        }
+        else
+        {
+            NSLog(@"2");
+        }
+    //    <UITableViewDelegate,UITableViewDataSource>
 }
 
 @end

@@ -1,4 +1,4 @@
-_import('UIView,UILabel,UIImage,UIButton,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,TTTableView,UIScreen,UIImageView,UIScrollView,WKWebView,NSURLRequest,NSURL,UIApplication,GitHomeViewController')
+_import('UIView,UILabel,UIImage,UIButton,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,UIScrollView,WKWebView,NSURLRequest,NSURL,UIApplication,GitHomeViewController')
 
 defineClass('HomeViewController:UIViewController',{
 	scrollView:property(),

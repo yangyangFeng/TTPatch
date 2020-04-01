@@ -63,9 +63,6 @@
     }
     
     [self loadJSCode];
-    
-    
-    
 }
 
 - (void)watchFolder:(NSString *)folderPath mainScriptPath:(NSString *)mainScriptPath

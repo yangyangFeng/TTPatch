@@ -1050,10 +1050,29 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
                 TTLog(@"%@",msg);
                 break;
         }
-//        TTLog(@"🍎🍎🍎🍎🍎🍎🍎-------------->%@",msg);
+
     };
     self[@"MessageQueue_oc_define"] = ^(NSString * interface){
-        NSArray * classAndSuper = [interface componentsSeparatedByString:@":"];
+        NSArray * protocols;
+        NSArray * classAndSuper;
+        if ([interface containsString:@"<"]) {
+            NSArray *protocolAndClass = [interface componentsSeparatedByString:@"<"];
+            NSString *protocolString = [protocolAndClass lastObject];
+            protocolString = [protocolString stringByReplacingOccurrencesOfString:@">" withString:@""];
+            protocols = [protocolString componentsSeparatedByString:@","];
+            classAndSuper = [[protocolAndClass firstObject] componentsSeparatedByString:@":"];
+        }else{
+            classAndSuper = [interface componentsSeparatedByString:@":"];
+        }
+         
+        for (NSString *aProtocol in protocols) {
+            if (class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
+                TTLog(@"%@ protocol add Success !!",aProtocol);
+            }else{
+                TTLog_Error(@"%@ protocol add failure !!",aProtocol);
+            }
+        }
+        
         return @{@"self":[classAndSuper firstObject],
                  @"super":[classAndSuper lastObject]
                  };

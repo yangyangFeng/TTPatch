@@ -73,7 +73,7 @@ static TTPatch *instance = nil;
 
 - (void)runMainJS{
     NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSString *path = [myBundle pathForResource:@"TTPatch" ofType:@"js"];
+    NSString *path = [myBundle pathForResource:@"TTPatch.js" ofType:nil];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
     [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
 }

@@ -16,9 +16,13 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // 初始化SDK
     [TTPatch initSDK];
     
+    /**
+     * 加载离线的热修复补丁
+     * 这里 `rootPath` 为项目根目录,如果通过手机运行 ,需要修改为bundle资源访问, 否则无法访问电脑资源,页面显示空白
+     */
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bugfix"]) {
         NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
         NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
