@@ -24,10 +24,7 @@
 
 @implementation ViewController
 - (IBAction)loadBugFixPatch:(id)sender {
-    NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
-    NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:@"bugPatch.js"];
-    
+    NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     
     [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugPatch.js"]];

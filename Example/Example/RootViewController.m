@@ -10,7 +10,7 @@
 #import "SGDirWatchdog.h"
 #import "TTPatch.h"
 #import "TTPatchUtils.h"
-
+#import "TTPatchHotRefrshTool.h"
 @interface RootViewController ()
 @property(nonatomic,strong)SGDirWatchdog *watchDog;
 @end
@@ -38,7 +38,10 @@
 - (void)updateResource:(void(^)(void))callback
 {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://10.72.148.19:8888/%@",self.jsFileName]]];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
+                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           self.jsFileName]]];
     if (!self.jsFileName.length) {
         return;
     }

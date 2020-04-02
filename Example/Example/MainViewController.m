@@ -8,6 +8,7 @@
 
 #import "MainViewController.h"
 #import "TTPatch.h"
+#import "TTPatchHotRefrshTool.h"
 @interface MainViewController ()
 
 @end
@@ -20,7 +21,10 @@
 - (void)updateResource:(void(^)(void))callback
 {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://10.72.148.19:8888/%@",@"hotfixPatch.js"]]];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
+                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           self.jsFileName]]];
 //    if (!self.jsFileName.length) {
 //        return;
 //    }

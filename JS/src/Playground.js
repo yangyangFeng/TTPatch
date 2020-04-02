@@ -51,7 +51,7 @@ defineClass('TTPlaygroundController:UIViewController', {
         label.setFont_(UIFont.systemFontOfSize_(18));
         label.setTextColor_(UIColor.blackColor());
         label.setFrame_(new TTReact(10, 64+20, self.view().bounds().size.width-20, 80));
-		label.setText_("---2---本页面为Native声明创建的空页面\n修改 Playground.js 实时查看修改效果");
+		label.setText_("---1---本页面为Native声明创建的空页面\n修改 Playground.js 实时查看修改效果");
 		label.setNumberOfLines_(0);
 		self.view().addSubview_(label);
 
@@ -61,7 +61,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			let witdh = react.size.width;
 			let view = UIButton.buttonWithType_(0);
 			view.setFrame_(react);
-			//greenColor blackColor blueColor
+			//systemGreenColor blackColor blueColor
 			view.setBackgroundColor_(UIColor.systemGreenColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
@@ -102,13 +102,6 @@ defineClass('TTPlaygroundController:UIViewController', {
 		let  str = self.name();
 		btn.setTitle_forState_(str, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
-		
-		self.test();
-		// self.jsInvocationOcWithBlock_(null);
-		self.jsInvocationOcWithBlock_(block(""),function(){
-			Utils.log('--------多参数测试---------')
-		}
-		);
 	}
 }, {
 	//静态方法
