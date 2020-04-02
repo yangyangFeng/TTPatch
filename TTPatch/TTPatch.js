@@ -334,7 +334,7 @@ class TTEdgeInsets {
 	let pv__import = function (clsName) {
 		if (!global[clsName]) {
 			global[clsName] = new JSObject(clsName);
-			Utils.log_info('import：' + clsName);
+			Utils.log('import：' + clsName);
 		}
 		return global[clsName]
 	};
@@ -438,7 +438,7 @@ class TTEdgeInsets {
 			}
 		}
 		let obj = new Class_obj(className, superClassName, methodList, classMethods, property_list);
-		Utils.log_info('register: [ ' + className+' ]');
+		Utils.log('register: [ ' + className+' ]');
 		CLASS_MAP[obj.__className] = obj;
 		pv__import(className);
 		return obj;

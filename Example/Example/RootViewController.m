@@ -22,16 +22,41 @@
 }
 
 -(void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     NSLog(@"----");
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self initJSContxtPath];
-    [self watch];
-    [self loadJSCode];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTPatch-Refresh" object:nil];
+}
 
+- (void)refresh{
+    
+}
+
+- (void)updateResource:(void(^)(void))callback
+{
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://10.72.148.19:8888/%@",self.jsFileName]]];
+    if (!self.jsFileName.length) {
+        return;
+    }
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (data && (error == nil)) {
+            // 网络访问成功
+            NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+            if (callback) {
+                callback();
+            }
+        } else {
+            // 网络访问失败
+            NSLog(@"error=%@",error);
+        }
+    }];
+    [dataTask resume];
 }
 
 - (void)initJSContxtPath{

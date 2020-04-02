@@ -1,9 +1,30 @@
 _import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,TaoBaoHome')
 
 defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewDataSource>',{
-    data:property(),
-	loadJSCode:function(){
-		let dataSource = ['加载纯JS模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
+	data:property(),
+	viewDidLoad:function () {
+		/**
+		 * super 使用
+		 */
+		Super().viewDidLoad();
+		/**
+		 * self 使用
+		 */ 
+		self.refresh();
+	},
+	refresh: function () {
+		// Super().testSuper();
+		// self.testSuper();
+		self.cleanSubviews();
+		self.addSomeTestView();
+	},
+	cleanSubviews: function () {
+		self.view().subviews().forEach(subview => {
+			subview.removeFromSuperview()
+		})
+	},
+	addSomeTestView:function(){
+		let dataSource = ['[2]加载纯JS模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
         self.setData_(dataSource);
 		let data = self.data();
 		let tableview = self.getTableview();

@@ -48,15 +48,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        [self conformsToProtocol:nil];
-        if ([self conformsToProtocol:@protocol(UITableViewDelegate)]) {
-            NSLog(@"1");
-        }
-        else
-        {
-            NSLog(@"2");
-        }
-    //    <UITableViewDelegate,UITableViewDataSource>
+
 }
 
 @end

@@ -1066,11 +1066,7 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
         }
          
         for (NSString *aProtocol in protocols) {
-            if (class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
-                TTLog(@"%@ protocol add Success !!",aProtocol);
-            }else{
-                TTLog_Error(@"%@ protocol add failure !!",aProtocol);
-            }
+            class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol));
         }
         
         return @{@"self":[classAndSuper firstObject],

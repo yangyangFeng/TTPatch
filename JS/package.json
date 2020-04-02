@@ -4,15 +4,21 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "commander": "^5.0.0",
     "escodegen": "^1.11.1",
     "esprima": "^4.0.1",
-    "estraverse": "^4.2.0"
+    "estraverse": "^4.2.0",
+    "express": "^4.17.1",
+    "socket.io": "^2.3.0",
+    "supervisor": "^0.12.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5"
   },
   "scripts": {
-    "build": "npx node build.js"
+    "build": "npx node app.js -r 2 -p 0 -o outputs -w src",
+    "package": "npx node app.js -r 2 -p 1 -o outputs -w src",
+    "server": "npx node app.js -r 1"
   },
   "keywords": [],
   "author": "bty",

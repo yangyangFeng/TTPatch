@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface RootViewController : UIViewController
 - (void)loadJSCode;
 - (NSString *)jsFileName;
+- (void)updateResource:(void(^)(void))callback;
+- (void)refresh;
 @end
 
 NS_ASSUME_NONNULL_END

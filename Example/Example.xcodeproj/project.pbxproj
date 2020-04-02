@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -32,11 +32,12 @@
 		102D64CE2434794A00EED7AE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64C22434794A00EED7AE /* ViewController.m */; };
 		102D64CF2434794A00EED7AE /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64C32434794A00EED7AE /* BlockViewController.m */; };
 		102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64CC2434794A00EED7AE /* TTPlaygroundController.m */; };
-		102D64EC2434875E00EED7AE /* Home.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64E72434875E00EED7AE /* Home.js */; };
-		102D64ED2434875E00EED7AE /* Playground.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64E82434875E00EED7AE /* Playground.js */; };
-		102D64EE2434875E00EED7AE /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64E92434875E00EED7AE /* bugPatch.js */; };
-		102D64EF2434875E00EED7AE /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64EA2434875E00EED7AE /* main.js */; };
-		102D64F02434875E00EED7AE /* Demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64EB2434875E00EED7AE /* Demo.js */; };
+		102D64FE2434D25300EED7AE /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 102D64F42434D25300EED7AE /* TTPatch.js */; };
+		102D64FF2434D25300EED7AE /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64F52434D25300EED7AE /* TTPatchModels.m */; };
+		102D65002434D25300EED7AE /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64F82434D25300EED7AE /* TTContext.m */; };
+		102D65012434D25300EED7AE /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64F92434D25300EED7AE /* TTPatch.m */; };
+		102D65022434D25300EED7AE /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64FA2434D25300EED7AE /* TTPatchMethodCleaner.m */; };
+		102D65032434D25300EED7AE /* TTPatchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64FD2434D25300EED7AE /* TTPatchUtils.m */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -62,11 +63,18 @@
 		102D64C52434794A00EED7AE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		102D64CC2434794A00EED7AE /* TTPlaygroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPlaygroundController.m; sourceTree = "<group>"; };
 		102D64CD2434794A00EED7AE /* TTPlaygroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPlaygroundController.h; sourceTree = "<group>"; };
-		102D64E72434875E00EED7AE /* Home.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Home.js; sourceTree = "<group>"; };
-		102D64E82434875E00EED7AE /* Playground.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Playground.js; sourceTree = "<group>"; };
-		102D64E92434875E00EED7AE /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
-		102D64EA2434875E00EED7AE /* main.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
-		102D64EB2434875E00EED7AE /* Demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Demo.js; sourceTree = "<group>"; };
+		102D64F22434D25300EED7AE /* TTPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatch.h; sourceTree = "<group>"; };
+		102D64F32434D25300EED7AE /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
+		102D64F42434D25300EED7AE /* TTPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TTPatch.js; sourceTree = "<group>"; };
+		102D64F52434D25300EED7AE /* TTPatchModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchModels.m; sourceTree = "<group>"; };
+		102D64F62434D25300EED7AE /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchMethodCleaner.h; sourceTree = "<group>"; };
+		102D64F72434D25300EED7AE /* TTPatchUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchUtils.h; sourceTree = "<group>"; };
+		102D64F82434D25300EED7AE /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
+		102D64F92434D25300EED7AE /* TTPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatch.m; sourceTree = "<group>"; };
+		102D64FA2434D25300EED7AE /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchMethodCleaner.m; sourceTree = "<group>"; };
+		102D64FB2434D25300EED7AE /* TTPatchModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchModels.h; sourceTree = "<group>"; };
+		102D64FC2434D25300EED7AE /* TTPatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchKit.h; sourceTree = "<group>"; };
+		102D64FD2434D25300EED7AE /* TTPatchUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchUtils.m; sourceTree = "<group>"; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
 		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,6 +115,7 @@
 		1014C25C22CB16C000132618 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				102D64F12434D25300EED7AE /* TTPatch */,
 				102D64E62434875E00EED7AE /* outputs */,
 				102D64CB2434794A00EED7AE /* 基础用法模板 */,
 				102D64C12434794A00EED7AE /* 实际场景 */,
@@ -160,14 +169,29 @@
 		102D64E62434875E00EED7AE /* outputs */ = {
 			isa = PBXGroup;
 			children = (
-				102D64E72434875E00EED7AE /* Home.js */,
-				102D64E82434875E00EED7AE /* Playground.js */,
-				102D64E92434875E00EED7AE /* bugPatch.js */,
-				102D64EA2434875E00EED7AE /* main.js */,
-				102D64EB2434875E00EED7AE /* Demo.js */,
 			);
 			name = outputs;
 			path = ../../JS/outputs;
+			sourceTree = "<group>";
+		};
+		102D64F12434D25300EED7AE /* TTPatch */ = {
+			isa = PBXGroup;
+			children = (
+				102D64F22434D25300EED7AE /* TTPatch.h */,
+				102D64F32434D25300EED7AE /* TTContext.h */,
+				102D64F42434D25300EED7AE /* TTPatch.js */,
+				102D64F52434D25300EED7AE /* TTPatchModels.m */,
+				102D64F62434D25300EED7AE /* TTPatchMethodCleaner.h */,
+				102D64F72434D25300EED7AE /* TTPatchUtils.h */,
+				102D64F82434D25300EED7AE /* TTContext.m */,
+				102D64F92434D25300EED7AE /* TTPatch.m */,
+				102D64FA2434D25300EED7AE /* TTPatchMethodCleaner.m */,
+				102D64FB2434D25300EED7AE /* TTPatchModels.h */,
+				102D64FC2434D25300EED7AE /* TTPatchKit.h */,
+				102D64FD2434D25300EED7AE /* TTPatchUtils.m */,
+			);
+			name = TTPatch;
+			path = ../../TTPatch;
 			sourceTree = "<group>";
 		};
 		10B102AA242E28EE00D62E6E /* bugfix */ = {
@@ -262,12 +286,8 @@
 			files = (
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
 				1014C26722CB16C400132618 /* Assets.xcassets in Resources */,
-				102D64EC2434875E00EED7AE /* Home.js in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
-				102D64EE2434875E00EED7AE /* bugPatch.js in Resources */,
-				102D64F02434875E00EED7AE /* Demo.js in Resources */,
-				102D64ED2434875E00EED7AE /* Playground.js in Resources */,
-				102D64EF2434875E00EED7AE /* main.js in Resources */,
+				102D64FE2434D25300EED7AE /* TTPatch.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,7 +309,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		10B102A5242E0A5300D62E6E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -358,11 +379,16 @@
 				1014C26D22CB16C400132618 /* main.m in Sources */,
 				102D64CF2434794A00EED7AE /* BlockViewController.m in Sources */,
 				10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */,
+				102D65012434D25300EED7AE /* TTPatch.m in Sources */,
+				102D64FF2434D25300EED7AE /* TTPatchModels.m in Sources */,
 				102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
+				102D65022434D25300EED7AE /* TTPatchMethodCleaner.m in Sources */,
 				1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */,
 				1014C25F22CB16C000132618 /* AppDelegate.m in Sources */,
+				102D65032434D25300EED7AE /* TTPatchUtils.m in Sources */,
+				102D65002434D25300EED7AE /* TTContext.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,8 +533,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VGUJ27JX8N;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -529,8 +556,9 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = VGUJ27JX8N;
 				INFOPLIST_FILE = Example/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
