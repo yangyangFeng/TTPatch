@@ -1,12 +1,10 @@
 # TTPatch
-热修复、热更新、JS代码动态下发、动态创建类
+*热修复、热更新、JS代码动态下发、动态创建类*
 
 
 [1. 使用文档](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md)
 
 [2. 基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
-
-
 
 
 
@@ -49,5 +47,5 @@
 ![重启后加载已下发补丁.gif](https://i.postimg.cc/7PT1pdCt/demo4.gif)
 
 
-
+> 您的喜欢就是我更新的动力
 
