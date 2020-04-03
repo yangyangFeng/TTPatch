@@ -1,12 +1,10 @@
 # TTPatch
-热修复、热更新、JS代码动态下发、动态创建类
+*热修复、热更新、JS代码动态下发、动态创建类*
 
 
 [1. 使用文档](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md)
 
 [2. 基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
-
-
 
 
 
@@ -20,7 +18,8 @@
 |**支持添加属性**                     |为已存在的`class`添加属性|
 |**支持基础数据类型**                   |非id类型,如`int`,`bool`均已支持|
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
-|**实现协议**          | 2020年04月01日新增|
+|**实现协议**                        | 2020年04月01日新增|
+|**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md#%E7%AE%80%E5%8D%95%E4%BD%93%E9%AA%8C-ii)|
 ---------------------------------------------------
 
 
@@ -48,5 +47,5 @@
 ![重启后加载已下发补丁.gif](https://i.postimg.cc/7PT1pdCt/demo4.gif)
 
 
-
+> 您的喜欢就是我更新的动力
 
