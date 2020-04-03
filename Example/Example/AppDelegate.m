@@ -57,6 +57,12 @@
 
 - (void)reviceRefresh:(id)msg{
     [self updateResource:msg callbacl:nil];
+//    UINavigationController *nav = (UINavigationController*)self.window.rootViewController;
+//    for (UIViewController * VC in nav.viewControllers) {
+//        if ([VC respondsToSelector:@selector(isJsCode)] &&[VC performSelector:@selector(isJsCode) withObject:nil]) {
+//            [VC performSelector:@selector(refresh)];
+//        }
+//    }
 }
 
 - (void)updateResource:(NSString *)filename callbacl:(void(^)(void))callback

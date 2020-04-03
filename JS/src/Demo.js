@@ -24,7 +24,7 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 		})
 	},
 	addSomeTestView:function(){
-		let dataSource = ['加载纯JS模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
+		let dataSource = ['加载纯J1S模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
         self.setData_(dataSource);
 		let data = self.data();
 		let tableview = self.getTableview();
@@ -95,12 +95,25 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 });
 
 //动态生成模块
-defineClass('JSRootViewController:UIViewController',{
+defineClass('JSRootViewController:RootViewController',{
 	dealloc:function () {
 		Utils.log('TestViewController->已释放');
 	},
 	viewDidLoad:function () {
 		Super().viewDidLoad();
+		self.addSomeTestView();
+	},
+	refresh: function () {
+		self.cleanSubviews();
+		self.addSomeTestView();
+		Utils.log_error('refresh');
+	},
+	cleanSubviews: function () {
+		self.view().subviews().forEach(subview => {
+			subview.removeFromSuperview();
+		})
+	},
+	addSomeTestView:function(){
 		self.setTitle_('动态下发模块');
 		self.view().setBackgroundColor_(UIColor.whiteColor());
 		let screenWidth = UIScreen.mainScreen().bounds().size.width;
@@ -138,6 +151,24 @@ defineClass('BlockViewController:UITableViewController',{
 	},
 	viewDidLoad:function () {
 		Super().viewDidLoad();
+		self.addSomeTestView()
+	},
+	refresh: function () {
+		// Super().testSuper();
+		// self.testSuper();
+		self.cleanSubviews();
+		self.addSomeTestView();
+	},
+	cleanSubviews: function () {
+		self.view().subviews().forEach(subview => {
+			if (subview != 'UITableView'){
+				subview.removeFromSuperview();
+			}else{
+				self.tableView().reloadData();
+			}
+		})
+	},
+	addSomeTestView:function(){
 		self.setTitle_('动态下发模块');
 		self.view().setBackgroundColor_(UIColor.whiteColor());
 		let screenWidth = UIScreen.mainScreen().bounds().size.width;

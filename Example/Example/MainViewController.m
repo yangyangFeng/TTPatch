@@ -25,9 +25,6 @@
                                                                            [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
                                                                            [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
                                                                            self.jsFileName]]];
-//    if (!self.jsFileName.length) {
-//        return;
-//    }
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data && (error == nil)) {
             // 网络访问成功

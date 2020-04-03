@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "RootTableViewController.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface BlockViewController : UITableViewController
+@interface BlockViewController : RootTableViewController
 
 @end
 

@@ -871,7 +871,7 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
                     }else{
                         __unsafe_unretained id tempArg;
                         [invocation getArgument:&tempArg atIndex:(i)];
-                        [tempArguments addObject:tempArg];
+                        [tempArguments addObject:tempArg==nil?[NSNull null]:tempArg];
                     }
                 }break;
                   case _C_STRUCT_B:{
