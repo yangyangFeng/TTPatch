@@ -36,15 +36,15 @@
 **演示项目**:Example.xcodeproj 
 #### 运行效果图
 
-![效果图.gif](http://code.cocoachina.com/uploads/attachments/20191030/1000267/1ef16348536be6c1a901ced275d8d387.gif)
+![效果图.gif](https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/cc8621a9531f405a65118f2a4fe1bfc1_demo1.gif)
 
 
 #### 在线下发补丁执行
-![在线下发补丁执行.gif](https://i.postimg.cc/pd2Pzwj0/demo1.gif)
+![在线下发补丁执行.gif](https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/f5a7fff60c8cf40308cca5d783981204_demo2.gif)
 
 
 #### 重启后加载已下发补丁
-![重启后加载已下发补丁.gif](https://i.postimg.cc/7PT1pdCt/demo4.gif)
+![重启后加载已下发补丁.gif](https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/cc1be957bfb4597aefd42aa3c579f30b_demo3.gif)
 
 
 > 您的喜欢就是我更新的动力
