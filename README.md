@@ -99,7 +99,7 @@ superView.addSubview_(view)
 ```
 
 #### Property
-声明和静态方法平级
+声明和实例方法平级
 ```js
 data:property(),
 ```
