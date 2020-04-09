@@ -47,6 +47,7 @@
 ![重启后加载已下发补丁.gif](https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/cc1be957bfb4597aefd42aa3c579f30b_demo3.gif)
 
 ## 3. 基础用法
+[我要参照TTPatch-JS模板](https://github.com/yangyangFeng/TTPatch/wiki/TTPatch-JS%E4%BD%BF%E7%94%A8%E6%A8%A1%E6%9D%BF)
 ### 0. build
 `TTPatch`的使用流程
 1. 源文件编写(伪`js`代码,不可直接执行).
