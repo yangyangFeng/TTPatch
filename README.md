@@ -46,7 +46,372 @@
 #### 重启后加载已下发补丁
 ![重启后加载已下发补丁.gif](https://wos2.58cdn.com.cn/DeFazYxWvDti/frsupload/cc1be957bfb4597aefd42aa3c579f30b_demo3.gif)
 
-## 3. 使用文档
+## 3. 基础用法
+### 0. build
+`TTPatch`的使用流程
+1. 源文件编写(伪`js`代码,不可直接执行).
+2. 执行 `build.js`脚本
+3. 通过`build.js`语法转义,变成`js`可执行代码.输出路径./outputs(具体要下发到app的js文件)
+
+
+**⚠️`./outputs目录`不要修改,每次执行过`build.js`后会替换`./outputs`目录**
+### 1. import
+在使用Objective-C类之前需要调用 `_import('className’)` :
+
+```js
+_import('UIView')
+var view = UIView.alloc().init()
+```
+
+可以用逗号 `,` 分隔，一次性导入多个类:
+
+```js
+_import('UIView, UIColor')
+var view = UIView.alloc().init()
+var red = UIColor.redColor()
+```
+
+### 2. 调用OC方法
+
+#### 调用类方法
+
+```js
+var redColor = UIColor.redColor();
+```
+
+#### 调用实例方法
+
+```js
+var view = UIView.alloc().init();
+view.setNeedsLayout();
+```
+
+#### 参数传递
+跟在OC一样传递参数:
+
+这里要注意下有参数的情况,参数前需要加`_`
+`Obj-C`方法中的`:`和js中的`_`是一一对应的,如果有遗漏会error
+```
+var view = UIView.alloc().init();
+var superView = UIView.alloc().init()
+superView.addSubview_(view)
+```
+
+#### Property
+声明和静态方法平级
+```js
+data:property(),
+```
+获取/修改 要通过 getter / setter 方法，获取时记得加 `()`:
+
+```js
+view.setBackgroundColor_(redColor);
+var bgColor = view.backgroundColor();
+```
+
+#### 方法名转换
+
+多参数方法名使用 `_` 分隔：
+
+```js
+var indexPath = require('NSIndexPath').indexPathForRow_inSection_(0, 1);
+```
+
+若原 OC 方法名里包含下划线 `_`，在 JS 使用双下划线 `__` 代替：
+
+```js
+// Obj-C: [JPObject _privateMethod];
+JPObject.__privateMethod()
+```
+### 3. defineClass
+声明Class,实现协议Protocol
+#### API
+```
+// class:superClass<protocolA,protocolB,...>
+defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewDataSource>',
+{
+    instanceMethods...
+},
+{
+    classMethods...
+});
+```
+
+@param `classDeclaration`: 字符串: `类名:父类名<Protocol>  `
+@param `instanceMethods`: 要添加或覆盖的实例方法  
+@param `classMethods`: 要添加或覆盖的类方法  
+
+#### 覆盖方法
+
+1.在 defineClass 里定义 OC 已存在的方法即可覆盖，方法名规则与调用规则一样，使用 `_` 分隔:
+
+```objc
+// OC
+@implementation JPTableViewController
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
+@end
+```
+```js
+// JS
+defineClass("JPTableViewController", {
+  tableView_didSelectRowAtIndexPath: function(tableView, indexPath) {
+    ...
+  },
+})
+```
+
+2.使用双下划线 `__` 代表原OC方法名里的下划线 `_` :
+
+```objc
+// OC
+@implementation JPTableViewController
+- (NSArray *) _dataSource {
+}
+@end
+```
+
+```js
+// JS
+defineClass("JPTableViewController", {
+  __dataSource: function() {
+  },
+})
+```
+
+3.在方法名前加 `tt` 即可调用未覆盖前的 OC 原方法:
+
+```objc
+// OC
+@implementation JPTableViewController
+- (void)viewDidLoad {
+}
+@end
+```
+
+```js
+// JS
+defineClass("JPTableViewController", {
+  viewDidLoad: function() {
+     self.ttviewDidLoad();
+  },
+})
+```
+
+#### 覆盖类方法
+
+`defineClass()` 第三个参数就是要添加或覆盖的类方法，规则与上述覆盖实例方法一致：
+
+```objc
+// OC
+@implementation JPTestObject
++ (void)shareInstance
+{
+}
+@end
+```
+```js
+// JS
+defineClass("JPTableViewController", {
+  //实例方法
+}, {
+  //类方法
+  shareInstance: function() {
+    ...
+  },
+})
+```
+
+#### 覆盖 Category 方法
+
+覆盖 Category 方法与覆盖普通方法一样：
+
+```objc
+@implementation UIView (custom)
+- (void)methodA {
+}
++ (void)clsMethodB {
+}
+@end
+```
+```js
+defineClass('UIView', {
+  methodA: function() {
+  }
+}, {
+  clsMethodB: function() {
+  }
+});
+```
+
+#### Super
+
+使用 `Super()` 接口代表 super 关键字，调用 super 方法:
+
+```js
+// JS
+defineClass("JPTableViewController", {
+  viewDidLoad: function() {
+     Super().viewDidLoad();
+  }
+})
+```
+
+#### Property
+##### 获取/修改 OC 定义的 Property
+用调用 getter / setter 的方式获取/修改已在 OC 定义的 Property:
+
+##### 动态新增 Property
+
+
+可以在 name:property() 为属性
+
+```js
+defineClass("JPTableViewController", {
+  //添加属性
+  name:property()
+  init: function() {
+     self = Super().init()
+     self.setData_(["a", "b"])     //添加新的 Property (id data)
+     self.setTotalCount_(2)
+     return self
+  },
+  viewDidLoad: function() {
+     var data = self.data()     //获取 Property 值
+     var totalCount = self.totalCount()
+  },
+})
+```
+
+#### 私有成员变量
+
+使用 `valueForKey()` 和 `setValue_forKey()` 获取/修改私有成员变量:
+
+```objc
+// OC
+@implementation JPTableViewController {
+     NSArray *_data;
+}
+@end
+```
+```js
+// JS
+defineClass("JPTableViewController", {
+  viewDidLoad: function() {
+     var data = self.valueForKey_("_data")     //get member variables
+     self.setValue_forKey_(["Patch"], "_data")     //set member variables
+  },
+})
+```
+
+#### 添加新方法
+
+可以给一个类随意添加 OC 未定义的方法，但所有的参数类型都是 `id`:
+
+```objc
+// OC
+@implementation JPTableViewController
+- (void)viewDidLoad
+{
+     NSString* data = [self dataAtIndex:@(1)];
+     NSLog(@"%@", data);      //output: Patch
+}
+@end
+```
+```js
+// JS
+var data = ["JS", "Patch"]
+defineClass("JPTableViewController", {
+  dataAtIndex: function(idx) {
+     return idx < data.length ? data[idx]: ""
+  }
+})
+```
+
+
+### 4. 特殊类型
+
+#### Struct
+
+支持 CGRect / CGPoint / CGSize / UIEdgeInsets 这四个 struct 类型，用 JS 对象表示:
+
+```objc
+// Obj-C
+UIView *view = [[UIView alloc] initWithFrame:CGRectMake(20, 20, 100, 100)];
+[view setCenter:CGPointMake(10,10)];
+[view sizeThatFits:CGSizeMake(100, 100)];
+
+
+
+```
+
+```js
+// JS
+var view = UIView.alloc().initWithFrame(new TTReact(x:20, y:20, width:100, height:100))
+view.setCenter_(new TTPoint(x: 10, y: 10))
+view.sizeThatFits_(new TTSize(width: 100, height:100))
+
+
+```
+
+
+#### Selector
+在JS使用字符串代表 Selector:
+
+```objc
+//Obj-C
+[self performSelector:@selector(viewWillAppear:) withObject:@(YES)];
+```
+
+```js
+//JS
+self.performSelector_withObject_("viewWillAppear:", 1)
+```
+
+
+### 5. Block
+
+#### 调用Obj-C传入的block
+```
+callBlock_:function(callback){
+    if(callback){
+        callback(10);
+    }
+},
+
+```
+#### Obj-C调用js传入block,并接受回调
+`JavaScript`的`block`传入`Obj-c`时要注意, `block`应声明方法参数及返回值类型 `,` 分割.
+返回值在第一位
+```
+runBlock:function(){
+
+    self.testCall2_(block("NSString*,NSString*"),function(arg){
+        Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
+        return '这是有返回值的哦';
+    });
+}
+
+```
+### 6. 调试
+目前支持3中级别日志
+
+`Utils.log` 只会在`debug`环境下的js中输出
+`Utils.log_info` 在js 和 xcode中输出
+`Utils.log_error` 在js 和 xcode中输出,并输出error信息
+
+log不支持多参数,只支持参数拼接
+```
+var view = UIView.alloc().init();
+var str = "test";
+var num = 1;
+Utils.log(str + num);   //直接在JS拼接字符串
+```
+
+也可以通过 Safari 的调试工具对 JS 进行断点调试，详见 [JS 断点调试](https://github.com/bang590/JSPatch/wiki/JS-%E6%96%AD%E7%82%B9%E8%B0%83%E8%AF%95)
+
+## 4. 环境配置及使用
 
 ### 简单体验 I
 
@@ -96,71 +461,8 @@
 
 > 执行`npm run package` 将`src`目录下文件打包成一个文件.(demo中使用此种方式进行演示).
 
-#### 使用模板 IV
 
-初次使用可参照模板格式进行开发
-```JavaScript
-/**
- * 引入UI组件,不引入无法直接使用
- */ 
-_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
-/**
- *  @params:1.要替换的Class名,`:`标识继承关系
- *  @params:2.声明实例方法
- *  @params:3.声明静态方法
- *  声明Class,如无需在Oc中动态创建,可不设置父类,直接在js中创建类
- *  声明Class,如Native不存在,则动态创建Class
- */
-defineClass('TTPlaygroundController:UIViewController', {
-    /**
-	 * 添加属性,自动生成`setter`/`getter`方法,取值和赋值必须使用`setter`/`getter`方法.
-	 */ 
-	name: property(),
-	/**
-	 * 声明实例方法,如已存在则替换原有方法,如Native不存在,直接在js中添加方法实现
-	 */ 
-	viewDidLoad:function () {
-	        /**
-		 * Super 使用
-		 */
-		Super().viewDidLoad();
-		/**
-		 * self 使用
-		 */ 
-		self.loadJSCode();
-	}
-	/**
-	 * 方法与方法之间 使用 , 分割
-	 */
-	,
-	loadJSCode: function () {
-  
-	},
-	/**
-	 * 调用Obj-C传入的block
-	 */
-	callBlock_:function(callback){
-		if(callback){
-		   callback(10);
-		}
-	},
-	/**
-	 * Obj-C调用js传入block,并接受回调
-	 */
-	runBlock:function(){
-		self.testCall2_(block("NSString*,NSString*"),function(arg){
-			Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
-			return '这是有返回值的哦';
-		});
-	}
-}, {
-	//静态方法
-	testAction_:function (str) {
-	}
-})
-
-```
 
 
 > 您的喜欢就是我更新的动力
