@@ -79,6 +79,9 @@
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data && (error == nil)) {
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            if (!result || !result.length) {
+                return ;
+            }
             [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:filename]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TTPatch-Refresh" object:nil];

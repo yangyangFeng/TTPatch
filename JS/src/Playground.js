@@ -1,7 +1,7 @@
 /**
  * 引入UI组件,不引入无法直接使用
  */ 
-_import('UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
+_import('ASIdentifierManager,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
 /**
  *  @params:1.要替换的Class名,`:`标识继承关系
@@ -80,7 +80,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 
 		var btn = UIButton.buttonWithType_(0);
 		btn.setBackgroundColor_(UIColor.blackColor());
-		btn.setTitle_forState_("按钮", 0);
+		btn.setTitle_forState_("UUID", 0);
 		btn.setFrame_(new TTReact(0, 600, screenWidth, 50));
 		btn.addTarget_action_forControlEvents_(self, "btnDidAction:", 1 << 6);
 		self.view().addSubview_(btn);
@@ -94,13 +94,14 @@ defineClass('TTPlaygroundController:UIViewController', {
 		}else{
 			btn.setBackgroundColor_(UIColor.systemGreenColor());
 		}
+
 	},
 	btnDidAction_: function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
-		self.setName_('按钮文字已改变');
-
+		var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
+		Utils.log_info('uuid->'+uuid.value());
 		let  str = self.name();
-		btn.setTitle_forState_(str, 0);
+		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
 	}
 }, {

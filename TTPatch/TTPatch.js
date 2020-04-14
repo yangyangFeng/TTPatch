@@ -148,6 +148,10 @@ class JSObject extends MetaObject{
 	__toOcObject() {
 		return this.__isa ? this.__isa : null;
 	}
+	//获取当前Value
+	value(){
+		return this.__toOcObject();
+	}
 }
 
 class Block extends JSObject{
@@ -298,9 +302,9 @@ class TTEdgeInsets {
 		if (jsMethod_IMP && !ttpatch__isSuperInvoke) {
 			result = jsMethod_IMP.apply(this, params ? params : null);
 		}
-		else if (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) {
+		else if (this[msg] || (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) ) {
 			jsMethod_IMP = this[msg];
-			jsMethod_IMP.apply(this, params);
+			result = jsMethod_IMP.apply(this, params);
 		}
 		else if (isInstance) {
 			result = MessageQueue.call(this.__isa, ttpatch__isSuperInvoke, isInstance,msg, params);

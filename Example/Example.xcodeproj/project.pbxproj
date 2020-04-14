@@ -37,6 +37,7 @@
 		109C08982435A6BC0021F206 /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C08952435A6BC0021F206 /* bugPatch.js */; };
 		109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C089A2435A6F50021F206 /* bugPatchOrigin.js */; };
 		10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10A3A9892445655B0051C2F7 /* hotfixPatch.js */; };
+		10A3A98F2445A2F10051C2F7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A3A98E2445A2F10051C2F7 /* AdSupport.framework */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -69,6 +70,7 @@
 		109C08952435A6BC0021F206 /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
 		109C089A2435A6F50021F206 /* bugPatchOrigin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatchOrigin.js; sourceTree = "<group>"; };
 		10A3A9892445655B0051C2F7 /* hotfixPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hotfixPatch.js; sourceTree = "<group>"; };
+		10A3A98E2445A2F10051C2F7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
 		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10A3A98F2445A2F10051C2F7 /* AdSupport.framework in Frameworks */,
 				A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -210,6 +213,7 @@
 		A6A49EC2EFCC9E65DD4B8B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				10A3A98E2445A2F10051C2F7 /* AdSupport.framework */,
 				474D1358ED147C13E1337BEA /* Pods_Example.framework */,
 			);
 			name = Frameworks;

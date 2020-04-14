@@ -16,24 +16,25 @@ var io = require('socket.io')(http,{
 const fs = require("fs");
 class TTPatchServer {
   constructor() { }
-  watch(callback) {
-    fs.watch('./.outputs', (eventType, filename) => {
-      if (filename) {
-        console.log(msg(filename));
-        io.emit(eventId,msg("refresh:"+filename)); 
+  watch(callback,path) {
+    fs.watch('./'+path+'/', (eventType, filename) => {
+      if (filename ) {
+        console.log(msg(filename+' '+ eventType));
+        io.emit(eventId,msg("refresh:"+filename));         
       }
     });
     fs.watch('./src', (eventType, filename) => {
+      console.log(msg(filename+' watch '+ eventType));
       if (filename) {
         callback();
       }
     });
   }
   
-  start() {
+  start(path) {
     console.log('----------------------------------------------------------------------------------------------\n'+msg('本地服务已启动'))
     app.get('/*', function (req, res) {
-      res.sendFile(__dirname + "/.outputs/" + req.params[0]);
+      res.sendFile(__dirname + '/'+path+'/' + req.params[0]);
       console.log(msg('read:' + req.params[0]));
     });
 

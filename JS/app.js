@@ -20,14 +20,14 @@ class APP {
         this.builder=new Build(program.package,program.output,program.work);
     }
     startLocalServer(){
-        this.server.start();
-        this.server.watch(()=>(this.build()),program.output);
+        this.server.start(program.output);
+        this.server.watch(()=>(this.build(program.output)),program.output);
     }
     say(){
 
     }
-    build(){
-        this.builder.run();
+    build(path){
+        this.builder.run(path);
     }
 }
 
