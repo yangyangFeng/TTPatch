@@ -34,9 +34,9 @@
 		102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64CC2434794A00EED7AE /* TTPlaygroundController.m */; };
 		1082CFDC2436CF5C006FE44A /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1082CFDB2436CF5C006FE44A /* RootTableViewController.m */; };
 		109C0887243593180021F206 /* TTPatchHotRefrshTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C0886243593180021F206 /* TTPatchHotRefrshTool.m */; };
-		109C08932435A5130021F206 /* hotfixPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C08922435A5130021F206 /* hotfixPatch.js */; };
 		109C08982435A6BC0021F206 /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C08952435A6BC0021F206 /* bugPatch.js */; };
 		109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C089A2435A6F50021F206 /* bugPatchOrigin.js */; };
+		10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10A3A9892445655B0051C2F7 /* hotfixPatch.js */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -66,9 +66,9 @@
 		1082CFDB2436CF5C006FE44A /* RootTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		109C0885243593180021F206 /* TTPatchHotRefrshTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPatchHotRefrshTool.h; sourceTree = "<group>"; };
 		109C0886243593180021F206 /* TTPatchHotRefrshTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchHotRefrshTool.m; sourceTree = "<group>"; };
-		109C08922435A5130021F206 /* hotfixPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hotfixPatch.js; sourceTree = "<group>"; };
 		109C08952435A6BC0021F206 /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
 		109C089A2435A6F50021F206 /* bugPatchOrigin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatchOrigin.js; sourceTree = "<group>"; };
+		10A3A9892445655B0051C2F7 /* hotfixPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hotfixPatch.js; sourceTree = "<group>"; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
 		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,8 +109,8 @@
 		1014C25C22CB16C000132618 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				10A3A9852445655B0051C2F7 /* .outputs */,
 				109C08942435A6BC0021F206 /* Resources */,
-				102D64E62434875E00EED7AE /* outputs */,
 				102D64CB2434794A00EED7AE /* 基础用法模板 */,
 				102D64C12434794A00EED7AE /* 实际场景 */,
 				1014C2B422CB1B5000132618 /* libs */,
@@ -164,15 +164,6 @@
 			path = "基础用法模板";
 			sourceTree = "<group>";
 		};
-		102D64E62434875E00EED7AE /* outputs */ = {
-			isa = PBXGroup;
-			children = (
-				109C08922435A5130021F206 /* hotfixPatch.js */,
-			);
-			name = outputs;
-			path = ../../JS/outputs;
-			sourceTree = "<group>";
-		};
 		109C08942435A6BC0021F206 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +179,14 @@
 				109C089A2435A6F50021F206 /* bugPatchOrigin.js */,
 			);
 			path = src;
+			sourceTree = "<group>";
+		};
+		10A3A9852445655B0051C2F7 /* .outputs */ = {
+			isa = PBXGroup;
+			children = (
+				10A3A9892445655B0051C2F7 /* hotfixPatch.js */,
+			);
+			path = .outputs;
 			sourceTree = "<group>";
 		};
 		10B102AA242E28EE00D62E6E /* bugfix */ = {
@@ -283,10 +282,10 @@
 			files = (
 				109C08982435A6BC0021F206 /* bugPatch.js in Resources */,
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
+				10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */,
 				109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */,
 				1014C26722CB16C400132618 /* Assets.xcassets in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
-				109C08932435A5130021F206 /* hotfixPatch.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

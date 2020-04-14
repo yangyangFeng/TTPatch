@@ -10,7 +10,6 @@
 
 
 #import "TTPatch.h"
-#import "TTPatchUtils.h"
 
 #import "SGDirWatchdog.h"
 #define guard(condfion) if(condfion){}

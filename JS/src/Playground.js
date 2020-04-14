@@ -51,7 +51,7 @@ defineClass('TTPlaygroundController:UIViewController', {
         label.setFont_(UIFont.systemFontOfSize_(18));
         label.setTextColor_(UIColor.blackColor());
         label.setFrame_(new TTReact(10, 64+20, self.view().bounds().size.width-20, 80));
-		label.setText_("---1---本页面为Native声明创建的空页面\n修改 Playground.js 实时查看修改效果");
+		label.setText_("------本页面为Native声明创建的空页面\n修改 Playground.js 实时查看修改效果");
 		label.setNumberOfLines_(0);
 		self.view().addSubview_(label);
 

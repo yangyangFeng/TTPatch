@@ -26,7 +26,7 @@
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "TTContext.h"
-#import "TTPatchUtils.h"
+#import "TTHookUtils.h"
 #import "TTPatchMethodCleaner.h"
 
 

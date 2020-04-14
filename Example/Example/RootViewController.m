@@ -9,7 +9,6 @@
 #import "RootViewController.h"
 #import "SGDirWatchdog.h"
 #import "TTPatch.h"
-#import "TTPatchUtils.h"
 #import "TTPatchHotRefrshTool.h"
 @interface RootViewController ()
 @property(nonatomic,strong)SGDirWatchdog *watchDog;

@@ -9,7 +9,6 @@
 #import "RootTableViewController.h"
 #import "SGDirWatchdog.h"
 #import "TTPatch.h"
-#import "TTPatchUtils.h"
 #import "TTPatchHotRefrshTool.h"
 @interface RootTableViewController ()
 

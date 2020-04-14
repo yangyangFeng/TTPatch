@@ -8,35 +8,35 @@
 
 /* Begin PBXBuildFile section */
 		01658090F2508997384E1E49068EC585 /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 93D18556FB37742075E27CCAC66DE24D /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		0B0BB8514CDA8276DDB5BD0C1F56520B /* TTPatchModels.h in Headers */ = {isa = PBXBuildFile; fileRef = C964FF130CBAE5DB6F2A83FB1CB5B65C /* TTPatchModels.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0D7BED7CD579016FAA5E5CD30E69777A /* SSLClientCertificate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D1F72F8769D4798531223224EA1327 /* SSLClientCertificate.swift */; };
-		11F40A27AB633C8506FF6D056ABCC8BD /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 2DFDB80F06FA737C9F6468C21F256896 /* TTContext.m */; };
 		135A4A2A9F142882E3AF26B8BF3EED06 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC175A508B1C9A97AE1EC019A31040F0 /* SocketManager.swift */; };
 		136E46F962DD1290A106901FD07B8866 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DCED566123C5D2EDB12EE8406D83E9 /* SocketTypes.swift */; };
-		1B8FB720EE3167FD8410017A24A0344A /* TTContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B683F6F38102649F135781CEBDAE3DD /* TTContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1CE0AC6E8A111A8785357AA0B2E241D4 /* SocketEnginePollable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 476879C5245CBDEF43D375A489D9A84F /* SocketEnginePollable.swift */; };
 		20C996618EA13CE9A58A93C9D3F4262B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB895F616DD1C4C7C1587261E4EBE5D /* Foundation.framework */; };
-		211B60A4BCC7DF4F903EC2907AB675F2 /* TTPatchUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = D75445A0637856BA174559E4C2B73D1C /* TTPatchUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		215675757E06AB66706A814BFDFED0D8 /* TTPatchMethodCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = CE36E8D08F607E626E96F5EFAE9850C2 /* TTPatchMethodCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		233034CE7D33A545EAEECB789DF6BA10 /* SocketEnginePacketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AE9FA909BB323D3BCA70870E1721452 /* SocketEnginePacketType.swift */; };
 		2B6B0FECA8B479AA50DCF2C69EF9CEB6 /* SocketIOStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75B21CE514A3072DBA7AFDE76611CD7D /* SocketIOStatus.swift */; };
-		33E9856649CEBD1C2594BC4C8BCA9D5A /* TTPatch-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 15CD167033980E561E0F19B709D7B043 /* TTPatch-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		381BE29DEBEB41011344BC4E14FE10D5 /* SocketExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B38AF27DA40D2913867A6E4207D2FEF5 /* SocketExtensions.swift */; };
-		3BF72FD7AB4074FB700F68978A2A8C15 /* TTPatch-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7B79CFBE1E5AD6CFD7BDFBC78C069E /* TTPatch-dummy.m */; };
+		38CB17CBA565E519BB9C151D6065310C /* TTPatchModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 223987B5553035B44E96A084A0ADBE35 /* TTPatchModels.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		3BCBCC6908C20C53322D8381DF888011 /* TTPatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 33848E80C0609927FB3C0A54C38593B9 /* TTPatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47FC02B31F206221DABD438FCCA1CBE5 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E816E623FDF7A0B5969337DD2EC441F /* SocketEngine.swift */; };
-		49C5E27FB1D876265486EECD055214E3 /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = A35EB2A476096D62FA23AF3B3D124123 /* TTPatch.m */; };
-		4ADA419CA4F721D07D29B347F20B2E26 /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 13CE51DFC6F97EDC301C9A587A8BA56D /* TTPatch.js */; };
-		4B30343A886808770D89EFE772954033 /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B7C72A6454B9F899D03F400E3FD1D79 /* TTPatchMethodCleaner.m */; };
+		4ADA419CA4F721D07D29B347F20B2E26 /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 51EBDCCAC1FD8F26E206E3315344B32E /* TTPatch.js */; };
 		5A1BF5B9880E7D35914379B96C39D561 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB895F616DD1C4C7C1587261E4EBE5D /* Foundation.framework */; };
 		5CC0EFD1A7B7F33F9FC19B2A723C4C50 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFCBA8E411F67CD29F0AEAEFFF3E7B83 /* SocketAckManager.swift */; };
+		6218ACBDAD95CE7A61A217BB1DBA63E3 /* TTHookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 62599F8C5DD4351B583E425B19DE1937 /* TTHookUtils.m */; };
 		64166866E94E742E896D85748BDD4869 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55BE5CD73AB51212AD3DEC7C9D921E1F /* SocketAnyEvent.swift */; };
+		66974CEEA92DA43872C6CA9486A177CA /* TTContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 83770C30B5BD3D0DEFCDF25D6D32CB63 /* TTContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		69A61F7206266FD3D4295CCBD56B46DF /* SocketEngineWebsocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 165ED20B2617EF214E43856D7D4A81CA /* SocketEngineWebsocket.swift */; };
-		736D6C0D13BDB86E263079FD302374B9 /* TTPatchUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5946BCBE8240DD5374A9390E9C18EE5B /* TTPatchUtils.m */; };
+		80998B218990F9B6B025922BA22A3C50 /* TTPatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 40087B0134478C5933C12F37DE13678A /* TTPatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		809F62AFF529B816870718106947B676 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E427C39DB582A35A213F9DD50408B65A /* Starscream-dummy.m */; };
 		8DCD0CC1C63C74C8C518004EC1682A68 /* Pods-Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7825A90E082A1582EB16256B0E722B3F /* Pods-Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		90DB33738984454BE6A34F56172B1173 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588A1DAF57E2CAC5C8751A3A2B18F988 /* SocketStringReader.swift */; };
+		91FD2C8D6952D7D312D3A1B8EE0B0D18 /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F86EF25DDA7E05A7FC0F974EA7CF066 /* TTContext.m */; };
+		92ECF48CDE9EB546B498C5EF109823F4 /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = F4D2E5CEF3EDB161CDEB138263887E22 /* TTPatch.m */; };
 		9CA16C417C1101CB145EC260E3B000CD /* Pods-Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = D6D7C498FA339E02BD53ECB8916CEA8E /* Pods-Example-dummy.m */; };
+		9F584986C161435C08E6FEC98100421A /* TTPatch-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 01386282BEE8E67CD0B386A543DF23CE /* TTPatch-dummy.m */; };
 		A7A033579F59682ABABFE5C2CA362002 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ADD5096982599354570B2E6A6630123 /* SocketIOClient.swift */; };
-		A959EB20E147805AAD9D3ACCF3EC6927 /* TTPatchMethodCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = 81985C4766E644EE5CBAECF3FC1DED2E /* TTPatchMethodCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADEB2E475B176B5FECCC6F3C98C8BCE6 /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 12E11940F82C17C80D97E88ED21E0B2E /* TTPatchMethodCleaner.m */; };
 		ADF9756D9806D59A67AE7DDE9441E178 /* SocketIOClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 858BB376A5CE47344670C3259C032EAD /* SocketIOClientOption.swift */; };
 		B0217F527B83DF939D87A83FE45C5EA1 /* SocketIOClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 834A0DDF2FDD3D6B30837CEF5AF070C8 /* SocketIOClientSpec.swift */; };
 		B4B9DC67E8F1A733923BD55C18540C09 /* SocketParsable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0C56D68F20D853A5E9DC241A89B9DD3 /* SocketParsable.swift */; };
@@ -47,16 +47,16 @@
 		C2FED24D839850F7DD39A569F721D99C /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8199C47D27B37882998192D472EF62B7 /* SocketEventHandler.swift */; };
 		C32BC8BBEF280B2E289015533E42B667 /* Socket.IO-Client-Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 078B5305AEF2C440371B80B2207BA622 /* Socket.IO-Client-Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CBCE97A1F167B4FFF65CDBB45213EF29 /* SocketIOClientConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C82634BF833C9E1B8B3AD03E58E5188 /* SocketIOClientConfiguration.swift */; };
-		D1B29ACCB3EC21DEF2FCB299D1E95A57 /* TTPatchKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8270F60D489D140015A964443829A767 /* TTPatchKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D2AB051FD158BE6469401E3F904E42B5 /* TTPatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 3BF8250083DF9C5FB813300E651D7E0D /* TTPatch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D3413B6840B9BE30593A9019B2F964AC /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 540718016C6F4455E84683CA8AD3C6F4 /* TTPatchModels.m */; };
+		D82A2EBFFA6712D6C19551884B95AE7C /* TTPatch-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CEB49CCC1A70D056A713D69155D2BA09 /* TTPatch-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D990E3077E3450D03A5647D2EE693ED2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB895F616DD1C4C7C1587261E4EBE5D /* Foundation.framework */; };
 		DEC18FE6886DB18A2F1CB50EDE3C650B /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F90078BDAF136F1F5491AF8F18246 /* SocketLogger.swift */; };
-		DF737A2F4260830F82E4968CC3CC954E /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = D910BCDB01031A062858D920D7CB781A /* TTPatchModels.m */; };
 		E41E47A76BB5E6AC2B3241AF18EA5556 /* SocketRawView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85B2AC3054D3DF6DD290D505C0194EC4 /* SocketRawView.swift */; };
 		E77C80821D0A7B74925E555D1A94F5CE /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5D11B4B4588578D557C6417B5A3143A /* WebSocket.swift */; };
 		E9EF28B9EADA8E6797457D3CE7474273 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1B2896BC5E312024756DF6145341C72 /* SocketEngineClient.swift */; };
 		EA8983D2D662FBA51C0A23F11397371C /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87349CD484A05CA54D778349C8670592 /* SSLSecurity.swift */; };
 		EE035FE50C2B31D946F6516383A6E160 /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63472C9AA2BCCDA1DB86B4BAF60125B4 /* SocketManagerSpec.swift */; };
+		F07D87BF31BB792A9606B5D6233DB2F7 /* TTHookUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AE3D0CA107CF3DF5D9BC54326CE9209 /* TTHookUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F7C7B59323A795F5500C9B4CB823AB5A /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D28565124216D01457B83147642EFF72 /* SocketAckEmitter.swift */; };
 		F8BAB91D5ED9A9919155DED798DB04C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBB895F616DD1C4C7C1587261E4EBE5D /* Foundation.framework */; };
 		F9027F91CE87561DFB1FD47187F0C8E9 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A16950179084B894EEFF2A51296675F /* Compression.swift */; };
@@ -95,77 +95,76 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01386282BEE8E67CD0B386A543DF23CE /* TTPatch-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TTPatch-dummy.m"; sourceTree = "<group>"; };
 		022732247A0026000936F8930B748A9B /* Starscream-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Starscream-Info.plist"; sourceTree = "<group>"; };
 		078B5305AEF2C440371B80B2207BA622 /* Socket.IO-Client-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-umbrella.h"; sourceTree = "<group>"; };
+		07EF5C66B99245C57AB1333F196F56C2 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		0A16950179084B894EEFF2A51296675F /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Starscream/Compression.swift; sourceTree = "<group>"; };
-		13CE51DFC6F97EDC301C9A587A8BA56D /* TTPatch.js */ = {isa = PBXFileReference; includeInIndex = 1; name = TTPatch.js; path = TTPatch/TTPatch.js; sourceTree = "<group>"; };
-		15CD167033980E561E0F19B709D7B043 /* TTPatch-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTPatch-umbrella.h"; sourceTree = "<group>"; };
+		12E11940F82C17C80D97E88ED21E0B2E /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatchMethodCleaner.m; path = TTPatch/TTPatchMethodCleaner.m; sourceTree = "<group>"; };
 		165ED20B2617EF214E43856D7D4A81CA /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineWebsocket.swift; path = Source/SocketIO/Engine/SocketEngineWebsocket.swift; sourceTree = "<group>"; };
 		1A21DA2B878BD9EF3759C162B650A989 /* SocketPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketPacket.swift; path = Source/SocketIO/Parse/SocketPacket.swift; sourceTree = "<group>"; };
 		1F667CC0E19EAF34E5A4119E2121F585 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		223987B5553035B44E96A084A0ADBE35 /* TTPatchModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchModels.h; path = TTPatch/TTPatchModels.h; sourceTree = "<group>"; };
 		2366DCA56489DADAB58990BEF7908FEA /* Socket.IO-Client-Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Socket.IO-Client-Swift-Info.plist"; sourceTree = "<group>"; };
+		23FF50BD96A6790B139ACA8391C04F3B /* TTPatch.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TTPatch.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		243410B9535472556EA4BB6DBC133A0D /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		2A866F7C2DE727B78A3B13987C1F9C6A /* Socket.IO-Client-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Socket.IO-Client-Swift.modulemap"; sourceTree = "<group>"; };
-		2DFDB80F06FA737C9F6468C21F256896 /* TTContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTContext.m; path = TTPatch/TTContext.m; sourceTree = "<group>"; };
 		2E816E623FDF7A0B5969337DD2EC441F /* SocketEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngine.swift; path = Source/SocketIO/Engine/SocketEngine.swift; sourceTree = "<group>"; };
 		31C1D37707DFAA5E6A164BCC07834264 /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
 		3319CBE6BF16B5B2366BDE834B663B5E /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33848E80C0609927FB3C0A54C38593B9 /* TTPatchKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchKit.h; path = TTPatch/TTPatchKit.h; sourceTree = "<group>"; };
 		35C305D3797C284E6F5BAA1D3E6F9BF8 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
-		3BF8250083DF9C5FB813300E651D7E0D /* TTPatch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatch.h; path = TTPatch/TTPatch.h; sourceTree = "<group>"; };
-		3CC13D445E84287A480F639877F64DEF /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		40087B0134478C5933C12F37DE13678A /* TTPatch.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatch.h; path = TTPatch/TTPatch.h; sourceTree = "<group>"; };
 		441854E35F81731E63E53DC7E4EEAD9D /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		476879C5245CBDEF43D375A489D9A84F /* SocketEnginePollable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePollable.swift; path = Source/SocketIO/Engine/SocketEnginePollable.swift; sourceTree = "<group>"; };
 		4ADD5096982599354570B2E6A6630123 /* SocketIOClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClient.swift; path = Source/SocketIO/Client/SocketIOClient.swift; sourceTree = "<group>"; };
 		4ADF328B462F003276F752024DB1972C /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Starscream.modulemap; sourceTree = "<group>"; };
 		50C0B0879B7086918A819F704BF40B4B /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketIO.framework; path = "Socket.IO-Client-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		51EBDCCAC1FD8F26E206E3315344B32E /* TTPatch.js */ = {isa = PBXFileReference; includeInIndex = 1; name = TTPatch.js; path = TTPatch/TTPatch.js; sourceTree = "<group>"; };
+		540718016C6F4455E84683CA8AD3C6F4 /* TTPatchModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatchModels.m; path = TTPatch/TTPatchModels.m; sourceTree = "<group>"; };
 		55BE5CD73AB51212AD3DEC7C9D921E1F /* SocketAnyEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Source/SocketIO/Client/SocketAnyEvent.swift; sourceTree = "<group>"; };
 		55CCD09644BE7586F9904BE5A495A9D5 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
 		588A1DAF57E2CAC5C8751A3A2B18F988 /* SocketStringReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketStringReader.swift; path = Source/SocketIO/Util/SocketStringReader.swift; sourceTree = "<group>"; };
-		5946BCBE8240DD5374A9390E9C18EE5B /* TTPatchUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatchUtils.m; path = TTPatch/TTPatchUtils.m; sourceTree = "<group>"; };
-		5A044BF5478E2CED5A1A6FC5C36C8777 /* TTPatch-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTPatch-prefix.pch"; sourceTree = "<group>"; };
+		5A89DCA1E11D7760CFBADCBCFD870D41 /* TTPatch-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TTPatch-Info.plist"; sourceTree = "<group>"; };
+		5AE3D0CA107CF3DF5D9BC54326CE9209 /* TTHookUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTHookUtils.h; path = TTPatch/TTHookUtils.h; sourceTree = "<group>"; };
 		5C82634BF833C9E1B8B3AD03E58E5188 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientConfiguration.swift; path = Source/SocketIO/Client/SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
+		62599F8C5DD4351B583E425B19DE1937 /* TTHookUtils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTHookUtils.m; path = TTPatch/TTHookUtils.m; sourceTree = "<group>"; };
+		6309E199443FF67205F55591C053DD2E /* TTPatch.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TTPatch.modulemap; sourceTree = "<group>"; };
 		63472C9AA2BCCDA1DB86B4BAF60125B4 /* SocketManagerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Source/SocketIO/Manager/SocketManagerSpec.swift; sourceTree = "<group>"; };
-		6B683F6F38102649F135781CEBDAE3DD /* TTContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTContext.h; path = TTPatch/TTContext.h; sourceTree = "<group>"; };
-		6C79B2E2F643B4EFB11B680AF2FEA0DC /* TTPatch.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TTPatch.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		75B21CE514A3072DBA7AFDE76611CD7D /* SocketIOStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOStatus.swift; path = Source/SocketIO/Client/SocketIOStatus.swift; sourceTree = "<group>"; };
 		7825A90E082A1582EB16256B0E722B3F /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
 		80FFE5910A4C54A60F0F33851BDEAC82 /* Socket.IO-Client-Swift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Socket.IO-Client-Swift.xcconfig"; sourceTree = "<group>"; };
-		81985C4766E644EE5CBAECF3FC1DED2E /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchMethodCleaner.h; path = TTPatch/TTPatchMethodCleaner.h; sourceTree = "<group>"; };
 		8199C47D27B37882998192D472EF62B7 /* SocketEventHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEventHandler.swift; path = Source/SocketIO/Client/SocketEventHandler.swift; sourceTree = "<group>"; };
 		81D1F72F8769D4798531223224EA1327 /* SSLClientCertificate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLClientCertificate.swift; path = Sources/Starscream/SSLClientCertificate.swift; sourceTree = "<group>"; };
-		8270F60D489D140015A964443829A767 /* TTPatchKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchKit.h; path = TTPatch/TTPatchKit.h; sourceTree = "<group>"; };
 		834A0DDF2FDD3D6B30837CEF5AF070C8 /* SocketIOClientSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientSpec.swift; path = Source/SocketIO/Client/SocketIOClientSpec.swift; sourceTree = "<group>"; };
-		835B0EAC037431C684DCFD1600614AEB /* TTPatch-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TTPatch-Info.plist"; sourceTree = "<group>"; };
+		83770C30B5BD3D0DEFCDF25D6D32CB63 /* TTContext.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTContext.h; path = TTPatch/TTContext.h; sourceTree = "<group>"; };
 		858BB376A5CE47344670C3259C032EAD /* SocketIOClientOption.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientOption.swift; path = Source/SocketIO/Client/SocketIOClientOption.swift; sourceTree = "<group>"; };
 		85B2AC3054D3DF6DD290D505C0194EC4 /* SocketRawView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketRawView.swift; path = Source/SocketIO/Client/SocketRawView.swift; sourceTree = "<group>"; };
 		87349CD484A05CA54D778349C8670592 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/Starscream/SSLSecurity.swift; sourceTree = "<group>"; };
 		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8B2AA35806E33FE7BC2143AD129909FB /* TTPatch.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTPatch.xcconfig; sourceTree = "<group>"; };
-		8B7C72A6454B9F899D03F400E3FD1D79 /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatchMethodCleaner.m; path = TTPatch/TTPatchMethodCleaner.m; sourceTree = "<group>"; };
+		8F86EF25DDA7E05A7FC0F974EA7CF066 /* TTContext.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTContext.m; path = TTPatch/TTContext.m; sourceTree = "<group>"; };
 		93D18556FB37742075E27CCAC66DE24D /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
 		976E836ED431B0F96899EF3A2B9048E3 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = Source/SocketIO/Engine/SocketEngineSpec.swift; sourceTree = "<group>"; };
 		9AE9FA909BB323D3BCA70870E1721452 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePacketType.swift; path = Source/SocketIO/Engine/SocketEnginePacketType.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F11AC03774BF9697F6C055F3DA21F56 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		9F556A8B347DD6F06937A18F1473A3A5 /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
-		A35EB2A476096D62FA23AF3B3D124123 /* TTPatch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatch.m; path = TTPatch/TTPatch.m; sourceTree = "<group>"; };
+		A9A5E02B38E33308EFC4DBE1CAE150A5 /* TTPatch.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTPatch.xcconfig; sourceTree = "<group>"; };
 		AC175A508B1C9A97AE1EC019A31040F0 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
-		AD7B79CFBE1E5AD6CFD7BDFBC78C069E /* TTPatch-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TTPatch-dummy.m"; sourceTree = "<group>"; };
-		AF310961A1FC9ACD0C6FE0D4B8A35D92 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		AFECBC24E09D0D25F822C27BD944AFD4 /* Pods-Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-frameworks.sh"; sourceTree = "<group>"; };
 		B1B2896BC5E312024756DF6145341C72 /* SocketEngineClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineClient.swift; path = Source/SocketIO/Engine/SocketEngineClient.swift; sourceTree = "<group>"; };
 		B38AF27DA40D2913867A6E4207D2FEF5 /* SocketExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = Source/SocketIO/Util/SocketExtensions.swift; sourceTree = "<group>"; };
 		B45138496B85A072654D1D0F8EBBEDE5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		B6B6CA718548CD90653E62878E3BFC02 /* TTPatch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = TTPatch.framework; path = TTPatch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6DCED566123C5D2EDB12EE8406D83E9 /* SocketTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketTypes.swift; path = Source/SocketIO/Util/SocketTypes.swift; sourceTree = "<group>"; };
+		C312E30BCCA1AF5641CA3BCD403BAFB6 /* TTPatch-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTPatch-prefix.pch"; sourceTree = "<group>"; };
 		C5D11B4B4588578D557C6417B5A3143A /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/Starscream/WebSocket.swift; sourceTree = "<group>"; };
-		C8E7D660641E24D48A1927DA0FB2FE78 /* TTPatch.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = TTPatch.modulemap; sourceTree = "<group>"; };
-		C964FF130CBAE5DB6F2A83FB1CB5B65C /* TTPatchModels.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchModels.h; path = TTPatch/TTPatchModels.h; sourceTree = "<group>"; };
+		CE36E8D08F607E626E96F5EFAE9850C2 /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchMethodCleaner.h; path = TTPatch/TTPatchMethodCleaner.h; sourceTree = "<group>"; };
 		CE9560C9EFE6E53460689610EF1CFE3E /* Socket.IO-Client-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Socket.IO-Client-Swift-dummy.m"; sourceTree = "<group>"; };
+		CEB49CCC1A70D056A713D69155D2BA09 /* TTPatch-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TTPatch-umbrella.h"; sourceTree = "<group>"; };
 		CFB0677719FB8148D3EDF755BE8CFEFA /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SocketIO/Util/SSLSecurity.swift; sourceTree = "<group>"; };
 		D28565124216D01457B83147642EFF72 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckEmitter.swift; path = Source/SocketIO/Ack/SocketAckEmitter.swift; sourceTree = "<group>"; };
 		D6D7C498FA339E02BD53ECB8916CEA8E /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
-		D75445A0637856BA174559E4C2B73D1C /* TTPatchUtils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TTPatchUtils.h; path = TTPatch/TTPatchUtils.h; sourceTree = "<group>"; };
-		D910BCDB01031A062858D920D7CB781A /* TTPatchModels.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatchModels.m; path = TTPatch/TTPatchModels.m; sourceTree = "<group>"; };
 		DBB895F616DD1C4C7C1587261E4EBE5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E0C56D68F20D853A5E9DC241A89B9DD3 /* SocketParsable.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketParsable.swift; path = Source/SocketIO/Parse/SocketParsable.swift; sourceTree = "<group>"; };
 		E3DF317506898F718CE294C9AC8325AF /* Socket.IO-Client-Swift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Socket.IO-Client-Swift-prefix.pch"; sourceTree = "<group>"; };
@@ -173,6 +172,7 @@
 		E92F90078BDAF136F1F5491AF8F18246 /* SocketLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketLogger.swift; path = Source/SocketIO/Util/SocketLogger.swift; sourceTree = "<group>"; };
 		EA21B344259B58996DB73382B1B1521F /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		EFCBA8E411F67CD29F0AEAEFFF3E7B83 /* SocketAckManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Source/SocketIO/Ack/SocketAckManager.swift; sourceTree = "<group>"; };
+		F4D2E5CEF3EDB161CDEB138263887E22 /* TTPatch.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TTPatch.m; path = TTPatch/TTPatch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -225,24 +225,6 @@
 			path = Starscream;
 			sourceTree = "<group>";
 		};
-		1A659039A105EF61F539C7A9C89E02F2 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				3CC13D445E84287A480F639877F64DEF /* LICENSE */,
-				AF310961A1FC9ACD0C6FE0D4B8A35D92 /* README.md */,
-				6C79B2E2F643B4EFB11B680AF2FEA0DC /* TTPatch.podspec */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		1C843E07300EC887CB0D8A0E6518B601 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				13CE51DFC6F97EDC301C9A587A8BA56D /* TTPatch.js */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		27EB3FE47610C422FB94BACE661FAFD3 /* Socket.IO-Client-Swift */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +259,16 @@
 			path = "Socket.IO-Client-Swift";
 			sourceTree = "<group>";
 		};
+		28B4608B2ABF148793AFBC0516BC2B21 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				07EF5C66B99245C57AB1333F196F56C2 /* LICENSE */,
+				9F11AC03774BF9697F6C055F3DA21F56 /* README.md */,
+				23FF50BD96A6790B139ACA8391C04F3B /* TTPatch.podspec */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
 		3A64C2478EA9455A6F0CFBCFF00FC624 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,26 +280,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		6120166A0D688654B9A4C42DC6D735FA /* TTPatch */ = {
+		4EACB6149542FA0348FABA85A8FAE6B4 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				6B683F6F38102649F135781CEBDAE3DD /* TTContext.h */,
-				2DFDB80F06FA737C9F6468C21F256896 /* TTContext.m */,
-				3BF8250083DF9C5FB813300E651D7E0D /* TTPatch.h */,
-				A35EB2A476096D62FA23AF3B3D124123 /* TTPatch.m */,
-				8270F60D489D140015A964443829A767 /* TTPatchKit.h */,
-				81985C4766E644EE5CBAECF3FC1DED2E /* TTPatchMethodCleaner.h */,
-				8B7C72A6454B9F899D03F400E3FD1D79 /* TTPatchMethodCleaner.m */,
-				C964FF130CBAE5DB6F2A83FB1CB5B65C /* TTPatchModels.h */,
-				D910BCDB01031A062858D920D7CB781A /* TTPatchModels.m */,
-				D75445A0637856BA174559E4C2B73D1C /* TTPatchUtils.h */,
-				5946BCBE8240DD5374A9390E9C18EE5B /* TTPatchUtils.m */,
-				1A659039A105EF61F539C7A9C89E02F2 /* Pod */,
-				1C843E07300EC887CB0D8A0E6518B601 /* Resources */,
-				EBF3B471359674F9B5F18F1ACD2E2B39 /* Support Files */,
+				6309E199443FF67205F55591C053DD2E /* TTPatch.modulemap */,
+				A9A5E02B38E33308EFC4DBE1CAE150A5 /* TTPatch.xcconfig */,
+				01386282BEE8E67CD0B386A543DF23CE /* TTPatch-dummy.m */,
+				5A89DCA1E11D7760CFBADCBCFD870D41 /* TTPatch-Info.plist */,
+				C312E30BCCA1AF5641CA3BCD403BAFB6 /* TTPatch-prefix.pch */,
+				CEB49CCC1A70D056A713D69155D2BA09 /* TTPatch-umbrella.h */,
 			);
-			name = TTPatch;
-			path = ../..;
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/TTPatch";
 			sourceTree = "<group>";
 		};
 		62D28F41BA904F2C69E2F67E28B1982A /* Support Files */ = {
@@ -322,6 +306,28 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/Starscream";
+			sourceTree = "<group>";
+		};
+		67D6623E84E3924F09290ED54FEC9D76 /* TTPatch */ = {
+			isa = PBXGroup;
+			children = (
+				83770C30B5BD3D0DEFCDF25D6D32CB63 /* TTContext.h */,
+				8F86EF25DDA7E05A7FC0F974EA7CF066 /* TTContext.m */,
+				5AE3D0CA107CF3DF5D9BC54326CE9209 /* TTHookUtils.h */,
+				62599F8C5DD4351B583E425B19DE1937 /* TTHookUtils.m */,
+				40087B0134478C5933C12F37DE13678A /* TTPatch.h */,
+				F4D2E5CEF3EDB161CDEB138263887E22 /* TTPatch.m */,
+				33848E80C0609927FB3C0A54C38593B9 /* TTPatchKit.h */,
+				CE36E8D08F607E626E96F5EFAE9850C2 /* TTPatchMethodCleaner.h */,
+				12E11940F82C17C80D97E88ED21E0B2E /* TTPatchMethodCleaner.m */,
+				223987B5553035B44E96A084A0ADBE35 /* TTPatchModels.h */,
+				540718016C6F4455E84683CA8AD3C6F4 /* TTPatchModels.m */,
+				28B4608B2ABF148793AFBC0516BC2B21 /* Pod */,
+				E7C0093DCAA19EDE042033B882F0D27C /* Resources */,
+				4EACB6149542FA0348FABA85A8FAE6B4 /* Support Files */,
+			);
+			name = TTPatch;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		9BDBD95ED116334D1B2835202D8D3060 /* Pods-Example */ = {
@@ -401,24 +407,18 @@
 			path = "../Target Support Files/Socket.IO-Client-Swift";
 			sourceTree = "<group>";
 		};
-		EBF3B471359674F9B5F18F1ACD2E2B39 /* Support Files */ = {
+		E7C0093DCAA19EDE042033B882F0D27C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				C8E7D660641E24D48A1927DA0FB2FE78 /* TTPatch.modulemap */,
-				8B2AA35806E33FE7BC2143AD129909FB /* TTPatch.xcconfig */,
-				AD7B79CFBE1E5AD6CFD7BDFBC78C069E /* TTPatch-dummy.m */,
-				835B0EAC037431C684DCFD1600614AEB /* TTPatch-Info.plist */,
-				5A044BF5478E2CED5A1A6FC5C36C8777 /* TTPatch-prefix.pch */,
-				15CD167033980E561E0F19B709D7B043 /* TTPatch-umbrella.h */,
+				51EBDCCAC1FD8F26E206E3315344B32E /* TTPatch.js */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/TTPatch";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		FA3C5A7BA53344742E9A528A019A2B15 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				6120166A0D688654B9A4C42DC6D735FA /* TTPatch */,
+				67D6623E84E3924F09290ED54FEC9D76 /* TTPatch */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -450,17 +450,17 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6B55163E5C650877BBBF3A3DA9B6EE97 /* Headers */ = {
+		8FBA51A044B28E2A5C5186FD2999A0E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1B8FB720EE3167FD8410017A24A0344A /* TTContext.h in Headers */,
-				33E9856649CEBD1C2594BC4C8BCA9D5A /* TTPatch-umbrella.h in Headers */,
-				D2AB051FD158BE6469401E3F904E42B5 /* TTPatch.h in Headers */,
-				D1B29ACCB3EC21DEF2FCB299D1E95A57 /* TTPatchKit.h in Headers */,
-				A959EB20E147805AAD9D3ACCF3EC6927 /* TTPatchMethodCleaner.h in Headers */,
-				0B0BB8514CDA8276DDB5BD0C1F56520B /* TTPatchModels.h in Headers */,
-				211B60A4BCC7DF4F903EC2907AB675F2 /* TTPatchUtils.h in Headers */,
+				66974CEEA92DA43872C6CA9486A177CA /* TTContext.h in Headers */,
+				F07D87BF31BB792A9606B5D6233DB2F7 /* TTHookUtils.h in Headers */,
+				D82A2EBFFA6712D6C19551884B95AE7C /* TTPatch-umbrella.h in Headers */,
+				80998B218990F9B6B025922BA22A3C50 /* TTPatch.h in Headers */,
+				3BCBCC6908C20C53322D8381DF888011 /* TTPatchKit.h in Headers */,
+				215675757E06AB66706A814BFDFED0D8 /* TTPatchMethodCleaner.h in Headers */,
+				38CB17CBA565E519BB9C151D6065310C /* TTPatchModels.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -529,8 +529,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 85935E4A37C6097748B4E926CBC3DB14 /* Build configuration list for PBXNativeTarget "TTPatch" */;
 			buildPhases = (
-				6B55163E5C650877BBBF3A3DA9B6EE97 /* Headers */,
-				5C410308B1A0605F1C551ACFC3BDF9CE /* Sources */,
+				8FBA51A044B28E2A5C5186FD2999A0E0 /* Headers */,
+				636758679F00A141235BCC6DD7501223 /* Sources */,
 				BDF071CF9BC8F556B466267C05292AC3 /* Frameworks */,
 				B2D4706C766AB9A262F7C56B28458FE3 /* Resources */,
 			);
@@ -650,16 +650,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5C410308B1A0605F1C551ACFC3BDF9CE /* Sources */ = {
+		636758679F00A141235BCC6DD7501223 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				11F40A27AB633C8506FF6D056ABCC8BD /* TTContext.m in Sources */,
-				3BF72FD7AB4074FB700F68978A2A8C15 /* TTPatch-dummy.m in Sources */,
-				49C5E27FB1D876265486EECD055214E3 /* TTPatch.m in Sources */,
-				4B30343A886808770D89EFE772954033 /* TTPatchMethodCleaner.m in Sources */,
-				DF737A2F4260830F82E4968CC3CC954E /* TTPatchModels.m in Sources */,
-				736D6C0D13BDB86E263079FD302374B9 /* TTPatchUtils.m in Sources */,
+				91FD2C8D6952D7D312D3A1B8EE0B0D18 /* TTContext.m in Sources */,
+				6218ACBDAD95CE7A61A217BB1DBA63E3 /* TTHookUtils.m in Sources */,
+				9F584986C161435C08E6FEC98100421A /* TTPatch-dummy.m in Sources */,
+				92ECF48CDE9EB546B498C5EF109823F4 /* TTPatch.m in Sources */,
+				ADEB2E475B176B5FECCC6F3C98C8BCE6 /* TTPatchMethodCleaner.m in Sources */,
+				D3413B6840B9BE30593A9019B2F964AC /* TTPatchModels.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -703,7 +703,7 @@
 /* Begin XCBuildConfiguration section */
 		0858B388A1F5BC2A7A1D8C9A55457B8E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B2AA35806E33FE7BC2143AD129909FB /* TTPatch.xcconfig */;
+			baseConfigurationReference = A9A5E02B38E33308EFC4DBE1CAE150A5 /* TTPatch.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1005,7 +1005,7 @@
 		};
 		C92793B363B07B104F45110A0091F6A5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8B2AA35806E33FE7BC2143AD129909FB /* TTPatch.xcconfig */;
+			baseConfigurationReference = A9A5E02B38E33308EFC4DBE1CAE150A5 /* TTPatch.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

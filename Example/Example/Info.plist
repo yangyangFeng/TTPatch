@@ -26,7 +26,8 @@
 		<true/>
 	</dict>
 	<key>TTPatchIP</key>
-	<string>192.168.3.137</string>
+	<string>10.72.148.19
+169.254.244.217</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

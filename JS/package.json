@@ -16,9 +16,9 @@
     "@babel/core": "^7.4.5"
   },
   "scripts": {
-    "build": "npx node app.js -r 2 -p 0 -o outputs -w src",
-    "package": "npx node app.js -r 2 -p 1 -o outputs -w src",
-    "server": "npx node app.js -r 1"
+    "build": "npx node app.js -r 2 -p 0 -o .outputs -w src",
+    "package": "npx node app.js -r 2 -p 1 -o .outputs -w src",
+    "server": "npx node app.js -r 1 -p 1 -o .outputs -w src"
   },
   "keywords": [],
   "author": "bty",

@@ -35,8 +35,13 @@
         [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
         NSLog(@"[补丁加载成功!!]");
     }
-    
+    /**
+     * 连接本地测试服务,如加载空白,请检查
+     * 1.本地服务是否已启动成功
+     * 2.检查`info.plist`中IP是否获取正确
+     */
     [self testSocket];
+    // 拉取本地js资源
     [self updateResource:@"hotfixPatch.js" callbacl:nil];
     return YES;
 }
@@ -45,11 +50,16 @@
 
 - (void)testSocket{
     
-    
-//    NSURL *socketURL = [NSURL URLWithString:[NSString stringWithFormat:@"ws://10.72.148.19:8888/socket.io/?EIO=4&transport=websocket"]];
-    NSString *socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
-                        [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                        [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+    NSString *socket;
+#if TARGET_IPHONE_SIMULATOR  //模拟器
+    socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
+    @"localhost",
+    [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+#elif TARGET_OS_IPHONE      //真机
+    socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
+    [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
+    [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+#endif
 
     [[TTPatchHotRefrshTool shareInstance] startLocalServer:socket];
     [TTPatchHotRefrshTool shareInstance].delegate = self;
@@ -57,12 +67,6 @@
 
 - (void)reviceRefresh:(id)msg{
     [self updateResource:msg callbacl:nil];
-//    UINavigationController *nav = (UINavigationController*)self.window.rootViewController;
-//    for (UIViewController * VC in nav.viewControllers) {
-//        if ([VC respondsToSelector:@selector(isJsCode)] &&[VC performSelector:@selector(isJsCode) withObject:nil]) {
-//            [VC performSelector:@selector(refresh)];
-//        }
-//    }
 }
 
 - (void)updateResource:(NSString *)filename callbacl:(void(^)(void))callback
