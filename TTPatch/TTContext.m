@@ -10,7 +10,6 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "TTPatch.h"
-#import <libkern/OSAtomic.h>
 #import "TTPatchKit.h"
 
 
@@ -110,60 +109,7 @@ static NSString *trim(NSString *string)
 /// @param signatureStr block类型声明 "void, NSString*, int"
 static id CreateBlockWithSignatureString(NSString *signatureStr){
     
-    static NSMutableDictionary *typeSignatureDict;
-    if (!typeSignatureDict) {
-        typeSignatureDict  = [NSMutableDictionary new];
-#define JP_DEFINE_TYPE_SIGNATURE(_type) \
-[typeSignatureDict setObject:@[[NSString stringWithUTF8String:@encode(_type)], @(sizeof(_type))] forKey:@#_type];\
-
-        JP_DEFINE_TYPE_SIGNATURE(id);
-        JP_DEFINE_TYPE_SIGNATURE(BOOL);
-        JP_DEFINE_TYPE_SIGNATURE(int);
-        JP_DEFINE_TYPE_SIGNATURE(void);
-        JP_DEFINE_TYPE_SIGNATURE(char);
-        JP_DEFINE_TYPE_SIGNATURE(short);
-        JP_DEFINE_TYPE_SIGNATURE(unsigned short);
-        JP_DEFINE_TYPE_SIGNATURE(unsigned int);
-        JP_DEFINE_TYPE_SIGNATURE(long);
-        JP_DEFINE_TYPE_SIGNATURE(unsigned long);
-        JP_DEFINE_TYPE_SIGNATURE(long long);
-        JP_DEFINE_TYPE_SIGNATURE(unsigned long long);
-        JP_DEFINE_TYPE_SIGNATURE(float);
-        JP_DEFINE_TYPE_SIGNATURE(double);
-        JP_DEFINE_TYPE_SIGNATURE(bool);
-        JP_DEFINE_TYPE_SIGNATURE(size_t);
-        JP_DEFINE_TYPE_SIGNATURE(CGFloat);
-        JP_DEFINE_TYPE_SIGNATURE(CGSize);
-        JP_DEFINE_TYPE_SIGNATURE(CGRect);
-        JP_DEFINE_TYPE_SIGNATURE(CGPoint);
-        JP_DEFINE_TYPE_SIGNATURE(CGVector);
-        JP_DEFINE_TYPE_SIGNATURE(NSRange);
-        JP_DEFINE_TYPE_SIGNATURE(NSInteger);
-        JP_DEFINE_TYPE_SIGNATURE(Class);
-        JP_DEFINE_TYPE_SIGNATURE(SEL);
-        JP_DEFINE_TYPE_SIGNATURE(void*);
-        JP_DEFINE_TYPE_SIGNATURE(void *);
-    }
-    NSArray *lt = [signatureStr componentsSeparatedByString:@","];
-    NSString *funcSignature = @"@?0";
-    
-    NSInteger size = sizeof(void *);
-    for (NSInteger i = 1; i < lt.count;) {
-        NSString *t = trim(lt[i]);
-        NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"id"][0];
-        if (i == 0) {
-            if (!t || t.length ==0)
-                funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
-            else
-                funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
-            break;
-        }else{
-            
-            funcSignature = [funcSignature stringByAppendingString:[NSString stringWithFormat:@"%@%@", tpe, [@(size) stringValue]]];
-            size += [typeSignatureDict[typeSignatureDict[t] ? t : @"id"][1] integerValue];
-        }
-        i = (i == lt.count-1) ? 0 : i+1;
-    }
+    NSString *funcSignature = CreateSignatureWithString(signatureStr, YES);
     
     //bugfix: framework下,静态函数调用中多次遇到 `static dispatch_once_t onceToken;` 会crash,增加安全拦截
     static BOOL isExchanged=NO;
@@ -202,6 +148,72 @@ static id CreateBlockWithSignatureString(NSString *signatureStr){
     blockLayout->invoke = (void *)msgForwardIMP;
     return block;
 }
+
+
+/// 根据 Class 字符串拼接的方法签名, 构造真实方法签名
+/// @param signatureStr 字符串参数类型 例'void,NSString*'
+/// @param isBlock 是否构造block签名
+static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock){
+    static NSMutableDictionary *typeSignatureDict;
+        if (!typeSignatureDict) {
+            typeSignatureDict  = [NSMutableDictionary new];
+    #define JP_DEFINE_TYPE_SIGNATURE(_type) \
+    [typeSignatureDict setObject:@[[NSString stringWithUTF8String:@encode(_type)], @(sizeof(_type))] forKey:@#_type];\
+
+            JP_DEFINE_TYPE_SIGNATURE(id);
+            JP_DEFINE_TYPE_SIGNATURE(BOOL);
+            JP_DEFINE_TYPE_SIGNATURE(int);
+            JP_DEFINE_TYPE_SIGNATURE(void);
+            JP_DEFINE_TYPE_SIGNATURE(char);
+            JP_DEFINE_TYPE_SIGNATURE(short);
+            JP_DEFINE_TYPE_SIGNATURE(unsigned short);
+            JP_DEFINE_TYPE_SIGNATURE(unsigned int);
+            JP_DEFINE_TYPE_SIGNATURE(long);
+            JP_DEFINE_TYPE_SIGNATURE(unsigned long);
+            JP_DEFINE_TYPE_SIGNATURE(long long);
+            JP_DEFINE_TYPE_SIGNATURE(unsigned long long);
+            JP_DEFINE_TYPE_SIGNATURE(float);
+            JP_DEFINE_TYPE_SIGNATURE(double);
+            JP_DEFINE_TYPE_SIGNATURE(bool);
+            JP_DEFINE_TYPE_SIGNATURE(size_t);
+            JP_DEFINE_TYPE_SIGNATURE(CGFloat);
+            JP_DEFINE_TYPE_SIGNATURE(CGSize);
+            JP_DEFINE_TYPE_SIGNATURE(CGRect);
+            JP_DEFINE_TYPE_SIGNATURE(CGPoint);
+            JP_DEFINE_TYPE_SIGNATURE(CGVector);
+            JP_DEFINE_TYPE_SIGNATURE(NSRange);
+            JP_DEFINE_TYPE_SIGNATURE(NSInteger);
+            JP_DEFINE_TYPE_SIGNATURE(Class);
+            JP_DEFINE_TYPE_SIGNATURE(SEL);
+            JP_DEFINE_TYPE_SIGNATURE(void*);
+            JP_DEFINE_TYPE_SIGNATURE(void *);
+        }
+    NSArray  *lt            = [signatureStr componentsSeparatedByString:@","];
+    /**
+     * 这里注意下block与func签名要区分下,block中没有_cmd, 并且要用@?便是target
+     */
+    NSString *funcSignature = isBlock ? @"@?0" : @"@0:8";
+    NSInteger size = isBlock ? sizeof(void *) : sizeof(void *)+ sizeof(SEL);
+        for (NSInteger i = 1; i < lt.count;) {
+            NSString *t = trim(lt[i]);
+            NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"id"][0];
+            if (i == 0) {
+                if (!t || t.length ==0)
+                    funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
+                else
+                    funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
+                break;
+            }else{
+                
+                funcSignature = [funcSignature stringByAppendingString:[NSString stringWithFormat:@"%@%@", tpe, [@(size) stringValue]]];
+                size += [typeSignatureDict[typeSignatureDict[t] ? t : @"id"][1] integerValue];
+            }
+            i = (i == lt.count-1) ? 0 : i+1;
+        }
+    
+    return funcSignature;
+}
+
 
 #define TT_ARG_Injection(charAbbreviation,type,func)\
 case charAbbreviation:\
@@ -309,8 +321,6 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
     }
 }
 
-
-
 static NSString * MethodFormatterToOcFunc(NSString *method){
     if ([method rangeOfString:@"_"].length > 0) {
         method = [method stringByReplacingOccurrencesOfString:@"__" withString:@"$$"];
@@ -332,11 +342,6 @@ static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
     Method classMethodInfo    = class_getClassMethod(aClass, aSel);
     return instanceMethodInfo?instanceMethodInfo:classMethodInfo;
 }
-
-
-
-
-
 
 static NSString * ttpatch_get_derive_class_originalName(NSString *curName){
     if ([curName hasPrefix:TTPATCH_DERIVE_PRE]) {
@@ -955,16 +960,23 @@ static void aspect_swizzleForwardInvocation(Class klass) {
 
 }
 
-static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isInstanceMethod) {
+static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isInstanceMethod, NSString *signature) {
     NSCParameterAssert(selector);
     Method targetMethod = isInstanceMethod?class_getInstanceMethod(cls, selector):class_getClassMethod(cls, selector);
     IMP targetMethodIMP = method_getImplementation(targetMethod);
+    NSString *signatureStr;
+    if (!signature || !signature.length) {
+        signatureStr = @"@@:@";
+    }else{
+        signatureStr= CreateSignatureWithString(signature, NO);
+    }
+     
     /**
      *这里将native不存在的方法,默认签名为 入参 @, return @,防止因签名原因无法获取参数列表.
      */
-    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:"@@:@";
+    const char *typeEncoding = method_getTypeEncoding(targetMethod)?:[signatureStr cStringUsingEncoding:NSUTF8StringEncoding];
+
     guard(aspect_isMsgForwardIMP(targetMethodIMP))else{
-        
         SEL new_SEL = NSSelectorFromString([NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, NSStringFromSelector(selector)]);
         class_addMethod(cls, new_SEL, method_getImplementation(targetMethod), typeEncoding);
 
@@ -974,6 +986,10 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
 }
 
 static void HookClassMethod(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys){
+    return HookClassMethodWithSignature(className, superClassName, method, isInstanceMethod, propertys, nil);
+}
+
+static void HookClassMethodWithSignature(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys,NSString *signature){
     ttpatch_performLocked(^{
         
         if(checkRegistedMethod(method, className, !isInstanceMethod)){
@@ -1021,16 +1037,14 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
          *  假如我们不做方法替换,系统在执行`objc_msgSend`函数,这样会根据当前的对象的继承链去查找方法然后执行,这里就涉及到一个查找的过程
          *  如果查找不到方法,会走消息转发也就是`_objc_msgForward`函数做的事情,所以那我们为什么不直接将方法的`IMP`替换为`_objc_msgForward`直接走消息转发呢
          */
-        aspect_prepareClassAndHookSelector(aClass, original_SEL, isInstanceMethod);
+        aspect_prepareClassAndHookSelector(aClass, original_SEL, isInstanceMethod, signature);
         
         //将已经替换的class做记录
         registerMethod(method, className, !isInstanceMethod);
         
         
     });
-  
 }
-
 
 
 #pragma makr- Native API
@@ -1086,6 +1100,9 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){
         HookClassMethod(className, superClassName, MethodFormatterToOcFunc(method), isInstanceMethod, propertys);
+    };
+    self[@"MessageQueue_oc_replaceDynamicMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys, NSString *signature){
+        HookClassMethodWithSignature(className, superClassName, MethodFormatterToOcFunc(method), isInstanceMethod, propertys, signature);
     };
     self[@"MessageQueue_oc_addPropertys"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
         AddPropertys(className, superClassName,propertys);

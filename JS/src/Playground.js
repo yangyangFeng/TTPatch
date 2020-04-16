@@ -1,7 +1,7 @@
 /**
  * 引入UI组件,不引入无法直接使用
  */ 
-_import('ASIdentifierManager,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
+_import('UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
 /**
  *  @params:1.要替换的Class名,`:`标识继承关系
@@ -38,6 +38,28 @@ defineClass('TTPlaygroundController:UIViewController', {
 		self.cleanSubviews();
 		self.addSomeTestView();
 	},
+	/**
+	 * TTPatch动态添加的方法分两类
+	 * 1. 仅供JS端调用,此种方法因供JS端调用,所以采用普通方式声明即可.
+	 * 2. 供JS&Oc调用,此种访问因`Native`调用所以需要提供动态方法签名,写法如下
+	 *    方法名	关键字		返回值,参数		方法实现
+	 * 	  funcName:`dynamic("void, int", function(){})`
+	 * 	  如方法只有一个参数/返回值(id类型)可简化:dynamic(function(){}),也可以不写`dynamic`.
+	 * 	  Native动态方法签名默认: `@@:@' 
+	 */
+	funcWithParams_:dynamic(function(param1){
+		Utils.log_info('[1]动态方法入参:'+param1);
+	}),
+	funcWithParams_param2_:dynamic('void,NSString *,NSString *',function(param1,param2){
+		Utils.log_info('[2]动态方法入参:'+param1+','+param2);
+	}),
+	funcWithParams_param2_param3_:dynamic('void,NSString *,NSString *,NSString *',function(param1,param2,param3){
+		Utils.log_info('[3]动态方法入参:'+param1+','+param2+','+param3);
+	}),
+
+	// ----------------------------------------------------------------------------------------------------------------
+	//											以下为Demo代码
+	// ----------------------------------------------------------------------------------------------------------------
 	cleanSubviews: function () {
 		self.view().subviews().forEach(subview => {
 			subview.removeFromSuperview()
@@ -84,10 +106,8 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.setFrame_(new TTReact(0, 600, screenWidth, 50));
 		btn.addTarget_action_forControlEvents_(self, "btnDidAction:", 1 << 6);
 		self.view().addSubview_(btn);
-		// self.params1_params2_params3_params4_params5_params6_params7_(2, 2, 2, 2, 2, 2, 2);
-		// self.ttparams1_params2_params3_params4_params5_params6_params7_(33333, 2, 2, 2, 2, 2, 2);
 	},
-	action_: function (btn) {
+	action_: dynamic(function (btn) {
 		btn.setSelected_(!btn.isSelected());
 		if(btn.isSelected()){
 			btn.setBackgroundColor_(UIColor.whiteColor());
@@ -95,7 +115,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			btn.setBackgroundColor_(UIColor.systemGreenColor());
 		}
 
-	},
+	}),
 	btnDidAction_: function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
 		var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
@@ -103,6 +123,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 		let  str = self.name();
 		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
+		self.testFunc();
 	}
 }, {
 	//静态方法

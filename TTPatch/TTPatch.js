@@ -22,12 +22,16 @@ MessageQueue.define = function (className) {
 MessageQueue.replaceMethod = function (className, superClassName, key, isInstanceMethod, propertys) {
 	return MessageQueue_oc_replaceMethod(className, superClassName, key, isInstanceMethod, propertys);
 };
+MessageQueue.replaceDynamicMethod = function (className, superClassName, key, isInstanceMethod, propertys, signature) {
+	return MessageQueue_oc_replaceDynamicMethod(className, superClassName, key, isInstanceMethod, propertys, signature);
+};
 MessageQueue.registerProperty = function (className, superClassName, propertys) {
 	return MessageQueue_oc_addPropertys(className, superClassName, propertys);
 };
 MessageQueue.MessageQueue_oc_setBlock = function (jsFunc) {
 	return MessageQueue_oc_setBlock(jsFunc);
 };
+
 
 class Utils {
 }
@@ -63,14 +67,14 @@ this.block=function(signature){
 }
 
 class Class_obj {
-	constructor(className, superClassName, instancesMethods, classMethods, propertys) {
+	constructor(className, superClassName, instancesMethods, classMethods, propertys, dynamicSignatureList) {
 		this.__cls;
 		this.__className = className;
 		this.__superClassName = superClassName;
 		this.__methodList = instancesMethods;
 		this.__property_list = propertys;
-		// this.__findPropertys();
 		this.__methodCache = new Array(3);
+		this.__dynamicSignatureList = dynamicSignatureList;
 		this.__cls = classMethods ? new Class_obj(className, superClassName, classMethods, false,null) : null;
 	}
 
@@ -197,11 +201,24 @@ class Block extends JSObject{
 	}
 }
 
-// class BlockOC {
-// 	constructor(key, isHasParams) {
-	
-// 	}
-// }
+class Dynamic extends JSObject{
+	constructor(signature, func) {
+		super('dynamic',null);
+		this.__signature = signature;
+		this.__imp = func; 
+	}
+	getImp(){
+		return this.__imp;
+	}
+	getSignature(){
+		return this.__signature;
+	}
+}
+this.dynamic=function(signature,func){
+	if(func == null) {func=signature;signature=null;}
+	if(signature==null || signature=='') signature=','
+	return new Dynamic(signature,func);
+}
 
 
 class Property {
@@ -432,16 +449,23 @@ class TTEdgeInsets {
 	function pv_registClass(className, superClassName, instancesMethods, classMethods) {
 		let methodList = {};
 		let property_list = [];
+		let dynamicSignatureList = {};
 		for (let key in instancesMethods) {
 			let value = instancesMethods[key];
 			if (value instanceof Property) {
 				value['__name'] = key;
 				property_list.push(value);
-			}else {
+			}
+			else if(value instanceof Dynamic){
+				methodList[key]=value.getImp();
+				dynamicSignatureList[key]=value.getSignature();
+			}
+			else {
 				methodList[key]=value;
 			}
 		}
-		let obj = new Class_obj(className, superClassName, methodList, classMethods, property_list);
+
+		let obj = new Class_obj(className, superClassName, methodList, classMethods, property_list, dynamicSignatureList);
 		Utils.log('register: [ ' + className+' ]');
 		CLASS_MAP[obj.__className] = obj;
 		pv__import(className);
@@ -464,10 +488,18 @@ class TTEdgeInsets {
 			isInstanceMethod = false;
 		}
 		for (const key in cls.__methodList) {
-			if (cls.__methodList.hasOwnProperty(key)) {
-				const method = cls.__methodList[key];
-				MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
-			}
+			// if (key != '_c' && cls.__methodList.hasOwnProperty(key) && cls.__dynamicSignatureList.hasOwnProperty(key)) {
+				if (key == '_c') continue;
+				let method = cls.__methodList[key];
+				
+				let signature = cls.__dynamicSignatureList?cls.__dynamicSignatureList[key]:'';
+				signature=signature?signature:'';
+				Utils.log_info(key+'----signature:'+signature);
+				MessageQueue.replaceDynamicMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list, signature);
+			// }else{
+			// 	let method = cls.__methodList[key];
+			// 	MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
+			// }
 		}
 		return isInstanceMethod ? pv_registMethods(cls.__cls) : null;
 	}
