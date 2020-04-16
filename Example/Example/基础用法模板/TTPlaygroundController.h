@@ -20,6 +20,9 @@ NS_ASSUME_NONNULL_BEGIN
                 param2:(NSString *)param2
                 param3:(NSString *)param3;
 
+- (void)funcWithBlockParams:(NSString * )param1
+                     param2:(void(^)(NSString *arg))param2;
+
 @end
 
 NS_ASSUME_NONNULL_END

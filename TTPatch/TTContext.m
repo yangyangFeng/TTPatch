@@ -156,7 +156,7 @@ static id CreateBlockWithSignatureString(NSString *signatureStr){
 static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock){
     static NSMutableDictionary *typeSignatureDict;
         if (!typeSignatureDict) {
-            typeSignatureDict  = [NSMutableDictionary new];
+            typeSignatureDict  = [NSMutableDictionary dictionaryWithObject:@[[NSString stringWithUTF8String:@encode(dispatch_block_t)], @(sizeof(dispatch_block_t))] forKey:@"@?"];
     #define JP_DEFINE_TYPE_SIGNATURE(_type) \
     [typeSignatureDict setObject:@[[NSString stringWithUTF8String:@encode(_type)], @(sizeof(_type))] forKey:@#_type];\
 

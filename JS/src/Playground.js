@@ -124,7 +124,14 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
 		self.testFunc();
-	}
+
+	},
+	funcWithBlockParams_param2_:dynamic(',id,?',function(arg1,callback){
+		Utils.log_info('block:'+arg1);
+		if(callback){
+			callback("I'm back");
+		}
+	})
 }, {
 	//静态方法
 	testAction_:function (str) {

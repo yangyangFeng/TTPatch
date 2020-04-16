@@ -33,10 +33,11 @@
 }
 - (void)testFunc{
 
-    [self funcWithParams:@"悟空"];
-    [self funcWithParams:@"熊大" param2:@"熊二"];
-    [self funcWithParams:@"百度" param2:@"腾讯" param3:@"阿里"];
+    [self funcWithBlockParams:@"blockFunc" param2:^(NSString * _Nonnull arg) {
+        NSLog(@"blockFunc: %@",arg);
+    }];
     
 }
+
 
 @end
