@@ -312,7 +312,7 @@ defineClass("JPTableViewController", {
 
 可以在 name:property() 为属性
 
-```js
+```
 defineClass("JPTableViewController", {
   //添加属性
   name:property(),
@@ -323,7 +323,7 @@ defineClass("JPTableViewController", {
      var name = self.name();    //获取 Property 值
      var totalCount = self.totalCount()
   },
-})
+},{});
 ```
 
 #### 私有成员变量
