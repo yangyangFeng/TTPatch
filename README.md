@@ -315,15 +315,12 @@ defineClass("JPTableViewController", {
 ```js
 defineClass("JPTableViewController", {
   //添加属性
-  name:property()
-  init: function() {
-     self = Super().init()
-     self.setData_(["a", "b"])     //添加新的 Property (id data)
-     self.setTotalCount_(2)
-     return self
-  },
+  name:property(),
+  totalCount:property(),
   viewDidLoad: function() {
-     var data = self.data()     //获取 Property 值
+     Super().viewDidLoad();
+     self.setName_("TTPatch");   //设置 Property 值
+     var name = self.name();    //获取 Property 值
      var totalCount = self.totalCount()
   },
 })
