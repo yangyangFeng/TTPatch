@@ -37,6 +37,11 @@
         NSLog(@"blockFunc: %@",arg);
     }];
     
+    [self funcWithBlockParams:@"blockFuncInt" paramInt2:^(int arg) {
+        NSLog(@"blockFuncInt: %d",arg);
+    }];
+   
+    
 }
 
 

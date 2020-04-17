@@ -22,7 +22,7 @@
 /**
  *日志开关
  */
-#define TTPATCH_LOG 0
+#define TTPATCH_LOG 1
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 #import "TTContext.h"

@@ -60,10 +60,14 @@
     }
 }
 
-- (void)testCall2:(NSString *(^)(NSString *str))call{
+- (void)testCall2:(UIViewController *(^)(UIViewController *str))call{
     if (call) {
-        NSLog(@"有参block----%@",call(@"安居客"));
+//        NSLog(@"有参block----%@",);
+        UIViewController *  res = call(self);
 //        call(@"安居客");
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [res.view setBackgroundColor:[UIColor systemGreenColor]];
+        });
     }
 }
 

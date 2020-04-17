@@ -87,7 +87,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			view.setBackgroundColor_(UIColor.systemGreenColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
-			label.setText_(String(i)+'🍓');
+			label.setText_(String(i)+'🍓s');
 			label.setFont_(UIFont.systemFontOfSize_(20))
 			label.setTextColor_(UIColor.whiteColor())
 			label.setTextAlignment_(1);
@@ -107,7 +107,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.addTarget_action_forControlEvents_(self, "btnDidAction:", 1 << 6);
 		self.view().addSubview_(btn);
 	},
-	action_: dynamic(function (btn) {
+	action_: dynamic(',id',function (btn) {
 		btn.setSelected_(!btn.isSelected());
 		if(btn.isSelected()){
 			btn.setBackgroundColor_(UIColor.whiteColor());
@@ -116,7 +116,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 		}
 
 	}),
-	btnDidAction_: function (btn) {
+	btnDidAction_: dynamic(',id',function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
 		var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
 		Utils.log_info('uuid->'+uuid.value());
@@ -124,12 +124,17 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
 		self.testFunc();
-
-	},
+	}),
 	funcWithBlockParams_param2_:dynamic(',id,?',function(arg1,callback){
 		Utils.log_info('block:'+arg1);
 		if(callback){
-			callback("I'm back");
+			callback(1);
+		}
+	}),
+	funcWithBlockParams_paramInt2_:dynamic(',id,?',function(arg1,callback){
+		Utils.log_info('block:'+arg1);
+		if(callback){
+			callback(1);
 		}
 	})
 }, {

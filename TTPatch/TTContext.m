@@ -186,7 +186,8 @@ static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock)
             JP_DEFINE_TYPE_SIGNATURE(Class);
             JP_DEFINE_TYPE_SIGNATURE(SEL);
             JP_DEFINE_TYPE_SIGNATURE(void*);
-            JP_DEFINE_TYPE_SIGNATURE(void *);
+            JP_DEFINE_TYPE_SIGNATURE(NSString*);
+            JP_DEFINE_TYPE_SIGNATURE(NSNumber*);
         }
     NSArray  *lt            = [signatureStr componentsSeparatedByString:@","];
     /**
@@ -196,7 +197,7 @@ static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock)
     NSInteger size = isBlock ? sizeof(void *) : sizeof(void *)+ sizeof(SEL);
         for (NSInteger i = 1; i < lt.count;) {
             NSString *t = trim(lt[i]);
-            NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"id"][0];
+            NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"void"][0];
             if (i == 0) {
                 if (!t || t.length ==0)
                     funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
@@ -578,11 +579,18 @@ static NSArray* WrapInvocationArgs(NSInvocation *invocation,bool isBlock){
 }
 
 
-static id DynamicBlock(id block, NSArray *arguments){
+static id DynamicBlock(id block, NSArray *arguments, NSString*custom_signature){
     TTPatchBlockRef blockLayout = (__bridge void *)block;
     void *desc = blockLayout->descriptor;
     desc += 2 * sizeof(unsigned long int);
-    guard((blockLayout->flags & TTPATCH_BLOCK_HAS_SIGNATURE)) else{
+    
+    //iOS 13有些系统block没有签名,导致无法动态调用.所以这里支持手动创建签名
+    if (!(blockLayout->flags & TTPATCH_BLOCK_HAS_SIGNATURE) && (custom_signature && custom_signature.length)) {
+        const char * c_custome_signature = [CreateSignatureWithString(custom_signature, YES) cStringUsingEncoding:NSUTF8StringEncoding];
+        size_t size = sizeof(&c_custome_signature);
+        memcpy(&blockLayout->descriptor->signature, &c_custome_signature, size);
+    }
+    guard((blockLayout->descriptor->signature != nil))else{
         @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"block 结构体中无法获取 signature"] userInfo:nil];
         return nil;
     }
@@ -1093,10 +1101,10 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         return DynamicMethodInvocation(obj, isSuper,isBlock,MethodFormatterToOcFunc(method),arguments);
     };
     
-    self[@"MessageQueue_oc_block"] = ^(id obj, id arguments){
+    self[@"MessageQueue_oc_block"] = ^(id obj, id arguments, NSString *custom_signature){
         TTPatchBlockModel *blockModel = (TTPatchBlockModel *)obj;
      
-        return DynamicBlock(blockModel.__isa, arguments);
+        return DynamicBlock(blockModel.__isa, arguments, custom_signature);
     };
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){
@@ -1109,7 +1117,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         AddPropertys(className, superClassName,propertys);
     };
     self[@"MessageQueue_oc_setBlock"] = ^(id jsFunc){
-//        TTLog(@"jsfunc-----%p",jsFunc);
+        TTLog(@"jsfunc-----%p",jsFunc);
     };
     self[@"APP_IsDebug"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
 #if DEBUG

@@ -50,16 +50,9 @@
 
 - (void)testSocket{
     
-    NSString *socket;
-#if TARGET_IPHONE_SIMULATOR  //模拟器
-    socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
-    @"localhost",
-    [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
-#elif TARGET_OS_IPHONE      //真机
-    socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
+    NSString *socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
     [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
     [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
-#endif
 
     [[TTPatchHotRefrshTool shareInstance] startLocalServer:socket];
     [TTPatchHotRefrshTool shareInstance].delegate = self;
