@@ -118,7 +118,7 @@ var bgColor = view.backgroundColor();
 多参数方法名使用 `_` 分隔：
 
 ```js
-var indexPath = require('NSIndexPath').indexPathForRow_inSection_(0, 1);
+var indexPath = NSIndexPath.indexPathForRow_inSection_(0, 1);
 ```
 
 若原 OC 方法名里包含下划线 `_`，在 JS 使用双下划线 `__` 代替：
@@ -249,6 +249,47 @@ defineClass('UIView', {
 });
 ```
 
+#### 添加新方法
+  *TTPatch动态添加的方法分两类*
+  1. 仅供JS端调用,此种方法因供JS端调用,所以采用普通方式声明即可.
+  2. 供JS&Oc调用,此种访问因`Native`调用所以需要提供动态方法签名,写法如下
+
+     方法名    关键字        返回值,参数        方法实现
+
+        funcName:`dynamic("void, int", function(){})`
+
+        如方法只有一个参数/返回值(id类型)可简化:dynamic(function(){}),也可以不写`dynamic`.
+
+        Native动态方法签名默认: `v@:v'
+
+[方法签名对照表](https://github.com/yangyangFeng/TTPatch/wiki/%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D%E5%AF%B9%E7%85%A7%E8%A1%A8#%E5%85%B3%E4%BA%8E%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D)
+```objc
+// OC
+@implementation JPTableViewController
+- (void)viewDidLoad
+{
+    [self funcWithParams:@"悟空"];
+    [self funcWithParams:@"熊大" param2:@"熊二"];
+    [self funcWithParams:@"百度" param2:@"腾讯" param3:@"阿里"];
+}
+@end
+```
+```js
+// JS
+
+defineClass("JPTableViewController", {
+ 	funcWithParams_:dynamic('void,id',function(param1){
+		Utils.log_info('[1]动态方法入参:'+param1);
+	}),
+	funcWithParams_param2_:dynamic('void,id,id',function(param1,param2){
+		Utils.log_info('[2]动态方法入参:'+param1+','+param2);
+	}),
+	funcWithParams_param2_param3_:dynamic('void,id,id,id',function(param1,param2,param3){
+		Utils.log_info('[3]动态方法入参:'+param1+','+param2+','+param3);
+	}),
+})
+```
+
 #### Super
 
 使用 `Super()` 接口代表 super 关键字，调用 super 方法:
@@ -309,29 +350,6 @@ defineClass("JPTableViewController", {
 })
 ```
 
-#### 添加新方法
-
-可以给一个类随意添加 OC 未定义的方法，但所有的参数类型都是 `id`:
-
-```objc
-// OC
-@implementation JPTableViewController
-- (void)viewDidLoad
-{
-     NSString* data = [self dataAtIndex:@(1)];
-     NSLog(@"%@", data);      //output: Patch
-}
-@end
-```
-```js
-// JS
-var data = ["JS", "Patch"]
-defineClass("JPTableViewController", {
-  dataAtIndex: function(idx) {
-     return idx < data.length ? data[idx]: ""
-  }
-})
-```
 
 
 ### 4. 特殊类型
@@ -373,31 +391,58 @@ view.sizeThatFits_(new TTSize(width: 100, height:100))
 self.performSelector_withObject_("viewWillAppear:", 1)
 ```
 
-
 ### 5. Block
 
-#### 调用Obj-C传入的block
+#### 新增Native方法中
+调用Obj-C传入的block,需传入方法签名`?`代表block
+动态生成的方法参数中包含`block`,要注意`block`是否包含`signature`信息,如确实则不可动态调用
+> iOS 13下 WKWebView delegate 方法中 `block`缺少`signature`.
+
+上述情况需要在调用时手动设置签名:
+```
+    decisionHandler(block(',int'),1);
+```
+'block(',int')'为签名,规则如下
+
+[方法签名对照表](https://github.com/yangyangFeng/TTPatch/wiki/%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D%E5%AF%B9%E7%85%A7%E8%A1%A8#%E5%85%B3%E4%BA%8E%E6%96%B9%E6%B3%95%E7%AD%BE%E5%90%8D)
+```
+
+callBlock_:dynamic(',?',function(callback){
+    if(callback){
+        //自动获取签名
+        callback(10);
+    })
+},
+
+webView_decidePolicyForNavigationAction_decisionHandler_:dynamic(',id,id,?',function(webView, navigationAction, 
+decisionHandler) {
+    //手动设置签名
+    decisionHandler(block(',int'),1);
+}),
+```
+#### 新增纯JS方法中
 ```
 callBlock_:function(callback){
     if(callback){
-        callback(10);
+	callback(10);
     }
 },
-
 ```
+
 #### Obj-C调用js传入block,并接受回调
 `JavaScript`的`block`传入`Obj-c`时要注意, `block`应声明方法参数及返回值类型 `,` 分割.
 返回值在第一位
 ```
 runBlock:function(){
 
-    self.testCall2_(block("NSString*,NSString*"),function(arg){
+    self.testCall2_(block("id,id"),function(arg){
         Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
         return '这是有返回值的哦';
     });
 }
 
 ```
+
 ### 6. 调试
 目前支持3中级别日志
 
