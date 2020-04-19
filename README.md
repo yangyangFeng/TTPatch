@@ -6,6 +6,7 @@
 
 [2. 基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
+[3. 在线工具](https://yangyangfeng.github.io/TTPatchConvertor/)
 
 > 风险提示: 请配合服务器下发开关使用, 通过配置决定`APP`是否初始化`TTPatch`模块
 
@@ -23,6 +24,7 @@
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
 |**实现协议**                        | 2020年04月01日新增|
 |**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md#%E7%AE%80%E5%8D%95%E4%BD%93%E9%AA%8C-ii)|
+|**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatchConvertor/)|
 
 
 
