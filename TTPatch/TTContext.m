@@ -1062,16 +1062,16 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     self[@"Utils_Log"] = ^(log_level level,id msg){
         switch (level) {
             case log_level_debug:
-                TTLog(@"%@",msg);
+                TTLog(@"%@",ToOcObject(msg));
                 break;
             case log_level_info:
-                TTLog_Info(@"%@",msg);
+                TTLog_Info(@"%@",ToOcObject(msg));
                 break;
             case log_level_error:
-                TTLog_Error(@"%@",msg);
+                TTLog_Error(@"%@",ToOcObject(msg));
                 break;
             default:
-                TTLog(@"%@",msg);
+                TTLog(@"%@",ToOcObject(msg));
                 break;
         }
 

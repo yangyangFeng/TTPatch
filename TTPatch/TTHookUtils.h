@@ -20,6 +20,19 @@ static id ToJsObject(id returnValue,NSString *clsName){
     return [TTJSObject createJSObject:nil className:clsName isInstance:NO];;
 }
 
+static id ToOcObject(id jsObj){
+    if (jsObj) {
+        if ([jsObj isKindOfClass:[NSString class]] ||
+            [jsObj isKindOfClass:[NSNumber class]]) {
+            return jsObj;
+        }
+        else if([jsObj isKindOfClass:[NSDictionary class]]){
+            return jsObj[@"__isa"];
+        }
+    }
+    return jsObj;
+}
+
 static NSDictionary* CGPointToJSObject(CGPoint point){
     return @{@"x":@(point.x),
              @"y":@(point.y)
