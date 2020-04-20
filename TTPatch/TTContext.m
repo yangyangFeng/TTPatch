@@ -579,8 +579,9 @@ static NSArray* WrapInvocationArgs(NSInvocation *invocation,bool isBlock){
 }
 
 
-static id DynamicBlock(id block, NSArray *arguments, NSString*custom_signature){
-    TTPatchBlockRef blockLayout = (__bridge void *)block;
+static id DynamicBlock(TTPatchBlockModel *blockModel, NSArray *arguments, NSString*custom_signature){
+    
+    TTPatchBlockRef blockLayout = (__bridge void *)blockModel.__isa;
     void *desc = blockLayout->descriptor;
     desc += 2 * sizeof(unsigned long int);
     
@@ -600,7 +601,7 @@ static id DynamicBlock(id block, NSArray *arguments, NSString*custom_signature){
     const char * c_signature = (*(const char **)desc);
     NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:c_signature];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
-    [invocation setTarget:block];
+    [invocation setTarget:blockModel.__isa];
     setInvocationArgumentsMethod(invocation, arguments,YES);
     [invocation invoke];
 
@@ -1102,9 +1103,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     };
     
     self[@"MessageQueue_oc_block"] = ^(id obj, id arguments, NSString *custom_signature){
-        TTPatchBlockModel *blockModel = (TTPatchBlockModel *)obj;
-     
-        return DynamicBlock(blockModel.__isa, arguments, custom_signature);
+        return DynamicBlock(obj, arguments, custom_signature);
     };
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){

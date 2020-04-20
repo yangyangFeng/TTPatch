@@ -108,7 +108,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "588"
             endingLineNumber = "588"
-            landmarkName = "DynamicBlock(block, arguments, custom_signature)"
+            landmarkName = "DynamicBlock(blockModel, arguments, custom_signature)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
