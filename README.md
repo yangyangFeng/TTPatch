@@ -2,10 +2,11 @@
 *热修复、热更新、JS代码动态下发、动态创建类*
 
 
-[1. 使用文档](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md)
+[1. 使用文档](https://github.com/yangyangFeng/TTPatch/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)
 
 [2. 基础用法](https://github.com/yangyangFeng/TTPatch/wiki/%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95)
 
+[3. 在线工具](https://yangyangfeng.github.io/TTPatch_Convertor/.)
 
 > 风险提示: 请配合服务器下发开关使用, 通过配置决定`APP`是否初始化`TTPatch`模块
 
@@ -23,13 +24,14 @@
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
 |**实现协议**                        | 2020年04月01日新增|
 |**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md#%E7%AE%80%E5%8D%95%E4%BD%93%E9%AA%8C-ii)|
+|**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatchConvertor/)|
 
 
 
 ## 2. 安装
 
 
-### CocoaPods `pod 0.3.0`
+### CocoaPods `pod 0.4.1`
 
 1. 在 Podfile 中添加  `pod 'TTPatch'`。
 2. 执行 `pod install` 或 `pod update`。
@@ -312,21 +314,18 @@ defineClass("JPTableViewController", {
 
 可以在 name:property() 为属性
 
-```js
+```
 defineClass("JPTableViewController", {
   //添加属性
-  name:property()
-  init: function() {
-     self = Super().init()
-     self.setData_(["a", "b"])     //添加新的 Property (id data)
-     self.setTotalCount_(2)
-     return self
-  },
+  name:property(),
+  totalCount:property(),
   viewDidLoad: function() {
-     var data = self.data()     //获取 Property 值
+     Super().viewDidLoad();
+     self.setName_("TTPatch");   //设置 Property 值
+     var name = self.name();    //获取 Property 值
      var totalCount = self.totalCount()
   },
-})
+},{});
 ```
 
 #### 私有成员变量
