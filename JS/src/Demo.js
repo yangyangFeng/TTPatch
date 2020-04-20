@@ -239,12 +239,6 @@ defineClass('BlockViewController:UITableViewController',{
 		if(callback){
 			callback(10);
 		}
-	},
-	// testCall1_:function(){
-	// },
-	// testCall2_:function(){
-	// },
-	// testCall3_:function(){
-	// },
+	}
 
 },{});

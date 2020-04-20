@@ -1090,7 +1090,9 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         }
          
         for (NSString *aProtocol in protocols) {
-            class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol));
+            if (!class_conformsToProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
+                class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol));
+            }
         }
         
         return @{@"self":[classAndSuper firstObject],

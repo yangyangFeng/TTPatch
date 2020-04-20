@@ -23,11 +23,8 @@
 @end
 
 @implementation TTPatchBlockModel
-//- (void)invote{
-//    NSInvocation *originalInvocation = objc_getAssociatedObject(self, "invocation");
-//    TTPatchUtils.TTDynamicBlockWithInvocation(self.__isa,originalInvocation);
-//}
+
 -(void)dealloc{
-    NSLog(@"%@----dealloc",NSStringFromClass([self class]));
+    NSLog(@"%@----dealloc",self);
 }
 @end

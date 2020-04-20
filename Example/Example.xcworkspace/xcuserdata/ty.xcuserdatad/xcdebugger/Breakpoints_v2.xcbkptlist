@@ -46,6 +46,38 @@
             endingLineNumber = "196"
             landmarkName = "CreateSignatureWithString(signatureStr, isBlock)"
             landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "95580389-FFD7-4ECD-B4A9-72622FB0B7F2 - ad85329e7892644f"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateSignatureWithString"
+                  moduleName = "Example"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/TTPatch/TTContext.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "196"
+                  endingLineNumber = "196"
+                  offsetFromSymbolStart = "8068">
+               </Location>
+               <Location
+                  uuid = "95580389-FFD7-4ECD-B4A9-72622FB0B7F2 - a66ff6cb55658303"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateSignatureWithString"
+                  moduleName = "TTPatch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/TTPatch/TTContext.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "196"
+                  endingLineNumber = "196"
+                  offsetFromSymbolStart = "8068">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -60,22 +92,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "860"
             endingLineNumber = "860"
-            landmarkName = "OC_MSG_SEND_HANDLE(self, invocation_selector, invocation)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B96FC346-0E85-4807-A9B9-5DB1EFF28915"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../TTPatch/TTContext.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "879"
-            endingLineNumber = "879"
             landmarkName = "OC_MSG_SEND_HANDLE(self, invocation_selector, invocation)"
             landmarkType = "9">
          </BreakpointContent>
@@ -110,6 +126,54 @@
             endingLineNumber = "588"
             landmarkName = "DynamicBlock(blockModel, arguments, custom_signature)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C19DB57D-ABB3-46A4-9DA5-2CD1D217F395"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../TTPatch/TTContext.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
+            landmarkName = "DynamicBlock(blockModel, arguments, custom_signature)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "C19DB57D-ABB3-46A4-9DA5-2CD1D217F395 - 873a67db4258cbc1"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DynamicBlock"
+                  moduleName = "Example"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/TTPatch/TTContext.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "585"
+                  endingLineNumber = "585"
+                  offsetFromSymbolStart = "164">
+               </Location>
+               <Location
+                  uuid = "C19DB57D-ABB3-46A4-9DA5-2CD1D217F395 - 8cd0a38e6faf2c8d"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "DynamicBlock"
+                  moduleName = "TTPatch"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/TTPatch/TTContext.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "585"
+                  endingLineNumber = "585"
+                  offsetFromSymbolStart = "164">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

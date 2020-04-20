@@ -330,7 +330,7 @@ class TTEdgeInsets {
         }
         else if (this[msg] || (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) ) {
             jsMethod_IMP = this[msg];
-            result = jsMethod_IMP.apply(this, params);
+            return jsMethod_IMP.apply(this, params);
         }
         else if (isInstance) {
             result = MessageQueue.call(this.__isa, ttpatch__isSuperInvoke, isInstance,msg, params);
@@ -545,7 +545,7 @@ class TTEdgeInsets {
             // MessageQueue.MessageQueue_oc_setBlock(arg);
             obj=arg;
         }
-        else if (arg instanceof JSObject || arg instanceof Object) {
+        else if (arg instanceof JSObject) {
             return arg.__isa ? arg.__isa : null;
         }
         else {

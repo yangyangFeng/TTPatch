@@ -8,16 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface TTPatchBlockModel : NSObject
-@property(nonatomic,strong)id __isa;
-@property(nonatomic,strong)NSInvocation *invocation;
-@property(nonatomic,strong)NSArray *arguments;
-
-@end
-
 
 @interface TTJSObject : NSObject
 + (NSDictionary *)createJSObject:(id)__isa
                        className:(NSString *)__className
                       isInstance:(BOOL)__isInstance;
 @end
+
+@interface TTPatchBlockModel : NSObject
+@property(nonatomic,copy)id __isa;
+@property(nonatomic,strong)NSInvocation *invocation;
+@property(nonatomic,strong)NSArray *arguments;
+
+@end
+

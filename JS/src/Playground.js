@@ -124,6 +124,8 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
 		self.testFunc();
+		var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
+		Utils.log_info(dic.name);
 	}),
 	funcWithBlockParams_param2_:dynamic(',id,?',function(arg1,callback){
 		Utils.log_info('block:'+arg1);
