@@ -70,10 +70,37 @@ this.block=function(signature,callback){
     return new Block(signature,callback);
 }
 
-class Class_obj {
-    constructor(className, superClassName, instancesMethods, classMethods, propertys, dynamicSignatureList) {
-        this.__cls;
+class MetaObject {
+    constructor(className, instance) {
+        this.__isa = instance ? instance : null;
+        // this.__metaIsa;
         this.__className = className;
+        // this.__isInstance = instance ? true : false;
+        this.__isInstance = !!instance;
+        this.__count = 0;
+        this.__instanceFlag = '';
+    }
+
+    release() {
+        if (this.__count === 0) {
+
+            return true;
+        }
+        this.__count -= 1;
+        if (this.__count === 0) {
+            return true;
+        }
+        return true;
+    }
+
+    retain() {
+        this.__count += 1;
+    }
+}
+
+class Class_obj extends MetaObject{
+    constructor(className, superClassName, instancesMethods, classMethods, propertys, dynamicSignatureList) {
+        super(className)
         this.__superClassName = superClassName;
         this.__methodList = instancesMethods;
         this.__property_list = propertys;
@@ -120,37 +147,10 @@ class Class_obj {
 
 }
 
-class MetaObject {
-    constructor(className, instance) {
-        this.__isa = instance ? instance : null;
-        // this.__metaIsa;
-        this.__className = className;
-        // this.__isInstance = instance ? true : false;
-        this.__isInstance = !!instance;
-        this.__count = 0;
-        this.__instanceFlag = '';
-    }
-}
 
 class JSObject extends MetaObject{
     constructor(className, instance) {
         super(className, instance);
-    }
-
-    release() {
-        if (this.__count === 0) {
-
-            return true;
-        }
-        this.__count -= 1;
-        if (this.__count === 0) {
-            return true;
-        }
-        return true;
-    }
-
-    retain() {
-        this.__count += 1;
     }
 
     __toOcObject() {
@@ -325,6 +325,8 @@ class TTEdgeInsets {
         let isInstance = this.__isInstance;
         let result;
         let params;
+        let curSelf=self;
+        self=this;
 
         let jsMethod_IMP = pv_findJSMethodMap(obj, msg, isInstance);
 
@@ -353,6 +355,7 @@ class TTEdgeInsets {
         }
         else if (this[msg] || (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) ) {
             jsMethod_IMP = this[msg];
+            self=curSelf;
             return jsMethod_IMP.apply(this, params);
         }
         else if (isInstance) {
@@ -361,10 +364,9 @@ class TTEdgeInsets {
             result = MessageQueue.call(this.__className, ttpatch__isSuperInvoke, isInstance,msg, params);
         }
 
-        // var jsObj = new JSObject('JSObject',result);
         //super调用已完成，将状态重新置为false
         global.ttpatch__isSuperInvoke=false;
-        // this.__isa=null;
+        self=curSelf;
         return pv_toJSObject(result);
     };
 

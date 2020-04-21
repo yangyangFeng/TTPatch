@@ -146,16 +146,9 @@ defineClass('TTPlaygroundController:UIViewController', {
 		self.testFunc();
 		var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
 		Utils.log_info(dic.name);
-
-
-		var session = TTPatchURLSession.sharedSession();
-		var url = "https://yangyangfeng.github.io/TTPatch_Convertor_Flutter/js/JPConvertor.js";
-        var req = NSURLRequest.requestWithURL_(NSURL.URLWithString_(url));
-        var dataTask = session.ttpatch__dataTaskWithRequest_completionHandler_(req, block('void,id,id,id', function(data, response, error) {
-			Utils.log_info(data);
-        }));
-        dataTask.resume();
-		
+				
+		var userMmodel = UserModel.new();
+		userMmodel.getUserName();
 	}),
 	funcWithBlockParams_param2_:dynamic(',id,?',function(arg1,callback){
 		Utils.log_info('block:'+arg1);
@@ -174,3 +167,13 @@ defineClass('TTPlaygroundController:UIViewController', {
 	testAction_:function (str) {
 	}
 })
+
+defineClass('UserModel:NSObject', {
+    getUserName: function() {
+		Utils.log_info(self.getUserPW());
+        return "Alibaba";
+    },
+    getUserPW: function() {
+        return "self -> UserModel";
+    },
+},{});

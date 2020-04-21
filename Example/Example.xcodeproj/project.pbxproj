@@ -175,10 +175,10 @@
 		102D64C12434794A00EED7AE /* 实际场景 */ = {
 			isa = PBXGroup;
 			children = (
-				102D64C22434794A00EED7AE /* ViewController.m */,
-				102D64C32434794A00EED7AE /* BlockViewController.m */,
-				102D64C42434794A00EED7AE /* BlockViewController.h */,
 				102D64C52434794A00EED7AE /* ViewController.h */,
+				102D64C22434794A00EED7AE /* ViewController.m */,
+				102D64C42434794A00EED7AE /* BlockViewController.h */,
+				102D64C32434794A00EED7AE /* BlockViewController.m */,
 			);
 			path = "实际场景";
 			sourceTree = "<group>";
@@ -186,8 +186,8 @@
 		102D64CB2434794A00EED7AE /* 基础用法模板 */ = {
 			isa = PBXGroup;
 			children = (
-				102D64CC2434794A00EED7AE /* TTPlaygroundController.m */,
 				102D64CD2434794A00EED7AE /* TTPlaygroundController.h */,
+				102D64CC2434794A00EED7AE /* TTPlaygroundController.m */,
 			);
 			path = "基础用法模板";
 			sourceTree = "<group>";
@@ -221,18 +221,18 @@
 			isa = PBXGroup;
 			children = (
 				10A725EB244EF80B00E5BD54 /* TTPatch.h */,
+				10A725F2244EF80B00E5BD54 /* TTPatch.m */,
 				10A725EC244EF80B00E5BD54 /* TTContext.h */,
+				10A725F1244EF80B00E5BD54 /* TTContext.m */,
 				10A725ED244EF80B00E5BD54 /* TTPatch.js */,
-				10A725EE244EF80B00E5BD54 /* TTPatchModels.m */,
-				10A725EF244EF80B00E5BD54 /* TTPatchMethodCleaner.h */,
 				10A725F0244EF80B00E5BD54 /* TTHookUtils.h */,
+				10A725F5244EF80B00E5BD54 /* TTHookUtils.m */,
 				10A725FD244F15D900E5BD54 /* TTPatchWidget.h */,
 				10A725FE244F15D900E5BD54 /* TTPatchWidget.m */,
-				10A725F1244EF80B00E5BD54 /* TTContext.m */,
-				10A725F2244EF80B00E5BD54 /* TTPatch.m */,
 				10A725F3244EF80B00E5BD54 /* TTPatchMethodCleaner.m */,
+				10A725EF244EF80B00E5BD54 /* TTPatchMethodCleaner.h */,
 				10A725F4244EF80B00E5BD54 /* TTPatchModels.h */,
-				10A725F5244EF80B00E5BD54 /* TTHookUtils.m */,
+				10A725EE244EF80B00E5BD54 /* TTPatchModels.m */,
 				10A725F6244EF80B00E5BD54 /* TTPatchKit.h */,
 			);
 			name = TTPatch;
