@@ -39,6 +39,13 @@
 		109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C089A2435A6F50021F206 /* bugPatchOrigin.js */; };
 		10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10A3A9892445655B0051C2F7 /* hotfixPatch.js */; };
 		10A3A98F2445A2F10051C2F7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A3A98E2445A2F10051C2F7 /* AdSupport.framework */; };
+		10A725F7244EF80B00E5BD54 /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10A725ED244EF80B00E5BD54 /* TTPatch.js */; };
+		10A725F8244EF80B00E5BD54 /* TTPatchModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725EE244EF80B00E5BD54 /* TTPatchModels.m */; };
+		10A725F9244EF80B00E5BD54 /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725F1244EF80B00E5BD54 /* TTContext.m */; };
+		10A725FA244EF80B00E5BD54 /* TTPatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725F2244EF80B00E5BD54 /* TTPatch.m */; };
+		10A725FB244EF80B00E5BD54 /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725F3244EF80B00E5BD54 /* TTPatchMethodCleaner.m */; };
+		10A725FC244EF80B00E5BD54 /* TTHookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725F5244EF80B00E5BD54 /* TTHookUtils.m */; };
+		10A725FF244F15D900E5BD54 /* TTPatchWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 10A725FE244F15D900E5BD54 /* TTPatchWidget.m */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -73,6 +80,20 @@
 		109C089A2435A6F50021F206 /* bugPatchOrigin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatchOrigin.js; sourceTree = "<group>"; };
 		10A3A9892445655B0051C2F7 /* hotfixPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = hotfixPatch.js; sourceTree = "<group>"; };
 		10A3A98E2445A2F10051C2F7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		10A725EB244EF80B00E5BD54 /* TTPatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatch.h; sourceTree = "<group>"; };
+		10A725EC244EF80B00E5BD54 /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
+		10A725ED244EF80B00E5BD54 /* TTPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TTPatch.js; sourceTree = "<group>"; };
+		10A725EE244EF80B00E5BD54 /* TTPatchModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchModels.m; sourceTree = "<group>"; };
+		10A725EF244EF80B00E5BD54 /* TTPatchMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchMethodCleaner.h; sourceTree = "<group>"; };
+		10A725F0244EF80B00E5BD54 /* TTHookUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTHookUtils.h; sourceTree = "<group>"; };
+		10A725F1244EF80B00E5BD54 /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
+		10A725F2244EF80B00E5BD54 /* TTPatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatch.m; sourceTree = "<group>"; };
+		10A725F3244EF80B00E5BD54 /* TTPatchMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchMethodCleaner.m; sourceTree = "<group>"; };
+		10A725F4244EF80B00E5BD54 /* TTPatchModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchModels.h; sourceTree = "<group>"; };
+		10A725F5244EF80B00E5BD54 /* TTHookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTHookUtils.m; sourceTree = "<group>"; };
+		10A725F6244EF80B00E5BD54 /* TTPatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchKit.h; sourceTree = "<group>"; };
+		10A725FD244F15D900E5BD54 /* TTPatchWidget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPatchWidget.h; sourceTree = "<group>"; };
+		10A725FE244F15D900E5BD54 /* TTPatchWidget.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchWidget.m; sourceTree = "<group>"; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
 		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -115,6 +136,7 @@
 		1014C25C22CB16C000132618 /* Example */ = {
 			isa = PBXGroup;
 			children = (
+				10A725EA244EF80B00E5BD54 /* TTPatch */,
 				10A3A9852445655B0051C2F7 /* .outputs */,
 				109C08942435A6BC0021F206 /* Resources */,
 				102D64CB2434794A00EED7AE /* 基础用法模板 */,
@@ -193,6 +215,28 @@
 				10A3A9892445655B0051C2F7 /* hotfixPatch.js */,
 			);
 			path = .outputs;
+			sourceTree = "<group>";
+		};
+		10A725EA244EF80B00E5BD54 /* TTPatch */ = {
+			isa = PBXGroup;
+			children = (
+				10A725EB244EF80B00E5BD54 /* TTPatch.h */,
+				10A725EC244EF80B00E5BD54 /* TTContext.h */,
+				10A725ED244EF80B00E5BD54 /* TTPatch.js */,
+				10A725EE244EF80B00E5BD54 /* TTPatchModels.m */,
+				10A725EF244EF80B00E5BD54 /* TTPatchMethodCleaner.h */,
+				10A725F0244EF80B00E5BD54 /* TTHookUtils.h */,
+				10A725FD244F15D900E5BD54 /* TTPatchWidget.h */,
+				10A725FE244F15D900E5BD54 /* TTPatchWidget.m */,
+				10A725F1244EF80B00E5BD54 /* TTContext.m */,
+				10A725F2244EF80B00E5BD54 /* TTPatch.m */,
+				10A725F3244EF80B00E5BD54 /* TTPatchMethodCleaner.m */,
+				10A725F4244EF80B00E5BD54 /* TTPatchModels.h */,
+				10A725F5244EF80B00E5BD54 /* TTHookUtils.m */,
+				10A725F6244EF80B00E5BD54 /* TTPatchKit.h */,
+			);
+			name = TTPatch;
+			path = ../../TTPatch;
 			sourceTree = "<group>";
 		};
 		10B102AA242E28EE00D62E6E /* bugfix */ = {
@@ -291,6 +335,7 @@
 				109C08982435A6BC0021F206 /* bugPatch.js in Resources */,
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
 				10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */,
+				10A725F7244EF80B00E5BD54 /* TTPatch.js in Resources */,
 				109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */,
 				1014C26722CB16C400132618 /* Assets.xcassets in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
@@ -400,14 +445,20 @@
 			files = (
 				102D64CE2434794A00EED7AE /* ViewController.m in Sources */,
 				1014C26D22CB16C400132618 /* main.m in Sources */,
+				10A725FC244EF80B00E5BD54 /* TTHookUtils.m in Sources */,
+				10A725FA244EF80B00E5BD54 /* TTPatch.m in Sources */,
 				102D64CF2434794A00EED7AE /* BlockViewController.m in Sources */,
 				10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */,
 				109C0887243593180021F206 /* TTPatchHotRefrshTool.m in Sources */,
 				102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */,
+				10A725F9244EF80B00E5BD54 /* TTContext.m in Sources */,
+				10A725FF244F15D900E5BD54 /* TTPatchWidget.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
+				10A725FB244EF80B00E5BD54 /* TTPatchMethodCleaner.m in Sources */,
 				1082CFDC2436CF5C006FE44A /* RootTableViewController.m in Sources */,
 				1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */,
+				10A725F8244EF80B00E5BD54 /* TTPatchModels.m in Sources */,
 				1014C25F22CB16C000132618 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

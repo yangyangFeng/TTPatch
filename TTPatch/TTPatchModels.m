@@ -31,7 +31,6 @@
     else if ([__isa isKindOfClass:NSMutableArray.class]){
         __className=@"NSMutableArray";
     }
-    NSLog(@"className:%@ ISA:%@",__className,__isa);
     if (__className==nil) {
         __className = NSStringFromClass([__isa class]);
     }else{

@@ -1,9 +1,13 @@
-_import('UIView,UILabel,UIImage,UIButton,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,UIScrollView,WKWebView,NSURLRequest,NSURL,UIApplication,GitHomeViewController')
+_import('GameViewController,NSString,NSBundle,SFSafariViewController,UIView,UILabel,UIImage,UIButton,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,UIScrollView,WKWebView,NSURLRequest,NSURL,UIApplication,GitHomeViewController')
 
 defineClass('HomeViewController:UIViewController',{
 	scrollView:property(),
 	viewDidLoad:function(){
 		Super().viewDidLoad();
+		
+		var adbundle = NSBundle.bundleWithPath_("/System/Library/Frameworks/SafariServices.framework");
+		adbundle.load();
+		
 		let dataSource = ['加载下发模块','JS-OC间block','点击加载更多',];
 
 		self.view().setBackgroundColor_(UIColor.whiteColor());
@@ -53,7 +57,8 @@ defineClass('HomeViewController:UIViewController',{
 
 
 	btnDidAction:function(){
-		var gitHomeVC = GitHomeViewController.new();
+		
+		var gitHomeVC = SFSafariViewController.alloc().initWithURL_(NSURL.URLWithString_("https://github.com/yangyangFeng/TTPatch/blob/master/README.md"));
 		self.navigationController().pushViewController_animated_(gitHomeVC, true);
 	}
 

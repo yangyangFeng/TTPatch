@@ -32,7 +32,7 @@
 #import "TTContext.h"
 #import "TTHookUtils.h"
 #import "TTPatchMethodCleaner.h"
-
+#import "TTPatchWidget.h"
 
 
 #endif /* TTPatchKit_h */

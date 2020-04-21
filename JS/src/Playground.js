@@ -1,7 +1,7 @@
 /**
  * 引入UI组件,不引入无法直接使用
  */ 
-_import('UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
+_import('TTPatchURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
 /**
  *  @params:1.要替换的Class名,`:`标识继承关系
@@ -61,6 +61,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			var arg1= param1[0];
 			var arg2=param2['vc'];
 			Utils.log_info('[2]动态方法入参:'+arg1+','+arg2);
+			// arg2.view().setBackgroundColor_(UIColor.redColor());
 		}
 		
 	}),
@@ -145,6 +146,16 @@ defineClass('TTPlaygroundController:UIViewController', {
 		self.testFunc();
 		var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
 		Utils.log_info(dic.name);
+
+
+		var session = TTPatchURLSession.sharedSession();
+		var url = "https://yangyangfeng.github.io/TTPatch_Convertor_Flutter/js/JPConvertor.js";
+        var req = NSURLRequest.requestWithURL_(NSURL.URLWithString_(url));
+        var dataTask = session.ttpatch__dataTaskWithRequest_completionHandler_(req, block('void,id,id,id', function(data, response, error) {
+			Utils.log_info(data);
+        }));
+        dataTask.resume();
+		
 	}),
 	funcWithBlockParams_param2_:dynamic(',id,?',function(arg1,callback){
 		Utils.log_info('block:'+arg1);

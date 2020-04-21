@@ -66,8 +66,8 @@ Utils.isDebug=function () {
 };
 
 
-this.block=function(signature){
-    return new Block(signature)
+this.block=function(signature,callback){
+    return new Block(signature,callback);
 }
 
 class Class_obj {
@@ -328,7 +328,6 @@ class TTEdgeInsets {
 
         let jsMethod_IMP = pv_findJSMethodMap(obj, msg, isInstance);
 
-        let paramsIsHasBlock = false;
         for (let i = 1; i < arguments.length; i++) {
             if (!params) params = new Array();
             if (jsMethod_IMP){
@@ -337,18 +336,9 @@ class TTEdgeInsets {
                 let param = arguments[i];
                 if (param instanceof Block) {
                     let blockKey = msg+i;
-                    let isHasParams = false;
-                    if (param.length){
-                        isHasParams = true;
-                    }
-                    if (i+1 >= arguments) {
-                        Utils.log_error('error 参数个数不匹配');
-                    }
-                    let blockImp = arguments[i+1];
-                    let blockOC = new Block(param.getFuncSignature(),blockImp,blockKey,isHasParams);
-                    global.curExecFuncArguments[blockKey] = blockOC;
-                    params.push(pv_toOcObject(blockOC));
-                    i++;
+                    param.__key=blockKey;
+                    global.curExecFuncArguments[blockKey] = param;
+                    params.push(pv_toOcObject(param));
                 }else {
                     params.push(pv_toOcObject(param));
                 }

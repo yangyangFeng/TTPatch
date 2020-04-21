@@ -2,26 +2,19 @@ PODS:
   - Socket.IO-Client-Swift (15.1.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
-  - TTPatch (0.5.1)
 
 DEPENDENCIES:
   - Socket.IO-Client-Swift (~> 15.1.0)
-  - TTPatch (from `../TTPatch.podspec`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Socket.IO-Client-Swift
     - Starscream
 
-EXTERNAL SOURCES:
-  TTPatch:
-    :path: "../TTPatch.podspec"
-
 SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  TTPatch: 523c28d2f7d3275c02f74b1a3d091c2a6e879315
 
-PODFILE CHECKSUM: db2950e5de8eda490bf65e8eaf010f9c06d51b14
+PODFILE CHECKSUM: 030bdbc82de207383aa2e09b2409bf709112fc9e
 
 COCOAPODS: 1.7.5

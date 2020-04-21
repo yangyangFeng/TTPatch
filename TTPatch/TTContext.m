@@ -88,10 +88,11 @@ static CGSize toOcCGSize(NSString *jsObjValue){
 
 static NSMethodSignature *block_methodSignatureForSelector(id self, SEL _cmd, SEL aSelector) {
     
-    TTPatchBlockRef blockLayout = (__bridge void *)self;
-    const char * c_signature = blockLayout->descriptor->signature;
-
-    return [NSMethodSignature signatureWithObjCTypes:c_signature];
+    uint8_t *p = (uint8_t *)((__bridge void *)self);
+    p += sizeof(void *) * 2 + sizeof(int32_t) *2 + sizeof(uintptr_t) * 2;
+    const char **signature = (const char **)p;
+    
+    return [NSMethodSignature signatureWithObjCTypes:*signature];
 }
 
 static id execFuncParamsBlockWithKeyAndParams(NSString *key,NSArray *params){
@@ -129,10 +130,19 @@ static id CreateBlockWithSignatureString(NSString *signatureStr){
 
     
     void (^block)(void) = ^(void){};
-    TTPatchBlockRef blockLayout = (__bridge void*)block;
-    IMP msgForwardIMP = _objc_msgForward;
-    blockLayout->descriptor->signature = [funcSignature cStringUsingEncoding:NSUTF8StringEncoding];
     
+    uint8_t *p = (uint8_t *)((__bridge void *)block);
+    p += sizeof(void *) + sizeof(int32_t) *2;
+    void(**invoke)(void) = (void (**)(void))p;
+    
+    p += sizeof(void *) + sizeof(uintptr_t) * 2;
+    const char **signature = (const char **)p;
+    const char *fs = [funcSignature UTF8String];
+    char *s = malloc(strlen(fs));
+    strcpy(s, fs);
+    *signature = s;
+    
+    IMP msgForwardIMP = _objc_msgForward;
 #if !defined(__arm64__)
     if ([funcSignature UTF8String][0] == '{') {
         //In some cases that returns struct, we should use the '_stret' API:
@@ -145,7 +155,8 @@ static id CreateBlockWithSignatureString(NSString *signatureStr){
     }
 #endif
     
-    blockLayout->invoke = (void *)msgForwardIMP;
+    *invoke = (void *)msgForwardIMP;
+    
     return block;
 }
 
@@ -259,7 +270,7 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
             case _C_ID:
             {
                 if ('?' == argumentType[1]) {
-                    __block NSDictionary *blockDic = ([arguments objectAtIndex:i]);
+                    NSDictionary *blockDic = ([arguments objectAtIndex:i]);
                     void(^blockImp)(void)= CreateBlockWithSignatureString([blockDic objectForKey:@"__signature"]);
                     [invocation setArgument:&blockImp atIndex:(startIndex + i)];
                     objc_setAssociatedObject(blockImp , CFBridgingRetain(@"TTPATCH_OC_BLOCK"), blockDic, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -928,6 +939,8 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
         __unsafe_unretained JSValue *jsValue;
         if (block_info_js) {
             func = block_info_js[@"__isa"];
+            JSValue * __func = [JSValue valueWithObject:func inContext:[TTPatch shareInstance].context];
+            jsValue =  [__func callWithArguments:params];
             params  =  [NSMutableArray arrayWithArray:WrapInvocationArgs(invocation, YES)];
             jsValue = execFuncParamsBlockWithKeyAndParams(block_info_js[@"__key"], params);
         }else{
