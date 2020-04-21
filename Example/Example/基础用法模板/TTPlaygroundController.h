@@ -13,8 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TTPlaygroundController : RootViewController
 - (void)funcWithParams:(NSString * )param1;
 
-- (void)funcWithParams:(NSString * )param1
-                param2:(NSString *)param2;
+- (void)funcWithParams:(NSArray * )param1
+                param2:(NSDictionary *)param2;
 
 - (void)funcWithParams:(NSString * )param1
                 param2:(NSString *)param2

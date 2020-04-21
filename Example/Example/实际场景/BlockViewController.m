@@ -52,11 +52,13 @@
     if (call) {
         call();
     }
+    [self sendMessage:@"1,2,3"];
+    [self sendMessageVC:self];
 }
 
 - (void)testCall1:(void(^)(NSString * str,int inta))call{
     if (call) {
-        call(@"asdhsdfjhsdbf",999);
+        call(@"{\"id\":1,\"name\":\"Tencent\",\"email\":\"admin@Tencent.com\",\"interest\":[\"Tencent\",\"Tencent\"]}",999);
     }
 }
 
@@ -118,7 +120,7 @@
 
 - (void)testCallIDID:(TTPlaygroundModel *(^)(NSString *str))call{
     if (call) {
-        NSLog(@"block返回值-- %@",call(@"arg IDID"));
+        NSLog(@"block返回值-- %@",call(@"{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}"));
     }else{
         NSLog(@"--------Call 方法未实现---------");
     }

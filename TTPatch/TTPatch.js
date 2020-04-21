@@ -32,7 +32,10 @@ MessageQueue.registerProperty = function (className, superClassName, propertys) 
 MessageQueue.MessageQueue_oc_setBlock = function (jsFunc) {
     return MessageQueue_oc_setBlock(jsFunc);
 };
-
+MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA = function (){
+    var flag = ProjectConfig_IS_USE_NATIVE_DATA();
+    return flag;
+}
 
 class Utils {
 }
@@ -286,7 +289,37 @@ class TTEdgeInsets {
 }
 
 (function () {
-    // Object.prototype = new MetaObject();
+    // 引入 UIKit class
+    global._import = function (name) {
+        let files = name.split(',').forEach((file) => {
+            pv__import(file);
+        });
+    };
+
+    let pv__import = function (clsName) {
+        if (!global[clsName]) {
+            global[clsName] = new JSObject(clsName);
+            Utils.log('import：' + clsName);
+        }
+        return global[clsName]
+    };
+
+    // 定义Class
+    global.defineClass = function (interface, instanceMethods, classMethods) {
+        let classInfo = MessageQueue.define(interface);
+        // 在JS全局声明Class
+        let obj = pv_registClass(classInfo['self'], classInfo['super'], instanceMethods, classMethods);
+        pv__import(classInfo['self']);
+        pv_addPropertys(obj);
+        // 在Native环境中创建并注册方法
+        pv_registMethods(obj);
+
+    };
+
+    global.property = function (adorn, obj) {
+        return new Property(adorn, obj);
+    };
+
     Object.prototype._c = function (msg) {
         let obj = CLASS_MAP[this.__className];
         let isInstance = this.__isInstance;
@@ -345,46 +378,6 @@ class TTEdgeInsets {
         return pv_toJSObject(result);
     };
 
-    pv__getFuncParams=function (arguments) {
-        let params;
-        for (let i = 1; i < arguments.length; i++) {
-            if (!params) params = new Array();
-            params.push(arguments[i]);
-        }
-        return params;
-    }
-
-    // 引入 UIKit class
-    global._import = function (name) {
-        let files = name.split(',').forEach((file) => {
-            pv__import(file);
-        });
-    };
-
-    let pv__import = function (clsName) {
-        if (!global[clsName]) {
-            global[clsName] = new JSObject(clsName);
-            Utils.log('import：' + clsName);
-        }
-        return global[clsName]
-    };
-
-    // 定义Class
-    global.defineClass = function (interface, instanceMethods, classMethods) {
-        let classInfo = MessageQueue.define(interface);
-        // 在JS全局声明Class
-        let obj = pv_registClass(classInfo['self'], classInfo['super'], instanceMethods, classMethods);
-        pv__import(classInfo['self']);
-        pv_addPropertys(obj);
-        // 在Native环境中创建并注册方法
-        pv_registMethods(obj);
-
-    };
-
-    global.property = function (adorn, obj) {
-        return new Property(adorn, obj);
-    };
-
     // native call js
     // Oc 消息转发至 js
     global.js_msgSend = function (instance, className, method, isInstance) {
@@ -415,6 +408,15 @@ class TTEdgeInsets {
             return result;
         }
     };
+
+    // function pv__getFuncParams(arguments) {
+    //     let params;
+    //     for (let i = 1; i < arguments.length; i++) {
+    //         if (!params) params = new Array();
+    //         params.push(arguments[i]);
+    //     }
+    //     return params;
+    // }
 
     function pv_retainJsObject(obj) {
         obj.retain();
@@ -501,7 +503,7 @@ class TTEdgeInsets {
                 
                 let signature = cls.__dynamicSignatureList?cls.__dynamicSignatureList[key]:'';
                 signature=signature?signature:'';
-                Utils.log_info(key+'----signature:'+signature);
+                // Utils.log_info(key+'----signature:'+signature);
                 MessageQueue.replaceDynamicMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list, signature);
             // }else{
             //     let method = cls.__methodList[key];
@@ -561,16 +563,9 @@ class TTEdgeInsets {
                 if (arg['__isInstance']) {
                     // return new JSObject(arg['__className'],arg.__isa);
                     let cls = arg['__className'];
+                    Utils.log('class:'+cls);
                     let value = arg['__isa'];
-                    if (value instanceof Array) {
-                        let result = new Array();
-                        arg.__isa.forEach(element => {
-                            let jsObj = pv_toJSObject(element);
-                            result.push(jsObj);
-                        });
-                        return result
-                    }
-                    else if (cls === 'block') {
+                    if (cls === 'block') {
                         let block = new Block('', arg.__isa);
                         return block.getBlock.bind(block);
                     }
@@ -582,16 +577,19 @@ class TTEdgeInsets {
                         return new TTSize(value.width, value.height);
                     } else if (cls === 'edge') {
                         return new TTEdgeInsets(value.top, value.left, value.bottom.value.right);
-                    } else if (cls === 'NSArray' ||
-                        cls === 'NSMutableArray') {
+                    } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
+                                (cls === 'NSArray' || cls === 'NSMutableArray')) {
                         let result = new Array();
-                        arg.forEach(element => {
+                        arg.__isa.forEach(element => {
                             let jsObj = pv_toJSObject(element);
                             result.push(jsObj);
                         });
                         return result
-                    } else if (cls === 'NSDictionary' ||
-                        cls === 'NSMutableDictionary') {
+                    } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
+                        (cls === 'NSDictionary' ||
+                        cls === 'NSMutableDictionary' ||
+                        cls === 'NSString' ||
+                        cls === 'NSNumber')) {
                         return arg.__isa;
                     }
                 }

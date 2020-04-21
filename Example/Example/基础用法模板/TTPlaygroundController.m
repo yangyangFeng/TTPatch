@@ -41,6 +41,9 @@
         NSLog(@"blockFuncInt: %d",arg);
     }];
    
+    [self funcWithParams:@[@"1",@"2",[UIView new]] param2:@{@"key":[UIView new],
+                                                            @"vc":self,
+    }];
     
 }
 

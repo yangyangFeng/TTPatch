@@ -50,8 +50,19 @@ defineClass('TTPlaygroundController:UIViewController', {
 	funcWithParams_:dynamic(function(param1){
 		Utils.log_info('[1]动态方法入参:'+param1);
 	}),
-	funcWithParams_param2_:dynamic('void,NSString *,NSString *',function(param1,param2){
-		Utils.log_info('[2]动态方法入参:'+param1+','+param2);
+	funcWithParams_param2_:dynamic('void,id,id',function(param1,param2){
+		if(MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			Utils.log_info('[2]动态方法入参:'+param1+','+param2);
+			var arg1= param1.objectAtIndex_(0);
+			var arg2=param2.objectForKey_('vc');
+			Utils.log_info('[2]动态方法入参:'+arg1.value()+','+arg1.value());
+		}else{
+			Utils.log_info('[2]动态方法入参:'+param1+','+param2);
+			var arg1= param1[0];
+			var arg2=param2['vc'];
+			Utils.log_info('[2]动态方法入参:'+arg1+','+arg2);
+		}
+		
 	}),
 	funcWithParams_param2_param3_:dynamic('void,NSString *,NSString *,NSString *',function(param1,param2,param3){
 		Utils.log_info('[3]动态方法入参:'+param1+','+param2+','+param3);
@@ -61,9 +72,17 @@ defineClass('TTPlaygroundController:UIViewController', {
 	//											以下为Demo代码
 	// ----------------------------------------------------------------------------------------------------------------
 	cleanSubviews: function () {
-		self.view().subviews().forEach(subview => {
-			subview.removeFromSuperview()
-		})
+		if(MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			var subviewsArr = self.view().subviews();
+			for (var i=0;i<subviewsArr.count();i++){
+				var subview = subviewsArr.objectAtIndex_(i);
+				subview.removeFromSuperview()
+			}
+		}else{
+			self.view().subviews().forEach(subview => {
+				subview.removeFromSuperview()
+			})
+		}
 	},
 	addSomeTestView: function () {
 		let screenWidth = UIScreen.mainScreen().bounds().size.width;
@@ -119,7 +138,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 	btnDidAction_: dynamic(',id',function (btn) {
 		// tap.view().setBackgroundColor_(UIColor.whiteColor());
 		var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
-		Utils.log_info('uuid->'+uuid.value());
+		Utils.log_info('uuid->'+uuid);
 		let  str = self.name();
 		btn.setTitle_forState_(uuid, 0);
 		btn.setBackgroundColor_(UIColor.systemGreenColor());

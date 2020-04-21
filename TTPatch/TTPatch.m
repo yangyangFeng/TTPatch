@@ -17,6 +17,7 @@ static TTPatch *instance = nil;
 @interface TTPatch ()
 
 @property(nonatomic,strong)TTContext *context;
+@property(nonatomic,strong)TTPatchConfigModel *config;
 @end
 
 @implementation TTPatch
@@ -67,6 +68,7 @@ static TTPatch *instance = nil;
     if (!_context) {
         _context = [TTContext new];
         [_context configJSBrigeActions];
+        [self projectConfig:[TTPatchConfigModel defaultConfig]];
         [self runMainJS];
     }
 }
@@ -76,6 +78,10 @@ static TTPatch *instance = nil;
     NSString *path = [myBundle pathForResource:@"TTPatch.js" ofType:nil];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
     [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
+    
 }
 
+- (void)projectConfig:(TTPatchConfigModel *)config{
+    self.config=config;
+}
 @end

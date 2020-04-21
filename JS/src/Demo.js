@@ -1,4 +1,4 @@
-_import('UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,TaoBaoHome')
+_import('NSMutableDictionary,NSMutableArray,UIView,UILabel,UIImage,UIColor,TTView,ViewController,UITableViewCell,UITableView,NSIndexPath,UIFont,UIScreen,UIImageView,TaoBaoHome')
 
 defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewDataSource>',{
 	data:property(),
@@ -19,9 +19,17 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 		self.addSomeTestView();
 	},
 	cleanSubviews: function () {
-		self.view().subviews().forEach(subview => {
-			subview.removeFromSuperview()
-		})
+		if(MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			var subviewsArr = self.view().subviews();
+			for (var i=0;i<subviewsArr.count();i++){
+				var subview = subviewsArr.objectAtIndex_(i);
+				subview.removeFromSuperview()
+			}
+		}else{
+			self.view().subviews().forEach(subview => {
+				subview.removeFromSuperview()
+			})
+		}
 	},
 	addSomeTestView:function(){
 		let dataSource = ['加载纯J1S模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
@@ -31,19 +39,24 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 		tableview.setTableHeaderView_(self.createPageHeader());
 		self.setTableview_(tableview);
         self.view().addSubview_(tableview);
-		// let aaa = TTView.new();
-		// aaa.__isa = null;
-		// aaa=null;
 		self.setTitle_('Demo.js');
     },
     tableView_numberOfRowsInSection_:function(tableview,section){
-        let data = self.data();
-        return data.length;
+		let data = self.data();
+		
+        return MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()?data.count():data.length;
     },
 
     tableView_cellForRowAtIndexPath_:function(tableview,indexPath){
         let cell = UITableViewCell.alloc().initWithStyle_reuseIdentifier_(1,'cell');
-		let data = self.data()[indexPath.row()];
+		let data;
+		if (MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			data = self.data().objectAtIndex_(indexPath.row()).value();
+		}else{
+			data = self.data()[indexPath.row()]
+		}
+
+		
         cell.textLabel().setText_("<"+ data+">");
         return cell;
     },
@@ -64,7 +77,12 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 		}
 		else {
 			let dataSource = self.data();
-			dataSource.push('点击加载更多Cell');
+			
+			if (MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+				dataSource=dataSource.arrayByAddingObject_('点击加载更多Cell');
+			}else{
+				dataSource.push('点击加载更多Cell');
+			}
 			self.setData_(dataSource);
 			self.tableview().reloadData();
 		}
@@ -109,9 +127,17 @@ defineClass('JSRootViewController:RootViewController',{
 		Utils.log_error('refresh');
 	},
 	cleanSubviews: function () {
-		self.view().subviews().forEach(subview => {
-			subview.removeFromSuperview();
-		})
+		if(MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			var subviewsArr = self.view().subviews();
+			for (var i=0;i<subviewsArr.count();i++){
+				var subview = subviewsArr.objectAtIndex_(i);
+				subview.removeFromSuperview()
+			}
+		}else{
+			self.view().subviews().forEach(subview => {
+				subview.removeFromSuperview()
+			})
+		}
 	},
 	addSomeTestView:function(){
 		self.setTitle_('动态下发模块');
@@ -160,13 +186,31 @@ defineClass('BlockViewController:UITableViewController',{
 		self.addSomeTestView();
 	},
 	cleanSubviews: function () {
-		self.view().subviews().forEach(subview => {
-			if (subview != 'UITableView'){
-				subview.removeFromSuperview();
-			}else{
-				self.tableView().reloadData();
+		if(MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
+			var subviewsArr = self.view().subviews();
+			for (var i=0;i<subviewsArr.count();i++){
+				var subview = subviewsArr.objectAtIndex_(i);
+				if (subview != 'UITableView'){
+					subview.removeFromSuperview();
+				}else{
+					self.tableView().reloadData();
+				}
 			}
-		})
+		}else{
+			self.view().subviews().forEach(subview => {
+				if (subview != 'UITableView'){
+					subview.removeFromSuperview();
+				}else{
+					self.tableView().reloadData();
+				}
+			})
+		}
+	},
+	sendMessage_:function(msg){
+		Utils.log_info(msg);
+	},
+	sendMessageVC_:function(vc){
+	vc.view().setBackgroundColor_(UIColor.blackColor());	
 	},
 	addSomeTestView:function(){
 		self.setTitle_('动态下发模块');
@@ -198,8 +242,8 @@ defineClass('BlockViewController:UITableViewController',{
 			}break;
 			case 1:{
 				self.testCall1_(block('void,id,int'),function(arg1,arg2){
-					Utils.log('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+arg1+arg2);
-					Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+arg1+arg2);
+					var dic = JSON.parse(arg1);
+					Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,无返回值  '+dic.name+'-'+arg2);
 				});
 			}break;
 			case 2:{

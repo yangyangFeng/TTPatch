@@ -22,3 +22,21 @@
 
 @end
 
+@interface TTPatchConfigModel : NSObject
+/**
+* 获取默认配置
+*/
++ (TTPatchConfigModel*)defaultConfig;
+
+
+/**
+ * default is NO
+ */
+@property(nonatomic,assign)BOOL isUserNativeData;
+
+/**
+ * default is YES
+ */
+@property(nonatomic,assign)BOOL isOpenLog;
+@end
+

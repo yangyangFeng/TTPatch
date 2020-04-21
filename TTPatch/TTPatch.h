@@ -10,7 +10,7 @@
 
 
 
-@class TTContext;
+@class TTContext,TTPatchConfigModel;
 /**
  *TTPatch 声明周期,初始化u入口
  */
@@ -35,9 +35,12 @@
 /// @param sourceURL ,用于调式时展示的 .js 文件名
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL;
 
+- (void)projectConfig:(TTPatchConfigModel *)config;
 
 - (NSString *)formatterJS:(NSString *)script;
+
 @property(nonatomic,strong,readonly)TTContext *context;
+@property(nonatomic,strong,readonly)TTPatchConfigModel *config;
 @end
 
 

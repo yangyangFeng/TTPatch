@@ -2,7 +2,7 @@ PODS:
   - Socket.IO-Client-Swift (15.1.0):
     - Starscream (~> 3.1)
   - Starscream (3.1.1)
-  - TTPatch (0.4.1)
+  - TTPatch (0.5.1)
 
 DEPENDENCIES:
   - Socket.IO-Client-Swift (~> 15.1.0)
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Socket.IO-Client-Swift: 7cb44c0ffb86e158cee32d0642d30ec5fdcf8f61
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
-  TTPatch: b439c9598d314060d8c0824fdff302847c6c67f0
+  TTPatch: 523c28d2f7d3275c02f74b1a3d091c2a6e879315
 
 PODFILE CHECKSUM: db2950e5de8eda490bf65e8eaf010f9c06d51b14
 

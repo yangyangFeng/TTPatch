@@ -418,7 +418,7 @@ static id WrapInvocationResult(NSInvocation *invocation,NSMethodSignature *signa
             } else {
                 returnValue = (__bridge id)result;
             }
-            return returnValue?ToJsObject(returnValue,NSStringFromClass([returnValue class])):[NSNull null];
+            return returnValue?ToJsObject(returnValue,nil):[NSNull null];
         }break;
         case _C_CLASS:{
             __unsafe_unretained Class instance = nil;
@@ -632,7 +632,8 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
     BOOL hasArgument = NO;
     TTCheckArguments(hasArgument,arguments);
     if([classOrInstance isKindOfClass:NSString.class]){
-        classOrInstance = NSClassFromString(classOrInstance);
+        Class classOrInstanceTmp = NSClassFromString(classOrInstance);
+        classOrInstance = classOrInstanceTmp ?: classOrInstance;
     }
     SEL sel_method = NSSelectorFromString(method);
     NSMethodSignature *signature = [classOrInstance methodSignatureForSelector:sel_method];
@@ -886,7 +887,7 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
                     }else{
                         __unsafe_unretained id tempArg;
                         [invocation getArgument:&tempArg atIndex:(i)];
-                        [tempArguments addObject:tempArg==nil?[NSNull null]:tempArg];
+                        [tempArguments addObject:tempArg==nil?[NSNull null]:ToJsObject(tempArg, nil)];
                     }
                 }break;
                   case _C_STRUCT_B:{
@@ -1060,6 +1061,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
 #pragma makr- Native API
 - (void)configJSBrigeActions{
     self[@"Utils_Log"] = ^(log_level level,id msg){
+        guard([TTPatch shareInstance].config.isOpenLog) else return;
         switch (level) {
             case log_level_debug:
                 TTLog(@"%@",ToOcObject(msg));
@@ -1076,6 +1078,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         }
 
     };
+    
     self[@"MessageQueue_oc_define"] = ^(NSString * interface){
         NSArray * protocols;
         NSArray * classAndSuper;
@@ -1127,6 +1130,14 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         return NO;
 #endif
         
+    };
+    
+    /**
+     * 是否将 String, Number, Dic,Arr 转换成JS 类型,转换后不可再调用Oc方法操作对象.
+     * 默认开启
+     */
+    self[@"ProjectConfig_IS_USE_NATIVE_DATA"] = ^(){
+        return [TTPatch shareInstance].config.isUserNativeData;
     };
     
 }
