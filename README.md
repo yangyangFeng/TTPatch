@@ -25,7 +25,7 @@
 |**实现协议**                        | 2020年04月01日新增|
 |**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md#%E7%AE%80%E5%8D%95%E4%BD%93%E9%AA%8C-ii)|
 |**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatchConvertor/)|
-|**支持原生网络请求**                        | |
+|**支持原生网络请求**                        |[使用示例](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95#2-%E5%A6%82%E6%9E%9C%E5%86%99%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82) |
 
 
 ## 2. 安装
