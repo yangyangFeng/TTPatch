@@ -8,6 +8,10 @@
 
 [3. 在线工具](https://yangyangfeng.github.io/TTPatch_Convertor/.)
 
+[4. 常见问题](https://github.com/yangyangFeng/TTPatch/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+
+[5. 进阶用法](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95)
+
 > 风险提示: 请配合服务器下发开关使用, 通过配置决定`APP`是否初始化`TTPatch`模块
 
 **审核问题请加群:978337686**
