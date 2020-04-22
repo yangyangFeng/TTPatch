@@ -47,9 +47,6 @@
 
 @implementation TTPatchBlockModel
 
--(void)dealloc{
-    NSLog(@"%@----dealloc",self);
-}
 @end
 
 @implementation TTPatchConfigModel

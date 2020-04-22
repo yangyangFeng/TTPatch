@@ -137,11 +137,15 @@ class Class_obj extends MetaObject{
             funcImp ?
                 this.__methodCache.push({[method]: funcImp}) : null;
             return funcImp;
-        } else {
+        } 
+        else if(this.__cls != null){
             let funcImp = this.__cls.__methodList[method];
             funcImp ?
                 this.__methodCache.push({[method]: funcImp}) : null;
             return funcImp;
+        }
+        else {
+            return null;
         }
     }
 
