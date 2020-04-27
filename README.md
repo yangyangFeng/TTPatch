@@ -267,7 +267,7 @@ defineClass('UIView', {
 
         funcName:`dynamic("void, int", function(){})`
 
-        如方法只有一个参数/返回值(id类型)可简化:dynamic(function(){}),也可以不写`dynamic`.
+        如方法无参/无返回值可简化:dynamic(function(){}),也可以不写`dynamic`.
 
         Native动态方法签名默认: `v@:v'
 
