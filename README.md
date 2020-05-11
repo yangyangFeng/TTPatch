@@ -8,9 +8,16 @@
 
 [3. 在线工具](https://yangyangfeng.github.io/TTPatch_Convertor/.)
 
+[4. 常见问题](https://github.com/yangyangFeng/TTPatch/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98)
+
+[5. 进阶用法](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95)
+
+*关于上架*
 > 风险提示: 请配合服务器下发开关使用, 通过配置决定`APP`是否初始化`TTPatch`模块
 
-**审核问题请加群:978337686**
+> **审核问题请加群:978337686**
+
+
 ## 1. 功能列表 
 
 |功能特性|备注限制|
@@ -23,8 +30,8 @@
 |**支持基础数据类型**                   |非id类型,如`int`,`bool`均已支持|
 |**支持下发纯`JS`页面**                    |纯`JS`代码映射原生代码,动态发布|
 |**实现协议**                        | 2020年04月01日新增|
-|**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/blob/master/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3.md#%E7%AE%80%E5%8D%95%E4%BD%93%E9%AA%8C-ii)|
-|**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatchConvertor/)|
+|**支持真机无线预览**                 | [详细说明](https://github.com/yangyangFeng/TTPatch/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3#%E5%AE%9E%E9%99%85%E4%BD%BF%E7%94%A8-iii)|
+|**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatch_Convertor/)|
 |**支持原生网络请求**                        |[使用示例](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95#2-%E5%A6%82%E6%9E%9C%E5%86%99%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82) |
 
 
@@ -260,7 +267,7 @@ defineClass('UIView', {
 
         funcName:`dynamic("void, int", function(){})`
 
-        如方法只有一个参数/返回值(id类型)可简化:dynamic(function(){}),也可以不写`dynamic`.
+        如方法无参/无返回值可简化:dynamic(function(){}),也可以不写`dynamic`.
 
         Native动态方法签名默认: `v@:v'
 
