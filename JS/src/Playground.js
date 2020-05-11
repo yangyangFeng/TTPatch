@@ -1,7 +1,7 @@
 /**
  * 引入UI组件,不引入无法直接使用
  */ 
-_import('TTPatchURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
+_import('TTPatchParser,NSURLSession,TTPatchURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel')
 
 /**
  *  @params:1.要替换的Class名,`:`标识继承关系
@@ -107,7 +107,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			view.setBackgroundColor_(UIColor.systemGreenColor());
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
-			label.setText_(String(i)+'🍓s');
+			label.setText_(String(i)+'🍓');
 			label.setFont_(UIFont.systemFontOfSize_(20))
 			label.setTextColor_(UIColor.whiteColor())
 			label.setTextAlignment_(1);
@@ -145,7 +145,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 		btn.setBackgroundColor_(UIColor.systemGreenColor());
 		self.testFunc();
 		var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
-		Utils.log_info(dic.name);
+		Utils.log_info(dic.name);		
 				
 		var userMmodel = UserModel.new();
 		userMmodel.getUserName();

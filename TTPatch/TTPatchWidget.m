@@ -20,3 +20,13 @@
     }];
 }
 @end
+
+@implementation TTPatchParser
++ (NSData *)stringToData:(NSString *)str{
+    return [str dataUsingEncoding:(NSUTF8StringEncoding)];
+}
++ (NSString *)dataToString:(NSData *)data{
+    return [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+@end

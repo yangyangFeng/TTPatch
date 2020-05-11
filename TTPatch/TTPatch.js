@@ -219,8 +219,6 @@ class Dynamic extends JSObject{
         super('dynamic',null);
         this.__signature = signature;
         this.__imp = func;
-		this.__imp = func; 
-        this.__imp = func;
     }
     getImp(){
         return this.__imp;
@@ -572,7 +570,7 @@ class TTEdgeInsets {
                     } else if (cls === 'size') {
                         return new TTSize(value.width, value.height);
                     } else if (cls === 'edge') {
-                        return new TTEdgeInsets(value.top, value.left, value.bottom.value.right);
+                        return new TTEdgeInsets(value.top, value.left, value.bottom, value.right);
                     } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
                                 (cls === 'NSArray' || cls === 'NSMutableArray')) {
                         let result = new Array();
@@ -606,7 +604,7 @@ class TTEdgeInsets {
         for (let i = 1; i < arguments.length; i++) {
             if (!params) params = new Array();
                 params.push(
-                    arguments[i]
+                    pv_toJSObject(arguments[i])
                 );
         }
         let funcBlock = curExecFuncArguments[index];//block

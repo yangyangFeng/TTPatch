@@ -15,4 +15,9 @@
 - (NSURLSessionDataTask *_Nonnull)ttpatch_dataTaskWithRequest:(NSURLRequest *_Nullable)request completionHandler:(void (^_Nullable)(NSString * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 @end
 
+@interface TTPatchParser : NSObject
++ (NSData *)stringToData:(NSString *)str;
++ (NSData *)dataToString:(NSData *)data;
+@end
+
 

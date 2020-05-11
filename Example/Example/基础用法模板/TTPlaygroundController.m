@@ -28,11 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-        
+     
 }
 - (void)testFunc{
-
+self.rootVC = [UIViewController new];
     [self funcWithBlockParams:@"blockFunc" param2:^(NSString * _Nonnull arg) {
         NSLog(@"blockFunc: %@",arg);
     }];

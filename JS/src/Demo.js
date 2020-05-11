@@ -236,7 +236,6 @@ defineClass('BlockViewController:UITableViewController',{
 		switch (index){
 			case 0:{
 				self.testCall0_(block("",function(){
-					Utils.log('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
 					Utils.log_info('--------JS传入OC方法,接受到回调--------- 无参数,无返回值');
 				}));
 			}break;
@@ -248,7 +247,6 @@ defineClass('BlockViewController:UITableViewController',{
 			}break;
 			case 2:{
 				self.testCall2_(block("id,id",function(arg){
-					Utils.log('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
 					Utils.log_info('--------JS传入OC方法,接受到回调--------- 有参数,有返回值:string  '+arg);
 					// arg.view().setBackgroundColor_(UIColor.blackColor());
 					return arg;
@@ -256,7 +254,6 @@ defineClass('BlockViewController:UITableViewController',{
 			}break;
 			case 3:{
 				self.testCall3_(block("id,void",function(){
-					Utils.log('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
 					Utils.log_info('--------JS传入OC方法,接受到回调--------- 无参数,有返回值:string  ');
 					return '这是有返回值的哦';
 				}));
@@ -268,11 +265,9 @@ defineClass('BlockViewController:UITableViewController',{
 			default:{
 				//方法签名第一位 是返回值,如果返回为void可以不填,但是要以","分割
 				self.testCallVID_(block("id, id, id, int, bool, float, id",function(arg1,arg2,arg3,arg4,arg5,arg6){
-					Utils.log('--------JS传入OC方法,接受到回调---------'+arg1+"\n"+arg2+"\n"+arg3+"\n"+arg4+"\n"+arg5+"\n"+arg6);
 					Utils.log_info('--------JS传入OC方法,接受到回调---------'+arg1+"\n"+arg2+"\n"+arg3+"\n"+arg4+"\n"+arg5+"\n"+arg6);
 				}));
 				self.OCcallBlock_(block(",id",function(arg1){
-					Utils.log("js与js block回调"+arg1);
 					Utils.log_info("js与js block回调"+arg1);
 				}))
 			}break;

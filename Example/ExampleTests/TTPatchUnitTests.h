@@ -1,17 +1,22 @@
 //
-//  TTPlaygroundController.h
-//  TTPatch
+//  TTPatchUnitTests.h
+//  ExampleTests
 //
-//  Created by ty on 2019/5/22.
-//  Copyright © 2019 TianyuBing. All rights reserved.
+//  Created by tianyubing on 2020/4/24.
+//  Copyright © 2020 TianyuBing. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "RootViewController.h"
+#import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TTPlaygroundController : RootViewController
-@property(nonatomic,strong) UIViewController * rootVC;
+@interface TTPatchUnitTests : NSObject
+- (void)nativeCallJsCase;
+
+- (void)JsCallNativeCase;
+
+- (void)blockAddSignatureCase;
+
 - (void)funcWithParams:(NSString * )param1;
 
 - (void)funcWithParams:(NSArray * )param1
@@ -26,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)funcWithBlockParams:(NSString * )param1
                      paramInt2:(void(^)(int ))param2;
-
-- (void)testFunc;
 @end
 
 NS_ASSUME_NONNULL_END

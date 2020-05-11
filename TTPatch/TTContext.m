@@ -1164,6 +1164,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     JSValue *func = [self getBlockFunc];
     NSMutableArray *tempArguments = [NSMutableArray arrayWithObject:key];
     [tempArguments addObjectsFromArray:arguments];
+    
     return [func callWithArguments:tempArguments];
 }
 
