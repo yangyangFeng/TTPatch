@@ -572,7 +572,7 @@ class TTEdgeInsets {
                     } else if (cls === 'size') {
                         return new TTSize(value.width, value.height);
                     } else if (cls === 'edge') {
-                        return new TTEdgeInsets(value.top, value.left, value.bottom.value.right);
+                        return new TTEdgeInsets(value.top, value.left, value.bottom, value.right);
                     } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
                                 (cls === 'NSArray' || cls === 'NSMutableArray')) {
                         let result = new Array();
