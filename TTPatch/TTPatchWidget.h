@@ -16,8 +16,8 @@
 @end
 
 @interface TTPatchParser : NSObject
-+ (NSData *)stringToData:(NSString *)str;
-+ (NSData *)dataToString:(NSData *)data;
++ (NSData * _Nonnull)stringToData:(NSString * _Nonnull)str;
++ (NSString * _Nonnull)dataToString:(NSData * _Nonnull)data;
 @end
 
 
