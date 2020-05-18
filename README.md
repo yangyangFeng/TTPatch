@@ -38,7 +38,7 @@
 ## 2. 安装
 
 
-### CocoaPods `pod 0.6.0`
+### CocoaPods `pod 0.7.1`
 
 1. 在 Podfile 中添加  `pod 'TTPatch'`。
 2. 执行 `pod install` 或 `pod update`。
