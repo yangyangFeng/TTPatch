@@ -331,7 +331,7 @@ class TTEdgeInsets {
         self=this;
 
         let jsMethod_IMP = pv_findJSMethodMap(obj, msg, isInstance);
-
+        jsMethod_IMP = jsMethod_IMP ? jsMethod_IMP : this[msg];
         for (let i = 1; i < arguments.length; i++) {
             if (!params) params = new Array();
             if (jsMethod_IMP){
@@ -348,17 +348,9 @@ class TTEdgeInsets {
                 }
             }
         }
-        // if (this instanceof Block | typeof this === 'NSBlock'){
-        //     this.__isa.apply(this.params);
-        // }
-        // else
+
         if (jsMethod_IMP && !ttpatch__isSuperInvoke) {
             result = jsMethod_IMP.apply(this, params ? params : null);
-        }
-        else if (this[msg] || (!this.__isa && !this.__className && !ttpatch__isSuperInvoke) ) {
-            jsMethod_IMP = this[msg];
-            self=curSelf;
-            return jsMethod_IMP.apply(this, params);
         }
         else if (isInstance) {
             result = MessageQueue.call(this.__isa, ttpatch__isSuperInvoke, isInstance,msg, params);
@@ -387,30 +379,15 @@ class TTEdgeInsets {
             if (!params) params = new Array();
             params.push(pv_toJSObject(arguments[i]));
         }
-        // Utils.log('oc------------->js' + '[' + className + ']:' + method + '');
+
         let obj = CLASS_MAP[className].__obj(isInstance);
         let imp = obj.__methodList[method];
         let result = imp.apply(undefined, params);
 
         // release self
         pv_releaseJsObject(curSelf);
-        // Utils.log('[self] ' + method + ' release');
-
-        if (result instanceof JSObject) {
-            return result.__toOcObject();
-        } else {
-            return result;
-        }
+        return pv_toOcObject(result); 
     };
-
-    // function pv__getFuncParams(arguments) {
-    //     let params;
-    //     for (let i = 1; i < arguments.length; i++) {
-    //         if (!params) params = new Array();
-    //         params.push(arguments[i]);
-    //     }
-    //     return params;
-    // }
 
     function pv_retainJsObject(obj) {
         obj.retain();
@@ -425,11 +402,8 @@ class TTEdgeInsets {
     function pv_releaseJsObject(obj) {
         if (obj.release()) {
             if (obj.__instanceFlag === lastSelf.__instanceFlag) {
-                // Utils.log(obj.__instanceFlag + 'self and lastSelf release');
                 self = lastSelf = null;
-
             } else {
-                // Utils.log(obj.__instanceFlag + 'self release, lastSelf replace self');
                 obj = null;
                 self = lastSelf;
             }
@@ -499,10 +473,10 @@ class TTEdgeInsets {
                 signature=signature?signature:'';
                 // Utils.log_info(key+'----signature:'+signature);
                 MessageQueue.replaceDynamicMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list, signature);
-            // }else{
-            //     let method = cls.__methodList[key];
-            //     MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
-            // }
+            }else{
+                let method = cls.__methodList[key];
+                MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
+            }
         }
         return isInstanceMethod ? pv_registMethods(cls.__cls) : null;
     }
@@ -590,6 +564,9 @@ class TTEdgeInsets {
                 let obj = new JSObject(arg.__className, arg.__isa);
                 arg=null;
                 return obj;
+            }
+            else if(arg instanceof Array){
+                return arg;
             }
             // return arg;
             return new JSObject('JSObject', arg);
