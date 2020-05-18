@@ -465,18 +465,12 @@ class TTEdgeInsets {
             isInstanceMethod = false;
         }
         for (const key in cls.__methodList) {
-            // if (key != '_c' && cls.__methodList.hasOwnProperty(key) && cls.__dynamicSignatureList.hasOwnProperty(key)) {
-                if (key == '_c') continue;
-                let method = cls.__methodList[key];
-                
-                let signature = cls.__dynamicSignatureList?cls.__dynamicSignatureList[key]:'';
-                signature=signature?signature:'';
-                // Utils.log_info(key+'----signature:'+signature);
-                MessageQueue.replaceDynamicMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list, signature);
-            }else{
-                let method = cls.__methodList[key];
-                MessageQueue.replaceMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list);
-            }
+            if (key == '_c') continue;
+            let method = cls.__methodList[key];
+            let signature = cls.__dynamicSignatureList?cls.__dynamicSignatureList[key]:'';
+            signature=signature?signature:'';
+            
+            MessageQueue.replaceDynamicMethod(cls.__className, cls.__superClassName, key, isInstanceMethod, cls.__property_list, signature);
         }
         return isInstanceMethod ? pv_registMethods(cls.__cls) : null;
     }
