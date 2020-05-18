@@ -512,6 +512,14 @@ class TTEdgeInsets {
         else if (arg instanceof JSObject) {
             return arg.__isa ? arg.__isa : null;
         }
+        else if (arg instanceof Object) {
+            for (const key in arg) {
+                if (arg.hasOwnProperty(key)) {
+                    arg[key] = pv_toOcObject(arg[key]);
+                }
+            }
+            obj = arg;
+        }
         else {
             obj = arg;
         }
@@ -552,6 +560,13 @@ class TTEdgeInsets {
                         cls === 'NSMutableDictionary' ||
                         cls === 'NSString' ||
                         cls === 'NSNumber')) {
+                            if (arg.__isa instanceof Object){
+                                for (const key in arg.__isa) {
+                                    if (arg.__isa.hasOwnProperty(key)) {
+                                        arg.__isa[key] = pv_toJSObject(arg.__isa[key]);
+                                    }
+                                }
+                            }
                         return arg.__isa;
                     }
                 }
