@@ -510,11 +510,16 @@ class TTEdgeInsets {
             obj=arg;
         }
         else if (arg instanceof JSObject) {
+            arg.__isa ? arg.__isa._c = '': null;
             return arg.__isa ? arg.__isa : null;
         }
         else if (arg instanceof Object) {
+
             for (const key in arg) {
-                if (arg.hasOwnProperty(key)) {
+                if (arg.hasOwnProperty("_c")){
+                    arg._c = '';
+                }
+                else if (arg.hasOwnProperty(key)) {
                     arg[key] = pv_toOcObject(arg[key]);
                 }
             }
@@ -523,7 +528,7 @@ class TTEdgeInsets {
         else {
             obj = arg;
         }
-        obj._c=null;
+        obj._c = '';
         return obj;
     }
 
@@ -535,39 +540,55 @@ class TTEdgeInsets {
                     let cls = arg['__className'];
                     Utils.log('class:'+cls);
                     let value = arg['__isa'];
-                    if (cls === 'block') {
-                        let block = new Block('', arg.__isa);
-                        return block.getBlock.bind(block);
-                    }
-                    else if (cls === 'react') {
-                        return new TTReact(value.x, value.y, value.width, value.height);
-                    } else if (cls === 'point') {
-                        return new TTPoint(value.x, value.y);
-                    } else if (cls === 'size') {
-                        return new TTSize(value.width, value.height);
-                    } else if (cls === 'edge') {
-                        return new TTEdgeInsets(value.top, value.left, value.bottom, value.right);
-                    } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
-                                (cls === 'NSArray' || cls === 'NSMutableArray')) {
-                        let result = new Array();
-                        arg.__isa.forEach(element => {
-                            let jsObj = pv_toJSObject(element);
-                            result.push(jsObj);
-                        });
-                        return result
-                    } else if (!MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
-                        (cls === 'NSDictionary' ||
-                        cls === 'NSMutableDictionary' ||
-                        cls === 'NSString' ||
-                        cls === 'NSNumber')) {
-                            if (arg.__isa instanceof Object){
-                                for (const key in arg.__isa) {
-                                    if (arg.__isa.hasOwnProperty(key)) {
-                                        arg.__isa[key] = pv_toJSObject(arg.__isa[key]);
-                                    }
-                                }
-                            }
-                        return arg.__isa;
+                    if (cls === "block") {
+                      let block = new Block("", arg.__isa);
+                      return block.getBlock.bind(block);
+                    } else if (cls === "react") {
+                      return new TTReact(
+                        value.x,
+                        value.y,
+                        value.width,
+                        value.height
+                      );
+                    } else if (cls === "point") {
+                      return new TTPoint(value.x, value.y);
+                    } else if (cls === "size") {
+                      return new TTSize(value.width, value.height);
+                    } else if (cls === "edge") {
+                      return new TTEdgeInsets(
+                        value.top,
+                        value.left,
+                        value.bottom,
+                        value.right
+                      );
+                    } else if (
+                      !MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
+                      (cls === "NSArray" || cls === "NSMutableArray")
+                    ) {
+                      let result = new Array();
+                      arg.__isa.forEach((element) => {
+                        let jsObj = pv_toJSObject(element);
+                        result.push(jsObj);
+                      });
+                      return result;
+                    } else if (
+                      !MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA() &&
+                      (cls === "NSDictionary" ||
+                        cls === "NSMutableDictionary" ||
+                        cls === "NSString" ||
+                        cls === "NSNumber")
+                    ) {
+                      if (arg.__isa instanceof Object) {
+                        for (const key in arg.__isa) {
+                          if (arg.__isa.hasOwnProperty('_c')) {
+                            arg._c = Object.prototype._c;
+                          }
+                          else if (arg.__isa.hasOwnProperty(key)) {
+                            arg.__isa[key] = pv_toJSObject(arg.__isa[key]);
+                          }
+                        }
+                      }
+                      return arg.__isa;
                     }
                 }
                 let obj = new JSObject(arg.__className, arg.__isa);
@@ -609,25 +630,3 @@ class TTEdgeInsets {
         return self;
     }
 })();
-
-
-
-
-
-
-
-
-// 获取函数的参数名
-// function getParameterName(fn) {
-//     if(typeof fn !== 'object' && typeof fn !== 'function' ) return;
-//     const COMMENTS = /((\/\/.*$)|(\/\*[\s\S]*?\*\/))/mg;
-//     const DEFAULT_PARAMS = /=[^,)]+/mg;
-//     const FAT_ARROWS = /=>.*$/mg;
-//     let code = fn.prototype ? fn.prototype.constructor.toString() : fn.toString();
-//     code = code
-//         .replace(COMMENTS, '')
-//         .replace(FAT_ARROWS, '')
-//         .replace(DEFAULT_PARAMS, '');
-//     let result = code.slice(code.indexOf('(') + 1, code.indexOf(')')).match(/([^\s,]+)/g);
-//     return result === null ? [] :result;
-// }
