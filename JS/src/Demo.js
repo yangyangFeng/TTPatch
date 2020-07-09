@@ -32,7 +32,7 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
 		}
 	},
 	addSomeTestView:function(){
-		let dataSource = ['加载纯J1S模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
+		let dataSource = ['加载纯JS模块','JS-OC block调用示例','淘宝大事故修复方案','动态添加数据',];
         self.setData_(dataSource);
 		let data = self.data();
 		let tableview = self.getTableview();
