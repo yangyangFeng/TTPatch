@@ -7,13 +7,10 @@
 //
 
 #import "TTHookUtils.h"
-#include <stdio.h>
-#import <UIKit/UIKit.h>
+
 #import <JavaScriptCore/JavaScriptCore.h>
-#import "TTPatch.h"
-#import "TTContext.h"
-#import <objc/runtime.h>
 #import <objc/message.h>
+
 #define TTHook_DERIVE_PRE @"TTHook_Derive_"
 
 #define guard(condfion) if(condfion){}

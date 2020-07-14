@@ -52,12 +52,12 @@
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
-           [self testSocket];
-         // 拉取本地js资源
-         [self updateResource:@"hotfixPatch.js" callbacl:nil];
-         TTPatchUnitTests *test = [TTPatchUnitTests new];
-         [test nativeCallJsCase];
-         [test blockAddSignatureCase];
+//           [self testSocket];
+//         // 拉取本地js资源
+//         [self updateResource:@"hotfixPatch.js" callbacl:nil];
+//         TTPatchUnitTests *test = [TTPatchUnitTests new];
+//         [test nativeCallJsCase];
+//         [test blockAddSignatureCase];
     }];
 }
 

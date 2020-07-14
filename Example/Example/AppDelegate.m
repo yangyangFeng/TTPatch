@@ -22,27 +22,27 @@
     // 初始化SDK
     [TTPatch initSDK];
     
-    /**
-     * 加载离线的热修复补丁
-     * 这里 `rootPath` 为项目根目录,如果通过手机运行 ,需要修改为bundle资源访问, 否则无法访问电脑资源,页面显示空白
-     */
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bugfix"]) {
-        
-        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
-           
-        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-               
-        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
-        NSLog(@"[补丁加载成功!!]");
-    }
-    /**
-     * 连接本地测试服务,如加载空白,请检查
-     * 1.本地服务是否已启动成功
-     * 2.检查`info.plist`中IP是否获取正确
-     */
-    [self testSocket];
-    // 拉取本地js资源
-    [self updateResource:@"hotfixPatch.js" callbacl:nil];
+//    /**
+//     * 加载离线的热修复补丁
+//     * 这里 `rootPath` 为项目根目录,如果通过手机运行 ,需要修改为bundle资源访问, 否则无法访问电脑资源,页面显示空白
+//     */
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bugfix"]) {
+//
+//        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
+//
+//        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+//
+//        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
+//        NSLog(@"[补丁加载成功!!]");
+//    }
+//    /**
+//     * 连接本地测试服务,如加载空白,请检查
+//     * 1.本地服务是否已启动成功
+//     * 2.检查`info.plist`中IP是否获取正确
+//     */
+//    [self testSocket];
+//    // 拉取本地js资源
+//    [self updateResource:@"hotfixPatch.js" callbacl:nil];
     return YES;
 }
 

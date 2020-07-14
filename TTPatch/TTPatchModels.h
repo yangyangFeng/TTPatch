@@ -40,3 +40,13 @@
 @property(nonatomic,assign)BOOL isOpenLog;
 @end
 
+
+@interface TTMethodList_Node : NSObject
+@property(nonatomic,copy)NSString *clsName;
+@property(nonatomic,copy)NSString *methodName;
+@property(nonatomic,copy)NSString *key;
+@property(nonatomic,assign)BOOL isClass;
++ (TTMethodList_Node *)createNodeCls:(NSString *)clsName
+                          methodName:(NSString *)methodName
+                             isClass:(BOOL)isClass;
+@end

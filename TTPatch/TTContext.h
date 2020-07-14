@@ -11,15 +11,6 @@
 extern NSString * _Nonnull const TTPatchChangeMethodPrefix;
 
 NS_ASSUME_NONNULL_BEGIN
-@interface TTMethodList_Node : NSObject
-@property(nonatomic,copy)NSString *clsName;
-@property(nonatomic,copy)NSString *methodName;
-@property(nonatomic,copy)NSString *key;
-@property(nonatomic,assign)BOOL isClass;
-+ (TTMethodList_Node *)createNodeCls:(NSString *)clsName
-                          methodName:(NSString *)methodName
-                             isClass:(BOOL)isClass;
-@end
 
 /// JS上下文与Native交互 核心管理类
 @interface TTContext : JSContext

@@ -60,3 +60,20 @@
 @end
 
 
+
+@implementation TTMethodList_Node
+
+
++ (TTMethodList_Node *)createNodeCls:(NSString *)clsName
+                          methodName:(NSString *)methodName
+                             isClass:(BOOL)isClass{
+    TTMethodList_Node * node = [TTMethodList_Node new];
+    node.clsName        = clsName;
+    node.methodName     = methodName;
+    node.key            = [NSString stringWithFormat:@"%@-%@%@",clsName,methodName,isClass?@"+":@"-"];
+    node.isClass        = isClass;
+    return node;
+}
+
+@end
+
