@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (id)execFuncParamsBlockWithBlockKey:(NSString *)key
                             arguments:(NSArray *)arguments;
-@property(nonatomic,strong)NSMutableDictionary *replaceMethodMap;
+
 @end
 
 NS_ASSUME_NONNULL_END

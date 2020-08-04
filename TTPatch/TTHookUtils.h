@@ -60,17 +60,7 @@ static NSDictionary* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
              };
 }
 
-@class JSValue;
-extern const struct TTHookUtils {
-    id          (*TTHookDynamicMethodInvocation)           (id classOrInstance,BOOL isSuper,BOOL isBlock,NSString *method, NSArray *arguments);
-    NSInvocation*          (*TTHookDynamicBlock)                      (id block,NSArray *arguments);
-    id          (*TTDynamicBlockWithInvocation)             (id block,NSInvocation *invocation);
-    char *      (*TTHookGetMethodTypes)                    (NSString *method,NSArray *arguments);
-    NSString *  (*TTHookMethodFormatterToOcFunc)           (NSString *method);
-//    id          (*TTHookToJsObject)                        (id returnValue);
-    NSString *  (*TTHookMethodFormatterToJSFunc)           (NSString *method);
-    Method      (*TTHookGetInstanceOrClassMethodInfo)      (Class aClass,SEL aSel);
-    void        (*TTHook_hookClassMethod)                  (NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys);
-    void        (*TTHook_addPropertys)                     (NSString *className,NSString *superClassName,NSArray *propertys);
-    
-} TTHookUtils;
+@interface TTHookUtils : NSObject
++(NSString *)TTHookMethodFormatterToOcFunc:(NSString *)method;
++(NSString *)TTHookMethodFormatterToJSFunc:(NSString *)method;
+@end

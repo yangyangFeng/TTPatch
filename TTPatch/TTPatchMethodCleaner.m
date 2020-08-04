@@ -11,16 +11,16 @@
 #import <objc/message.h>
 #import "TTPatch.h"
 #import "TTPatchKit.h"
-
+#import "TTEngine.h"
 @implementation TTPatchMethodCleaner
 
 + (void)clean{
     [self cleanClass:nil];
-    [[TTPatch shareInstance].context.replaceMethodMap removeAllObjects];
+    [TTEngine.getReplaceMethodMap removeAllObjects];
 }
 
 + (void)cleanClass:(NSString *)className{
-    NSDictionary *methodsDict = [TTPatch shareInstance].context.replaceMethodMap;
+    NSDictionary *methodsDict = TTEngine.getReplaceMethodMap;
     for (TTMethodList_Node * node in methodsDict.allValues) {
         Class cls = NSClassFromString(node.clsName);
         guard(cls) else {continue;}
