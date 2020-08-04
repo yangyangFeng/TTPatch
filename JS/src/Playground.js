@@ -90,7 +90,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 		let screenHeight = UIScreen.mainScreen().bounds().size.height;
 
 		var label = UILabel.new();
-        label.setFont_(UIFont.systemFontOfSize_(18));
+        // label.setFont_(UIFont.systemFontOfSize_(18));
         label.setTextColor_(UIColor.blackColor());
         label.setFrame_(new TTReact(10, 64+20, self.view().bounds().size.width-20, 80));
 		label.setText_("------本页面为Native声明创建的空页面\n修改 Playground.js 实时查看修改效果");
@@ -108,7 +108,7 @@ defineClass('TTPlaygroundController:UIViewController', {
 			let label = UILabel.alloc().init();
 			label.setFrame_(react)
 			label.setText_(String(i)+'🍓');
-			label.setFont_(UIFont.systemFontOfSize_(20))
+			// label.setFont_(UIFont.systemFontOfSize_(20))
 			label.setTextColor_(UIColor.whiteColor())
 			label.setTextAlignment_(1);
 			self.view().addSubview_(view);
