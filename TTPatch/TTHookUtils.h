@@ -27,7 +27,13 @@ static id ToOcObject(id jsObj){
             return jsObj;
         }
         else if([jsObj isKindOfClass:[NSDictionary class]]){
-            return jsObj[@"__isa"];
+            jsObj = jsObj[@"__isa"]?jsObj[@"__isa"]:jsObj;
+            if ([jsObj isKindOfClass:NSDictionary.class]) {
+                NSMutableDictionary *temp = (NSMutableDictionary *)[jsObj mutableCopy];
+                [temp removeObjectForKey:@"_c"];
+                jsObj = temp;
+            }
+        return jsObj;
         }
     }
     return jsObj;
@@ -58,6 +64,37 @@ static NSDictionary* UIEdgeInsetsToJSObject(UIEdgeInsets edge){
              @"bottom":@(edge.bottom),
              @"right":@(edge.right)
              };
+}
+
+static CGRect toOcCGReact(NSString *jsObjValue){
+
+    if (jsObjValue) {
+        return CGRectFromString(jsObjValue);
+    }
+    return CGRectZero;
+}
+
+static CGPoint toOcCGPoint(NSString *jsObjValue){
+    if (jsObjValue){
+        return CGPointFromString(jsObjValue);
+    }
+    return CGPointZero;
+}
+
+static CGSize toOcCGSize(NSString *jsObjValue){
+    if (jsObjValue) {
+        return CGSizeFromString(jsObjValue);
+    }
+    return CGSizeZero;
+}
+
+static NSMethodSignature *block_methodSignatureForSelector(id self, SEL _cmd, SEL aSelector) {
+    
+    uint8_t *p = (uint8_t *)((__bridge void *)self);
+    p += sizeof(void *) * 2 + sizeof(int32_t) *2 + sizeof(uintptr_t) * 2;
+    const char **signature = (const char **)p;
+    
+    return [NSMethodSignature signatureWithObjCTypes:*signature];
 }
 
 @interface TTHookUtils : NSObject

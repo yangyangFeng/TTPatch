@@ -33,9 +33,9 @@
 //         * 1.本地服务是否已启动成功
 //         * 2.检查`info.plist`中IP是否获取正确
 //         */
-        [self testSocket];
+//        [self testSocket];
 //        // 拉取本地js资源
-        [self updateResource:@"hotfixPatch" callbacl:nil];
+////        [self updateResource:@"hotfixPatch" callbacl:nil];
 ////        [self loadupdateResource:@"hotfixPatch.js" callbacl:nil];
 ////    [TTPatchUnitTests testAction:@"unit-test"];
     [self testNativeCallJsCase];
@@ -43,7 +43,7 @@
 
 
 - (void)testNativeCallJsCase{
-
+//    sleep(10);
     /*
      * native调用js方法,参数带block
      * 实际场景:
@@ -138,15 +138,15 @@
 //    [self updateResource:msg callbacl:nil];
 }
 
-- (void)updateResource:(NSString *)filename callbacl:(void(^)(void))callback
-{
-    NSString *srcPath = [[NSBundle mainBundle] pathForResource:filename ofType:@"js"];
-
-
-    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:filename]];
-}
+//- (void)updateResource:(NSString *)filename callbacl:(void(^)(void))callback
+//{
+//    NSString *srcPath = [[NSBundle mainBundle] pathForResource:filename ofType:@"js"];
+//
+//
+//    NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+//
+//    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:filename]];
+//}
 
 
 @end

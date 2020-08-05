@@ -28,6 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTPatch-Refresh" object:nil];
+    NSLog(@"super---%@",self);
 }
 
 - (void)refresh{

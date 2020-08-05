@@ -36,6 +36,15 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self presentViewController:_alert animated:YES completion:nil];
 
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+//    NSInteger nums = [self tableView:self.tableview numberOfRowsInSection:0];
+//    UITableViewCell *cell= [self tableView:self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//    NSLog(@"%@",cell);
 }
 
 -(NSString *)jsFileName{

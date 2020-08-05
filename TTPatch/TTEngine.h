@@ -12,52 +12,29 @@
 #import "TTPatchModels.h"
 #import "TTPatch.h"
 #import "TTPatchKit.h"
+#import "ffi.h"
+
+
+
 
 NS_ASSUME_NONNULL_BEGIN
 
-#define guard(condfion) if(condfion){}
-#define TTPATCH_DERIVE_PRE @"TTPatch_Derive_"
-#define TTPatchInvocationException @"TTPatchInvocationException"
+extern NSString *_Nonnull const TTPatchChangeMethodPrefix;
+extern NSString *_Nonnull const kMessageQueue_oc_define;
+extern NSString *_Nonnull const kMessageQueue_oc_sendMsg;
+extern NSString *_Nonnull const kMessageQueue_oc_block;
+extern NSString *_Nonnull const kMessageQueue_oc_replaceMethod;
+extern NSString *_Nonnull const kMessageQueue_oc_replaceDynamicMethod;
+extern NSString *_Nonnull const kMessageQueue_oc_addPropertys;
+extern NSString *_Nonnull const kMessageQueue_oc_genBlock;
+extern NSString *_Nonnull const kAPP_IsDebug;
+extern NSString *_Nonnull const kUtils_Log;
 
-#pragma mark - 函数声明
-static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock);
-static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocation_selector, NSInvocation *invocation);
-static void HookClassMethodWithSignature(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys,NSString *signature);
-static id CreateBlockWithSignatureString(NSString *signatureStr);
-
-static CGRect toOcCGReact(NSString *jsObjValue){
-
-    if (jsObjValue) {
-        return CGRectFromString(jsObjValue);
-    }
-    return CGRectZero;
-}
-
-static CGPoint toOcCGPoint(NSString *jsObjValue){
-    if (jsObjValue){
-        return CGPointFromString(jsObjValue);
-    }
-    return CGPointZero;
-}
-
-static CGSize toOcCGSize(NSString *jsObjValue){
-    if (jsObjValue) {
-        return CGSizeFromString(jsObjValue);
-    }
-    return CGSizeZero;
-}
-
-static NSMethodSignature *block_methodSignatureForSelector(id self, SEL _cmd, SEL aSelector) {
     
-    uint8_t *p = (uint8_t *)((__bridge void *)self);
-    p += sizeof(void *) * 2 + sizeof(int32_t) *2 + sizeof(uintptr_t) * 2;
-    const char **signature = (const char **)p;
-    
-    return [NSMethodSignature signatureWithObjCTypes:*signature];
-}
-
-
+/// JS上下文与Native交互 核心管理类
 @interface TTEngine : NSObject
++ (id)defineClass:(NSString *)interface;
+
 + (id)dynamicMethodInvocation:(id)classOrInstance
                       isSuper:(BOOL)isSuper
                       isBlock:(BOOL)isBlock
@@ -85,8 +62,18 @@ static NSMethodSignature *block_methodSignatureForSelector(id self, SEL _cmd, SE
       superClassName:(NSString *)superClassName
            propertys:(NSArray *)propertys;
 
++ (id)GetParamFromArgs:(void **)args
+          argumentType:(const char *)argumentType
+                 index:(int)index;
+
++ (void)ConvertReturnValue:(const char *)methodSignature
+                   jsValue:(JSValue *)jsValue
+                retPointer:(void *)retPointer;
+
 + (NSMutableDictionary *)getReplaceMethodMap;
++ (ffi_type *)typeEncodingToFfiType:(const char *)typeEncoding;
+
++ (id)GenJsBlockSignature:(NSString *)signature
+                    block:(JSValue *)block;
 @end
-
 NS_ASSUME_NONNULL_END
-

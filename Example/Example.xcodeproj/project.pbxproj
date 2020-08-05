@@ -41,8 +41,6 @@
 		1061CF9B24D16527000ED7ED /* TTEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9124D16527000ED7ED /* TTEngine.m */; };
 		1061CF9C24D16527000ED7ED /* TTPatchMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9224D16527000ED7ED /* TTPatchMethodCleaner.m */; };
 		1061CF9D24D16527000ED7ED /* TTHookUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9424D16527000ED7ED /* TTHookUtils.m */; };
-		107EAD91245271110023C30B /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 107EAD90245271110023C30B /* ExampleTests.m */; };
-		107EAD9A24527BB60023C30B /* TTPatchUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 107EAD9924527BB60023C30B /* TTPatchUnitTests.m */; };
 		1082CFDC2436CF5C006FE44A /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1082CFDB2436CF5C006FE44A /* RootTableViewController.m */; };
 		109C0887243593180021F206 /* TTPatchHotRefrshTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C0886243593180021F206 /* TTPatchHotRefrshTool.m */; };
 		109C08982435A6BC0021F206 /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C08952435A6BC0021F206 /* bugPatch.js */; };
@@ -52,6 +50,11 @@
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
 		10BFFBA324D98B7400B3974F /* TTBlockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFFBA224D98B7400B3974F /* TTBlockHelper.m */; };
 		10BFFBC624D9988B00B3974F /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BFFBC324D9988B00B3974F /* libffi.a */; };
+		10BFFBC824DAAFB600B3974F /* TTPatchUnitTests.js in Resources */ = {isa = PBXBuildFile; fileRef = 10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */; };
+		10BFFBC924DAAFFD00B3974F /* TTPatchUnitTests.js in Resources */ = {isa = PBXBuildFile; fileRef = 10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */; };
+		10BFFBCA24DAD62700B3974F /* TTPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 1061CF8824D16527000ED7ED /* TTPatch.js */; };
+		10BFFBCC24DAD8AA00B3974F /* ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFFBCB24DAD8AA00B3974F /* ExampleTests.m */; };
+		10BFFBD024DADAC700B3974F /* TTPatchUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFFBCF24DADAC700B3974F /* TTPatchUnitTests.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,10 +107,7 @@
 		1061CF9424D16527000ED7ED /* TTHookUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTHookUtils.m; sourceTree = "<group>"; };
 		1061CF9524D16527000ED7ED /* TTPatchKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchKit.h; sourceTree = "<group>"; };
 		107EAD8E245271110023C30B /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		107EAD90245271110023C30B /* ExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
 		107EAD92245271110023C30B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		107EAD9824527BB60023C30B /* TTPatchUnitTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPatchUnitTests.h; sourceTree = "<group>"; };
-		107EAD9924527BB60023C30B /* TTPatchUnitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTPatchUnitTests.m; sourceTree = "<group>"; };
 		1082CFDA2436CF5C006FE44A /* RootTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
 		1082CFDB2436CF5C006FE44A /* RootTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
 		109C0885243593180021F206 /* TTPatchHotRefrshTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTPatchHotRefrshTool.h; sourceTree = "<group>"; };
@@ -131,6 +131,10 @@
 		10BFFBC324D9988B00B3974F /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
 		10BFFBC424D9988B00B3974F /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
 		10BFFBC524D9988B00B3974F /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
+		10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = TTPatchUnitTests.js; path = ../../JS/.outputs/TTPatchUnitTests.js; sourceTree = "<group>"; };
+		10BFFBCB24DAD8AA00B3974F /* ExampleTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExampleTests.m; sourceTree = "<group>"; };
+		10BFFBCE24DADAC700B3974F /* TTPatchUnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchUnitTests.h; sourceTree = "<group>"; };
+		10BFFBCF24DADAC700B3974F /* TTPatchUnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchUnitTests.m; sourceTree = "<group>"; };
 		474D1358ED147C13E1337BEA /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		67A6FD84A8BE9A2F1720D1E5 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.debug.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		E85B47CF39DC3B5A404C9FCE /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -250,13 +254,13 @@
 				1061CF8B24D16527000ED7ED /* TTPatchMethodCleaner.h */,
 				1061CF8C24D16527000ED7ED /* TTEngine.h */,
 				1061CF9124D16527000ED7ED /* TTEngine.m */,
-				1061CF8D24D16527000ED7ED /* TTHookUtils.h */,
 				10BFFBA124D98B7400B3974F /* TTBlockHelper.h */,
 				10BFFBA224D98B7400B3974F /* TTBlockHelper.m */,
 				1061CF8F24D16527000ED7ED /* TTPatch.m */,
 				1061CF9024D16527000ED7ED /* TTPatchWidget.m */,
 				1061CF9224D16527000ED7ED /* TTPatchMethodCleaner.m */,
 				1061CF9324D16527000ED7ED /* TTPatchModels.h */,
+				1061CF8D24D16527000ED7ED /* TTHookUtils.h */,
 				1061CF9424D16527000ED7ED /* TTHookUtils.m */,
 				1061CF9524D16527000ED7ED /* TTPatchKit.h */,
 			);
@@ -267,9 +271,10 @@
 		107EAD8F245271110023C30B /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
-				107EAD90245271110023C30B /* ExampleTests.m */,
-				107EAD9824527BB60023C30B /* TTPatchUnitTests.h */,
-				107EAD9924527BB60023C30B /* TTPatchUnitTests.m */,
+				10BFFBCE24DADAC700B3974F /* TTPatchUnitTests.h */,
+				10BFFBCF24DADAC700B3974F /* TTPatchUnitTests.m */,
+				10BFFBCB24DAD8AA00B3974F /* ExampleTests.m */,
+				10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */,
 				107EAD92245271110023C30B /* Info.plist */,
 			);
 			path = ExampleTests;
@@ -436,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				109C08982435A6BC0021F206 /* bugPatch.js in Resources */,
+				10BFFBC924DAAFFD00B3974F /* TTPatchUnitTests.js in Resources */,
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
 				10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */,
 				1061CF9624D16527000ED7ED /* TTPatch.js in Resources */,
@@ -449,6 +455,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10BFFBC824DAAFB600B3974F /* TTPatchUnitTests.js in Resources */,
+				10BFFBCA24DAD62700B3974F /* TTPatch.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,7 +496,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "Pods/XcodeCoverage/exportenv.sh\n\n\n";
+			shellScript = "
+";
 		};
 		109CDCD02435EA53002BD891 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -596,8 +605,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				107EAD9A24527BB60023C30B /* TTPatchUnitTests.m in Sources */,
-				107EAD91245271110023C30B /* ExampleTests.m in Sources */,
+				10BFFBD024DADAC700B3974F /* TTPatchUnitTests.m in Sources */,
+				10BFFBCC24DAD8AA00B3974F /* ExampleTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -826,7 +835,11 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/../TTPatch\"",
+					"\"$(SRCROOT)/Example/libffi\"",
+				);
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -848,7 +861,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = YES;
+				GCC_INSTRUMENT_PROGRAM_FLOW_ARCS = NO;
 				INFOPLIST_FILE = ExampleTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (

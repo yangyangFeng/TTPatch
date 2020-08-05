@@ -10,7 +10,7 @@ _import('TTPatchURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDe
  *  声明Class,如无需在Oc中动态创建,可不设置父类,直接在js中创建类
  *  声明Class,如Native不存在,则动态创建Class
  */
-defineClass('TTPatchUnitTests', {
+defineClass('TTPatchUnitTests:XCTestCase', {
     /**
      * 添加属性,自动生成`setter`/`getter`方法,取值和赋值必须使用`setter`/`getter`方法.
      */
@@ -68,18 +68,16 @@ defineClass('TTPatchUnitTests', {
         var arg2 = param2['key'];
         Utils.log_info('[unit-test] [3]funcWithParams_param2_:' + param1 + ',' + arg2);
     }),
-    testBlockInt_: dynamic('void,?',function(p1) {
+    testBlockInt_: dynamic('void,int',function(p1) {
         p1(1);
         Utils.log_info('[unit-test] [3]testBlockInt_:' + p1);
     }),
-    testBlockString_: dynamic('void,?',function(p1) {
+    testBlockString_: dynamic('void,@',function(p1) {
         p1("ttpatch");
         Utils.log_info('[unit-test] [3]testBlockString_:' + p1);
     }),
-    testBlockObj_: dynamic('void,?',function(p1) {
-        
-        var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
-        Utils.log_info(dic.name);
+    testBlockObj_: dynamic('void,@',function(p1) {
+        var dic = {"key":"val"};
         p1(dic);
         Utils.log_info('[unit-test] [3]testBlockObj_:' + p1);
     })

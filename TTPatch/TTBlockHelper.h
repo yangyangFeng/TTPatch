@@ -34,26 +34,46 @@ typedef enum {
 } TTPATCH_BLOCK_FLAGS;
 
 
-typedef struct TTPatchBlock {
-    void *isa; // initialized to &_NSConcreteStackBlock or &_NSConcreteGlobalBlock
-    TTPATCH_BLOCK_FLAGS flags;
+struct TTPatchBlock {
+    void *isa;
+    int flags;
     int reserved;
-    void (*invoke)(void *, ...);
-    struct Block_descriptor_1 {
-    unsigned long int reserved;         // NULL
-        unsigned long int size;         // sizeof(struct Block_literal_1)
-        // optional helper functions
-        void (*copy_helper)(void *dst, void *src);     // IFF (1<<25)
-        void (*dispose_helper)(void *src);             // IFF (1<<25)
-        // required ABI.2010.3.16
-        const char *signature;                         // IFF (1<<30)
-    } *descriptor;
-    // imported variables
-} *TTPatchBlockRef;
+    void *invoke;
+    struct TTPatchBlockDescriptor *descriptor;
+    void *wrapper;
+};
+
+struct TTPatchBlockDescriptor {
+    //Block_descriptor_1
+    struct {
+        unsigned long int reserved;
+        unsigned long int size;
+    };
+
+    //Block_descriptor_2
+    struct {
+        // requires BLOCK_HAS_COPY_DISPOSE
+        void (*copy)(void *dst, const void *src);
+
+        void (*dispose)(const void *);
+    };
+
+    //Block_descriptor_3
+    struct {
+        // requires BLOCK_HAS_SIGNATURE
+        const char *signature;
+    };
+};
 
 
+@class JSValue;
 @interface TTBlockHelper : NSObject
+- (id)initWithTypeEncoding:(NSString *)typeEncoding func:(JSValue *)func;
 
+- (void *)block;
+
+@property (nonatomic, copy) NSString *typeEncoding;
+@property (nonatomic, strong) JSValue *func;
 @end
 
 NS_ASSUME_NONNULL_END

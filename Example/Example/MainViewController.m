@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "TTPatch.h"
 #import "TTPatchHotRefrshTool.h"
+
 @interface MainViewController ()
 
 @end
@@ -56,9 +57,8 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-
-    
 }
+
 
 /*
 #pragma mark - Navigation

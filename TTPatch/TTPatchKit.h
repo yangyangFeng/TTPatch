@@ -22,11 +22,7 @@
 /**
  *日志开关
  */
-#define TTPATCH_LOG 0
-/**
- * 是否将 String, Number, Dic,Arr 转换成JS 类型,转换后不可再调用Oc方法操作对象.
- */
-#define TTPATCH_ProjectConfig_IS_USE_NATIVE_DATA 1
+#define TTPATCH_LOG 1
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>

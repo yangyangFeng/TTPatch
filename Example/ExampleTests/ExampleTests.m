@@ -21,12 +21,6 @@
     // Put setup code here. This method is called before the invocation of each test method in the class.
     // 初始化SDK
     [TTPatch initSDK];
-    NSString * str = [NSString alloc];
-    NSString *str1=@"111";
-    NSData *data = [str1 dataUsingEncoding:NSUTF8StringEncoding];
-    str = [str initWithData:data encoding:(NSUTF8StringEncoding)];
-    NSLog(@"%@",str);
-    NSLog(@"%@",str1);
 }
 
 - (void)tearDown {
@@ -45,19 +39,14 @@
     // 拉取本地js资源
     [self updateResource:@"hotfixPatch.js" callbacl:nil];
     TTPatchUnitTests *test = [TTPatchUnitTests new];
-    [test nativeCallJsCase];
-    [test blockAddSignatureCase];
+    [test testExample];
+    
 }
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
     [self measureBlock:^{
-//           [self testSocket];
-//         // 拉取本地js资源
-//         [self updateResource:@"hotfixPatch.js" callbacl:nil];
-//         TTPatchUnitTests *test = [TTPatchUnitTests new];
-//         [test nativeCallJsCase];
-//         [test blockAddSignatureCase];
+
     }];
 }
 

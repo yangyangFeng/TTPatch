@@ -4,11 +4,11 @@ class MessageQueue {}
 
 MessageQueue.call = function (obj, isSuperInvoke, isInstance, msg, params) {
     /***
-     *     params1    : target
-     *             : 是否是super()
-     *             : 是否是实例方法
-     *             : 方法名
-     *             : 参数
+     * 	params1	: target
+     * 			: 是否是super()
+     * 			: 是否是实例方法
+     * 			: 方法名
+     * 			: 参数
      */
     return MessageQueue_oc_sendMsg(obj, isSuperInvoke, isInstance, msg, params);
 };

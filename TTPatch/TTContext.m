@@ -7,9 +7,12 @@
 //
 
 #import "TTContext.h"
+
 #import "TTHookUtils.h"
 #import "TTEngine.h"
+
 #import <UIKit/UIKit.h>
+
 typedef enum : NSUInteger {
     log_level_debug=1,
     log_level_info,
@@ -23,55 +26,9 @@ typedef enum : NSUInteger {
 
 #pragma makr- Native API
 - (void)configJSBrigeActions{
-    self[@"Utils_Log"] = ^(log_level level,id msg){
-        guard([TTPatch shareInstance].config.isOpenLog) else return;
-        switch (level) {
-            case log_level_debug:
-                TTLog(@"%@",ToOcObject(msg));
-                break;
-            case log_level_info:
-                TTLog_Info(@"%@",ToOcObject(msg));
-                break;
-            case log_level_error:
-                TTLog_Error(@"%@",ToOcObject(msg));
-                break;
-            default:
-                TTLog(@"%@",ToOcObject(msg));
-                break;
-        }
-
-    };
     
     self[@"MessageQueue_oc_define"] = ^(NSString * interface){
-        NSArray * protocols;
-        NSArray * classAndSuper;
-        if ([interface containsString:@"<"]) {
-            NSArray *protocolAndClass = [interface componentsSeparatedByString:@"<"];
-            NSString *protocolString = [protocolAndClass lastObject];
-            protocolString = [protocolString stringByReplacingOccurrencesOfString:@">" withString:@""];
-            protocols = [protocolString componentsSeparatedByString:@","];
-            classAndSuper = [[protocolAndClass firstObject] componentsSeparatedByString:@":"];
-        }else{
-            classAndSuper = [interface componentsSeparatedByString:@":"];
-        }
-         
-        for (NSString *aProtocol in protocols) {
-            Class cls =NSClassFromString([classAndSuper firstObject]);
-            Protocol *pro = NSProtocolFromString(aProtocol);
-            if (!class_conformsToProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
-                if (class_addProtocol(cls, pro)) {
-                    NSLog(@"添加协议成功");
-                }else{
-                    NSLog(@"添加协议失败");
-                }
-            }else{
-                
-            }
-        }
-        
-        return @{@"self":[classAndSuper firstObject],
-                 @"super":[classAndSuper lastObject]
-                 };
+        return [TTEngine defineClass:interface];
     };
     
     self[@"MessageQueue_oc_sendMsg"] = ^(id obj,BOOL isSuper,BOOL isBlock,NSString* method,id arguments){
@@ -91,41 +48,39 @@ typedef enum : NSUInteger {
     self[@"MessageQueue_oc_addPropertys"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
         [TTEngine addPropertys:className superClassName:superClassName propertys:propertys];
     };
-    self[@"MessageQueue_oc_setBlock"] = ^(id jsFunc){
-        TTLog(@"jsfunc-----%p",jsFunc);
+    self[@"MessageQueue_oc_genBlock"] = ^(NSString *signature, JSValue *func){
+        return [TTEngine GenJsBlockSignature:signature block:func];
     };
+
     self[@"APP_IsDebug"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
 #if DEBUG
         return YES;
 #else
         return NO;
 #endif
-        
     };
     
-    /**
-     * 是否将 String, Number, Dic,Arr 转换成JS 类型,转换后不可再调用Oc方法操作对象.
-     * 默认开启
-     */
-    self[@"ProjectConfig_IS_USE_NATIVE_DATA"] = ^(){
-        return [TTPatch shareInstance].config.isUserNativeData;
+    self[@"Utils_Log"] = ^(log_level level,id msg){
+        guard([TTPatch shareInstance].config.isOpenLog) else return;
+        switch (level) {
+            case log_level_debug:
+                TTLog(@"%@",ToOcObject(msg));
+                break;
+            case log_level_info:
+                TTLog_Info(@"%@",ToOcObject(msg));
+                break;
+            case log_level_error:
+                TTLog_Error(@"%@",ToOcObject(msg));
+                break;
+            default:
+                TTLog(@"%@",ToOcObject(msg));
+                break;
+        }
     };
-    
 }
 
-- (JSValue *)getBlockFunc{
-    return self[@"jsBlock"];
+- (JSValue *)messageQueue{
+    return self[@"js_msgSend"];
 }
-
-- (id)execFuncParamsBlockWithBlockKey:(NSString *)key
-                            arguments:(NSArray *)arguments{
-    JSValue *func = [self getBlockFunc];
-    NSMutableArray *tempArguments = [NSMutableArray arrayWithObject:key];
-    [tempArguments addObjectsFromArray:arguments];
-    
-    return [func callWithArguments:tempArguments];
-}
-
-
 @end
 
