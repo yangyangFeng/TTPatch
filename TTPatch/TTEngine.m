@@ -1067,11 +1067,13 @@ static void aspect_prepareClassAndHookSelector(Class cls, SEL selector, BOOL isI
     IMP targetMethodIMP = method_getImplementation(targetMethod);
     NSString *signatureStr;
     if (!signature || !signature.length) {
-        signatureStr = @"@@:@";
+        signatureStr = @"i@:@";
     }else{
         signatureStr= CreateSignatureWithString(signature, NO);
     }
      
+    NSString *selectorName = NSStringFromSelector(selector);
+    
     /**
      *这里将native不存在的方法,默认签名为 入参 @, return @,防止因签名原因无法获取参数列表.
      */
@@ -1178,35 +1180,34 @@ static id WrapParamsWithTypeChar(void **args,const char *argumentType,int index)
                 tempArg = (__bridge id) (*(void **) arg);
                 TTPatchBlockModel *block = [TTPatchBlockModel new];
                 block.__isa = tempArg;
-                value = tempArg;
-                
+                value = ToJsObject(block, @"block");
             }else{
                 __unsafe_unretained id tempArg;
                 tempArg = (__bridge id) (*(void **) arg);
-                value = tempArg;
+                value = tempArg==nil?[NSNull null]:ToJsObject(tempArg, nil);
             }
         }break;
         case _C_STRUCT_B:{
             NSString * returnStypeStr = [NSString stringWithUTF8String:argumentType];
             if ([returnStypeStr hasPrefix:@"{CGRect"]){
-                CGRect instance;
-                //                    instance =  (*(void **) arg);
-//                [tempArguments addObject:ToJsObject(CGReactToJSObject(instance),@"react")];
+                __unsafe_unretained id tempArg;
+                tempArg = (__bridge id) (*(void **) arg);
+                return ToJsObject(CGReactToJSObject([tempArg CGRectValue]),@"react");
             }
             else if ([returnStypeStr hasPrefix:@"{CGPoint"]){
-                CGPoint instance;
-                //                    [invocation getArgument:&instance atIndex:(i)];
-//                [tempArguments addObject:ToJsObject(CGPointToJSObject(instance),@"point")];
+                __unsafe_unretained id tempArg;
+                tempArg = (__bridge id) (*(void **) arg);
+                return ToJsObject(CGPointToJSObject([tempArg CGPointValue]),@"CGPoint");
             }
             else if ([returnStypeStr hasPrefix:@"{CGSize"]){
-                CGSize instance;
-                //                    [invocation getArgument:&instance atIndex:(i)];
-//                [tempArguments addObject:ToJsObject(CGSizeToJSObject(instance),@"size")];
+                __unsafe_unretained id tempArg;
+                tempArg = (__bridge id) (*(void **) arg);
+                return ToJsObject(CGSizeToJSObject([tempArg CGSizeValue]),@"size");
             }
             else if ([returnStypeStr hasPrefix:@"{UIEdgeInsets"]){
-                UIEdgeInsets instance;
-                //                    [invocation getArgument:&instance atIndex:(i)];
-//                [tempArguments addObject:ToJsObject(UIEdgeInsetsToJSObject(instance),@"edge")];
+                __unsafe_unretained id tempArg;
+                tempArg = (__bridge id) (*(void **) arg);
+                return ToJsObject(UIEdgeInsetsToJSObject([tempArg UIEdgeInsetsValue]),@"edge");
             }else{
                 NSCAssert(NO, @"*******%@---当前结构体暂不支持",returnStypeStr);
             }

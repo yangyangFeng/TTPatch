@@ -41,25 +41,25 @@ defineClass('ViewController:UIViewController<UITableViewDelegate,UITableViewData
         self.view().addSubview_(tableview);
 		self.setTitle_('Demo.js');
     },
-    tableView_numberOfRowsInSection_:function(tableview,section){
+    tableView_numberOfRowsInSection_:dynamic('long long,@,long long',function(tableview,section){
 		let data = self.data();
 		
         return MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()?data.count():data.length;
-    },
+    }),
 
-    tableView_cellForRowAtIndexPath_:function(tableview,indexPath){
+    tableView_cellForRowAtIndexPath_:dynamic('@,@,@',function(tableview,indexPath){
         let cell = UITableViewCell.alloc().initWithStyle_reuseIdentifier_(1,'cell');
 		let data;
 		if (MessageQueue.ProjectConfig_IS_USE_NATIVE_DATA()){
 			data = self.data().objectAtIndex_(indexPath.row()).value();
 		}else{
-			data = self.data()[indexPath.row()]
+			data = self.data()[1]
 		}
 
 		
         cell.textLabel().setText_("<"+ data+">");
         return cell;
-    },
+    }),
 	tableView_didSelectRowAtIndexPath_:function (tableview,indexPath) {
 		if (indexPath.row() === 0){
 			let vc = JSRootViewController.new();

@@ -13,7 +13,7 @@
 
 #import "SGDirWatchdog.h"
 #define guard(condfion) if(condfion){}
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableview;
 @property(nonatomic,strong)NSMutableArray *watchDogs;

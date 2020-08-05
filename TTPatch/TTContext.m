@@ -56,8 +56,16 @@ typedef enum : NSUInteger {
         }
          
         for (NSString *aProtocol in protocols) {
+            Class cls =NSClassFromString([classAndSuper firstObject]);
+            Protocol *pro = NSProtocolFromString(aProtocol);
             if (!class_conformsToProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
-                class_addProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol));
+                if (class_addProtocol(cls, pro)) {
+                    NSLog(@"添加协议成功");
+                }else{
+                    NSLog(@"添加协议失败");
+                }
+            }else{
+                
             }
         }
         
