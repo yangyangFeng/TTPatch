@@ -1,5 +1,5 @@
 //
-//  TTPatchUnitTests.m
+//  TTDFKitUnitTests.m
 //  ExampleTests
 //
 //  Created by tianyubing on 2020/4/24.
@@ -7,16 +7,16 @@
 //
 
 #import "TTPatchUnitTests.h"
-#import "TTPatch.h"
-#import "TTPatchKit.h"
-#import "TTPatchHotRefrshTool.h"
+#import "TTDFKit.h"
+#import "TTDFKitHeader.h"
+#import "TTDFKitHotRefrshTool.h"
 
-@implementation TTPatchUnitTests
+@implementation TTDFKitUnitTests
 
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     // 初始化SDK
-//    [TTPatch initSDK];
+//    [TTDFKit initSDK];
 
 }
 
@@ -37,7 +37,7 @@
 //        // 拉取本地js资源
         [self updateResource:@"hotfixPatch" callbacl:nil];
 ////        [self loadupdateResource:@"hotfixPatch.js" callbacl:nil];
-////    [TTPatchUnitTests testAction:@"unit-test"];
+////    [TTDFKitUnitTests testAction:@"unit-test"];
     [self testNativeCallJsCase];
 }
 
@@ -124,14 +124,14 @@
 #if TARGET_IPHONE_SIMULATOR  //模拟器
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
               @"127.0.0.1",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #elif TARGET_OS_IPHONE      //真机
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #endif
-    [[TTPatchHotRefrshTool shareInstance] startLocalServer:socket];
-    [TTPatchHotRefrshTool shareInstance].delegate = self;
+    [[TTDFKitHotRefrshTool shareInstance] startLocalServer:socket];
+    [TTDFKitHotRefrshTool shareInstance].delegate = self;
 }
 
 - (void)reviceRefresh:(id)msg{
@@ -145,7 +145,7 @@
 
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
 
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:filename]];
+    [[TTDFKit shareInstance] evaluateScript:[[TTDFKit shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:filename]];
 }
 
 

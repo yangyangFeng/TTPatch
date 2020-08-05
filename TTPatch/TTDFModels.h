@@ -1,5 +1,5 @@
 //
-//  TTPatchModels.h
+//  TTDFModels.h
 //  Example
 //
 //  Created by tianyubing on 2019/9/6.
@@ -15,18 +15,18 @@
                       isInstance:(BOOL)__isInstance;
 @end
 
-@interface TTPatchBlockModel : NSObject
+@interface TTDFKitBlockModel : NSObject
 @property(nonatomic,copy)id __isa;
 @property(nonatomic,strong)NSInvocation *invocation;
 @property(nonatomic,strong)NSArray *arguments;
 
 @end
 
-@interface TTPatchConfigModel : NSObject
+@interface TTDFKitConfigModel : NSObject
 /**
 * 获取默认配置
 */
-+ (TTPatchConfigModel*)defaultConfig;
++ (TTDFKitConfigModel*)defaultConfig;
 
 
 /**

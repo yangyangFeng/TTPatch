@@ -1,12 +1,12 @@
 //
-//  TTHookUtils.m
+//  TTDFUtils.m
 //  TTHook
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import "TTHookUtils.h"
+#import "TTDFUtils.h"
 
 #import <JavaScriptCore/JavaScriptCore.h>
 #import <objc/message.h>
@@ -30,7 +30,7 @@ static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
     Method classMethodInfo    = class_getClassMethod(aClass, aSel);
     return instanceMethodInfo?instanceMethodInfo:classMethodInfo;
 }
-@implementation TTHookUtils
+@implementation TTDFUtils
 
 +(NSString *)TTHookMethodFormatterToOcFunc:(NSString *)method{
     return MethodFormatterToOcFunc(method);

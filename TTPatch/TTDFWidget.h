@@ -1,0 +1,23 @@
+//
+//  TTDFWidget.h
+//  Example
+//
+//  Created by tianyubing on 2020/4/21.
+//  Copyright © 2020 TianyuBing. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+
+
+@interface TTDFKitURLSession : NSObject
++ (instancetype _Nonnull)sharedSession;
+- (NSURLSessionDataTask *_Nonnull)TTDFKit_dataTaskWithRequest:(NSURLRequest *_Nullable)request completionHandler:(void (^_Nullable)(NSString * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
+@end
+
+@interface TTDFKitParser : NSObject
++ (NSData * _Nonnull)stringToData:(NSString * _Nonnull)str;
++ (NSString * _Nonnull)dataToString:(NSData * _Nonnull)data;
+@end
+
+

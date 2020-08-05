@@ -1,6 +1,6 @@
 //
-//  TTPatch.h
-//  TTPatch
+//  TTDFKit.h
+//  TTDFKit
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
@@ -10,11 +10,11 @@
 
 
 
-@class TTContext,TTPatchConfigModel;
+@class TTContext,TTDFKitConfigModel;
 /**
- *TTPatch 声明周期,初始化u入口
+ *TTDFKit 声明周期,初始化u入口
  */
-@interface TTPatch : NSObject
+@interface TTDFKit : NSObject
 
 /// SDK 初始化, 建议程序启动时优先初始化,以保证能修复更多场景
 + (void )initSDK;
@@ -23,7 +23,7 @@
 + (void)deInitSDK;
 
 /// 获取当前JS 上下文
-+ (TTPatch *)shareInstance;
++ (TTDFKit *)shareInstance;
 
 
 /// 执行 patch
@@ -35,12 +35,10 @@
 /// @param sourceURL ,用于调式时展示的 .js 文件名
 - (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL;
 
-- (void)projectConfig:(TTPatchConfigModel *)config;
-
-- (NSString *)formatterJS:(NSString *)script;
+- (void)projectConfig:(TTDFKitConfigModel *)config;
 
 @property(nonatomic,strong,readonly)TTContext *context;
-@property(nonatomic,strong,readonly)TTPatchConfigModel *config;
+@property(nonatomic,strong,readonly)TTDFKitConfigModel *config;
 @end
 
 

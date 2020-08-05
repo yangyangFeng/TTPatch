@@ -1,5 +1,5 @@
 //
-//  TTBlockHelper.h
+//  TTDFBlockHelper.h
 //  Example
 //
 //  Created by tianyubing on 2020/8/4.
@@ -24,26 +24,26 @@ typedef enum {
     // BLOCK_IS_NOESCAPE is set, BLOCK_IS_GLOBAL is set too. Copying a
     // non-escaping block returns the original block and releasing such a
     // block is a no-op, which is exactly how global blocks are handled.
-    TTPATCH_BLOCK_IS_NOESCAPE      =  (1 << 23),
+    TTDFKit_BLOCK_IS_NOESCAPE      =  (1 << 23),
 
-    TTPATCH_BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
-    TTPATCH_BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
-    TTPATCH_BLOCK_IS_GLOBAL =         (1 << 28),
-    TTPATCH_BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
-    TTPATCH_BLOCK_HAS_SIGNATURE =     (1 << 30),
-} TTPATCH_BLOCK_FLAGS;
+    TTDFKit_BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
+    TTDFKit_BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
+    TTDFKit_BLOCK_IS_GLOBAL =         (1 << 28),
+    TTDFKit_BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
+    TTDFKit_BLOCK_HAS_SIGNATURE =     (1 << 30),
+} TTDFKit_BLOCK_FLAGS;
 
 
-struct TTPatchBlock {
+struct TTDFKitBlock {
     void *isa;
     int flags;
     int reserved;
     void *invoke;
-    struct TTPatchBlockDescriptor *descriptor;
+    struct TTDFKitBlockDescriptor *descriptor;
     void *wrapper;
 };
 
-struct TTPatchBlockDescriptor {
+struct TTDFKitBlockDescriptor {
     //Block_descriptor_1
     struct {
         unsigned long int reserved;
@@ -67,7 +67,7 @@ struct TTPatchBlockDescriptor {
 
 
 @class JSValue;
-@interface TTBlockHelper : NSObject
+@interface TTDFBlockHelper : NSObject
 - (id)initWithTypeEncoding:(NSString *)typeEncoding func:(JSValue *)func;
 
 - (void *)block;

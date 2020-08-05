@@ -1,15 +1,15 @@
 //
-//  TTEngine.m
+//  TTDFEngine.m
 //  Pods-Example
 //
 //  Created by tianyubing on 2020/7/29.
 //
 
-#import "TTEngine.h"
+#import "TTDFEngine.h"
 
-#import "TTBlockHelper.h"
+#import "TTDFBlockHelper.h"
 
-NSString * const TTPatchChangeMethodPrefix = @"tt";
+NSString * const TTDFKitChangeMethodPrefix = @"tt";
 NSString * const kMessageQueue_oc_define = @"MessageQueue_oc_define";
 NSString * const kMessageQueue_oc_sendMsg = @"MessageQueue_oc_sendMsg";
 NSString * const kMessageQueue_oc_block = @"MessageQueue_oc_block";
@@ -19,9 +19,9 @@ NSString * const kMessageQueue_oc_addPropertys = @"MessageQueue_oc_addPropertys"
 NSString * const kMessageQueue_oc_genBlock = @"MessageQueue_oc_genBlock";
 NSString * const kAPP_IsDebug = @"APP_IsDebug";
 NSString * const kUtils_Log = @"Utils_Log";
-NSString * const TTPatchInvocationException = @"TTPatchInvocationException";
+NSString * const TTDFKitInvocationException = @"TTDFKitInvocationException";
 
-@implementation TTEngine
+@implementation TTDFEngine
 
 void __registerMethod(NSString *method,NSString *class,BOOL isClass){
     if (!__replaceMethodMap) {
@@ -153,7 +153,7 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
             case _C_ID:
             {
                 if ('?' == argumentType[1]) {
-                    TTBlockHelper *blockHelper=[arguments objectAtIndex:i];
+                    TTDFBlockHelper *blockHelper=[arguments objectAtIndex:i];
                     void(^blockImp)(void)=blockHelper.block;
                     [invocation setArgument:&blockImp atIndex:(startIndex + i)];
                 }else{
@@ -297,23 +297,23 @@ static id WrapOcToJsInvocationResult(NSInvocation *invocation,NSMethodSignature 
 }
 
 #pragma mark - js 动态调用Oc函数
-static id DynamicBlock(TTPatchBlockModel *blockModel, NSArray *arguments, NSString*custom_signature){
+static id DynamicBlock(TTDFKitBlockModel *blockModel, NSArray *arguments, NSString*custom_signature){
 
-    struct TTPatchBlock* blockLayout = (__bridge void *)blockModel.__isa;
+    struct TTDFKitBlock* blockLayout = (__bridge void *)blockModel.__isa;
     void *desc = blockLayout->descriptor;
     desc += 2 * sizeof(unsigned long int);
 
     //iOS 13有些系统block没有签名,导致无法动态调用.所以这里支持手动创建签名
-    if (!(blockLayout->flags & TTPATCH_BLOCK_HAS_SIGNATURE) && (custom_signature && custom_signature.length)) {
+    if (!(blockLayout->flags & TTDFKit_BLOCK_HAS_SIGNATURE) && (custom_signature && custom_signature.length)) {
         const char * c_custome_signature = [CreateSignatureWithString(custom_signature, YES) cStringUsingEncoding:NSUTF8StringEncoding];
         size_t size = sizeof(&c_custome_signature);
         memcpy(&blockLayout->descriptor->signature, &c_custome_signature, size);
     }
     guard((blockLayout->descriptor->signature != nil))else{
-        @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"block 结构体中无法获取 signature"] userInfo:nil];
+        @throw [NSException exceptionWithName:TTDFKitInvocationException reason:[NSString stringWithFormat:@"block 结构体中无法获取 signature"] userInfo:nil];
         return nil;
     }
-    if (blockLayout->flags & TTPATCH_BLOCK_HAS_COPY_DISPOSE) {
+    if (blockLayout->flags & TTDFKit_BLOCK_HAS_COPY_DISPOSE) {
         desc += 2 *sizeof(void *);
     }
     const char * c_signature = (*(const char **)desc);
@@ -339,7 +339,7 @@ arguments.count > 0) {  \
 flag = YES;  \
 }
 static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, NSString *method, NSArray *arguments){
-    Class ttpatch_cur_class = [classOrInstance class];;
+    Class TTDFKit_cur_class = [classOrInstance class];;
     if (isSuper) {
         //通过直接替换当前isa为父类isa,实现super语法
         object_setClass(classOrInstance, [classOrInstance superclass]);
@@ -354,12 +354,12 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
     
     NSMethodSignature *signature = [classOrInstance methodSignatureForSelector:sel_method];
     guard(signature) else{
-        @throw [NSException exceptionWithName:TTPatchInvocationException reason:[NSString stringWithFormat:@"没有找到 '%@' 中的 %@ 方法", classOrInstance,  method] userInfo:nil];
+        @throw [NSException exceptionWithName:TTDFKitInvocationException reason:[NSString stringWithFormat:@"没有找到 '%@' 中的 %@ 方法", classOrInstance,  method] userInfo:nil];
     }
     
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
-#if TTPATCH_LOG
+#if TTDFKit_LOG
 //            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 #endif
         [invocation setTarget:classOrInstance];
@@ -375,25 +375,25 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
     }
 
     if (isSuper) {
-        object_setClass(classOrInstance, ttpatch_cur_class);
+        object_setClass(classOrInstance, TTDFKit_cur_class);
     }
     return nil;
     
 }
 
 /**
- *  TTPatch 动态方法前缀
+ *  TTDFKit 动态方法前缀
  */
-static NSRecursiveLock* ttpatch_lock=nil;
+static NSRecursiveLock* TTDFKit_lock=nil;
 static NSMutableDictionary *__replaceMethodMap;
 
-static void ttpatch_performLocked(dispatch_block_t block) {
-    if (!ttpatch_lock) {
-        ttpatch_lock = [NSRecursiveLock new];
+static void TTDFKit_performLocked(dispatch_block_t block) {
+    if (!TTDFKit_lock) {
+        TTDFKit_lock = [NSRecursiveLock new];
     }
-    [ttpatch_lock lock];
+    [TTDFKit_lock lock];
     block();
-    [ttpatch_lock unlock];
+    [TTDFKit_lock unlock];
 }
 
 void registerMethod(NSString *method,NSString *class,BOOL isClass){
@@ -455,12 +455,12 @@ static void AddPropertys(NSString *className,NSString *superClassName,NSArray *p
             NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
             
             if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
-#if TTPATCH_LOG
+#if TTDFKit_LOG
                 TTLog(@"Get添加成功:%@",propertyForSetter);
 #endif
             }
             if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
-#if TTPATCH_LOG
+#if TTDFKit_LOG
                 TTLog(@"Set添加成功:set%@",propertyForSetter);
 #endif
             }
@@ -527,7 +527,7 @@ static void OnCallJavaScriptMessageHandlerIMP(ffi_cif *cif, void *ret, void **ar
     __unsafe_unretained JSValue *jsValue;
 
     [params addObjectsFromArray:GetParamFromArgs(args, typeEncoding.UTF8String)];
-    func = [TTPatch shareInstance].context.messageQueue;
+    func = [TTDFKit shareInstance].context.messageQueue;
     jsValue = [func callWithArguments:params];
     
     ConvertReturnValue([methodSignature methodReturnType], jsValue, ret);
@@ -547,7 +547,7 @@ static NSArray* GetParamFromArgs(void **args,const char *typeEncoding){
     NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
     id assignSlf = (__bridge id) (*(void **) args[0]);
     SEL sel = *(void **) args[1];
-    [tempArguments addObject:assignSlf ? [JSValue valueWithObject:assignSlf inContext:[TTPatch shareInstance].context] : [NSNull null]];
+    [tempArguments addObject:assignSlf ? [JSValue valueWithObject:assignSlf inContext:[TTDFKit shareInstance].context] : [NSNull null]];
     [tempArguments addObject:NSStringFromClass([assignSlf class])];
     [tempArguments addObject:MethodFormatterToJSFunc(NSStringFromSelector(sel))];
     BOOL isInstance = YES;
@@ -581,7 +581,7 @@ static id WrapParamsWithTypeChar(void **args,const char *argumentType,int index)
             if ('?' == argumentType[1]) {
                 __unsafe_unretained id tempArg;
                 tempArg = (__bridge id) (*(void **) arg);
-                TTPatchBlockModel *block = [TTPatchBlockModel new];
+                TTDFKitBlockModel *block = [TTDFKitBlockModel new];
                 block.__isa = tempArg;
                 value = ToJsObject(block, @"block");
             }else{
@@ -634,16 +634,16 @@ static void ConvertReturnValue(const char *argumentType, JSValue *jsValue ,void 
                 id retObj = [jsValue toObject];
                 
                 *ptr = (__bridge void *) ToOcObject(retObj);
-                if ([retObj isKindOfClass:[TTBlockHelper class]]) {
-                    *ptr = [((TTBlockHelper *)retObj) block];
+                if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
+                    *ptr = [((TTDFBlockHelper *)retObj) block];
                 }
             }break;
             case _C_CLASS:{
                 void **ptr = retPointer;
                 id retObj = [jsValue toObject];
                 *ptr = (__bridge void *) retObj;
-                if ([retObj isKindOfClass:[TTBlockHelper class]]) {
-                    *ptr = [((TTBlockHelper *)retObj) block];
+                if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
+                    *ptr = [((TTDFBlockHelper *)retObj) block];
                 }
             }break;
             case _C_STRUCT_B:{
@@ -790,7 +790,7 @@ static void HookClassMethod(NSString *className,NSString *superClassName,NSStrin
 }
 
 static void HookClassMethodWithSignature(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray *propertys,NSString *signature){
-    ttpatch_performLocked(^{
+    TTDFKit_performLocked(^{
         
         if(checkRegistedMethod(method, className, !isInstanceMethod)){
             return;
@@ -807,7 +807,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
             NSCAssert(NO, errorDescription);
         }
         
-        #if TTPATCH_LOG
+        #if TTDFKit_LOG
         TTLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
         #endif
         Class aClass = NSClassFromString(className);
@@ -869,7 +869,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     return DynamicMethodInvocation(classOrInstance, isSuper, isBlock, method, arguments);
 }
 
-+ (NSInvocation*)dynamicBlock:(TTPatchBlockModel *)blockModel
++ (NSInvocation*)dynamicBlock:(TTDFKitBlockModel *)blockModel
                     arguments:(NSArray *)arguments
              custom_signature:(NSString*)custom_signature {
     return DynamicBlock(blockModel, arguments, custom_signature);
@@ -904,7 +904,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
 
 + (id)GenJsBlockSignature:(NSString *)signature
                     block:(JSValue *)block{
-    TTBlockHelper *blockHelper = [[TTBlockHelper alloc] initWithTypeEncoding:CreateSignatureWithString(signature, YES) func:block];
+    TTDFBlockHelper *blockHelper = [[TTDFBlockHelper alloc] initWithTypeEncoding:CreateSignatureWithString(signature, YES) func:block];
     return blockHelper;
 }
 

@@ -1,13 +1,13 @@
 //
-//  TTPatchKit.h
-//  TTPatch
+//  TTDFKitKit.h
+//  TTDFKit
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#ifndef TTPatchKit_h
-#define TTPatchKit_h
+#ifndef TTDFKitKit_h
+#define TTDFKitKit_h
 #define guard(condfion) if(condfion){}
 
 #ifdef DEBUG
@@ -22,15 +22,16 @@
 /**
  *日志开关
  */
-#define TTPATCH_LOG 1
+#define TTDFKit_LOG 1
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
 
 #import "TTContext.h"
-#import "TTHookUtils.h"
-#import "TTPatchMethodCleaner.h"
-#import "TTPatchWidget.h"
+#import "TTDFUtils.h"
+#import "TTDFMethodCleaner.h"
+#import "TTDFWidget.h"
+#import "TTDFModels.h"
+#import "TTDFEngine.h"
 
-
-#endif /* TTPatchKit_h */
+#endif /* TTDFKitKit_h */

@@ -355,16 +355,16 @@ class TTEdgeInsets {
             }
         }
 
-        if (jsMethod_IMP && !ttpatch__isSuperInvoke) {
+        if (jsMethod_IMP && !ttdfkit__isSuperInvoke) {
             result = jsMethod_IMP.apply(this, params ? params : null);
         } else if (isInstance) {
-            result = MessageQueue.call(this.__isa, ttpatch__isSuperInvoke, isInstance, msg, params);
+            result = MessageQueue.call(this.__isa, ttdfkit__isSuperInvoke, isInstance, msg, params);
         } else {
-            result = MessageQueue.call(this.__className, ttpatch__isSuperInvoke, isInstance, msg, params);
+            result = MessageQueue.call(this.__className, ttdfkit__isSuperInvoke, isInstance, msg, params);
         }
 
         //super调用已完成，将状态重新置为false
-        global.ttpatch__isSuperInvoke = false;
+        global.ttdfkit__isSuperInvoke = false;
         self = curSelf;
         return pv_toJSObject(result);
     };
@@ -606,9 +606,9 @@ class TTEdgeInsets {
     global.curExecFuncArguments = {};
     global.self = null;
     global.lastSelf = null;
-    global.ttpatch__isSuperInvoke = false;
+    global.ttdfkit__isSuperInvoke = false;
     global.Super = function () {
-        ttpatch__isSuperInvoke = true;
+        ttdfkit__isSuperInvoke = true;
         return self;
     }
 })();

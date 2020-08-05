@@ -1,5 +1,5 @@
 //
-//  TTEngine.h
+//  TTDFEngine.h
 //  Pods-Example
 //
 //  Created by tianyubing on 2020/7/29.
@@ -9,17 +9,15 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 
-#import "TTPatchModels.h"
-#import "TTPatch.h"
-#import "TTPatchKit.h"
+#import "TTDFModels.h"
+#import "TTDFKit.h"
+#import "TTDFKitHeader.h"
 #import "ffi.h"
-
-
 
 
 NS_ASSUME_NONNULL_BEGIN
 
-extern NSString *_Nonnull const TTPatchChangeMethodPrefix;
+extern NSString *_Nonnull const TTDFKitChangeMethodPrefix;
 extern NSString *_Nonnull const kMessageQueue_oc_define;
 extern NSString *_Nonnull const kMessageQueue_oc_sendMsg;
 extern NSString *_Nonnull const kMessageQueue_oc_block;
@@ -32,7 +30,7 @@ extern NSString *_Nonnull const kUtils_Log;
 
     
 /// JS上下文与Native交互 核心管理类
-@interface TTEngine : NSObject
+@interface TTDFEngine : NSObject
 + (id)defineClass:(NSString *)interface;
 
 + (id)dynamicMethodInvocation:(id)classOrInstance
@@ -41,7 +39,7 @@ extern NSString *_Nonnull const kUtils_Log;
                        method:(NSString *)method
                     arguments:(NSArray *)arguments;
 
-+ (NSInvocation*)dynamicBlock:(TTPatchBlockModel *)blockModel
++ (NSInvocation*)dynamicBlock:(TTDFKitBlockModel *)blockModel
                     arguments:(NSArray *)arguments
              custom_signature:(NSString*)custom_signature;
 

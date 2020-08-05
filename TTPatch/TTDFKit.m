@@ -1,40 +1,40 @@
 //
-//  TTPatch.m
-//  TTPatch
+//  TTDFKit.m
+//  TTDFKit
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import "TTPatch.h"
-#import "TTPatchKit.h"
+#import "TTDFKit.h"
+#import "TTDFKitHeader.h"
 
 
 
 static NSRegularExpression* _regex;
-static TTPatch *instance = nil;
+static TTDFKit *instance = nil;
 
-@interface TTPatch ()
+@interface TTDFKit ()
 
 @property(nonatomic,strong)TTContext *context;
-@property(nonatomic,strong)TTPatchConfigModel *config;
+@property(nonatomic,strong)TTDFKitConfigModel *config;
 @end
 
-@implementation TTPatch
+@implementation TTDFKit
 
 + (void)initSDK{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [TTPatch new];
+        instance = [TTDFKit new];
     });
     [instance loadTTJSKit];
 }
 
 + (void)deInitSDK{
-    [[TTPatch shareInstance] clearContext];
+    [[TTDFKit shareInstance] clearContext];
 }
 
-+ (TTPatch *)shareInstance{
++ (TTDFKit *)shareInstance{
     return instance;
 }
 
@@ -55,12 +55,8 @@ static TTPatch *instance = nil;
     
 }
 
-- (NSString *)formatterJS:(NSString *)script{
-    return script;
-}
-
 - (void)clearContext{
-    [TTPatchMethodCleaner clean];
+    [TTDFMethodCleaner clean];
     self.context = nil;
 }
 
@@ -68,20 +64,20 @@ static TTPatch *instance = nil;
     if (!_context) {
         _context = [TTContext new];
         [_context configJSBrigeActions];
-        [self projectConfig:[TTPatchConfigModel defaultConfig]];
+        [self projectConfig:[TTDFKitConfigModel defaultConfig]];
         [self runMainJS];
     }
 }
 
 - (void)runMainJS{
     NSBundle *myBundle = [NSBundle bundleForClass:[self class]];
-    NSString *path = [myBundle pathForResource:@"TTPatch.js" ofType:nil];
+    NSString *path = [myBundle pathForResource:@"TTDF.js" ofType:nil];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTPatch.js"]];
+    [self evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"TTDF_Core.js"]];
     
 }
 
-- (void)projectConfig:(TTPatchConfigModel *)config{
+- (void)projectConfig:(TTDFKitConfigModel *)config{
     self.config=config;
 }
 @end

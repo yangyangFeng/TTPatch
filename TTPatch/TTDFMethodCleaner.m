@@ -1,34 +1,34 @@
 //
-//  TTPatchMethodCleaner.m
-//  TTPatch
+//  TTDFMethodCleaner.m
+//  TTDFKit
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import "TTPatchMethodCleaner.h"
+#import "TTDFMethodCleaner.h"
 #import <objc/runtime.h>
 #import <objc/message.h>
-#import "TTPatch.h"
-#import "TTPatchKit.h"
-#import "TTEngine.h"
-@implementation TTPatchMethodCleaner
+#import "TTDFKit.h"
+#import "TTDFKitHeader.h"
+#import "TTDFEngine.h"
+@implementation TTDFMethodCleaner
 
 + (void)clean{
     [self cleanClass:nil];
-    [TTEngine.getReplaceMethodMap removeAllObjects];
+    [TTDFEngine.getReplaceMethodMap removeAllObjects];
 }
 
 + (void)cleanClass:(NSString *)className{
-    NSDictionary *methodsDict = TTEngine.getReplaceMethodMap;
+    NSDictionary *methodsDict = TTDFEngine.getReplaceMethodMap;
     for (TTMethodList_Node * node in methodsDict.allValues) {
         Class cls = NSClassFromString(node.clsName);
         guard(cls) else {continue;}
         
         NSString *selectorName = node.methodName;
-        NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTPatchChangeMethodPrefix, selectorName];
+        NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTDFKitChangeMethodPrefix, selectorName];
         
-#if TTPATCH_LOG
+#if TTDFKit_LOG
         TTLog(@"class:%@ message:[%@] cleaned",node.clsName,selectorName);
 #endif
         SEL selector = NSSelectorFromString(selectorName);

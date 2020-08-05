@@ -1,12 +1,12 @@
 //
-//  TTPatchModels.m
+//  TTDFModels.m
 //  Example
 //
 //  Created by tianyubing on 2019/9/6.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import "TTPatchModels.h"
+#import "TTDFModels.h"
 
 
 @implementation TTJSObject
@@ -45,13 +45,13 @@
 
 @end
 
-@implementation TTPatchBlockModel
+@implementation TTDFKitBlockModel
 
 @end
 
-@implementation TTPatchConfigModel
-+ (TTPatchConfigModel*)defaultConfig{
-    TTPatchConfigModel *config = [TTPatchConfigModel new];
+@implementation TTDFKitConfigModel
++ (TTDFKitConfigModel*)defaultConfig{
+    TTDFKitConfigModel *config = [TTDFKitConfigModel new];
     config.isUserNativeData = NO;
     config.isOpenLog = YES;
     return config;

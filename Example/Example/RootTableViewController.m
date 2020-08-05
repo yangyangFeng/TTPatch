@@ -8,8 +8,8 @@
 
 #import "RootTableViewController.h"
 #import "SGDirWatchdog.h"
-#import "TTPatch.h"
-#import "TTPatchHotRefrshTool.h"
+#import "TTDFKit.h"
+#import "TTDFKitHotRefrshTool.h"
 @interface RootTableViewController ()
 
 @end
@@ -20,7 +20,7 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTPatch-Refresh" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTDFKit-Refresh" object:nil];
 }
 
 - (void)refresh{
@@ -31,8 +31,8 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
                                                                            self.jsFileName]]];
     if (!self.jsFileName.length) {
         return;
@@ -42,7 +42,7 @@
             // 网络访问成功
             NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+            [[TTDFKit shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
             if (callback) {
                 callback();
             }

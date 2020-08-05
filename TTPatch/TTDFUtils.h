@@ -1,5 +1,5 @@
 //
-//  TTHookUtils.h
+//  TTDFUtils.h
 //  TTHook
 //
 //  Created by ty on 2019/5/18.
@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <objc/runtime.h>
-#import "TTPatchModels.h"
+#import "TTDFModels.h"
 
 
 
@@ -97,7 +97,7 @@ static NSMethodSignature *block_methodSignatureForSelector(id self, SEL _cmd, SE
     return [NSMethodSignature signatureWithObjCTypes:*signature];
 }
 
-@interface TTHookUtils : NSObject
+@interface TTDFUtils : NSObject
 +(NSString *)TTHookMethodFormatterToOcFunc:(NSString *)method;
 +(NSString *)TTHookMethodFormatterToJSFunc:(NSString *)method;
 @end

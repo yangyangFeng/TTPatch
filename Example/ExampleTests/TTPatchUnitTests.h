@@ -1,5 +1,5 @@
 //
-//  TTPatchUnitTests.h
+//  TTDFKitUnitTests.h
 //  ExampleTests
 //
 //  Created by tianyubing on 2020/4/24.
@@ -10,7 +10,7 @@
 #import <XCTest/XCTest.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TTPatchUnitTests : XCTestCase
+@interface TTDFKitUnitTests : XCTestCase
 - (void)testExample;
 - (void)testInt:(int)p1 string:(NSString*)p2;
 - (void)testArray:(NSArray *)p1 dic:(NSDictionary *)p2;

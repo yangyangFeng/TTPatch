@@ -90,7 +90,7 @@
     [self testCallIDID:^TTPlaygroundModel *(NSString *str) {
         NSLog(@"接受回调 -- %@",str);
         TTPlaygroundModel *model = [TTPlaygroundModel new];
-        model.name = @"TTPatch";
+        model.name = @"TTDFKit";
         return model;
     }];
 }

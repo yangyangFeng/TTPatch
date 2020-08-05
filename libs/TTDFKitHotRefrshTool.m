@@ -1,29 +1,29 @@
 //
-//  TTPatchHotRefrshTool.m
+//  TTDFKitHotRefrshTool.m
 //  Example
 //
 //  Created by tianyubing on 2020/4/2.
 //  Copyright © 2020 TianyuBing. All rights reserved.
 //
 
-#import "TTPatchHotRefrshTool.h"
+#import "TTDFKitHotRefrshTool.h"
 
 @import SocketIO;
 
-static TTPatchHotRefrshTool *instance=nil;
+static TTDFKitHotRefrshTool *instance=nil;
 static NSString * LocaServerIP=nil;
-@interface TTPatchHotRefrshTool ()
+@interface TTDFKitHotRefrshTool ()
 @property(nonatomic,strong )SocketManager* manager;
 @property(nonatomic,strong) NSString *curUrl;
 @end
 
-@implementation TTPatchHotRefrshTool
+@implementation TTDFKitHotRefrshTool
 + (instancetype)shareInstance{
     if (!instance) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            instance = [TTPatchHotRefrshTool new];
-            NSString *_ip=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"TTPatchIP"];
+            instance = [TTDFKitHotRefrshTool new];
+            NSString *_ip=[[NSBundle mainBundle] objectForInfoDictionaryKey:@"TTDFKitIP"];
             NSArray *arr=[_ip componentsSeparatedByString:@"\n"];
             NSString *localIp = [arr firstObject];
             LocaServerIP=localIp;

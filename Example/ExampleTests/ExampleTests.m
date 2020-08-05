@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../../TTPatch/TTPatch.h"
-#import "../../libs/TTPatchHotRefrshTool.h"
+#import "../../TTDFKit/TTDFKit.h"
+#import "../../libs/TTDFKitHotRefrshTool.h"
 #import "基础用法模板/TTPlaygroundController.h"
-#import "TTPatchUnitTests.h"
+#import "TTDFKitUnitTests.h"
 @interface ExampleTests : XCTestCase
 
 @end
@@ -20,7 +20,7 @@
 - (void)setUp {
     // Put setup code here. This method is called before the invocation of each test method in the class.
     // 初始化SDK
-    [TTPatch initSDK];
+    [TTDFKit initSDK];
 }
 
 - (void)tearDown {
@@ -38,7 +38,7 @@
     [self testSocket];
     // 拉取本地js资源
     [self updateResource:@"hotfixPatch.js" callbacl:nil];
-    TTPatchUnitTests *test = [TTPatchUnitTests new];
+    TTDFKitUnitTests *test = [TTDFKitUnitTests new];
     [test testExample];
     
 }
@@ -56,14 +56,14 @@
 #if TARGET_IPHONE_SIMULATOR  //模拟器
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
               @"127.0.0.1",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #elif TARGET_OS_IPHONE      //真机
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #endif
-    [[TTPatchHotRefrshTool shareInstance] startLocalServer:socket];
-    [TTPatchHotRefrshTool shareInstance].delegate = self;
+    [[TTDFKitHotRefrshTool shareInstance] startLocalServer:socket];
+    [TTDFKitHotRefrshTool shareInstance].delegate = self;
 }
 
 - (void)reviceRefresh:(id)msg{
@@ -74,8 +74,8 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
                                                                            filename]]];
     
     
@@ -85,9 +85,9 @@
             if (!result || !result.length) {
                 return ;
             }
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:filename]];
+            [[TTDFKit shareInstance] evaluateScript:[[TTDFKit shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:filename]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TTPatch-Refresh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TTDFKit-Refresh" object:nil];
             });
             if (callback) {
                 callback();
@@ -99,7 +99,7 @@
                
             NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
                    
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+            [[TTDFKit shareInstance] evaluateScript:[[TTDFKit shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
             
         }
     }];

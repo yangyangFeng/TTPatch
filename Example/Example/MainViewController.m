@@ -1,14 +1,14 @@
 //
 //  MainViewController.m
-//  TTPatch
+//  TTDFKit
 //
 //  Created by ty on 2019/6/27.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
 #import "MainViewController.h"
-#import "TTPatch.h"
-#import "TTPatchHotRefrshTool.h"
+#import "TTDFKit.h"
+#import "TTDFKitHotRefrshTool.h"
 
 @interface MainViewController ()
 
@@ -16,22 +16,22 @@
 
 @implementation MainViewController
 - (IBAction)refresh:(id)sender {
-//    [TTPatch deInitSDK];
+//    [TTDFKit deInitSDK];
     [self updateResource:nil];
 }
 - (void)updateResource:(void(^)(void))callback
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
                                                                            self.jsFileName]]];
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (data && (error == nil)) {
             // 网络访问成功
             NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+            [[TTDFKit shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
             if (callback) {
                 callback();
             }

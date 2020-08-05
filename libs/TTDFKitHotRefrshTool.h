@@ -1,5 +1,5 @@
 //
-//  TTPatchHotRefrshTool.h
+//  TTDFKitHotRefrshTool.h
 //  Example
 //
 //  Created by tianyubing on 2020/4/2.
@@ -15,14 +15,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol TTPatchHotRefrshTool <NSObject>
+@protocol TTDFKitHotRefrshTool <NSObject>
 
 - (void)reviceRefresh:(id)msg;
 
 @end
 
-@interface TTPatchHotRefrshTool : NSObject
-@property(nonatomic,weak)id<TTPatchHotRefrshTool> delegate;
+@interface TTDFKitHotRefrshTool : NSObject
+@property(nonatomic,weak)id<TTDFKitHotRefrshTool> delegate;
 
 + (instancetype)shareInstance;
 - (void)startLocalServer:(NSString *)url;
