@@ -97,13 +97,12 @@
 		0A16950179084B894EEFF2A51296675F /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Starscream/Compression.swift; sourceTree = "<group>"; };
 		0A4CC938C90624E8D24DF8F24F4730DF /* Pods-Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Example-dummy.m"; sourceTree = "<group>"; };
 		10A028C1355C497E69B7FA3D9F05B59E /* Pods-Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		113B7443847E565731A9654E839A2980 /* TTDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TTDFKit.framework; sourceTree = "<group>"; };
 		165ED20B2617EF214E43856D7D4A81CA /* SocketEngineWebsocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineWebsocket.swift; path = Source/SocketIO/Engine/SocketEngineWebsocket.swift; sourceTree = "<group>"; };
 		1A21DA2B878BD9EF3759C162B650A989 /* SocketPacket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketPacket.swift; path = Source/SocketIO/Parse/SocketPacket.swift; sourceTree = "<group>"; };
 		1F667CC0E19EAF34E5A4119E2121F585 /* Pods_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_Example.framework; path = "Pods-Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2366DCA56489DADAB58990BEF7908FEA /* Socket.IO-Client-Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Socket.IO-Client-Swift-Info.plist"; sourceTree = "<group>"; };
-		2853296C3E70ED52F5D9C9DF3A2F2640 /* TTDFKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTDFKit.xcconfig; sourceTree = "<group>"; };
 		2A866F7C2DE727B78A3B13987C1F9C6A /* Socket.IO-Client-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Socket.IO-Client-Swift.modulemap"; sourceTree = "<group>"; };
-		2B6996E6DB1EF226CA0E2F5628BA898E /* TTDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TTDFKit.framework; sourceTree = "<group>"; };
 		2E816E623FDF7A0B5969337DD2EC441F /* SocketEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngine.swift; path = Source/SocketIO/Engine/SocketEngine.swift; sourceTree = "<group>"; };
 		2F584467E77187F22B38443ED1DED5C1 /* Pods-Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Example-Info.plist"; sourceTree = "<group>"; };
 		3319CBE6BF16B5B2366BDE834B663B5E /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,11 +111,9 @@
 		4ADD5096982599354570B2E6A6630123 /* SocketIOClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClient.swift; path = Source/SocketIO/Client/SocketIOClient.swift; sourceTree = "<group>"; };
 		4ADF328B462F003276F752024DB1972C /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Starscream.modulemap; sourceTree = "<group>"; };
 		50C0B0879B7086918A819F704BF40B4B /* SocketIO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SocketIO.framework; path = "Socket.IO-Client-Swift.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5561E2EA8C3305B515C7F00E0DFE8D0C /* TTDFKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TTDFKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		55BE5CD73AB51212AD3DEC7C9D921E1F /* SocketAnyEvent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAnyEvent.swift; path = Source/SocketIO/Client/SocketAnyEvent.swift; sourceTree = "<group>"; };
 		55CCD09644BE7586F9904BE5A495A9D5 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
 		588A1DAF57E2CAC5C8751A3A2B18F988 /* SocketStringReader.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketStringReader.swift; path = Source/SocketIO/Util/SocketStringReader.swift; sourceTree = "<group>"; };
-		5A5122EBFFA4A7336349DA78C9BA18EE /* TTDF.js */ = {isa = PBXFileReference; includeInIndex = 1; name = TTDF.js; path = TTDFKit.framework/TTDF.js; sourceTree = "<group>"; };
 		5C82634BF833C9E1B8B3AD03E58E5188 /* SocketIOClientConfiguration.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOClientConfiguration.swift; path = Source/SocketIO/Client/SocketIOClientConfiguration.swift; sourceTree = "<group>"; };
 		63472C9AA2BCCDA1DB86B4BAF60125B4 /* SocketManagerSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Source/SocketIO/Manager/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		75B21CE514A3072DBA7AFDE76611CD7D /* SocketIOStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketIOStatus.swift; path = Source/SocketIO/Client/SocketIOStatus.swift; sourceTree = "<group>"; };
@@ -129,14 +126,17 @@
 		87349CD484A05CA54D778349C8670592 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Sources/Starscream/SSLSecurity.swift; sourceTree = "<group>"; };
 		88720EEB19C38A893F59C4A28DD4ABDB /* Pods-Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BD3ED77A076F0C16200F205A8BF478E /* TTDFKit.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = TTDFKit.xcconfig; sourceTree = "<group>"; };
 		93D18556FB37742075E27CCAC66DE24D /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
 		976E836ED431B0F96899EF3A2B9048E3 /* SocketEngineSpec.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineSpec.swift; path = Source/SocketIO/Engine/SocketEngineSpec.swift; sourceTree = "<group>"; };
 		9AE9FA909BB323D3BCA70870E1721452 /* SocketEnginePacketType.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEnginePacketType.swift; path = Source/SocketIO/Engine/SocketEnginePacketType.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9F556A8B347DD6F06937A18F1473A3A5 /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		A324D0A5022A134BFB7DD38D7F000503 /* TTDF.js */ = {isa = PBXFileReference; includeInIndex = 1; name = TTDF.js; path = TTDFKit.framework/TTDF.js; sourceTree = "<group>"; };
 		AC175A508B1C9A97AE1EC019A31040F0 /* SocketManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Source/SocketIO/Manager/SocketManager.swift; sourceTree = "<group>"; };
 		B1B2896BC5E312024756DF6145341C72 /* SocketEngineClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEngineClient.swift; path = Source/SocketIO/Engine/SocketEngineClient.swift; sourceTree = "<group>"; };
 		B38AF27DA40D2913867A6E4207D2FEF5 /* SocketExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketExtensions.swift; path = Source/SocketIO/Util/SocketExtensions.swift; sourceTree = "<group>"; };
+		B39722FE2A1B7A6B538B060D1F05818F /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		B6DCED566123C5D2EDB12EE8406D83E9 /* SocketTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketTypes.swift; path = Source/SocketIO/Util/SocketTypes.swift; sourceTree = "<group>"; };
 		C279FD3E22C18A18BD14A60BBEE528AE /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		C311A072E895F6578A6539CE40DAEB25 /* Pods-Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-Example-umbrella.h"; sourceTree = "<group>"; };
@@ -151,6 +151,7 @@
 		E461604D1935300640BC06EC98AF2CF6 /* Pods-Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Example-resources.sh"; sourceTree = "<group>"; };
 		E46AE294CD9E3FDF378630D8D450B624 /* Pods-Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-Example.modulemap"; sourceTree = "<group>"; };
 		E92F90078BDAF136F1F5491AF8F18246 /* SocketLogger.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketLogger.swift; path = Source/SocketIO/Util/SocketLogger.swift; sourceTree = "<group>"; };
+		ED280C270CA47BE0E85A5211B33AE077 /* TTDFKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TTDFKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		EE9FB60D37AD58773608D53EFDA1BCB4 /* Pods-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Example.debug.xcconfig"; sourceTree = "<group>"; };
 		EFCBA8E411F67CD29F0AEAEFFF3E7B83 /* SocketAckManager.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketAckManager.swift; path = Source/SocketIO/Ack/SocketAckManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,18 +185,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A13E72D26903A9F9FC91D979A0F8CBE /* TTDFKit */ = {
-			isa = PBXGroup;
-			children = (
-				3F5D78467B151BB323B7EB480648BE68 /* Frameworks */,
-				B2685778D4B80270AD601AEBC00784D1 /* Pod */,
-				628FF6B1A9D29E9273901C2EDF430E48 /* Resources */,
-				19586B3F57DD22A0A262107C2EBE219E /* Support Files */,
-			);
-			name = TTDFKit;
-			path = ../../SDK;
-			sourceTree = "<group>";
-		};
 		0A5654142DD0530B37769BDFD46EA13E /* Starscream */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,13 +198,12 @@
 			path = Starscream;
 			sourceTree = "<group>";
 		};
-		19586B3F57DD22A0A262107C2EBE219E /* Support Files */ = {
+		0DF1EDA6109F88E5B0ADB8C9CE4BFC0A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2853296C3E70ED52F5D9C9DF3A2F2640 /* TTDFKit.xcconfig */,
+				A324D0A5022A134BFB7DD38D7F000503 /* TTDF.js */,
 			);
-			name = "Support Files";
-			path = "../Example/Pods/Target Support Files/TTDFKit";
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		27EB3FE47610C422FB94BACE661FAFD3 /* Socket.IO-Client-Swift */ = {
@@ -252,20 +240,12 @@
 			path = "Socket.IO-Client-Swift";
 			sourceTree = "<group>";
 		};
-		3F5D78467B151BB323B7EB480648BE68 /* Frameworks */ = {
+		3669A9983359B3527DF4E04D0142D414 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2B6996E6DB1EF226CA0E2F5628BA898E /* TTDFKit.framework */,
+				113B7443847E565731A9654E839A2980 /* TTDFKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		628FF6B1A9D29E9273901C2EDF430E48 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				5A5122EBFFA4A7336349DA78C9BA18EE /* TTDF.js */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		62D28F41BA904F2C69E2F67E28B1982A /* Support Files */ = {
@@ -282,12 +262,25 @@
 			path = "../Target Support Files/Starscream";
 			sourceTree = "<group>";
 		};
-		B2685778D4B80270AD601AEBC00784D1 /* Pod */ = {
+		A4F1F858A037153EA80C9733B19D34D9 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				5561E2EA8C3305B515C7F00E0DFE8D0C /* TTDFKit.podspec */,
+				B39722FE2A1B7A6B538B060D1F05818F /* LICENSE */,
+				ED280C270CA47BE0E85A5211B33AE077 /* TTDFKit.podspec */,
 			);
 			name = Pod;
+			sourceTree = "<group>";
+		};
+		A862F9F1A23EA040C0B437C3B3BA10D2 /* TTDFKit */ = {
+			isa = PBXGroup;
+			children = (
+				3669A9983359B3527DF4E04D0142D414 /* Frameworks */,
+				A4F1F858A037153EA80C9733B19D34D9 /* Pod */,
+				0DF1EDA6109F88E5B0ADB8C9CE4BFC0A /* Resources */,
+				DA4852832AE53DA06779EDA18E78C8E8 /* Support Files */,
+			);
+			name = TTDFKit;
+			path = ../../SDK;
 			sourceTree = "<group>";
 		};
 		B36C0C7C10660C72F38622494EBA9D54 /* Targets Support Files */ = {
@@ -331,7 +324,7 @@
 		D6387777C7122048BC718441CE5B7948 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0A13E72D26903A9F9FC91D979A0F8CBE /* TTDFKit */,
+				A862F9F1A23EA040C0B437C3B3BA10D2 /* TTDFKit */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -352,6 +345,15 @@
 			);
 			name = "Pods-Example";
 			path = "Target Support Files/Pods-Example";
+			sourceTree = "<group>";
+		};
+		DA4852832AE53DA06779EDA18E78C8E8 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				8BD3ED77A076F0C16200F205A8BF478E /* TTDFKit.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../Example/Pods/Target Support Files/TTDFKit";
 			sourceTree = "<group>";
 		};
 		DB2C61061EC170240411C29EF6DD7C9D /* iOS */ = {
@@ -723,7 +725,7 @@
 		};
 		453079776A224DAFF17AC21F2BD97903 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2853296C3E70ED52F5D9C9DF3A2F2640 /* TTDFKit.xcconfig */;
+			baseConfigurationReference = 8BD3ED77A076F0C16200F205A8BF478E /* TTDFKit.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -899,7 +901,7 @@
 		};
 		A7FD67A7A307AD094879A048A3B6F899 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2853296C3E70ED52F5D9C9DF3A2F2640 /* TTDFKit.xcconfig */;
+			baseConfigurationReference = 8BD3ED77A076F0C16200F205A8BF478E /* TTDFKit.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

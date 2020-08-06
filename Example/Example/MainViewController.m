@@ -17,7 +17,7 @@
 @implementation MainViewController
 - (IBAction)refresh:(id)sender {
     [TTDFEntry deInitSDK];
-//    [self updateResource:nil];
+    [self updateResource:nil];
 }
 - (void)updateResource:(void(^)(void))callback
 {

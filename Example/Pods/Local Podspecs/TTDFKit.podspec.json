@@ -16,7 +16,6 @@
     "git": "https://github.com/yangyangFeng/TTPatch.git",
     "tag": "2.0.0"
   },
-  "public_header_files": "TTDFKit.framework/Headers/*",
   "resources": "TTDFKit.framework/TTDF.js",
   "vendored_frameworks": [
     "TTDFKit.framework"
