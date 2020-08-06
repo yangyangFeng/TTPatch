@@ -1,6 +1,6 @@
 git tag "$1"
 git push origin "$1"
-pod trunk push ./TTPatch.podspec --allow-warnings
+pod trunk push ./SDK/TTDFKit.podspec --allow-warnings
 
 echo "████████╗████████╗██████╗  █████╗ ████████╗ ██████╗██╗  ██╗"
 echo "╚══██╔══╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██║  ██║"

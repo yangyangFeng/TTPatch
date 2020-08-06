@@ -1,6 +1,6 @@
 //
 //  RootViewController.m
-//  TTPatch
+//  TTDFKit
 //
 //  Created by ty on 2019/6/23.
 //  Copyright © 2019 TianyuBing. All rights reserved.
@@ -8,8 +8,8 @@
 
 #import "RootViewController.h"
 #import "SGDirWatchdog.h"
-#import "TTPatch.h"
-#import "TTPatchHotRefrshTool.h"
+#import <TTDFKit/TTDFKit.h>
+#import "TTDFKitHotRefrshTool.h"
 @interface RootViewController ()
 @property(nonatomic,strong)SGDirWatchdog *watchDog;
 @end
@@ -27,7 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTPatch-Refresh" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTDFKit-Refresh" object:nil];
+    NSLog(@"super---%@",self);
 }
 
 - (void)refresh{
@@ -38,8 +39,8 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
                                                                            self.jsFileName]]];
     if (!self.jsFileName.length) {
         return;
@@ -49,7 +50,7 @@
             // 网络访问成功
             NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
             if (callback) {
                 callback();
             }
@@ -63,7 +64,7 @@
 
 - (void)initJSContxtPath{
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
-    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTPatch.js"];
+    NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTDFKit.js"];
 
     NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
     NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
@@ -86,7 +87,7 @@
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     if (jsCode.length) {
-        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:self.jsFileName]];
+        [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:self.jsFileName]];
     }
     
     [self loadJSCode];

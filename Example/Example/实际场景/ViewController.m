@@ -1,6 +1,6 @@
 //
 //  ViewController.m
-//  TTPatch
+//  TTDFKit
 //
 //  Created by ty on 2019/5/17.
 //  Copyright © 2019 TianyuBing. All rights reserved.
@@ -9,11 +9,11 @@
 #import "ViewController.h"
 //#import <SafariServices/SFSafariViewController.h>
 
-#import "TTPatch.h"
+#import <TTDFKit/TTDFKit.h>
 
 #import "SGDirWatchdog.h"
 #define guard(condfion) if(condfion){}
-@interface ViewController ()
+@interface ViewController ()<UITableViewDelegate,UITableViewDataSource>
 
 @property(nonatomic,strong)UITableView *tableview;
 @property(nonatomic,strong)NSMutableArray *watchDogs;
@@ -26,7 +26,7 @@
     NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     
-    [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugPatch.js"]];
+    [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugPatch.js"]];
     UIAlertController *_alert = [UIAlertController alertControllerWithTitle:@"" message:@"天猫首页弹框修复成功" preferredStyle:(UIAlertControllerStyleAlert)];
     [_alert addAction:[UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
            
@@ -36,6 +36,15 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     [self presentViewController:_alert animated:YES completion:nil];
 
+    
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+//    NSInteger nums = [self tableView:self.tableview numberOfRowsInSection:0];
+//    UITableViewCell *cell= [self tableView:self.tableview cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+//    NSLog(@"%@",cell);
 }
 
 -(NSString *)jsFileName{

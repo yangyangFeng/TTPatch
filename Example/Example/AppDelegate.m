@@ -1,17 +1,17 @@
 //
 //  AppDelegate.m
-//  TTPatch
+//  TTDFKit
 //
 //  Created by ty on 2019/5/17.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
 #import "AppDelegate.h"
-#import "TTPatch.h"
-#import "TTPatchHotRefrshTool.h"
 
+#import "TTDFKitHotRefrshTool.h"
+#import <TTDFKit/TTDFKit.h>
 
-@interface AppDelegate ()<TTPatchHotRefrshTool>
+@interface AppDelegate ()<TTDFKitHotRefrshTool,TTLogProtocol>
 
 @end
 
@@ -20,33 +20,36 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 初始化SDK
-    [TTPatch initSDK];
+    [TTDFEntry initSDK];
+    [TTDFEntry shareInstance].logDelegate = self;
     
-//    /**
-//     * 加载离线的热修复补丁
-//     * 这里 `rootPath` 为项目根目录,如果通过手机运行 ,需要修改为bundle资源访问, 否则无法访问电脑资源,页面显示空白
-//     */
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bugfix"]) {
-//
-//        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
-//
-//        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
-//
-//        [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
-//        NSLog(@"[补丁加载成功!!]");
-//    }
-//    /**
-//     * 连接本地测试服务,如加载空白,请检查
-//     * 1.本地服务是否已启动成功
-//     * 2.检查`info.plist`中IP是否获取正确
-//     */
-//    [self testSocket];
-//    // 拉取本地js资源
-//    [self updateResource:@"hotfixPatch.js" callbacl:nil];
+    /**
+     * 加载离线的热修复补丁
+     * 这里 `rootPath` 为项目根目录,如果通过手机运行 ,需要修改为bundle资源访问, 否则无法访问电脑资源,页面显示空白
+     */
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"bugfix"]) {
+
+        NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
+
+        NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
+
+        [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
+        NSLog(@"[补丁加载成功!!]");
+    }
+    /**
+     * 连接本地测试服务,如加载空白,请检查
+     * 1.本地服务是否已启动成功
+     * 2.检查`info.plist`中IP是否获取正确
+     */
+    [self testSocket];
+    // 拉取本地js资源
+    [self updateResource:@"hotfixPatch.js" callbacl:nil];
     return YES;
 }
 
-
+- (void)log:(NSString *)log level:(log_level)level{
+    NSLog(@"----------------\n%@",log);
+}
 
 - (void)testSocket{
     
@@ -54,14 +57,14 @@
 #if TARGET_IPHONE_SIMULATOR  //模拟器
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
               @"127.0.0.1",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #elif TARGET_OS_IPHONE      //真机
     socket = [NSString stringWithFormat:@"ws://%@:%@/socket.io/?EIO=4&transport=websocket",
-              [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-              [TTPatchHotRefrshTool shareInstance].getLocaServerPort];
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+              [TTDFKitHotRefrshTool shareInstance].getLocaServerPort];
 #endif
-    [[TTPatchHotRefrshTool shareInstance] startLocalServer:socket];
-    [TTPatchHotRefrshTool shareInstance].delegate = self;
+    [[TTDFKitHotRefrshTool shareInstance] startLocalServer:socket];
+    [TTDFKitHotRefrshTool shareInstance].delegate = self;
 }
 
 - (void)reviceRefresh:(id)msg{
@@ -72,8 +75,8 @@
 {
     NSURLSession *session = [NSURLSession sharedSession];
     NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTPatchHotRefrshTool shareInstance].getLocaServerPort,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
                                                                            filename]]];
     
     
@@ -83,9 +86,9 @@
             if (!result || !result.length) {
                 return ;
             }
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:result] withSourceURL:[NSURL URLWithString:filename]];
+            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:filename]];
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"TTPatch-Refresh" object:nil];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"TTDFKit-Refresh" object:nil];
             });
             if (callback) {
                 callback();
@@ -97,7 +100,7 @@
                
             NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
                    
-            [[TTPatch shareInstance] evaluateScript:[[TTPatch shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+            [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
             
         }
     }];

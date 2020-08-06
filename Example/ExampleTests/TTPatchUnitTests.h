@@ -1,5 +1,5 @@
 //
-//  TTPatchUnitTests.h
+//  TTDFKitUnitTests.h
 //  ExampleTests
 //
 //  Created by tianyubing on 2020/4/24.
@@ -7,30 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <XCTest/XCTest.h>
 NS_ASSUME_NONNULL_BEGIN
 
-@interface TTPatchUnitTests : NSObject
-- (void)nativeCallJsCase;
+@interface TTDFKitUnitTests : XCTestCase
+- (void)testExample;
+- (void)testInt:(int)p1 string:(NSString*)p2;
+- (void)testArray:(NSArray *)p1 dic:(NSDictionary *)p2;
 
-- (void)JsCallNativeCase;
+- (void)testBlockInt:(void(^)(int))p1;
+- (void)testBlockString:(void(^)(NSString*))p1;
+- (void)testBlockObj:(void(^)(id))p1;
 
-- (void)blockAddSignatureCase;
-
-- (void)funcWithParams:(NSString * )param1;
-
-- (void)funcWithParams:(NSArray * )param1
-                param2:(NSDictionary *)param2;
-
-- (void)funcWithParams:(NSString * )param1
-                param2:(NSString *)param2
-                param3:(NSString *)param3;
-
-- (void)funcWithBlockParams:(NSString * )param1
-                     param2:(void(^)(NSString *arg))param2;
-
-- (void)funcWithBlockParams:(NSString * )param1
-                     paramInt2:(void(^)(int ))param2;
 @end
 
 NS_ASSUME_NONNULL_END

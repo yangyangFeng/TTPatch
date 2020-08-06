@@ -1,0 +1,6 @@
+framework module TTDFKit {
+  umbrella header "TTDFKit.h"
+
+  export *
+  module * { export * }
+}

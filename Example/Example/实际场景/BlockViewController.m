@@ -62,13 +62,14 @@
     }
 }
 
-- (void)testCall2:(UIViewController *(^)(UIViewController *str))call{
+- (void)testCall2:(NSDictionary *(^)(UIViewController *str))call{
     if (call) {
 //        NSLog(@"有参block----%@",);
-        UIViewController *  res = call(self);
+        NSDictionary *  res = call(self);
+                NSLog(@"有参block----%@",res);
 //        call(@"安居客");
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [res.view setBackgroundColor:[UIColor systemGreenColor]];
+//            [res.view setBackgroundColor:[UIColor systemGreenColor]];
         });
     }
 }
@@ -89,7 +90,7 @@
     [self testCallIDID:^TTPlaygroundModel *(NSString *str) {
         NSLog(@"接受回调 -- %@",str);
         TTPlaygroundModel *model = [TTPlaygroundModel new];
-        model.name = @"TTPatch";
+        model.name = @"TTDFKit";
         return model;
     }];
 }

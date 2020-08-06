@@ -1,0 +1,16 @@
+PODS:
+  - TTDFKit (2.0.0)
+
+DEPENDENCIES:
+  - TTDFKit (from `../SDK/TTDFKit.podspec`)
+
+EXTERNAL SOURCES:
+  TTDFKit:
+    :path: "../SDK/TTDFKit.podspec"
+
+SPEC CHECKSUMS:
+  TTDFKit: 08a2cc58f2117c3cb56a7ba5ee3b8825257a975b
+
+PODFILE CHECKSUM: f348eca20a0f5ca3c3cdc483fc6b6d1619d3d1fb
+
+COCOAPODS: 1.7.5

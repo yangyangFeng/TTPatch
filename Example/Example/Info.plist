@@ -25,8 +25,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
-	<key>TTPatchIP</key>
-	<string>192.168.31.28</string>
+	<key>TTDFKitIP</key>
+	<string>10.72.148.87</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
