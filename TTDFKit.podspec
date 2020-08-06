@@ -15,8 +15,8 @@ Pod::Spec.new do |spec|
   #  summary should be tweet-length, and the description more in depth.
   #
 
-  spec.name         = "TTPatch"
-  spec.version      = "0.8.1"
+  spec.name         = "TTDFKit"
+  spec.version      = "2.0.3"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.
@@ -94,9 +94,6 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "TTPatch/*.{h,m}"
-
-  spec.public_header_files = "TTPatch/*.h"
 
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -107,9 +104,9 @@ Pod::Spec.new do |spec|
   #  non-essential files like tests, examples and documentation.
   #
 
-  # spec.resource  = "icon.png"
-  spec.resources = "TTPatch/*.js"
 
+  spec.resources = "TTDFKit.framework/TTDF.js"
+  spec.vendored_frameworks = ['TTDFKit.framework']
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 
 

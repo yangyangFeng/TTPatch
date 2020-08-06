@@ -6,15 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <objc/runtime.h>
-#import <objc/message.h>
 
-#import "TTDFModels.h"
-#import "TTDFEntry.h"
-#import "TTDFKit.h"
 #import "ffi.h"
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *_Nonnull const TTDFKitChangeMethodPrefix;
@@ -28,7 +21,9 @@ extern NSString *_Nonnull const kMessageQueue_oc_genBlock;
 extern NSString *_Nonnull const kAPP_IsDebug;
 extern NSString *_Nonnull const kUtils_Log;
 
+@class JSValue,TTDFKitBlockModel;
 
+//@class ffi_type;
 /// JS上下文与Native交互 核心管理类
 @interface TTDFEngine : NSObject
 + (id)defineClass:(NSString *)interface;
@@ -68,10 +63,11 @@ extern NSString *_Nonnull const kUtils_Log;
                    jsValue:(JSValue *)jsValue
                 retPointer:(void *)retPointer;
 
-+ (NSMutableDictionary *)getReplaceMethodMap;
-+ (ffi_type *)typeEncodingToFfiType:(const char *)typeEncoding;
-
 + (id)GenJsBlockSignature:(NSString *)signature
                     block:(JSValue *)block;
+
++ (ffi_type *)typeEncodingToFfiType:(const char *)typeEncoding;
+
++ (NSMutableDictionary *)getReplaceMethodMap;
 @end
 NS_ASSUME_NONNULL_END
