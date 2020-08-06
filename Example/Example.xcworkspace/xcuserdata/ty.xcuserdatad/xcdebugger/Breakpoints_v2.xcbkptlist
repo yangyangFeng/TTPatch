@@ -42,8 +42,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
             <Locations>
@@ -90,8 +90,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -122,8 +122,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -138,8 +138,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
             <Locations>
@@ -186,8 +186,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -202,8 +202,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -218,8 +218,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -234,8 +234,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -250,8 +250,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -266,8 +266,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -282,8 +282,8 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
          </BreakpointContent>
@@ -314,26 +314,10 @@
             filePath = "../TTPatch/TTContext.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "TTContext"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5229BAC1-3903-46BB-A15C-449CD3212E92"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Example/&#x5b9e;&#x9645;&#x573a;&#x666f;/BlockViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-testCall0:"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -394,8 +378,8 @@
             filePath = "ExampleTests/TTPatchUnitTests.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "-testNativeCallJsCase"
             landmarkType = "7">
          </BreakpointContent>
@@ -467,22 +451,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "22728FA2-BFD6-4452-B0F9-005C91678B35"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Example/AppDelegate.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-updateResource:callbacl:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8D000347-A3E1-4E99-9F1D-5C1A2A2CD140"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -490,8 +458,8 @@
             filePath = "Example/AppDelegate.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "-updateResource:callbacl:"
             landmarkType = "7">
          </BreakpointContent>
@@ -499,49 +467,81 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "675F5427-AE27-47D3-B0BC-A34112A79122"
+            uuid = "8A298303-BB9C-4714-8047-E05B408FCC61"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Example/AppDelegate.m"
+            filePath = "ExampleTests/TTPatchUnitTests.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-updateResource:callbacl:"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "-testNativeCallJsCase"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "675F5427-AE27-47D3-B0BC-A34112A79122 - cd22ca55222c80d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[AppDelegate updateResource:callbacl:]"
-                  moduleName = "Example"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/Example/Example/AppDelegate.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "80"
-                  endingLineNumber = "80"
-                  offsetFromSymbolStart = "556">
-               </Location>
-               <Location
-                  uuid = "675F5427-AE27-47D3-B0BC-A34112A79122 - 61ab311ee96f51e0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__39-[AppDelegate updateResource:callbacl:]_block_invoke"
-                  moduleName = "Example"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ty/MyProjects/iOS/TTPatch/Example/Example/AppDelegate.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "81"
-                  endingLineNumber = "81"
-                  offsetFromSymbolStart = "109">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F0A934EB-F86E-4933-9DC2-30A190E0DE72"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ExampleTests/TTPatchUnitTests.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "-testBlockInt:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B79DA11E-37E0-4A45-8F08-70300D8DA6F5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../TTDFKit/TTDFKit/TTDFEngine.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "replaceMethod(cls, selector, isInstanceMethod, signature)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B7E5E232-FD74-488B-9D68-0469DDC4F777"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Example/RootViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "-refresh"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3DFF583A-53D1-4FFA-9D87-D6707797633D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Example/MainViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "-refresh:"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

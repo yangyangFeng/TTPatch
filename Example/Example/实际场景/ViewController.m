@@ -9,7 +9,7 @@
 #import "ViewController.h"
 //#import <SafariServices/SFSafariViewController.h>
 
-#import "TTDFKit.h"
+#import <TTDFKit/TTDFKit.h>
 
 #import "SGDirWatchdog.h"
 #define guard(condfion) if(condfion){}
@@ -26,7 +26,7 @@
     NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"bugPatch" ofType:@"js"];
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     
-    [[TTDFKit shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugPatch.js"]];
+    [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugPatch.js"]];
     UIAlertController *_alert = [UIAlertController alertControllerWithTitle:@"" message:@"天猫首页弹框修复成功" preferredStyle:(UIAlertControllerStyleAlert)];
     [_alert addAction:[UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
            

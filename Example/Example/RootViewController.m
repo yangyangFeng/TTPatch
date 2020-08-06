@@ -8,7 +8,7 @@
 
 #import "RootViewController.h"
 #import "SGDirWatchdog.h"
-#import "TTDFKit.h"
+#import <TTDFKit/TTDFKit.h>
 #import "TTDFKitHotRefrshTool.h"
 @interface RootViewController ()
 @property(nonatomic,strong)SGDirWatchdog *watchDog;
@@ -50,7 +50,7 @@
             // 网络访问成功
             NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTDFKit shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
+            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
             if (callback) {
                 callback();
             }
@@ -87,7 +87,7 @@
     
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     if (jsCode.length) {
-        [[TTDFKit shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:self.jsFileName]];
+        [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:self.jsFileName]];
     }
     
     [self loadJSCode];

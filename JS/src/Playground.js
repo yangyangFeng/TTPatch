@@ -138,6 +138,12 @@ defineClass('TTPlaygroundController:UIViewController', {
 
         var userMmodel = UserModel.new();
         userMmodel.getUserName();
+        self.testInt_string_(999,"ttpatch")
+        
+        self.testArray_dic_([1,2,3],dic);
+        self.tttestBlockString_(function(p1){
+            Utils.log_info('[unit-test] testBlockString_:' + p1);
+        });
     }),
     funcWithBlockParams_param2_: dynamic(',id,?', function (arg1, callback) {
         Utils.log_info('block:' + arg1);
@@ -150,6 +156,21 @@ defineClass('TTPlaygroundController:UIViewController', {
         if (callback) {
             callback(1);
         }
+    }),
+    testBlockInt_: dynamic('void,?',function(p1) {
+        p1(1);
+        Utils.log_info('[unit-test] [3]testBlockInt_:' + p1);
+    }),
+    testBlockString_: dynamic('void,?',function(p1) {
+        p1("ttpatch");
+        Utils.log_info('[unit-test] [3]testBlockString_:' + p1);
+    }),
+    testBlockObj_: dynamic('void,?',function(p1) {
+        
+        var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
+        Utils.log_info(dic.name);
+        p1(dic);
+        Utils.log_info('[unit-test] [3]testBlockObj_:' + p1);
     })
 }, {
     //静态方法

@@ -7,7 +7,7 @@
 //
 
 #import "MainViewController.h"
-#import "TTDFKit.h"
+#import <TTDFKit/TTDFKit.h>
 #import "TTDFKitHotRefrshTool.h"
 
 @interface MainViewController ()
@@ -16,8 +16,8 @@
 
 @implementation MainViewController
 - (IBAction)refresh:(id)sender {
-//    [TTDFKit deInitSDK];
-    [self updateResource:nil];
+    [TTDFEntry deInitSDK];
+//    [self updateResource:nil];
 }
 - (void)updateResource:(void(^)(void))callback
 {
@@ -31,7 +31,7 @@
             // 网络访问成功
             NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
             NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTDFKit shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
             if (callback) {
                 callback();
             }

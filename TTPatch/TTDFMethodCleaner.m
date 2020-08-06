@@ -10,7 +10,7 @@
 #import <objc/runtime.h>
 #import <objc/message.h>
 #import "TTDFKit.h"
-#import "TTDFKitHeader.h"
+#import "TTDFEntry.h"
 #import "TTDFEngine.h"
 @implementation TTDFMethodCleaner
 
@@ -44,8 +44,6 @@
         guard(method) else{continue;}
         char *typeDescription = (char *)method_getTypeEncoding(method);
         class_replaceMethod(cls, selector, originalImp, typeDescription);
-
-
     }
 }
 @end

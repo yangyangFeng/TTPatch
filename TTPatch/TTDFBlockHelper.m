@@ -36,7 +36,7 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
     NSString *typeEncoding = userInfo.typeEncoding;
     NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:typeEncoding.UTF8String];
     JSValue *func = userInfo.func;
-
+    
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (int i = 1; i < signature.numberOfArguments; i++) {
         const char *type = [signature getArgumentTypeAtIndex:i];
@@ -51,11 +51,11 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
         }
         return;
     }
-
+    
     return;
 }
 
-- (id)initWithTypeEncoding:(NSString *)typeEncoding func:(JSValue *)func {
+- (id)initWithTypeEncoding:(NSString *)typeEncoding callbackFunction:(JSValue *)func {
     self = [super init];
     if (self) {
         _typeEncoding = typeEncoding;
@@ -64,7 +64,7 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
     return self;
 }
 
-- (void *)block {
+- (void *)blockPtr {
     NSString *typeEncoding = self.typeEncoding;
     NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:typeEncoding.UTF8String];
     if (typeEncoding.length <= 0) {
@@ -78,34 +78,37 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
     ffi_type *returnType = [TTDFEngine typeEncodingToFfiType:signature.methodReturnType];
     _args = malloc(sizeof(ffi_type *) * argCount);
     _args[0] = &ffi_type_pointer;
+    
     for (int i = 1; i < argCount; i++) {
         _args[i] = [TTDFEngine typeEncodingToFfiType:[signature getArgumentTypeAtIndex:i]];
     }
-
+    
     if (ffi_prep_cif(_cifPtr, FFI_DEFAULT_ABI, argCount, returnType, _args) == FFI_OK) {
-        ffi_prep_closure_loc(_closure, _cifPtr, blockIMP, (__bridge void *) self, imp);
+        if (ffi_prep_closure_loc(_closure, _cifPtr, blockIMP, (__bridge void *) self, imp) != FFI_OK) {
+            NSAssert(NO, @"block 生成失败");
+        }
     }
-
+    
     struct TTDFKitBlockDescriptor descriptor = {
-            0,
-            sizeof(struct TTDFKitBlock),
-            (void (*)(void *dst, const void *src)) copy_helper,
-            (void (*)(const void *src)) dispose_helper,
-            nil
+        0,
+        sizeof(struct TTDFKitBlock),
+        (void (*)(void *dst, const void *src)) copy_helper,
+        (void (*)(const void *src)) dispose_helper,
+        nil
     };
-
+    
     _descriptor = malloc(sizeof(struct TTDFKitBlockDescriptor));
     memcpy(_descriptor, &descriptor, sizeof(struct TTDFKitBlockDescriptor));
-
+    
     struct TTDFKitBlock newBlock = {
-            &_NSConcreteStackBlock,
-            (TTDFKit_BLOCK_HAS_COPY_DISPOSE | TTDFKit_BLOCK_HAS_SIGNATURE),
-            0,
-            imp,
-            _descriptor,
-            (__bridge void *) self
+        &_NSConcreteStackBlock,
+        (TTDFKit_BLOCK_HAS_COPY_DISPOSE | TTDFKit_BLOCK_HAS_SIGNATURE),
+        0,
+        imp,
+        _descriptor,
+        (__bridge void *) self
     };
-
+    
     _blockPtr = Block_copy(&newBlock);
     CFRelease(&descriptor);
     CFRelease(&newBlock);

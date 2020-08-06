@@ -14,7 +14,7 @@
 + (NSDictionary *)createJSObject:(id)__isa
                        className:(NSString *)__className
                       isInstance:(BOOL)__isInstance{
-
+    
     if ([__isa isKindOfClass:NSString.class]) {
         __className=@"NSString";
     }else if ([__isa isKindOfClass:NSNumber.class]){
@@ -40,7 +40,7 @@
     return @{@"__isa":__isa?:[NSNull null],
              @"__className":__className,
              @"__isInstance":@(__isInstance)
-             };
+    };
 }
 
 @end

@@ -33,14 +33,6 @@
 		102D64CF2434794A00EED7AE /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64C32434794A00EED7AE /* BlockViewController.m */; };
 		102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 102D64CC2434794A00EED7AE /* TTPlaygroundController.m */; };
 		104D6C7B2448A275008D5E23 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 104D6C7A2448A275008D5E23 /* WebKit.framework */; };
-		1061CF9624D16527000ED7ED /* TTDF.js in Resources */ = {isa = PBXBuildFile; fileRef = 1061CF8824D16527000ED7ED /* TTDF.js */; };
-		1061CF9724D16527000ED7ED /* TTDFModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF8A24D16527000ED7ED /* TTDFModels.m */; };
-		1061CF9824D16527000ED7ED /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF8E24D16527000ED7ED /* TTContext.m */; };
-		1061CF9924D16527000ED7ED /* TTDFKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF8F24D16527000ED7ED /* TTDFKit.m */; };
-		1061CF9A24D16527000ED7ED /* TTDFWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9024D16527000ED7ED /* TTDFWidget.m */; };
-		1061CF9B24D16527000ED7ED /* TTDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9124D16527000ED7ED /* TTDFEngine.m */; };
-		1061CF9C24D16527000ED7ED /* TTDFMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9224D16527000ED7ED /* TTDFMethodCleaner.m */; };
-		1061CF9D24D16527000ED7ED /* TTDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 1061CF9424D16527000ED7ED /* TTDFUtils.m */; };
 		1082CFDC2436CF5C006FE44A /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1082CFDB2436CF5C006FE44A /* RootTableViewController.m */; };
 		109C0887243593180021F206 /* TTDFKitHotRefrshTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 109C0886243593180021F206 /* TTDFKitHotRefrshTool.m */; };
 		109C08982435A6BC0021F206 /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 109C08952435A6BC0021F206 /* bugPatch.js */; };
@@ -48,11 +40,8 @@
 		10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 10A3A9892445655B0051C2F7 /* hotfixPatch.js */; };
 		10A3A98F2445A2F10051C2F7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 10A3A98E2445A2F10051C2F7 /* AdSupport.framework */; };
 		10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B102AC242E294E00D62E6E /* TaoBaoHome.m */; };
-		10BFFBA324D98B7400B3974F /* TTDFBlockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFFBA224D98B7400B3974F /* TTDFBlockHelper.m */; };
-		10BFFBC624D9988B00B3974F /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10BFFBC324D9988B00B3974F /* libffi.a */; };
 		10BFFBC824DAAFB600B3974F /* TTPatchUnitTests.js in Resources */ = {isa = PBXBuildFile; fileRef = 10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */; };
 		10BFFBC924DAAFFD00B3974F /* TTPatchUnitTests.js in Resources */ = {isa = PBXBuildFile; fileRef = 10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */; };
-		10BFFBCA24DAD62700B3974F /* TTDF.js in Resources */ = {isa = PBXBuildFile; fileRef = 1061CF8824D16527000ED7ED /* TTDF.js */; };
 		10BFFBD024DADAC700B3974F /* TTPatchUnitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10BFFBCF24DADAC700B3974F /* TTPatchUnitTests.m */; };
 		A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 474D1358ED147C13E1337BEA /* Pods_Example.framework */; };
 /* End PBXBuildFile section */
@@ -88,23 +77,8 @@
 		102D64C52434794A00EED7AE /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		102D64CC2434794A00EED7AE /* TTPlaygroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPlaygroundController.m; sourceTree = "<group>"; };
 		102D64CD2434794A00EED7AE /* TTPlaygroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPlaygroundController.h; sourceTree = "<group>"; };
+		104607FD24DBC28A00F97096 /* TTDFKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTDFKit.framework; path = ../../TTDFKit/output/Release/TTDFKit.framework; sourceTree = "<group>"; };
 		104D6C7A2448A275008D5E23 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		1061CF8624D16527000ED7ED /* TTDFKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFKit.h; sourceTree = "<group>"; };
-		1061CF8724D16527000ED7ED /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
-		1061CF8824D16527000ED7ED /* TTDF.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TTDF.js; sourceTree = "<group>"; };
-		1061CF8924D16527000ED7ED /* TTDFWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFWidget.h; sourceTree = "<group>"; };
-		1061CF8A24D16527000ED7ED /* TTDFModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFModels.m; sourceTree = "<group>"; };
-		1061CF8B24D16527000ED7ED /* TTDFMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFMethodCleaner.h; sourceTree = "<group>"; };
-		1061CF8C24D16527000ED7ED /* TTDFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFEngine.h; sourceTree = "<group>"; };
-		1061CF8D24D16527000ED7ED /* TTDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFUtils.h; sourceTree = "<group>"; };
-		1061CF8E24D16527000ED7ED /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
-		1061CF8F24D16527000ED7ED /* TTDFKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFKit.m; sourceTree = "<group>"; };
-		1061CF9024D16527000ED7ED /* TTDFWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFWidget.m; sourceTree = "<group>"; };
-		1061CF9124D16527000ED7ED /* TTDFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFEngine.m; sourceTree = "<group>"; };
-		1061CF9224D16527000ED7ED /* TTDFMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFMethodCleaner.m; sourceTree = "<group>"; };
-		1061CF9324D16527000ED7ED /* TTDFModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFModels.h; sourceTree = "<group>"; };
-		1061CF9424D16527000ED7ED /* TTDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFUtils.m; sourceTree = "<group>"; };
-		1061CF9524D16527000ED7ED /* TTDFKitHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFKitHeader.h; sourceTree = "<group>"; };
 		107EAD8E245271110023C30B /* ExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		107EAD92245271110023C30B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1082CFDA2436CF5C006FE44A /* RootTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
@@ -117,19 +91,6 @@
 		10A3A98E2445A2F10051C2F7 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		10B102AB242E294E00D62E6E /* TaoBaoHome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
 		10B102AC242E294E00D62E6E /* TaoBaoHome.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
-		10BFFBA124D98B7400B3974F /* TTDFBlockHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTDFBlockHelper.h; sourceTree = "<group>"; };
-		10BFFBA224D98B7400B3974F /* TTDFBlockHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTDFBlockHelper.m; sourceTree = "<group>"; };
-		10BFFBBB24D9988B00B3974F /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
-		10BFFBBC24D9988B00B3974F /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
-		10BFFBBD24D9988B00B3974F /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
-		10BFFBBE24D9988B00B3974F /* ffi_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_i386.h; sourceTree = "<group>"; };
-		10BFFBBF24D9988B00B3974F /* ffitarget_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_x86_64.h; sourceTree = "<group>"; };
-		10BFFBC024D9988B00B3974F /* ffi_x86_64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_x86_64.h; sourceTree = "<group>"; };
-		10BFFBC124D9988B00B3974F /* ffitarget_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm.h; sourceTree = "<group>"; };
-		10BFFBC224D9988B00B3974F /* ffitarget_i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_i386.h; sourceTree = "<group>"; };
-		10BFFBC324D9988B00B3974F /* libffi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libffi.a; sourceTree = "<group>"; };
-		10BFFBC424D9988B00B3974F /* ffi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi.h; sourceTree = "<group>"; };
-		10BFFBC524D9988B00B3974F /* ffi_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm64.h; sourceTree = "<group>"; };
 		10BFFBC724DAAFB600B3974F /* TTPatchUnitTests.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = TTPatchUnitTests.js; path = ../../JS/.outputs/TTPatchUnitTests.js; sourceTree = "<group>"; };
 		10BFFBCE24DADAC700B3974F /* TTPatchUnitTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPatchUnitTests.h; sourceTree = "<group>"; };
 		10BFFBCF24DADAC700B3974F /* TTPatchUnitTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPatchUnitTests.m; sourceTree = "<group>"; };
@@ -146,7 +107,6 @@
 				104D6C7B2448A275008D5E23 /* WebKit.framework in Frameworks */,
 				10A3A98F2445A2F10051C2F7 /* AdSupport.framework in Frameworks */,
 				A05E0F6D2107FD30B4DB7424 /* Pods_Example.framework in Frameworks */,
-				10BFFBC624D9988B00B3974F /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -183,8 +143,6 @@
 		1014C25C22CB16C000132618 /* Example */ = {
 			isa = PBXGroup;
 			children = (
-				10BFFBBA24D9988B00B3974F /* libffi */,
-				1061CF8524D16527000ED7ED /* TTPatch */,
 				10A3A9852445655B0051C2F7 /* .outputs */,
 				109C08942435A6BC0021F206 /* Resources */,
 				102D64CB2434794A00EED7AE /* 基础用法模板 */,
@@ -240,32 +198,6 @@
 			path = "基础用法模板";
 			sourceTree = "<group>";
 		};
-		1061CF8524D16527000ED7ED /* TTPatch */ = {
-			isa = PBXGroup;
-			children = (
-				1061CF8624D16527000ED7ED /* TTDFKit.h */,
-				1061CF8F24D16527000ED7ED /* TTDFKit.m */,
-				1061CF8724D16527000ED7ED /* TTContext.h */,
-				1061CF8E24D16527000ED7ED /* TTContext.m */,
-				1061CF8824D16527000ED7ED /* TTDF.js */,
-				1061CF9324D16527000ED7ED /* TTDFModels.h */,
-				1061CF8A24D16527000ED7ED /* TTDFModels.m */,
-				1061CF8C24D16527000ED7ED /* TTDFEngine.h */,
-				1061CF9124D16527000ED7ED /* TTDFEngine.m */,
-				10BFFBA124D98B7400B3974F /* TTDFBlockHelper.h */,
-				10BFFBA224D98B7400B3974F /* TTDFBlockHelper.m */,
-				1061CF8924D16527000ED7ED /* TTDFWidget.h */,
-				1061CF9024D16527000ED7ED /* TTDFWidget.m */,
-				1061CF8B24D16527000ED7ED /* TTDFMethodCleaner.h */,
-				1061CF9224D16527000ED7ED /* TTDFMethodCleaner.m */,
-				1061CF8D24D16527000ED7ED /* TTDFUtils.h */,
-				1061CF9424D16527000ED7ED /* TTDFUtils.m */,
-				1061CF9524D16527000ED7ED /* TTDFKitHeader.h */,
-			);
-			name = TTPatch;
-			path = ../../TTPatch;
-			sourceTree = "<group>";
-		};
 		107EAD8F245271110023C30B /* ExampleTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,24 +243,6 @@
 			path = bugfix;
 			sourceTree = "<group>";
 		};
-		10BFFBBA24D9988B00B3974F /* libffi */ = {
-			isa = PBXGroup;
-			children = (
-				10BFFBBB24D9988B00B3974F /* ffitarget_arm64.h */,
-				10BFFBBC24D9988B00B3974F /* ffitarget.h */,
-				10BFFBBD24D9988B00B3974F /* ffi_arm.h */,
-				10BFFBBE24D9988B00B3974F /* ffi_i386.h */,
-				10BFFBBF24D9988B00B3974F /* ffitarget_x86_64.h */,
-				10BFFBC024D9988B00B3974F /* ffi_x86_64.h */,
-				10BFFBC124D9988B00B3974F /* ffitarget_arm.h */,
-				10BFFBC224D9988B00B3974F /* ffitarget_i386.h */,
-				10BFFBC324D9988B00B3974F /* libffi.a */,
-				10BFFBC424D9988B00B3974F /* ffi.h */,
-				10BFFBC524D9988B00B3974F /* ffi_arm64.h */,
-			);
-			path = libffi;
-			sourceTree = "<group>";
-		};
 		495018408DBFB9381C922E98 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +255,7 @@
 		A6A49EC2EFCC9E65DD4B8B25 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				104607FD24DBC28A00F97096 /* TTDFKit.framework */,
 				104D6C7A2448A275008D5E23 /* WebKit.framework */,
 				10A3A98E2445A2F10051C2F7 /* AdSupport.framework */,
 				474D1358ED147C13E1337BEA /* Pods_Example.framework */,
@@ -362,6 +277,7 @@
 				10B102A5242E0A5300D62E6E /* ShellScript */,
 				2E7ED8980D5E213CBB1B3F1E /* [CP] Embed Pods Frameworks */,
 				109CDCD02435EA53002BD891 /* ShellScript */,
+				3FA4A01DF5D2EDDE4942885C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -441,7 +357,6 @@
 				10BFFBC924DAAFFD00B3974F /* TTPatchUnitTests.js in Resources */,
 				1014C26A22CB16C400132618 /* LaunchScreen.storyboard in Resources */,
 				10A3A98D2445655B0051C2F7 /* hotfixPatch.js in Resources */,
-				1061CF9624D16527000ED7ED /* TTDF.js in Resources */,
 				109C089B2435A6F50021F206 /* bugPatchOrigin.js in Resources */,
 				1014C26722CB16C400132618 /* Assets.xcassets in Resources */,
 				1014C26522CB16C000132618 /* Main.storyboard in Resources */,
@@ -453,7 +368,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				10BFFBC824DAAFB600B3974F /* TTPatchUnitTests.js in Resources */,
-				10BFFBCA24DAD62700B3974F /* TTDF.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +461,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3FA4A01DF5D2EDDE4942885C /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		987BD3957D65A85079578143 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -576,24 +507,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10BFFBA324D98B7400B3974F /* TTDFBlockHelper.m in Sources */,
-				1061CF9D24D16527000ED7ED /* TTDFUtils.m in Sources */,
 				102D64CE2434794A00EED7AE /* ViewController.m in Sources */,
 				1014C26D22CB16C400132618 /* main.m in Sources */,
-				1061CF9924D16527000ED7ED /* TTDFKit.m in Sources */,
-				1061CF9B24D16527000ED7ED /* TTDFEngine.m in Sources */,
 				102D64CF2434794A00EED7AE /* BlockViewController.m in Sources */,
 				10B102AD242E294E00D62E6E /* TaoBaoHome.m in Sources */,
 				109C0887243593180021F206 /* TTDFKitHotRefrshTool.m in Sources */,
-				1061CF9C24D16527000ED7ED /* TTDFMethodCleaner.m in Sources */,
 				102D64D22434794A00EED7AE /* TTPlaygroundController.m in Sources */,
-				1061CF9824D16527000ED7ED /* TTContext.m in Sources */,
 				1014C2A022CB17E700132618 /* RootViewController.m in Sources */,
 				1014C2A122CB17E700132618 /* MainViewController.m in Sources */,
 				1082CFDC2436CF5C006FE44A /* RootTableViewController.m in Sources */,
-				1061CF9A24D16527000ED7ED /* TTDFWidget.m in Sources */,
 				1014C2B722CB1B5000132618 /* SGDirWatchdog.m in Sources */,
-				1061CF9724D16527000ED7ED /* TTDFModels.m in Sources */,
 				1014C25F22CB16C000132618 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -756,6 +679,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VGUJ27JX8N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Example",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/Socket.IO-Client-Swift/SocketIO.framework/Headers\"",
@@ -789,6 +716,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = VGUJ27JX8N;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Example",
+				);
 				INFOPLIST_FILE = Example/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (

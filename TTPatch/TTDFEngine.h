@@ -10,8 +10,8 @@
 #import <objc/message.h>
 
 #import "TTDFModels.h"
+#import "TTDFEntry.h"
 #import "TTDFKit.h"
-#import "TTDFKitHeader.h"
 #import "ffi.h"
 
 
@@ -28,7 +28,7 @@ extern NSString *_Nonnull const kMessageQueue_oc_genBlock;
 extern NSString *_Nonnull const kAPP_IsDebug;
 extern NSString *_Nonnull const kUtils_Log;
 
-    
+
 /// JS上下文与Native交互 核心管理类
 @interface TTDFEngine : NSObject
 + (id)defineClass:(NSString *)interface;

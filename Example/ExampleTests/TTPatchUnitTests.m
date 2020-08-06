@@ -7,8 +7,7 @@
 //
 
 #import "TTPatchUnitTests.h"
-#import "TTDFKit.h"
-#import "TTDFKitHeader.h"
+#import <TTDFKit/TTDFKit.h>
 #import "TTDFKitHotRefrshTool.h"
 
 @implementation TTDFKitUnitTests
@@ -27,7 +26,7 @@
 - (void)testExample {
     // This is an example of a functional test case.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-
+    sleep(5);
         /**
 //         * 连接本地测试服务,如加载空白,请检查
 //         * 1.本地服务是否已启动成功
@@ -35,10 +34,10 @@
 //         */
         [self testSocket];
 //        // 拉取本地js资源
-        [self updateResource:@"hotfixPatch" callbacl:nil];
+//        [self updateResource:@"hotfixPatch" callbacl:nil];
 ////        [self loadupdateResource:@"hotfixPatch.js" callbacl:nil];
 ////    [TTDFKitUnitTests testAction:@"unit-test"];
-    [self testNativeCallJsCase];
+    
 }
 
 
@@ -80,15 +79,15 @@
     
 }
 
-//- (void)testBlockInt:(void(^)(int))p1{
-//
-//}
-//- (void)testBlockString:(void(^)(NSString*))p1{
-//
-//}
-//- (void)testBlockObj:(void(^)(id))p1{
-//
-//}
+- (void)testBlockInt:(void(^)(int))p1{
+
+}
+- (void)testBlockString:(void(^)(NSString*))p1{
+
+}
+- (void)testBlockObj:(void(^)(id))p1{
+
+}
 
 - (void)testCall1:(void(^)(NSString * str,int inta))call{
     if (call) {
@@ -145,7 +144,7 @@
 
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
 
-    [[TTDFKit shareInstance] evaluateScript:[[TTDFKit shareInstance] formatterJS:jsCode] withSourceURL:[NSURL URLWithString:filename]];
+    [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:filename]];
 }
 
 

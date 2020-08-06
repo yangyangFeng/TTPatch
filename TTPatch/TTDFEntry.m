@@ -6,35 +6,35 @@
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
+#import "TTDFEntry.h"
 #import "TTDFKit.h"
-#import "TTDFKitHeader.h"
 
 
 
 static NSRegularExpression* _regex;
-static TTDFKit *instance = nil;
+static TTDFEntry *instance = nil;
 
-@interface TTDFKit ()
+@interface TTDFEntry ()
 
 @property(nonatomic,strong)TTContext *context;
 @property(nonatomic,strong)TTDFKitConfigModel *config;
 @end
 
-@implementation TTDFKit
+@implementation TTDFEntry
 
 + (void)initSDK{
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [TTDFKit new];
+        instance = [TTDFEntry new];
     });
     [instance loadTTJSKit];
 }
 
 + (void)deInitSDK{
-    [[TTDFKit shareInstance] clearContext];
+    [[TTDFEntry shareInstance] clearContext];
 }
 
-+ (TTDFKit *)shareInstance{
++ (TTDFEntry *)shareInstance{
     return instance;
 }
 
@@ -46,13 +46,11 @@ static TTDFKit *instance = nil;
     guard(script != nil && script.length) else{
         TTAssert(NO, @"执行脚本为空,请检查");
     }
- 
     if (sourceURL) {
         [self.context evaluateScript:script withSourceURL:sourceURL];
     }else{
         [self.context evaluateScript:script];
     }
-    
 }
 
 - (void)clearContext{
@@ -79,5 +77,9 @@ static TTDFKit *instance = nil;
 
 - (void)projectConfig:(TTDFKitConfigModel *)config{
     self.config=config;
+}
+
+- (void)setLogDelegate:(id<TTLogProtocol>)logDelegate{
+    self.context.logDelegate = logDelegate;
 }
 @end

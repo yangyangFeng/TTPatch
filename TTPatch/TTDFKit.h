@@ -1,44 +1,37 @@
 //
-//  TTDFKit.h
+//  TTDFKitKit.h
 //  TTDFKit
 //
 //  Created by ty on 2019/5/18.
 //  Copyright © 2019 TianyuBing. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#ifndef TTDFKitKit_h
+#define TTDFKitKit_h
+#define guard(condfion) if(condfion){}
 
+#ifdef DEBUG
+#define TTLog(ARGS, ...) NSLog((@"[%s:%d] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
+#else
+#define TTLog(...)
+#endif
+#define TTLog_Info(ARGS, ...) NSLog((@"[%s:%d] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
+#define TTLog_Error(ARGS, ...) NSLog((@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
+#define TTAssert(con,ARGS, ...) NSAssert(con,(@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
 
-
-@class TTContext,TTDFKitConfigModel;
 /**
- *TTDFKit 声明周期,初始化u入口
+ *日志开关
  */
-@interface TTDFKit : NSObject
+#define TTDFKit_LOG 1
 
-/// SDK 初始化, 建议程序启动时优先初始化,以保证能修复更多场景
-+ (void )initSDK;
+#import <Foundation/Foundation.h>
+#import <JavaScriptCore/JavaScriptCore.h>
 
-/// 析构组件
-+ (void)deInitSDK;
+#import "TTContext.h"
+#import "TTDFUtils.h"
+#import "TTDFMethodCleaner.h"
+#import "TTDFWidget.h"
+#import "TTDFModels.h"
+#import "TTDFEngine.h"
 
-/// 获取当前JS 上下文
-+ (TTDFKit *)shareInstance;
-
-
-/// 执行 patch
-/// @param script js
-- (void)evaluateScript:(NSString *)script;
-
-/// 执行 patch
-/// @param script js
-/// @param sourceURL ,用于调式时展示的 .js 文件名
-- (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL;
-
-- (void)projectConfig:(TTDFKitConfigModel *)config;
-
-@property(nonatomic,strong,readonly)TTContext *context;
-@property(nonatomic,strong,readonly)TTDFKitConfigModel *config;
-@end
-
-
+#endif /* TTDFKitKit_h */

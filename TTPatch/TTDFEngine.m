@@ -49,62 +49,62 @@ static NSString *trim(NSString *string)
 /// @param isBlock 是否构造block签名
 static NSString *CreateSignatureWithString(NSString *signatureStr, bool isBlock){
     static NSMutableDictionary *typeSignatureDict;
-        if (!typeSignatureDict) {
-            typeSignatureDict  = [NSMutableDictionary dictionaryWithObject:@[[NSString stringWithUTF8String:@encode(dispatch_block_t)], @(sizeof(dispatch_block_t))] forKey:@"?"];
-    #define JP_DEFINE_TYPE_SIGNATURE(_type) \
-    [typeSignatureDict setObject:@[[NSString stringWithUTF8String:@encode(_type)], @(sizeof(_type))] forKey:@#_type];\
+    if (!typeSignatureDict) {
+        typeSignatureDict  = [NSMutableDictionary dictionaryWithObject:@[[NSString stringWithUTF8String:@encode(dispatch_block_t)], @(sizeof(dispatch_block_t))] forKey:@"?"];
+#define JP_DEFINE_TYPE_SIGNATURE(_type) \
+[typeSignatureDict setObject:@[[NSString stringWithUTF8String:@encode(_type)], @(sizeof(_type))] forKey:@#_type];\
 
-            JP_DEFINE_TYPE_SIGNATURE(id);
-            JP_DEFINE_TYPE_SIGNATURE(BOOL);
-            JP_DEFINE_TYPE_SIGNATURE(int);
-            JP_DEFINE_TYPE_SIGNATURE(void);
-            JP_DEFINE_TYPE_SIGNATURE(char);
-            JP_DEFINE_TYPE_SIGNATURE(short);
-            JP_DEFINE_TYPE_SIGNATURE(unsigned short);
-            JP_DEFINE_TYPE_SIGNATURE(unsigned int);
-            JP_DEFINE_TYPE_SIGNATURE(long);
-            JP_DEFINE_TYPE_SIGNATURE(unsigned long);
-            JP_DEFINE_TYPE_SIGNATURE(long long);
-            JP_DEFINE_TYPE_SIGNATURE(unsigned long long);
-            JP_DEFINE_TYPE_SIGNATURE(float);
-            JP_DEFINE_TYPE_SIGNATURE(double);
-            JP_DEFINE_TYPE_SIGNATURE(bool);
-            JP_DEFINE_TYPE_SIGNATURE(size_t);
-            JP_DEFINE_TYPE_SIGNATURE(CGFloat);
-            JP_DEFINE_TYPE_SIGNATURE(CGSize);
-            JP_DEFINE_TYPE_SIGNATURE(CGRect);
-            JP_DEFINE_TYPE_SIGNATURE(CGPoint);
-            JP_DEFINE_TYPE_SIGNATURE(CGVector);
-            JP_DEFINE_TYPE_SIGNATURE(NSRange);
-            JP_DEFINE_TYPE_SIGNATURE(NSInteger);
-            JP_DEFINE_TYPE_SIGNATURE(Class);
-            JP_DEFINE_TYPE_SIGNATURE(SEL);
-            JP_DEFINE_TYPE_SIGNATURE(void*);
-            JP_DEFINE_TYPE_SIGNATURE(NSString*);
-            JP_DEFINE_TYPE_SIGNATURE(NSNumber*);
-        }
+        JP_DEFINE_TYPE_SIGNATURE(id);
+        JP_DEFINE_TYPE_SIGNATURE(BOOL);
+        JP_DEFINE_TYPE_SIGNATURE(int);
+        JP_DEFINE_TYPE_SIGNATURE(void);
+        JP_DEFINE_TYPE_SIGNATURE(char);
+        JP_DEFINE_TYPE_SIGNATURE(short);
+        JP_DEFINE_TYPE_SIGNATURE(unsigned short);
+        JP_DEFINE_TYPE_SIGNATURE(unsigned int);
+        JP_DEFINE_TYPE_SIGNATURE(long);
+        JP_DEFINE_TYPE_SIGNATURE(unsigned long);
+        JP_DEFINE_TYPE_SIGNATURE(long long);
+        JP_DEFINE_TYPE_SIGNATURE(unsigned long long);
+        JP_DEFINE_TYPE_SIGNATURE(float);
+        JP_DEFINE_TYPE_SIGNATURE(double);
+        JP_DEFINE_TYPE_SIGNATURE(bool);
+        JP_DEFINE_TYPE_SIGNATURE(size_t);
+        JP_DEFINE_TYPE_SIGNATURE(CGFloat);
+        JP_DEFINE_TYPE_SIGNATURE(CGSize);
+        JP_DEFINE_TYPE_SIGNATURE(CGRect);
+        JP_DEFINE_TYPE_SIGNATURE(CGPoint);
+        JP_DEFINE_TYPE_SIGNATURE(CGVector);
+        JP_DEFINE_TYPE_SIGNATURE(NSRange);
+        JP_DEFINE_TYPE_SIGNATURE(NSInteger);
+        JP_DEFINE_TYPE_SIGNATURE(Class);
+        JP_DEFINE_TYPE_SIGNATURE(SEL);
+        JP_DEFINE_TYPE_SIGNATURE(void*);
+        JP_DEFINE_TYPE_SIGNATURE(NSString*);
+        JP_DEFINE_TYPE_SIGNATURE(NSNumber*);
+    }
     NSArray  *lt            = [signatureStr componentsSeparatedByString:@","];
     /**
      * 这里注意下block与func签名要区分下,block中没有_cmd, 并且要用@?便是target
      */
     NSString *funcSignature = isBlock ? @"@?0" : @"@0:8";
     NSInteger size = isBlock ? sizeof(void *) : sizeof(void *)+ sizeof(SEL);
-        for (NSInteger i = 1; i < lt.count;) {
-            NSString *t = trim(lt[i]);
-            NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"id"][0];
-            if (i == 0) {
-                if (!t || t.length ==0)
-                    funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
-                else
-                    funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
-                break;
-            }else{
-                
-                funcSignature = [funcSignature stringByAppendingString:[NSString stringWithFormat:@"%@%@", tpe, [@(size) stringValue]]];
-                size += [typeSignatureDict[typeSignatureDict[t] ? t : @"id"][1] integerValue];
-            }
-            i = (i == lt.count-1) ? 0 : i+1;
+    for (NSInteger i = 1; i < lt.count;) {
+        NSString *t = trim(lt[i]);
+        NSString *tpe = typeSignatureDict[typeSignatureDict[t] ? t : @"id"][0];
+        if (i == 0) {
+            if (!t || t.length ==0)
+                funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
+            else
+                funcSignature  =[[NSString stringWithFormat:@"%@%@",tpe, [@(size) stringValue]] stringByAppendingString:funcSignature];
+            break;
+        }else{
+            
+            funcSignature = [funcSignature stringByAppendingString:[NSString stringWithFormat:@"%@%@", tpe, [@(size) stringValue]]];
+            size += [typeSignatureDict[typeSignatureDict[t] ? t : @"id"][1] integerValue];
         }
+        i = (i == lt.count-1) ? 0 : i+1;
+    }
     
     return funcSignature;
 }
@@ -134,7 +134,7 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
         systemMethodArgCount=0;
         return;
     }
-   
+    
     guard(systemMethodArgCount == arguments.count)else{
         NSCAssert(NO, [NSString stringWithFormat:@"参数个数不匹配,请检查!"]);
     }
@@ -154,20 +154,20 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
             {
                 if ('?' == argumentType[1]) {
                     TTDFBlockHelper *blockHelper=[arguments objectAtIndex:i];
-                    void(^blockImp)(void)=blockHelper.block;
+                    void(^blockImp)(void)=blockHelper.blockPtr;
                     [invocation setArgument:&blockImp atIndex:(startIndex + i)];
                 }else{
-                    __strong id argument =[arguments objectAtIndex:i];
+                    id argument =[arguments objectAtIndex:i];
                     argument = ToOcObject(argument);
                     [invocation setArgument:&argument atIndex:(startIndex + i)];
                 }
             }break;
             case _C_STRUCT_B:
             {
-                 id argument = ([arguments objectAtIndex:i]);
+                id argument = ([arguments objectAtIndex:i]);
                 NSString * clsType = [argument objectForKey:@"__className"];
                 guard(clsType)else{
-                   NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
+                    NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
                 }
                 NSString *str = [argument objectForKey:@"__isa"];
                 if ([clsType isEqualToString:@"react"]){
@@ -182,7 +182,10 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                     CGSize ocBaseData = toOcCGSize(str);
                     [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
                 }
-                
+                else if ([clsType isEqualToString:@"edge"]){
+                    UIEdgeInsets ocBaseData = toOcEdgeInsets(str);
+                    [invocation setArgument:&ocBaseData atIndex:(startIndex + i)];
+                }
             }break;
             case 'c':{
                 JSValue *jsObj = arguments[i];
@@ -191,7 +194,7 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
                 [invocation setArgument:&argument atIndex:(startIndex + i)];
             }break;
             case _C_SEL:{
-                 SEL argument = NSSelectorFromString([arguments objectAtIndex:i]);
+                SEL argument = NSSelectorFromString([arguments objectAtIndex:i]);
                 [invocation setArgument:&argument atIndex:(startIndex + i)];
             }break;
                 TT_ARG_Injection(_C_SHT, short, shortValue);
@@ -210,15 +213,8 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
             default:
                 break;
         }
-    
+        
     }
-}
-
-static NSString * MethodFormatterToJSFunc(NSString *method){
-    if ([method rangeOfString:@":"].length > 0) {
-        method = [method stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-    }
-    return method;
 }
 
 #pragma mark - wrap Oc data To JS
@@ -229,14 +225,14 @@ type instance; \
 return @(instance); \
 }break;
 static id WrapOcToJsInvocationResult(NSInvocation *invocation,NSMethodSignature *signature){
-//TODO:block返回值 jsObjToOcObj
+    //TODO:block返回值 jsObjToOcObj
     NSString * method;
     if (invocation.selector) {
         method = NSStringFromSelector(invocation.selector);
     }
-   const char *argumentType = signature.methodReturnType;
+    const char *argumentType = signature.methodReturnType;
     char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
-
+    
     switch (flag) {
         case _C_ID:{
             id returnValue;
@@ -244,7 +240,7 @@ static id WrapOcToJsInvocationResult(NSInvocation *invocation,NSMethodSignature 
             [invocation getReturnValue:&result];
             if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
                 returnValue = (__bridge_transfer id)result;
-                        TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+                TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
             } else {
                 returnValue = (__bridge id)result;
             }
@@ -298,11 +294,11 @@ static id WrapOcToJsInvocationResult(NSInvocation *invocation,NSMethodSignature 
 
 #pragma mark - js 动态调用Oc函数
 static id DynamicBlock(TTDFKitBlockModel *blockModel, NSArray *arguments, NSString*custom_signature){
-
+    
     struct TTDFKitBlock* blockLayout = (__bridge void *)blockModel.__isa;
     void *desc = blockLayout->descriptor;
     desc += 2 * sizeof(unsigned long int);
-
+    
     //iOS 13有些系统block没有签名,导致无法动态调用.所以这里支持手动创建签名
     if (!(blockLayout->flags & TTDFKit_BLOCK_HAS_SIGNATURE) && (custom_signature && custom_signature.length)) {
         const char * c_custome_signature = [CreateSignatureWithString(custom_signature, YES) cStringUsingEncoding:NSUTF8StringEncoding];
@@ -325,7 +321,7 @@ static id DynamicBlock(TTDFKitBlockModel *blockModel, NSArray *arguments, NSStri
     setInvocationArgumentsMethod(invocation, arguments,YES);
     
     [invocation invoke];
-
+    
     guard(strcmp(signature.methodReturnType,"v") == 0)else{
         return WrapOcToJsInvocationResult(invocation, signature);
     }
@@ -360,8 +356,9 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
 #if TTDFKit_LOG
-//            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
+        //            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %s \n | %@ \n -----------------------------------" ,method,signature.numberOfArguments,method_getTypeEncoding(methodInfo),arguments);
 #endif
+        [invocation retainArguments];
         [invocation setTarget:classOrInstance];
         [invocation setSelector:sel_method];
         if (hasArgument) {
@@ -373,7 +370,7 @@ static id DynamicMethodInvocation(id classOrInstance,BOOL isSuper,BOOL isBlock, 
             return WrapOcToJsInvocationResult(invocation, signature);
         }
     }
-
+    
     if (isSuper) {
         object_setClass(classOrInstance, TTDFKit_cur_class);
     }
@@ -435,41 +432,41 @@ static id TT_Patch_Property_getter(id self,SEL _cmd){
 
 static void AddPropertys(NSString *className,NSString *superClassName,NSArray *propertys){
     
+    
+    Class aClass = NSClassFromString(className);
+    
+    BOOL needRegistClass=NO;
+    if (!aClass) {
+        aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
+        needRegistClass = YES;
+    }
+    
+    for (NSDictionary * property in propertys) {
+        NSString *propertyName = [property objectForKey:@"__name"];
+        /**
+         targetClass:   表示要添加的属性的类
+         propertyName:  表示要添加的属性名
+         attrs：        类特性列表
+         attrsCount:    类特性个数
+         */
+        NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
         
-        Class aClass = NSClassFromString(className);
-        
-        BOOL needRegistClass=NO;
-        if (!aClass) {
-            aClass = objc_allocateClassPair(NSClassFromString(superClassName), [className UTF8String], 0);
-            needRegistClass = YES;
-        }
-        
-        for (NSDictionary * property in propertys) {
-            NSString *propertyName = [property objectForKey:@"__name"];
-            /**
-             targetClass:   表示要添加的属性的类
-             propertyName:  表示要添加的属性名
-             attrs：        类特性列表
-             attrsCount:    类特性个数
-             */
-            NSString *propertyForSetter = [propertyName stringByReplacingCharactersInRange:NSMakeRange(0,1) withString:[[propertyName substringToIndex:1] capitalizedString]];
-            
-            if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
+        if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
 #if TTDFKit_LOG
-                TTLog(@"Get添加成功:%@",propertyForSetter);
+            TTLog(@"Get添加成功:%@",propertyForSetter);
 #endif
-            }
-            if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
+        }
+        if (class_addMethod(aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:",propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
 #if TTDFKit_LOG
-                TTLog(@"Set添加成功:set%@",propertyForSetter);
+            TTLog(@"Set添加成功:set%@",propertyForSetter);
 #endif
-            }
         }
-        
-        if (needRegistClass) {
-            objc_registerClassPair(aClass);
-        }
-        
+    }
+    
+    if (needRegistClass) {
+        objc_registerClassPair(aClass);
+    }
+    
 }
 
 static void replaceMethod(Class cls, SEL selector, BOOL isInstanceMethod, NSString *signature) {
@@ -487,7 +484,7 @@ static void replaceMethod(Class cls, SEL selector, BOOL isInstanceMethod, NSStri
      *这里将native不存在的方法,默认签名为 入参 @, return @,防止因签名原因无法获取参数列表.
      */
     const char *typeEncoding = method_getTypeEncoding(targetMethod)?:[signatureStr cStringUsingEncoding:NSUTF8StringEncoding];
-
+    
     //libffi版本实现
     NSMethodSignature *sig = [NSMethodSignature signatureWithObjCTypes:typeEncoding];
     unsigned int argCount = (unsigned int) [sig numberOfArguments];
@@ -525,9 +522,9 @@ static void OnCallJavaScriptMessageHandlerIMP(ffi_cif *cif, void *ret, void **ar
     NSMutableArray *params = [[NSMutableArray alloc] init];
     JSValue * func;
     __unsafe_unretained JSValue *jsValue;
-
+    
     [params addObjectsFromArray:GetParamFromArgs(args, typeEncoding.UTF8String)];
-    func = [TTDFKit shareInstance].context.messageQueue;
+    func = [TTDFEntry shareInstance].context.messageQueue;
     jsValue = [func callWithArguments:params];
     
     ConvertReturnValue([methodSignature methodReturnType], jsValue, ret);
@@ -547,7 +544,7 @@ static NSArray* GetParamFromArgs(void **args,const char *typeEncoding){
     NSMutableArray *tempArguments = [NSMutableArray arrayWithCapacity:systemMethodArgCount];
     id assignSlf = (__bridge id) (*(void **) args[0]);
     SEL sel = *(void **) args[1];
-    [tempArguments addObject:assignSlf ? [JSValue valueWithObject:assignSlf inContext:[TTDFKit shareInstance].context] : [NSNull null]];
+    [tempArguments addObject:assignSlf ? [JSValue valueWithObject:assignSlf inContext:[TTDFEntry shareInstance].context] : [NSNull null]];
     [tempArguments addObject:NSStringFromClass([assignSlf class])];
     [tempArguments addObject:MethodFormatterToJSFunc(NSStringFromSelector(sel))];
     BOOL isInstance = YES;
@@ -627,65 +624,70 @@ type *ptr = (type *)retPointer;\
 }\
 break;
 static void ConvertReturnValue(const char *argumentType, JSValue *jsValue ,void *retPointer) {
-        char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
-        switch (flag) {
-            case _C_ID:{
+    char flag = argumentType[0] == 'r' ? argumentType[1] : argumentType[0];
+    switch (flag) {
+        case _C_ID:{
+            void **ptr = retPointer;
+            id retObj = [jsValue toObject];
+            
+            *ptr = (__bridge void *) ToOcObject(retObj);
+            if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
+                *ptr = [((TTDFBlockHelper *)retObj) blockPtr];
+            }
+        }break;
+        case _C_CLASS:{
+            void **ptr = retPointer;
+            id retObj = [jsValue toObject];
+            *ptr = (__bridge void *) retObj;
+            if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
+                *ptr = [((TTDFBlockHelper *)retObj) blockPtr];
+            }
+        }break;
+        case _C_STRUCT_B:{
+            id retObj = [jsValue toObject];
+            NSString * clsType = [retObj objectForKey:@"__className"];
+            guard(clsType)else{
+                NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
+            }
+            NSString *str = [retObj objectForKey:@"__isa"];
+            if ([clsType isEqualToString:@"react"]){
+                CGRect ocBaseData = toOcCGReact(str);
                 void **ptr = retPointer;
-                id retObj = [jsValue toObject];
-                
-                *ptr = (__bridge void *) ToOcObject(retObj);
-                if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
-                    *ptr = [((TTDFBlockHelper *)retObj) block];
-                }
-            }break;
-            case _C_CLASS:{
+                *ptr = & ocBaseData;
+            }else if ([clsType isEqualToString:@"point"]){
+                CGPoint ocBaseData = toOcCGPoint(str);
                 void **ptr = retPointer;
-                id retObj = [jsValue toObject];
-                *ptr = (__bridge void *) retObj;
-                if ([retObj isKindOfClass:[TTDFBlockHelper class]]) {
-                    *ptr = [((TTDFBlockHelper *)retObj) block];
-                }
-            }break;
-            case _C_STRUCT_B:{
-                id retObj = [jsValue toObject];
-                NSString * clsType = [retObj objectForKey:@"__className"];
-                guard(clsType)else{
-                   NSCAssert(NO, [NSString stringWithFormat:@"***************方法签名入参为结构体,当前JS返回params未能获取当前结构体类型,请检查************"]);
-                }
-                NSString *str = [retObj objectForKey:@"__isa"];
-                if ([clsType isEqualToString:@"react"]){
-                    CGRect ocBaseData = toOcCGReact(str);
-                    void **ptr = retPointer;
-                    *ptr = & ocBaseData;
-                }else if ([clsType isEqualToString:@"point"]){
-                    CGPoint ocBaseData = toOcCGPoint(str);
-                    void **ptr = retPointer;
-                    *ptr = & ocBaseData;
-                }
-                else if ([clsType isEqualToString:@"size"]){
-                    CGSize ocBaseData = toOcCGSize(str);
-                    void **ptr = retPointer;
-                    *ptr = & ocBaseData;
-                }
-                break;
-            }break;
-                TT_RETURN_PTR_WRAP(_C_SHT, short, toInt32);
-                TT_RETURN_PTR_WRAP(_C_USHT, unsigned short,toUInt32);
-                TT_RETURN_PTR_WRAP(_C_INT, int,toInt32);
-                TT_RETURN_PTR_WRAP(_C_UINT, unsigned int,toUInt32);
-                TT_RETURN_PTR_WRAP(_C_LNG, long,toInt32);
-                TT_RETURN_PTR_WRAP(_C_ULNG, unsigned long,toUInt32);
-                TT_RETURN_PTR_WRAP(_C_LNG_LNG, long long,toInt32);
-                TT_RETURN_PTR_WRAP(_C_ULNG_LNG, unsigned long long,toUInt32);
-                TT_RETURN_PTR_WRAP(_C_FLT, float,toDouble);
-                TT_RETURN_PTR_WRAP(_C_DBL, double,toDouble);
-                TT_RETURN_PTR_WRAP(_C_BFLD, BOOL,toBool);
-                TT_RETURN_PTR_WRAP(_C_BOOL, BOOL,toBool);
-                
-            default:
-                break;
-        }
-        return ;
+                *ptr = & ocBaseData;
+            }
+            else if ([clsType isEqualToString:@"size"]){
+                CGSize ocBaseData = toOcCGSize(str);
+                void **ptr = retPointer;
+                *ptr = & ocBaseData;
+            }
+            else if ([clsType isEqualToString:@"edge"]){
+                UIEdgeInsets ocBaseData = toOcEdgeInsets(str);
+                void **ptr = retPointer;
+                *ptr = & ocBaseData;
+            }
+            break;
+        }break;
+            TT_RETURN_PTR_WRAP(_C_SHT, short, toInt32);
+            TT_RETURN_PTR_WRAP(_C_USHT, unsigned short,toUInt32);
+            TT_RETURN_PTR_WRAP(_C_INT, int,toInt32);
+            TT_RETURN_PTR_WRAP(_C_UINT, unsigned int,toUInt32);
+            TT_RETURN_PTR_WRAP(_C_LNG, long,toInt32);
+            TT_RETURN_PTR_WRAP(_C_ULNG, unsigned long,toUInt32);
+            TT_RETURN_PTR_WRAP(_C_LNG_LNG, long long,toInt32);
+            TT_RETURN_PTR_WRAP(_C_ULNG_LNG, unsigned long long,toUInt32);
+            TT_RETURN_PTR_WRAP(_C_FLT, float,toDouble);
+            TT_RETURN_PTR_WRAP(_C_DBL, double,toDouble);
+            TT_RETURN_PTR_WRAP(_C_BFLD, BOOL,toBool);
+            TT_RETURN_PTR_WRAP(_C_BOOL, BOOL,toBool);
+            
+        default:
+            break;
+    }
+    return ;
     
 }
 
@@ -736,17 +738,17 @@ static ffi_type *typeEncodingToFfiType(const char *typeEncoding) {
             type->alignment = 0;
             type->elements = NULL;
             type->type = FFI_TYPE_STRUCT;
-
+            
             NSString *types = [typeString substringToIndex:typeString.length - 1];
             NSUInteger location = [types rangeOfString:@"="].location + 1;
             types = [types substringFromIndex:location];
             char *typesCode = (char *) [types UTF8String];
-
-
+            
+            
             size_t index = 0;
             size_t subCount = 0;
             NSString *subTypeEncoding;
-
+            
             while (typesCode[index]) {
                 if (typesCode[index] == '{') {
                     size_t stackSize = 1;
@@ -767,18 +769,18 @@ static ffi_type *typeEncodingToFfiType(const char *typeEncoding) {
                     subTypeEncoding = [types substringWithRange:NSMakeRange(index, 1)];
                     index++;
                 }
-
+                
                 ffi_type *subFfiType = typeEncodingToFfiType((char *) subTypeEncoding.UTF8String);
                 type->size += subFfiType->size;
                 type->elements = realloc((void *) (type->elements), sizeof(ffi_type *) * (subCount + 1));
                 type->elements[subCount] = subFfiType;
                 subCount++;
             }
-
+            
             type->elements = realloc((void *) (type->elements), sizeof(ffi_type *) * (subCount + 1));
             type->elements[subCount] = NULL;
             return type;
-
+            
         }
         default:
             return NULL;
@@ -798,7 +800,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
         static NSSet *disallowedSelectorList;
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
-            disallowedSelectorList = [NSSet setWithObjects:@"retain", @"release", @"autorelease", @"forwardInvocation:", nil];
+            disallowedSelectorList = [NSSet setWithObjects:@"retain", @"release", @"autorelease", nil];
         });
         
         
@@ -807,9 +809,9 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
             NSCAssert(NO, errorDescription);
         }
         
-        #if TTDFKit_LOG
+#if TTDFKit_LOG
         TTLog(@"%@替换 %@ %@", className, isInstanceMethod?@"-":@"+", method);
-        #endif
+#endif
         Class aClass = NSClassFromString(className);
         SEL original_SEL = NSSelectorFromString(method);
         Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
@@ -841,7 +843,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     }else{
         classAndSuper = [interface componentsSeparatedByString:@":"];
     }
-     
+    
     for (NSString *aProtocol in protocols) {
         Class cls =NSClassFromString([classAndSuper firstObject]);
         Protocol *pro = NSProtocolFromString(aProtocol);
@@ -858,7 +860,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     
     return @{@"self":[classAndSuper firstObject],
              @"super":[classAndSuper lastObject]
-             };
+    };
 }
 
 + (id)dynamicMethodInvocation:(id)classOrInstance
@@ -904,13 +906,13 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
 
 + (id)GenJsBlockSignature:(NSString *)signature
                     block:(JSValue *)block{
-    TTDFBlockHelper *blockHelper = [[TTDFBlockHelper alloc] initWithTypeEncoding:CreateSignatureWithString(signature, YES) func:block];
+    TTDFBlockHelper *blockHelper = [[TTDFBlockHelper alloc] initWithTypeEncoding:CreateSignatureWithString(signature, YES) callbackFunction:block];
     return blockHelper;
 }
 
 + (id)GetParamFromArgs:(void **)args
-                     argumentType:(const char *)argumentType
-                       index:(int)index{
+          argumentType:(const char *)argumentType
+                 index:(int)index{
     return WrapParamsWithTypeChar(args, argumentType, index);
 }
 

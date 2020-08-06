@@ -9,9 +9,9 @@
 #import "AppDelegate.h"
 
 #import "TTDFKitHotRefrshTool.h"
-#import "TTDFKitHeader.h"
+#import <TTDFKit/TTDFKit.h>
 
-@interface AppDelegate ()<TTDFKitHotRefrshTool>
+@interface AppDelegate ()<TTDFKitHotRefrshTool,TTLogProtocol>
 
 @end
 
@@ -20,7 +20,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 初始化SDK
-    [TTDFKit initSDK];
+    [TTDFEntry initSDK];
+    [TTDFEntry shareInstance].logDelegate = self;
     
     /**
      * 加载离线的热修复补丁
@@ -32,7 +33,7 @@
 
         NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
 
-        [[TTDFKit shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
+        [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"bugfix.js"]];
         NSLog(@"[补丁加载成功!!]");
     }
     /**
@@ -46,7 +47,9 @@
     return YES;
 }
 
-
+- (void)log:(NSString *)log level:(log_level)level{
+    NSLog(@"----------------\n%@",log);
+}
 
 - (void)testSocket{
     
@@ -83,7 +86,7 @@
             if (!result || !result.length) {
                 return ;
             }
-            [[TTDFKit shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:filename]];
+            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:filename]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"TTDFKit-Refresh" object:nil];
             });
@@ -97,7 +100,7 @@
                
             NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
                    
-            [[TTDFKit shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+            [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
             
         }
     }];
