@@ -1,10 +1,10 @@
 # TTPatch
 ============================
 
-![Cocoapods](https://img.shields.io/cocoapods/l/TTDFKit)
-![Cocoapods](https://img.shields.io/cocoapods/v/TTDFKit)
-![CocoaPods](https://img.shields.io/badge/platform-iOS8.0+-yellowgreen)
-![CocoaPods](https://img.shields.io/badge/build-pass-green)
+[![Cocoapods](https://img.shields.io/cocoapods/l/TTDFKit)](https://cocoapods.org/pods/TTDFKit)
+[![Cocoapods](https://img.shields.io/cocoapods/v/TTDFKit)](https://cocoapods.org/pods/TTDFKit)
+[![CocoaPods](https://img.shields.io/badge/platform-iOS8.0+-yellowgreen)](https://cocoapods.org/pods/TTDFKit)
+
 
 *热修复、热更新、JS代码动态下发、动态创建类*
 > TTPatch升级为2.0,核心实现替换为libffi实现.同时将代码重构,修改敏感命名.TTPatch更新为TTDFKit
