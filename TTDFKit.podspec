@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TTDFKit"
-  spec.version      = "2.0.4"
+  spec.version      = "2.1.0"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.
@@ -104,8 +104,6 @@ Pod::Spec.new do |spec|
   #  non-essential files like tests, examples and documentation.
   #
 
-
-  spec.resources = "TTDFKit.framework/TTDF.js"
   spec.vendored_frameworks = "TTDFKit.framework"
   # spec.preserve_paths = "FilesToSave", "MoreFilesToSave"
 

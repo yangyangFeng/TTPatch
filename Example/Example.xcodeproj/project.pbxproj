@@ -277,7 +277,6 @@
 				10B102A5242E0A5300D62E6E /* ShellScript */,
 				2E7ED8980D5E213CBB1B3F1E /* [CP] Embed Pods Frameworks */,
 				109CDCD02435EA53002BD891 /* ShellScript */,
-				3FA4A01DF5D2EDDE4942885C /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -389,8 +388,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		1082CBE024B86B4A00B7856A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -407,8 +405,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 		109CDCD02435EA53002BD891 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -459,23 +456,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		3FA4A01DF5D2EDDE4942885C /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Example/Pods-Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		987BD3957D65A85079578143 /* [CP] Check Pods Manifest.lock */ = {
