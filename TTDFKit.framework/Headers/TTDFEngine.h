@@ -7,7 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ffi.h"
 NS_ASSUME_NONNULL_BEGIN
 
 extern NSString *_Nonnull const TTDFKitChangeMethodPrefix;
@@ -66,7 +65,7 @@ extern NSString *_Nonnull const kUtils_Log;
 + (id)GenJsBlockSignature:(NSString *)signature
                     block:(JSValue *)block;
 
-+ (ffi_type *)typeEncodingToFfiType:(const char *)typeEncoding;
++ (void *)typeEncodingToFfiType:(const char *)typeEncoding;
 
 + (NSMutableDictionary *)getReplaceMethodMap;
 @end

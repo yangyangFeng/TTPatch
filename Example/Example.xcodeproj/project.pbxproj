@@ -276,7 +276,6 @@
 				1014C25822CB16C000132618 /* Resources */,
 				10B102A5242E0A5300D62E6E /* ShellScript */,
 				2E7ED8980D5E213CBB1B3F1E /* [CP] Embed Pods Frameworks */,
-				109CDCD02435EA53002BD891 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -388,7 +387,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 		1082CBE024B86B4A00B7856A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -405,24 +405,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
-		};
-		109CDCD02435EA53002BD891 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
+			shellScript = "
+";
 		};
 		10B102A5242E0A5300D62E6E /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;

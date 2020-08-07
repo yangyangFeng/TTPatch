@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TTDFKit"
-  spec.version      = "2.1.0"
+  spec.version      = "2.1.1"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.
@@ -94,8 +94,8 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-
-
+  spec.public_header_files = 'TTDFKit.framework/**/*.h'
+  spec.source_files = 'TTDFKit.framework/**/*.h'
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  A list of resources included with the Pod. These are copied into the
@@ -120,7 +120,7 @@ Pod::Spec.new do |spec|
   # spec.library   = "iconv"
   # spec.libraries = "iconv", "xml2"
 
-
+  spec.vendored_libraries = "libffi/libffi.a"
   # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
   #  If your library depends on compiler flags you can set them in the xcconfig hash
