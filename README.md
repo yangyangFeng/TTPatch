@@ -1,6 +1,17 @@
 # TTPatch
-*热修复、热更新、JS代码动态下发、动态创建类*
 
+
+[![Cocoapods](https://img.shields.io/cocoapods/l/TTDFKit)](https://cocoapods.org/pods/TTDFKit)
+[![Cocoapods](https://img.shields.io/cocoapods/v/TTDFKit)](https://cocoapods.org/pods/TTDFKit)
+[![CocoaPods](https://img.shields.io/badge/platform-iOS8.0+-yellowgreen)](https://cocoapods.org/pods/TTDFKit)
+
+
+*热修复、热更新、JS代码动态下发、动态创建类*
+> TTPatch升级为2.0,核心实现替换为libffi实现.同时将代码重构,修改敏感命名.TTPatch更新为TTDFKit
+
+> 风险提示: 仅供技术交流使用,上架有风险!!!!
+
+> **热更新交流群:978337686**
 
 [1. 使用文档](https://github.com/yangyangFeng/TTPatch/wiki/%E4%BD%BF%E7%94%A8%E6%96%87%E6%A1%A3)
 
@@ -12,10 +23,9 @@
 
 [5. 进阶用法](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95)
 
-*关于上架*
-> 风险提示: 请配合服务器下发开关使用, 通过配置决定`APP`是否初始化`TTPatch`模块
 
-> **审核问题请加群:978337686**
+
+
 
 
 ## 1. 功能列表 
@@ -38,11 +48,11 @@
 ## 2. 安装
 
 
-### CocoaPods `pod 0.7.1`
+### CocoaPods `pod 2.1.1`
 
-1. 在 Podfile 中添加  `pod 'TTPatch'`。
+1. 在 Podfile 中添加  `pod 'TTDFKit'`。
 2. 执行 `pod install` 或 `pod update`。
-3. 导入 "TTPatch.h"
+3. 导入 "TTDFKit.h"
 
 
 **演示项目**:Example.xcodeproj 
