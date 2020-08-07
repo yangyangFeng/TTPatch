@@ -1,4 +1,11 @@
 # TTPatch
+============================
+
+![Cocoapods](https://img.shields.io/cocoapods/l/TTDFKit)
+![Cocoapods](https://img.shields.io/cocoapods/v/TTDFKit)
+![CocoaPods](https://img.shields.io/badge/platform-iOS8.0+-yellowgreen)
+![CocoaPods](https://img.shields.io/badge/build-pass-green)
+
 *热修复、热更新、JS代码动态下发、动态创建类*
 > TTPatch升级为2.0,核心实现替换为libffi实现.同时将代码重构,修改敏感命名.TTPatch更新为TTDFKit
 
@@ -41,7 +48,7 @@
 ## 2. 安装
 
 
-### CocoaPods `pod 2.1.0`
+### CocoaPods `pod 2.1.1`
 
 1. 在 Podfile 中添加  `pod 'TTDFKit'`。
 2. 执行 `pod install` 或 `pod update`。
