@@ -28,7 +28,6 @@ typedef enum : NSUInteger {
 
 - (JSValue *)messageQueue;
 
-- (NSString *)dfKitCore;
 @property(nonatomic,weak) id<TTLogProtocol> logDelegate;
 @end
 
