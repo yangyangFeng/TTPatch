@@ -127,23 +127,26 @@ defineClass('TTPlaygroundController:UIViewController', {
         }),
     btnDidAction_: dynamic(',id', function (btn) {
         // tap.view().setBackgroundColor_(UIColor.whiteColor());
-        var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
-        Utils.log_info('uuid->' + uuid);
-        let str = self.name();
-        btn.setTitle_forState_(uuid, 0);
-        btn.setBackgroundColor_(UIColor.systemGreenColor());
-        self.testFunc();
-        var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
-        Utils.log_info(dic.name);
+        // var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
+        // Utils.log_info('uuid->' + uuid);
+        // let str = self.name();
+        // btn.setTitle_forState_(uuid, 0);
+        // btn.setBackgroundColor_(UIColor.systemGreenColor());
+        // self.testFunc();
+        // var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
+        // Utils.log_info(dic.name);
 
-        var userMmodel = UserModel.new();
-        userMmodel.getUserName();
-        self.testInt_string_(999,"ttpatch")
+        // var userMmodel = UserModel.new();
+        // userMmodel.getUserName();
+        // self.testInt_string_(999,"ttpatch")
         
-        self.testArray_dic_([1,2,3],dic);
-        self.tttestBlockString_(function(p1){
-            Utils.log_info('[unit-test] testBlockString_:' + p1);
-        });
+        // self.testArray_dic_([1,2,3],dic);
+        // self.tttestBlockString_(function(p1){
+        //     Utils.log_info('[unit-test] testBlockString_:' + p1);
+        // });
+        UIView.animateWithDuration_animations_(1,block('',function(){
+            btn.setBackgroundColor_(UIColor.systemGreenColor());
+        }));
     }),
     funcWithBlockParams_param2_: dynamic(',id,?', function (arg1, callback) {
         Utils.log_info('block:' + arg1);

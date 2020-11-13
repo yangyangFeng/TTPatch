@@ -1,0 +1,777 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1022C1E9255E6C34006DD5B5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C1E8255E6C34006DD5B5 /* AppDelegate.m */; };
+		1022C1F2255E6C34006DD5B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1022C1F0255E6C34006DD5B5 /* Main.storyboard */; };
+		1022C1F4255E6C36006DD5B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1022C1F3255E6C36006DD5B5 /* Assets.xcassets */; };
+		1022C1F7255E6C36006DD5B5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1022C1F5255E6C36006DD5B5 /* LaunchScreen.storyboard */; };
+		1022C1FA255E6C36006DD5B5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C1F9255E6C36006DD5B5 /* main.m */; };
+		1022C204255E6C36006DD5B5 /* TTDFKitExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C203255E6C36006DD5B5 /* TTDFKitExampleTests.m */; };
+		1022C20F255E6C36006DD5B5 /* TTDFKitExampleUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C20E255E6C36006DD5B5 /* TTDFKitExampleUITests.m */; };
+		1022C251255E6DE5006DD5B5 /* bugPatch.js in Resources */ = {isa = PBXBuildFile; fileRef = 1022C241255E6DE4006DD5B5 /* bugPatch.js */; };
+		1022C252255E6DE5006DD5B5 /* bugPatchOrigin.js in Resources */ = {isa = PBXBuildFile; fileRef = 1022C243255E6DE4006DD5B5 /* bugPatchOrigin.js */; };
+		1022C253255E6DE5006DD5B5 /* RootTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C244255E6DE4006DD5B5 /* RootTableViewController.m */; };
+		1022C254255E6DE5006DD5B5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C247255E6DE4006DD5B5 /* ViewController.m */; };
+		1022C255255E6DE5006DD5B5 /* BlockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C248255E6DE4006DD5B5 /* BlockViewController.m */; };
+		1022C256255E6DE5006DD5B5 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C24C255E6DE5006DD5B5 /* RootViewController.m */; };
+		1022C257255E6DE5006DD5B5 /* TTPlaygroundController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C24E255E6DE5006DD5B5 /* TTPlaygroundController.m */; };
+		1022C258255E6DE5006DD5B5 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C250255E6DE5006DD5B5 /* MainViewController.m */; };
+		1022C274255E6EA8006DD5B5 /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C272255E6EA8006DD5B5 /* TaoBaoHome.m */; };
+		1022C27D255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C279255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m */; };
+		1022C27E255E6F99006DD5B5 /* SGDirWatchdog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */; };
+		4E20FC51A91F83A78098987E /* Pods_TTDFKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C11E13E95E320FE9DB2EF46 /* Pods_TTDFKitExample.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1022C200255E6C36006DD5B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1022C1DC255E6C34006DD5B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1022C1E3255E6C34006DD5B5;
+			remoteInfo = TTDFKitExample;
+		};
+		1022C20B255E6C36006DD5B5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1022C1DC255E6C34006DD5B5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1022C1E3255E6C34006DD5B5;
+			remoteInfo = TTDFKitExample;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0C11E13E95E320FE9DB2EF46 /* Pods_TTDFKitExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TTDFKitExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1022C1E4255E6C34006DD5B5 /* TTDFKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTDFKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1022C1E7255E6C34006DD5B5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		1022C1E8255E6C34006DD5B5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		1022C1F1255E6C34006DD5B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		1022C1F3255E6C36006DD5B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		1022C1F6255E6C36006DD5B5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1022C1F8255E6C36006DD5B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1022C1F9255E6C36006DD5B5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		1022C1FF255E6C36006DD5B5 /* TTDFKitExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTDFKitExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1022C203255E6C36006DD5B5 /* TTDFKitExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTDFKitExampleTests.m; sourceTree = "<group>"; };
+		1022C205255E6C36006DD5B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1022C20A255E6C36006DD5B5 /* TTDFKitExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTDFKitExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1022C20E255E6C36006DD5B5 /* TTDFKitExampleUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTDFKitExampleUITests.m; sourceTree = "<group>"; };
+		1022C210255E6C36006DD5B5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1022C23F255E6DE4006DD5B5 /* RootTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootTableViewController.h; sourceTree = "<group>"; };
+		1022C241255E6DE4006DD5B5 /* bugPatch.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatch.js; sourceTree = "<group>"; };
+		1022C243255E6DE4006DD5B5 /* bugPatchOrigin.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bugPatchOrigin.js; sourceTree = "<group>"; };
+		1022C244255E6DE4006DD5B5 /* RootTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootTableViewController.m; sourceTree = "<group>"; };
+		1022C245255E6DE4006DD5B5 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		1022C247255E6DE4006DD5B5 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		1022C248255E6DE4006DD5B5 /* BlockViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockViewController.m; sourceTree = "<group>"; };
+		1022C249255E6DE4006DD5B5 /* BlockViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockViewController.h; sourceTree = "<group>"; };
+		1022C24A255E6DE4006DD5B5 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		1022C24B255E6DE5006DD5B5 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		1022C24C255E6DE5006DD5B5 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		1022C24E255E6DE5006DD5B5 /* TTPlaygroundController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTPlaygroundController.m; sourceTree = "<group>"; };
+		1022C24F255E6DE5006DD5B5 /* TTPlaygroundController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTPlaygroundController.h; sourceTree = "<group>"; };
+		1022C250255E6DE5006DD5B5 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		1022C272255E6EA8006DD5B5 /* TaoBaoHome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaoBaoHome.m; sourceTree = "<group>"; };
+		1022C273255E6EA8006DD5B5 /* TaoBaoHome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaoBaoHome.h; sourceTree = "<group>"; };
+		1022C279255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFKitHotRefrshTool.m; sourceTree = "<group>"; };
+		1022C27A255E6F99006DD5B5 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
+		1022C27B255E6F99006DD5B5 /* TTDFKitHotRefrshTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFKitHotRefrshTool.h; sourceTree = "<group>"; };
+		1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
+		A6569A8DA44A261A15B12148 /* Pods-TTDFKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTDFKitExample.debug.xcconfig"; path = "Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample.debug.xcconfig"; sourceTree = "<group>"; };
+		AD2663AED8A6905479D20CC0 /* Pods-TTDFKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTDFKitExample.release.xcconfig"; path = "Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1022C1E1255E6C34006DD5B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4E20FC51A91F83A78098987E /* Pods_TTDFKitExample.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C1FC255E6C36006DD5B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C207255E6C36006DD5B5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1022C1DB255E6C34006DD5B5 = {
+			isa = PBXGroup;
+			children = (
+				1022C1E6255E6C34006DD5B5 /* TTDFKitExample */,
+				1022C202255E6C36006DD5B5 /* TTDFKitExampleTests */,
+				1022C20D255E6C36006DD5B5 /* TTDFKitExampleUITests */,
+				1022C1E5255E6C34006DD5B5 /* Products */,
+				A9F0EC74F34C038C9710E133 /* Pods */,
+				1717C3F349EB83DD1436B1A6 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		1022C1E5255E6C34006DD5B5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1022C1E4255E6C34006DD5B5 /* TTDFKitExample.app */,
+				1022C1FF255E6C36006DD5B5 /* TTDFKitExampleTests.xctest */,
+				1022C20A255E6C36006DD5B5 /* TTDFKitExampleUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		1022C1E6255E6C34006DD5B5 /* TTDFKitExample */ = {
+			isa = PBXGroup;
+			children = (
+				1022C278255E6F99006DD5B5 /* libs */,
+				1022C271255E6EA8006DD5B5 /* bugfix */,
+				1022C24D255E6DE5006DD5B5 /* 基础用法模板 */,
+				1022C246255E6DE4006DD5B5 /* 实际场景 */,
+				1022C24B255E6DE5006DD5B5 /* MainViewController.h */,
+				1022C250255E6DE5006DD5B5 /* MainViewController.m */,
+				1022C240255E6DE4006DD5B5 /* Resources */,
+				1022C23F255E6DE4006DD5B5 /* RootTableViewController.h */,
+				1022C244255E6DE4006DD5B5 /* RootTableViewController.m */,
+				1022C245255E6DE4006DD5B5 /* RootViewController.h */,
+				1022C24C255E6DE5006DD5B5 /* RootViewController.m */,
+				1022C1E7255E6C34006DD5B5 /* AppDelegate.h */,
+				1022C1E8255E6C34006DD5B5 /* AppDelegate.m */,
+				1022C1F0255E6C34006DD5B5 /* Main.storyboard */,
+				1022C1F3255E6C36006DD5B5 /* Assets.xcassets */,
+				1022C1F5255E6C36006DD5B5 /* LaunchScreen.storyboard */,
+				1022C1F8255E6C36006DD5B5 /* Info.plist */,
+				1022C1F9255E6C36006DD5B5 /* main.m */,
+			);
+			path = TTDFKitExample;
+			sourceTree = "<group>";
+		};
+		1022C202255E6C36006DD5B5 /* TTDFKitExampleTests */ = {
+			isa = PBXGroup;
+			children = (
+				1022C203255E6C36006DD5B5 /* TTDFKitExampleTests.m */,
+				1022C205255E6C36006DD5B5 /* Info.plist */,
+			);
+			path = TTDFKitExampleTests;
+			sourceTree = "<group>";
+		};
+		1022C20D255E6C36006DD5B5 /* TTDFKitExampleUITests */ = {
+			isa = PBXGroup;
+			children = (
+				1022C20E255E6C36006DD5B5 /* TTDFKitExampleUITests.m */,
+				1022C210255E6C36006DD5B5 /* Info.plist */,
+			);
+			path = TTDFKitExampleUITests;
+			sourceTree = "<group>";
+		};
+		1022C240255E6DE4006DD5B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1022C241255E6DE4006DD5B5 /* bugPatch.js */,
+				1022C242255E6DE4006DD5B5 /* src */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		1022C242255E6DE4006DD5B5 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				1022C243255E6DE4006DD5B5 /* bugPatchOrigin.js */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		1022C246255E6DE4006DD5B5 /* 实际场景 */ = {
+			isa = PBXGroup;
+			children = (
+				1022C247255E6DE4006DD5B5 /* ViewController.m */,
+				1022C248255E6DE4006DD5B5 /* BlockViewController.m */,
+				1022C249255E6DE4006DD5B5 /* BlockViewController.h */,
+				1022C24A255E6DE4006DD5B5 /* ViewController.h */,
+			);
+			path = "实际场景";
+			sourceTree = "<group>";
+		};
+		1022C24D255E6DE5006DD5B5 /* 基础用法模板 */ = {
+			isa = PBXGroup;
+			children = (
+				1022C24E255E6DE5006DD5B5 /* TTPlaygroundController.m */,
+				1022C24F255E6DE5006DD5B5 /* TTPlaygroundController.h */,
+			);
+			path = "基础用法模板";
+			sourceTree = "<group>";
+		};
+		1022C271255E6EA8006DD5B5 /* bugfix */ = {
+			isa = PBXGroup;
+			children = (
+				1022C272255E6EA8006DD5B5 /* TaoBaoHome.m */,
+				1022C273255E6EA8006DD5B5 /* TaoBaoHome.h */,
+			);
+			path = bugfix;
+			sourceTree = "<group>";
+		};
+		1022C278255E6F99006DD5B5 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				1022C279255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m */,
+				1022C27A255E6F99006DD5B5 /* SGDirWatchdog.h */,
+				1022C27B255E6F99006DD5B5 /* TTDFKitHotRefrshTool.h */,
+				1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		1717C3F349EB83DD1436B1A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0C11E13E95E320FE9DB2EF46 /* Pods_TTDFKitExample.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A9F0EC74F34C038C9710E133 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A6569A8DA44A261A15B12148 /* Pods-TTDFKitExample.debug.xcconfig */,
+				AD2663AED8A6905479D20CC0 /* Pods-TTDFKitExample.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1022C1E3255E6C34006DD5B5 /* TTDFKitExample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1022C213255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExample" */;
+			buildPhases = (
+				D793E522446FFEF8A979C9E0 /* [CP] Check Pods Manifest.lock */,
+				1022C1E0255E6C34006DD5B5 /* Sources */,
+				1022C1E1255E6C34006DD5B5 /* Frameworks */,
+				1022C1E2255E6C34006DD5B5 /* Resources */,
+				8BDAF4FA41DE77025BE0495F /* [CP] Embed Pods Frameworks */,
+				1022C26D255E6E2B006DD5B5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TTDFKitExample;
+			productName = TTDFKitExample;
+			productReference = 1022C1E4255E6C34006DD5B5 /* TTDFKitExample.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1022C1FE255E6C36006DD5B5 /* TTDFKitExampleTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1022C216255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExampleTests" */;
+			buildPhases = (
+				1022C1FB255E6C36006DD5B5 /* Sources */,
+				1022C1FC255E6C36006DD5B5 /* Frameworks */,
+				1022C1FD255E6C36006DD5B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1022C201255E6C36006DD5B5 /* PBXTargetDependency */,
+			);
+			name = TTDFKitExampleTests;
+			productName = TTDFKitExampleTests;
+			productReference = 1022C1FF255E6C36006DD5B5 /* TTDFKitExampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1022C209255E6C36006DD5B5 /* TTDFKitExampleUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1022C219255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExampleUITests" */;
+			buildPhases = (
+				1022C206255E6C36006DD5B5 /* Sources */,
+				1022C207255E6C36006DD5B5 /* Frameworks */,
+				1022C208255E6C36006DD5B5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1022C20C255E6C36006DD5B5 /* PBXTargetDependency */,
+			);
+			name = TTDFKitExampleUITests;
+			productName = TTDFKitExampleUITests;
+			productReference = 1022C20A255E6C36006DD5B5 /* TTDFKitExampleUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1022C1DC255E6C34006DD5B5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					1022C1E3255E6C34006DD5B5 = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					1022C1FE255E6C36006DD5B5 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 1022C1E3255E6C34006DD5B5;
+					};
+					1022C209255E6C36006DD5B5 = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = 1022C1E3255E6C34006DD5B5;
+					};
+				};
+			};
+			buildConfigurationList = 1022C1DF255E6C34006DD5B5 /* Build configuration list for PBXProject "TTDFKitExample" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1022C1DB255E6C34006DD5B5;
+			productRefGroup = 1022C1E5255E6C34006DD5B5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1022C1E3255E6C34006DD5B5 /* TTDFKitExample */,
+				1022C1FE255E6C36006DD5B5 /* TTDFKitExampleTests */,
+				1022C209255E6C36006DD5B5 /* TTDFKitExampleUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1022C1E2255E6C34006DD5B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1022C252255E6DE5006DD5B5 /* bugPatchOrigin.js in Resources */,
+				1022C251255E6DE5006DD5B5 /* bugPatch.js in Resources */,
+				1022C1F7255E6C36006DD5B5 /* LaunchScreen.storyboard in Resources */,
+				1022C1F4255E6C36006DD5B5 /* Assets.xcassets in Resources */,
+				1022C1F2255E6C34006DD5B5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C1FD255E6C36006DD5B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C208255E6C36006DD5B5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1022C26D255E6E2B006DD5B5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#appledoc --no-create-docset --output ./doc --project-name Example --project-company \"TTPatch\" --company-id \"com.ttpatch\" .\nplist=\"${SRCROOT}/${TARGET_NAME}/info.plist\"\nTTDFKitIP=$(/usr/libexec/PlistBuddy -c \"Print :TTDFKitIP\" \"${plist}\")\necho \"curIP:+$TTDFKitIP\"\nip=`ifconfig | grep inet | grep -v inet6 | grep -v 127 | cut -d ' ' -f2 `\nTTDFKitIP=$ip\n/usr/libexec/PlistBuddy -c \"Set :TTDFKitIP $TTDFKitIP\" \"${plist}\"\n\n#sh initLocalServer.sh\n";
+		};
+		8BDAF4FA41DE77025BE0495F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D793E522446FFEF8A979C9E0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TTDFKitExample-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1022C1E0255E6C34006DD5B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1022C253255E6DE5006DD5B5 /* RootTableViewController.m in Sources */,
+				1022C1E9255E6C34006DD5B5 /* AppDelegate.m in Sources */,
+				1022C256255E6DE5006DD5B5 /* RootViewController.m in Sources */,
+				1022C274255E6EA8006DD5B5 /* TaoBaoHome.m in Sources */,
+				1022C27E255E6F99006DD5B5 /* SGDirWatchdog.m in Sources */,
+				1022C258255E6DE5006DD5B5 /* MainViewController.m in Sources */,
+				1022C257255E6DE5006DD5B5 /* TTPlaygroundController.m in Sources */,
+				1022C27D255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m in Sources */,
+				1022C254255E6DE5006DD5B5 /* ViewController.m in Sources */,
+				1022C255255E6DE5006DD5B5 /* BlockViewController.m in Sources */,
+				1022C1FA255E6C36006DD5B5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C1FB255E6C36006DD5B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1022C204255E6C36006DD5B5 /* TTDFKitExampleTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1022C206255E6C36006DD5B5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1022C20F255E6C36006DD5B5 /* TTDFKitExampleUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1022C201255E6C36006DD5B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1022C1E3255E6C34006DD5B5 /* TTDFKitExample */;
+			targetProxy = 1022C200255E6C36006DD5B5 /* PBXContainerItemProxy */;
+		};
+		1022C20C255E6C36006DD5B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1022C1E3255E6C34006DD5B5 /* TTDFKitExample */;
+			targetProxy = 1022C20B255E6C36006DD5B5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		1022C1F0255E6C34006DD5B5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1022C1F1255E6C34006DD5B5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		1022C1F5255E6C36006DD5B5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1022C1F6255E6C36006DD5B5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1022C211255E6C36006DD5B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1022C212255E6C36006DD5B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		1022C214255E6C36006DD5B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6569A8DA44A261A15B12148 /* Pods-TTDFKitExample.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FL273NP26J;
+				INFOPLIST_FILE = TTDFKitExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		1022C215255E6C36006DD5B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AD2663AED8A6905479D20CC0 /* Pods-TTDFKitExample.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = FL273NP26J;
+				INFOPLIST_FILE = TTDFKitExample/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExample;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		1022C217255E6C36006DD5B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTDFKitExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TTDFKitExample.app/TTDFKitExample";
+			};
+			name = Debug;
+		};
+		1022C218255E6C36006DD5B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTDFKitExampleTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExampleTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TTDFKitExample.app/TTDFKitExample";
+			};
+			name = Release;
+		};
+		1022C21A255E6C36006DD5B5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTDFKitExampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TTDFKitExample;
+			};
+			name = Debug;
+		};
+		1022C21B255E6C36006DD5B5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = TTDFKitExampleUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ttpatch.www.TTDFKitExampleUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = TTDFKitExample;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1022C1DF255E6C34006DD5B5 /* Build configuration list for PBXProject "TTDFKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1022C211255E6C36006DD5B5 /* Debug */,
+				1022C212255E6C36006DD5B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1022C213255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1022C214255E6C36006DD5B5 /* Debug */,
+				1022C215255E6C36006DD5B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1022C216255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExampleTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1022C217255E6C36006DD5B5 /* Debug */,
+				1022C218255E6C36006DD5B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1022C219255E6C36006DD5B5 /* Build configuration list for PBXNativeTarget "TTDFKitExampleUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1022C21A255E6C36006DD5B5 /* Debug */,
+				1022C21B255E6C36006DD5B5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1022C1DC255E6C34006DD5B5 /* Project object */;
+}
