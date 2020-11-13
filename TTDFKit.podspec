@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TTDFKit"
-  spec.version      = "2.1.6"
+  spec.version      = "2.1.3.0001"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.
@@ -129,7 +129,7 @@ Pod::Spec.new do |spec|
 
   # spec.requires_arc = true
 
-  # spec.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
+  spec.xcconfig = { "ENABLE_BITCODE" => false }
   # spec.dependency "JSONKit", "~> 1.4"
 
 end
