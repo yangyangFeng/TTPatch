@@ -18,7 +18,12 @@
 @end
 
 
-#define data @[@"JS:block 传入Oc [void:void]",@"JS:block 传入Oc [void:obj]",@"JS:block 传入Oc [obj:obj]",@"JS:block 传入Oc [obj:void]",@"Oc:block 传入JS [void:int]",@"JS:block 传入Oc 多参数&多类型[void:void]"]
+#define data @[@"1.JS替换:noReturnParamsVoid, 无返回/无参 ",\
+                @"2.JS替换:noReturnParamsStringInt, 无返回/Str,Int",\
+                @"3.JS替换:returnParamsId, 有返回/有参",\
+                @"4.JS调用OC:OCNoReturnParams, 有返回/有参",\
+                @"5.JS替换:testMoreParams, 多参数&多类型"]
+
 @interface BlockViewController ()
 
 @end
@@ -29,8 +34,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+ 
     // Do any additional setup after loading the view.
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UILabel *msg = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 100)];
+    msg.text = @"    参数携带block参数请参考例:1~4.\n    常规方法替换请参照[testMoreParams]";
+    msg.numberOfLines = 0;
+    msg.backgroundColor = [UIColor systemGreenColor];
+    msg.textColor = [UIColor whiteColor];
+    return msg;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 100;;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -47,8 +65,9 @@
     [self btnAction:(int)indexPath.row];
 }
 
+#pragma mark - 演示代码
 
-- (void)testCall0:(void(^)(void))call{
+- (void)noReturnParamsVoid:(void(^)(void))call{
     if (call) {
         call();
     }
@@ -56,55 +75,22 @@
     [self sendMessageVC:self];
 }
 
-- (void)testCall1:(void(^)(NSString * str,int inta))call{
+- (void)noReturnParamsStringInt:(void(^)(NSString * str,int inta))call{
     if (call) {
         call(@"{\"id\":1,\"name\":\"Tencent\",\"email\":\"admin@Tencent.com\",\"interest\":[\"Tencent\",\"Tencent\"]}",999);
     }
 }
 
-- (void)testCall2:(NSDictionary *(^)(UIViewController *str))call{
+- (void)returnParamsId:(NSDictionary *(^)(UIViewController *str))call{
     if (call) {
-//        NSLog(@"有参block----%@",);
         NSDictionary *  res = call(self);
-                NSLog(@"有参block----%@",res);
-//        call(@"安居客");
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            [res.view setBackgroundColor:[UIColor systemGreenColor]];
-        });
+        NSLog(@"有参block----%@",res);
     }
 }
 
-- (void)testCall3:(NSString *(^)(void))call{
-    if (call) {
-          NSLog(@"有参block----%@",call());
-      }
-}
 
 
-- (void)invocateTest{
-    NSLog(@"开始调用");
-    [self testCallVV:^{
-        NSLog(@"接受回调");
-    }];
-
-    [self testCallIDID:^TTPlaygroundModel *(NSString *str) {
-        NSLog(@"接受回调 -- %@",str);
-        TTPlaygroundModel *model = [TTPlaygroundModel new];
-        model.name = @"TTDFKit";
-        return model;
-    }];
-}
-
-
-- (void)testCallVV:(void(^)(void))call{
-    if (call) {
-        call();
-    }else{
-        NSLog(@"--------Call 方法未实现---------");
-    }
-}
-
-- (void)testCallVID:(void(^)(NSString *arg0,NSString *arg1,int arg2,bool arg3, float arg4, NSNumber* arg5))call{
+- (void)testMoreParams:(void(^)(NSString *arg0,NSString *arg1,int arg2,bool arg3, float arg4, NSNumber* arg5))call{
     if (call) {
         call(@"arg0",@"arg1 ",24,NO,1.99,@(58));
     }else{
@@ -119,25 +105,18 @@
     }
 }
 
-- (void)testCallIDID:(TTPlaygroundModel *(^)(NSString *str))call{
-    if (call) {
-        NSLog(@"block返回值-- %@",call(@"{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}"));
-    }else{
-        NSLog(@"--------Call 方法未实现---------");
-    }
-}
-
-- (void)callBlock:(void(^)(NSString *str))block{
+- (void)OCNoReturnParams:(void(^)(NSString *str))block{
+    
 }
 
 - (void)runBlock{
-
-    id cbInt = ^void(int arg) {
-        NSLog(@"js方法回调----------%d", arg);
+    id cbInt = ^void(NSString *arg) {
+        NSLog(@"js方法回调----------%@", arg);
     };
-
-    [self callBlock:cbInt]; //it's OK
+    
+    [self OCNoReturnParams:cbInt]; //it's OK
 }
+
 
 - (void)configViewSize:(CGSize )size{
     
@@ -155,6 +134,28 @@
 }
 
 - (void)btnAction:(int)index{
-
+    
 }
+
+- (void)testCall3:(NSString *(^)(void))call{
+    if (call) {
+        NSLog(@"有参block----%@",call());
+    }
+}
+
+
+//- (void)invocateTest{
+//    NSLog(@"开始调用");
+//    [self testCallVV:^{
+//        NSLog(@"接受回调");
+//    }];
+//
+//    [self testCallIDID:^TTPlaygroundModel *(NSString *str) {
+//        NSLog(@"接受回调 -- %@",str);
+//        TTPlaygroundModel *model = [TTPlaygroundModel new];
+//        model.name = @"TTDFKit";
+//        return model;
+//    }];
+//}
+
 @end

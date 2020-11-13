@@ -22,6 +22,9 @@
     // 初始化SDK
     [TTDFEntry initSDK];
     [TTDFEntry shareInstance].logDelegate = self;
+    TTDFKitConfigModel *config = [TTDFKitConfigModel new];
+    config.isOpenLog = YES; //打开日志输出, release下可关闭.
+    [[TTDFEntry shareInstance] projectConfig:config];
     
     /**
      * 加载离线的热修复补丁
@@ -48,7 +51,7 @@
 }
 
 - (void)log:(NSString *)log level:(log_level)level{
-    NSLog(@"----------------\n%@",log);
+    NSLog(@"%@",log);
 }
 
 - (void)testSocket{

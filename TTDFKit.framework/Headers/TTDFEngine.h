@@ -19,6 +19,7 @@ extern NSString *_Nonnull const kMessageQueue_oc_addPropertys;
 extern NSString *_Nonnull const kMessageQueue_oc_genBlock;
 extern NSString *_Nonnull const kAPP_IsDebug;
 extern NSString *_Nonnull const kUtils_Log;
+extern NSString *_Nonnull const kIsOpenJSLog;
 
 @class JSValue,TTDFKitBlockModel;
 
