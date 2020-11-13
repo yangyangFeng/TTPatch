@@ -48,7 +48,7 @@
 ## 2. 安装
 
 
-### CocoaPods `pod 2.1.1`
+### CocoaPods `pod 2.1.2`
 
 1. 在 Podfile 中添加  `pod 'TTDFKit'`。
 2. 执行 `pod install` 或 `pod update`。
