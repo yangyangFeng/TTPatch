@@ -25,6 +25,7 @@
 		1022C274255E6EA8006DD5B5 /* TaoBaoHome.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C272255E6EA8006DD5B5 /* TaoBaoHome.m */; };
 		1022C27D255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C279255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m */; };
 		1022C27E255E6F99006DD5B5 /* SGDirWatchdog.m in Sources */ = {isa = PBXBuildFile; fileRef = 1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */; };
+		10F3A7ED257DDAAC0008E4CE /* TTDFWidget.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F3A7EC257DDAAC0008E4CE /* TTDFWidget.m */; };
 		4E20FC51A91F83A78098987E /* Pods_TTDFKitExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C11E13E95E320FE9DB2EF46 /* Pods_TTDFKitExample.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,8 @@
 		1022C27A255E6F99006DD5B5 /* SGDirWatchdog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGDirWatchdog.h; sourceTree = "<group>"; };
 		1022C27B255E6F99006DD5B5 /* TTDFKitHotRefrshTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFKitHotRefrshTool.h; sourceTree = "<group>"; };
 		1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGDirWatchdog.m; sourceTree = "<group>"; };
+		10F3A7EB257DDAAC0008E4CE /* TTDFWidget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFWidget.h; sourceTree = "<group>"; };
+		10F3A7EC257DDAAC0008E4CE /* TTDFWidget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFWidget.m; sourceTree = "<group>"; };
 		A6569A8DA44A261A15B12148 /* Pods-TTDFKitExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTDFKitExample.debug.xcconfig"; path = "Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample.debug.xcconfig"; sourceTree = "<group>"; };
 		AD2663AED8A6905479D20CC0 /* Pods-TTDFKitExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TTDFKitExample.release.xcconfig"; path = "Target Support Files/Pods-TTDFKitExample/Pods-TTDFKitExample.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +139,7 @@
 		1022C1E6255E6C34006DD5B5 /* TTDFKitExample */ = {
 			isa = PBXGroup;
 			children = (
+				10F3A7EA257DDA900008E4CE /* TTDFKitWidgets */,
 				1022C278255E6F99006DD5B5 /* libs */,
 				1022C271255E6EA8006DD5B5 /* bugfix */,
 				1022C24D255E6DE5006DD5B5 /* 基础用法模板 */,
@@ -231,6 +235,15 @@
 				1022C27C255E6F99006DD5B5 /* SGDirWatchdog.m */,
 			);
 			path = libs;
+			sourceTree = "<group>";
+		};
+		10F3A7EA257DDA900008E4CE /* TTDFKitWidgets */ = {
+			isa = PBXGroup;
+			children = (
+				10F3A7EB257DDAAC0008E4CE /* TTDFWidget.h */,
+				10F3A7EC257DDAAC0008E4CE /* TTDFWidget.m */,
+			);
+			path = TTDFKitWidgets;
 			sourceTree = "<group>";
 		};
 		1717C3F349EB83DD1436B1A6 /* Frameworks */ = {
@@ -452,6 +465,7 @@
 				1022C257255E6DE5006DD5B5 /* TTPlaygroundController.m in Sources */,
 				1022C27D255E6F99006DD5B5 /* TTDFKitHotRefrshTool.m in Sources */,
 				1022C254255E6DE5006DD5B5 /* ViewController.m in Sources */,
+				10F3A7ED257DDAAC0008E4CE /* TTDFWidget.m in Sources */,
 				1022C255255E6DE5006DD5B5 /* BlockViewController.m in Sources */,
 				1022C1FA255E6C36006DD5B5 /* main.m in Sources */,
 			);

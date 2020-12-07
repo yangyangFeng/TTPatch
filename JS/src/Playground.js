@@ -2,7 +2,7 @@
  * 引入UI组件,不引入无法直接使用
  */
 _import(
-  "TTPatchParser,NSURLSession,TTPatchURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel"
+  "TTPatchParser,NSURLSession,TTDFKitURLSession,NSURLRequest,NSURL,NSString,TTPatchHotRefrshTool,UIDevice,UIView,UILabel,UIColor,UIFont,UIScreen,UIImageView,UIImage,UITapGestureRecognizer,UIButton,TTPlaygroundModel"
 );
 
 /**
@@ -156,6 +156,17 @@ defineClass(
       // self.tttestBlockString_(function(p1){
       //     Utils.log_info('[unit-test] testBlockString_:' + p1);
       // });
+      var url =
+        "https://yangyangfeng.github.io/TTPatch_Convertor_Flutter/js/JPConvertor.js";
+      var req = NSURLRequest.requestWithURL_(NSURL.URLWithString_(url));
+      var dataTask = TTDFKitURLSession.dataTaskWithRequest_completionHandler_(
+        req,
+        block("void,id,id,id", function (data, response, error) {
+          Utils.log_info(data);
+        })
+      );
+      dataTask.resume();
+
       UIView.animateWithDuration_animations_(
         1,
         block("", function () {

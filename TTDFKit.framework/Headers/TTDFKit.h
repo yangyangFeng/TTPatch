@@ -31,7 +31,6 @@
 #import "TTDFEngine.h"
 #import "TTContext.h"
 #import "TTDFUtils.h"
-#import "TTDFWidget.h"
 #import "TTDFModels.h"
 #import "TTDFBlockHelper.h"
 #import "TTDFMethodCleaner.h"

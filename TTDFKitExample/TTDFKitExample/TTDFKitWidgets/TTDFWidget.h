@@ -8,11 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-
-
 @interface TTDFKitURLSession : NSObject
-+ (instancetype _Nonnull)sharedSession;
-- (NSURLSessionDataTask *_Nonnull)TTDFKit_dataTaskWithRequest:(NSURLRequest *_Nullable)request completionHandler:(void (^_Nullable)(NSString * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
++ (NSURLSessionDataTask *_Nonnull)dataTaskWithRequest:(NSURLRequest *_Nullable)request completionHandler:(void (^_Nullable)(NSString * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error))completionHandler;
 @end
 
 @interface TTDFKitParser : NSObject
