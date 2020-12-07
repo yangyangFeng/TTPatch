@@ -26,8 +26,8 @@
 		<true/>
 	</dict>
 	<key>TTDFKitIP</key>
-	<string>10.72.148.67
-169.254.75.171</string>
+	<string>10.72.14.117
+192.168.255.10</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
