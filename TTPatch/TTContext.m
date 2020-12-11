@@ -944,10 +944,21 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
             params  =  [NSMutableArray arrayWithArray:WrapInvocationArgs(invocation, YES)];
             jsValue = execFuncParamsBlockWithKeyAndParams(block_info_js[@"__key"], params);
         }else{
+            NSMutableDictionary *dictionary = [TTPatch shareInstance].context.replaceMethodMap;
+            NSString *className = NSStringFromClass([self class]);
+            NSArray *keys = dictionary.allKeys;
+            for (NSString *key in keys) {
+                NSArray *classKeys = [key componentsSeparatedByString:@"-"];
+                NSString *targetClassName = classKeys.firstObject;
+                if ([self isKindOfClass:NSClassFromString(targetClassName)]) {
+                    className = targetClassName;
+                    break;
+                }
+            }
             params  = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],
-                                         NSStringFromClass([self class]),
-                                         MethodFormatterToJSFunc(NSStringFromSelector(invocation.selector)),
-                                         @(isInstance)] mutableCopy];
+                         className,
+                         MethodFormatterToJSFunc(NSStringFromSelector(invocation.selector)),
+                         @(isInstance)] mutableCopy];
             [params addObjectsFromArray:tempArguments];;
             jsValue = [func callWithArguments:params];
         }

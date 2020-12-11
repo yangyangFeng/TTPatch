@@ -380,9 +380,12 @@ class TTEdgeInsets {
             params.push(pv_toJSObject(arguments[i]));
         }
 
-        let obj = CLASS_MAP[className].__obj(isInstance);
-        let imp = obj.__methodList[method];
-        let result = imp.apply(undefined, params);
+        var result;
+        if (CLASS_MAP.hasOwnProperty(className)) {
+            let obj = CLASS_MAP[className].__obj(isInstance);
+            let imp = obj.__methodList[method];
+            result = imp.apply(undefined, params);
+        }
 
         // release self
         pv_releaseJsObject(curSelf);
