@@ -22,8 +22,11 @@ static id ToJsObject(id returnValue,NSString *clsName){
 
 static id ToOcObject(id jsObj){
     if (jsObj) {
-        if ([jsObj isKindOfClass:[NSString class]] ||
-            [jsObj isKindOfClass:[NSNumber class]]) {
+        if([jsObj isKindOfClass:[NSNull class]]){
+            return nil;
+        }
+        else if ([jsObj isKindOfClass:[NSString class]] ||
+                 [jsObj isKindOfClass:[NSNumber class]]) {
             return jsObj;
         }
         else if([jsObj isKindOfClass:[NSDictionary class]]){

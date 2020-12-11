@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TTPatch"
-  spec.version      = "0.8.1"
+  spec.version      = "0.9.0"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.

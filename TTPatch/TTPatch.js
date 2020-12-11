@@ -371,7 +371,8 @@ class TTEdgeInsets {
         let funcTargetActionLength = 4;
         // retain self
         let curSelf = new JSObject(className, instance);
-        curSelf.__instanceFlag = className + '-' + method;
+        //以当前class为标识,防止子类super调用时,self引用问题
+        curSelf.__instanceFlag = className + '-' + method + instance.toString();;
         pv_retainJsObject(curSelf);
 
         let params;
@@ -404,7 +405,7 @@ class TTEdgeInsets {
 
     function pv_releaseJsObject(obj) {
         if (obj.release()) {
-            if (obj.__instanceFlag === lastSelf.__instanceFlag) {
+            if (lastSelf == null || obj.__instanceFlag === lastSelf.__instanceFlag) {
                 self = lastSelf = null;
             } else {
                 obj = null;
