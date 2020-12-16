@@ -29,6 +29,7 @@ extern NSString *_Nonnull const kIsOpenJSLog;
 + (id)defineClass:(NSString *)interface;
 
 + (id)dynamicMethodInvocation:(id)classOrInstance
+                    className:(NSString *)className
                       isSuper:(BOOL)isSuper
                       isBlock:(BOOL)isBlock
                        method:(NSString *)method
