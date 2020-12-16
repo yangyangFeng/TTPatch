@@ -350,12 +350,17 @@ static char * GetMethodTypes(NSString *method,NSArray *arguments){
 
 static NSString * MethodFormatterToOcFunc(NSString *method){
     if ([method rangeOfString:@"_"].length > 0) {
+        method = [method stringByReplacingOccurrencesOfString:@"__" withString:@"$$"];
         method = [method stringByReplacingOccurrencesOfString:@"_" withString:@":"];
+        method = [method stringByReplacingOccurrencesOfString:@"$$" withString:@"_"];
     }
     return method;
 }
 
 static NSString * MethodFormatterToJSFunc(NSString *method){
+    if ([method rangeOfString:@"_"].length > 0) {
+        method = [method stringByReplacingOccurrencesOfString:@"_" withString:@"__"];
+    }
     if ([method rangeOfString:@":"].length > 0) {
         method = [method stringByReplacingOccurrencesOfString:@":" withString:@"_"];
     }

@@ -333,22 +333,6 @@ static void setInvocationArgumentsMethod(NSInvocation *invocation,NSArray *argum
     }
 }
 
-static NSString * MethodFormatterToOcFunc(NSString *method){
-    if ([method rangeOfString:@"_"].length > 0) {
-        method = [method stringByReplacingOccurrencesOfString:@"__" withString:@"$$"];
-        method = [method stringByReplacingOccurrencesOfString:@"_" withString:@":"];
-        method = [method stringByReplacingOccurrencesOfString:@"$$" withString:@"_"];
-    }
-    return method;
-}
-
-static NSString * MethodFormatterToJSFunc(NSString *method){
-    if ([method rangeOfString:@":"].length > 0) {
-        method = [method stringByReplacingOccurrencesOfString:@":" withString:@"_"];
-    }
-    return method;
-}
-
 static Method GetInstanceOrClassMethodInfo(Class aClass,SEL aSel){
     Method instanceMethodInfo = class_getInstanceMethod(aClass, aSel);
     Method classMethodInfo    = class_getClassMethod(aClass, aSel);
@@ -957,7 +941,7 @@ static void OC_MSG_SEND_HANDLE(__unsafe_unretained NSObject *self, SEL invocatio
             }
             params  = [@[[JSValue valueWithObject:self inContext:[TTPatch shareInstance].context],
                          className,
-                         MethodFormatterToJSFunc(NSStringFromSelector(invocation.selector)),
+                         TTHookUtils.TTHookMethodFormatterToJSFunc(NSStringFromSelector(invocation.selector)),
                          @(isInstance)] mutableCopy];
             [params addObjectsFromArray:tempArguments];;
             jsValue = [func callWithArguments:params];
@@ -1128,7 +1112,7 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     };
     
     self[@"MessageQueue_oc_sendMsg"] = ^(id obj,BOOL isSuper,BOOL isBlock,NSString* method,id arguments){
-        return DynamicMethodInvocation(obj, isSuper,isBlock,MethodFormatterToOcFunc(method),arguments);
+        return DynamicMethodInvocation(obj, isSuper,isBlock,TTHookUtils.TTHookMethodFormatterToOcFunc(method),arguments);
     };
     
     self[@"MessageQueue_oc_block"] = ^(id obj, id arguments, NSString *custom_signature){
@@ -1136,10 +1120,10 @@ static void HookClassMethodWithSignature(NSString *className,NSString *superClas
     };
     
     self[@"MessageQueue_oc_replaceMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys){
-        HookClassMethod(className, superClassName, MethodFormatterToOcFunc(method), isInstanceMethod, propertys);
+        HookClassMethod(className, superClassName, TTHookUtils.TTHookMethodFormatterToOcFunc(method), isInstanceMethod, propertys);
     };
     self[@"MessageQueue_oc_replaceDynamicMethod"] = ^(NSString *className,NSString *superClassName,NSString *method,BOOL isInstanceMethod,NSArray*propertys, NSString *signature){
-        HookClassMethodWithSignature(className, superClassName, MethodFormatterToOcFunc(method), isInstanceMethod, propertys, signature);
+        HookClassMethodWithSignature(className, superClassName, TTHookUtils.TTHookMethodFormatterToOcFunc(method), isInstanceMethod, propertys, signature);
     };
     self[@"MessageQueue_oc_addPropertys"] = ^(NSString *className,NSString *superClassName,NSArray*propertys){
         AddPropertys(className, superClassName,propertys);
