@@ -6,6 +6,5 @@ target 'TTDFKitExample' do
   use_frameworks!
   
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
-  pod 'TTDFKit' , :path => "../TTDFKit.podspec"
-#  pod 'TTDFKit' , :path => "../../TTDFKit/TTDFKit.podspec"
+  pod 'TTDFKit' , :path => "../TTDFKit/TTDFKit.podspec"
 end
