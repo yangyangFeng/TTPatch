@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-
-@class TTContext,TTDFKitConfigModel;
+@class TTContext, TTDFKitConfigModel;
 @protocol TTLogProtocol;
 /**
  *TTDFKit 声明周期,初始化u入口
@@ -17,14 +16,13 @@
 @interface TTDFEntry : NSObject
 
 /// SDK 初始化, 建议程序启动时优先初始化,以保证能修复更多场景
-+ (void )initSDK;
++ (void)initSDK;
 
 /// 析构组件
 + (void)deInitSDK;
 
 /// 获取当前JS 上下文
 + (TTDFEntry *)shareInstance;
-
 
 /// 执行 patch
 /// @param script js
@@ -37,10 +35,8 @@
 
 - (void)projectConfig:(TTDFKitConfigModel *)config;
 
-@property(nonatomic,strong,readonly)TTContext *context;
-@property(nonatomic,strong,readonly)TTDFKitConfigModel *config;
+@property (nonatomic, strong, readonly) TTContext *context;
+@property (nonatomic, strong, readonly) TTDFKitConfigModel *config;
 
-@property(nonatomic,weak) id<TTLogProtocol> logDelegate;
+@property (nonatomic, weak) id<TTLogProtocol> logDelegate;
 @end
-
-

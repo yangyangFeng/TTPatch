@@ -408,7 +408,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#appledoc --no-create-docset --output ./doc --project-name Example --project-company \"TTPatch\" --company-id \"com.ttpatch\" .\nplist=\"${SRCROOT}/${TARGET_NAME}/info.plist\"\nTTDFKitIP=$(/usr/libexec/PlistBuddy -c \"Print :TTDFKitIP\" \"${plist}\")\necho \"curIP:+$TTDFKitIP\"\nip=`ifconfig | grep inet | grep -v inet6 | grep -v 127 | cut -d ' ' -f2 `\nTTDFKitIP=$ip\n/usr/libexec/PlistBuddy -c \"Set :TTDFKitIP $TTDFKitIP\" \"${plist}\"\n\n#sh initLocalServer.sh\n";
+			shellScript = "
+";
 		};
 		8BDAF4FA41DE77025BE0495F /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -104,14 +104,11 @@ class MetaObject {
   }
 
   release() {
-    if (this.__count === 0) {
-      return true;
-    }
     this.__count -= 1;
-    if (this.__count === 0) {
+    if (this.__count <= 0) {
       return true;
     }
-    return true;
+    return false;
   }
 
   retain() {

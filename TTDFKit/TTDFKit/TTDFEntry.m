@@ -170,16 +170,10 @@ NSString *dfKitCore(){
         }
 
         release() {
-            if (this.__count === 0) {
-                return true;
-            }
-
             this.__count -= 1;
-
-            if (this.__count === 0) {
+            if (this.__count <= 0) {
                 return true;
             }
-
             return false;
         }
 

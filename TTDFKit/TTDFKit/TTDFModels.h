@@ -8,17 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
-
 @interface TTJSObject : NSObject
-+ (NSDictionary *)createJSObject:(id)__isa
-                       className:(NSString *)__className
-                      isInstance:(BOOL)__isInstance;
++ (NSDictionary *)createJSObject:(id)__isa className:(NSString *)__className isInstance:(BOOL)__isInstance;
 @end
 
 @interface TTDFKitBlockModel : NSObject
-@property(nonatomic,copy)id __isa;
-@property(nonatomic,strong)NSInvocation *invocation;
-@property(nonatomic,strong)NSArray *arguments;
+@property (nonatomic, copy) id __isa;
+@property (nonatomic, strong) NSInvocation *invocation;
+@property (nonatomic, strong) NSArray *arguments;
 
 @end
 
@@ -26,27 +23,23 @@
 /**
  * 获取默认配置
  */
-+ (TTDFKitConfigModel*)defaultConfig;
-
++ (TTDFKitConfigModel *)defaultConfig;
 
 /**
  * default is NO
  */
-@property(nonatomic,assign)BOOL isUserNativeData;
+@property (nonatomic, assign) BOOL isUserNativeData;
 
 /**
  * default is YES
  */
-@property(nonatomic,assign)BOOL isOpenLog;
+@property (nonatomic, assign) BOOL isOpenLog;
 @end
 
-
 @interface TTMethodList_Node : NSObject
-@property(nonatomic,copy)NSString *clsName;
-@property(nonatomic,copy)NSString *methodName;
-@property(nonatomic,copy)NSString *key;
-@property(nonatomic,assign)BOOL isClass;
-+ (TTMethodList_Node *)createNodeCls:(NSString *)clsName
-                          methodName:(NSString *)methodName
-                             isClass:(BOOL)isClass;
+@property (nonatomic, copy) NSString *clsName;
+@property (nonatomic, copy) NSString *methodName;
+@property (nonatomic, copy) NSString *key;
+@property (nonatomic, assign) BOOL isClass;
++ (TTMethodList_Node *)createNodeCls:(NSString *)clsName methodName:(NSString *)methodName isClass:(BOOL)isClass;
 @end

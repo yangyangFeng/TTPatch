@@ -21,7 +21,7 @@ extern NSString *_Nonnull const kAPP_IsDebug;
 extern NSString *_Nonnull const kUtils_Log;
 extern NSString *_Nonnull const kIsOpenJSLog;
 
-@class JSValue,TTDFKitBlockModel;
+@class JSValue, TTDFKitBlockModel;
 
 //@class ffi_type;
 /// JS上下文与Native交互 核心管理类
@@ -35,9 +35,7 @@ extern NSString *_Nonnull const kIsOpenJSLog;
                        method:(NSString *)method
                     arguments:(NSArray *)arguments;
 
-+ (NSInvocation*)dynamicBlock:(TTDFKitBlockModel *)blockModel
-                    arguments:(NSArray *)arguments
-             custom_signature:(NSString*)custom_signature;
++ (NSInvocation *)dynamicBlock:(TTDFKitBlockModel *)blockModel arguments:(NSArray *)arguments custom_signature:(NSString *)custom_signature;
 
 + (void)hookClassMethod:(NSString *)className
          superClassName:(NSString *)superClassName
@@ -52,20 +50,13 @@ extern NSString *_Nonnull const kIsOpenJSLog;
                            propertys:(NSArray *)propertys
                            signature:(NSString *)signature;
 
-+ (void)addPropertys:(NSString *)className
-      superClassName:(NSString *)superClassName
-           propertys:(NSArray *)propertys;
++ (void)addPropertys:(NSString *)className superClassName:(NSString *)superClassName propertys:(NSArray *)propertys;
 
-+ (id)GetParamFromArgs:(void **)args
-          argumentType:(const char *)argumentType
-                 index:(int)index;
++ (id)GetParamFromArgs:(void **)args argumentType:(const char *)argumentType index:(int)index;
 
-+ (void)ConvertReturnValue:(const char *)methodSignature
-                   jsValue:(JSValue *)jsValue
-                retPointer:(void *)retPointer;
++ (void)ConvertReturnValue:(const char *)methodSignature jsValue:(JSValue *)jsValue retPointer:(void *)retPointer;
 
-+ (id)GenJsBlockSignature:(NSString *)signature
-                    block:(JSValue *)block;
++ (id)GenJsBlockSignature:(NSString *)signature block:(JSValue *)block;
 
 + (void *)typeEncodingToFfiType:(const char *)typeEncoding;
 

@@ -14,34 +14,38 @@
 #import "TTDFEngine.h"
 @implementation TTDFMethodCleaner
 
-+ (void)clean{
++ (void)clean {
     [self cleanClass:nil];
     [TTDFEngine.getReplaceMethodMap removeAllObjects];
 }
 
-+ (void)cleanClass:(NSString *)className{
++ (void)cleanClass:(NSString *)className {
     NSDictionary *methodsDict = TTDFEngine.getReplaceMethodMap;
-    for (TTMethodList_Node * node in methodsDict.allValues) {
+    for (TTMethodList_Node *node in methodsDict.allValues) {
         Class cls = NSClassFromString(node.clsName);
-        guard(cls) else {continue;}
-        
+        guard(cls) else {
+            continue;
+        }
+
         NSString *selectorName = node.methodName;
         NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTDFKitChangeMethodPrefix, selectorName];
-        
+
 #if 1
-        TTLog(@"class:%@ message:[%@] cleaned",node.clsName,selectorName);
+        TTLog(@"class:%@ message:[%@] cleaned", node.clsName, selectorName);
 #endif
         SEL selector = NSSelectorFromString(selectorName);
         SEL originalSelector = NSSelectorFromString(originalSelectorName);
         IMP originalImp = class_respondsToSelector(cls, originalSelector) ? class_getMethodImplementation(cls, originalSelector) : NULL;
-        
+
         Method method;
         if (node.isClass) {
             method = class_getClassMethod(cls, originalSelector);
-        }else{
+        } else {
             method = class_getInstanceMethod(cls, originalSelector);
         }
-        guard(method) else{continue;}
+        guard(method) else {
+            continue;
+        }
         char *typeDescription = (char *)method_getTypeEncoding(method);
         class_replaceMethod(cls, selector, originalImp, typeDescription);
     }

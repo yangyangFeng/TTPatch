@@ -34,18 +34,18 @@ void dispose_helper(struct TTDFKitBlock *src) {
 }
 
 static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
-    TTDFBlockHelper *userInfo = (__bridge TTDFBlockHelper *) userdata;// 不可以进行释放
+    TTDFBlockHelper *userInfo = (__bridge TTDFBlockHelper *)userdata;  // 不可以进行释放
     NSString *typeEncoding = userInfo.typeEncoding;
     NSMethodSignature *signature = [NSMethodSignature signatureWithObjCTypes:typeEncoding.UTF8String];
     JSValue *func = userInfo.func;
-    
+
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (int i = 1; i < signature.numberOfArguments; i++) {
         const char *type = [signature getArgumentTypeAtIndex:i];
         id value = [TTDFEngine GetParamFromArgs:args argumentType:type index:i];
         [array addObject:value ? value : [NSNull null]];
     }
-    
+
     if (func) {
         JSValue *value = [func callWithArguments:array];
         if (value && ![value isUndefined]) {
@@ -53,7 +53,7 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
         }
         return;
     }
-    
+
     return;
 }
 
@@ -75,42 +75,31 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
     // 第一个参数是自身block的参数
     unsigned int argCount = (unsigned int)signature.numberOfArguments;
     void *imp = NULL;
-    _cifPtr = malloc(sizeof(ffi_cif));//不可以free
-    _closure = ffi_closure_alloc(sizeof(ffi_closure), (void **) &imp);
+    _cifPtr = malloc(sizeof(ffi_cif));  //不可以free
+    _closure = ffi_closure_alloc(sizeof(ffi_closure), (void **)&imp);
     ffi_type *returnType = (ffi_type *)[TTDFEngine typeEncodingToFfiType:signature.methodReturnType];
     _args = malloc(sizeof(ffi_type *) * argCount);
     _args[0] = &ffi_type_pointer;
-    
+
     for (int i = 1; i < argCount; i++) {
         _args[i] = (ffi_type *)[TTDFEngine typeEncodingToFfiType:[signature getArgumentTypeAtIndex:i]];
     }
-    
+
     if (ffi_prep_cif(_cifPtr, FFI_DEFAULT_ABI, argCount, returnType, _args) == FFI_OK) {
-        if (ffi_prep_closure_loc(_closure, _cifPtr, blockIMP, (__bridge void *) self, imp) != FFI_OK) {
+        if (ffi_prep_closure_loc(_closure, _cifPtr, blockIMP, (__bridge void *)self, imp) != FFI_OK) {
             NSAssert(NO, @"block 生成失败");
         }
     }
-    
-    struct TTDFKitBlockDescriptor descriptor = {
-        0,
-        sizeof(struct TTDFKitBlock),
-        (void (*)(void *dst, const void *src)) copy_helper,
-        (void (*)(const void *src)) dispose_helper,
-        nil
-    };
-    
+
+    struct TTDFKitBlockDescriptor descriptor
+        = { 0, sizeof(struct TTDFKitBlock), (void (*)(void *dst, const void *src))copy_helper, (void (*)(const void *src))dispose_helper, nil };
+
     _descriptor = malloc(sizeof(struct TTDFKitBlockDescriptor));
     memcpy(_descriptor, &descriptor, sizeof(struct TTDFKitBlockDescriptor));
-    
-    struct TTDFKitBlock newBlock = {
-        &_NSConcreteStackBlock,
-        (TTDFKit_BLOCK_HAS_COPY_DISPOSE | TTDFKit_BLOCK_HAS_SIGNATURE),
-        0,
-        imp,
-        _descriptor,
-        (__bridge void *) self
-    };
-    
+
+    struct TTDFKitBlock newBlock
+        = { &_NSConcreteStackBlock, (TTDFKit_BLOCK_HAS_COPY_DISPOSE | TTDFKit_BLOCK_HAS_SIGNATURE), 0, imp, _descriptor, (__bridge void *)self };
+
     _blockPtr = Block_copy(&newBlock);
     CFRelease(&descriptor);
     CFRelease(&newBlock);

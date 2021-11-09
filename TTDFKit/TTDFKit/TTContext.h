@@ -8,12 +8,10 @@
 
 #import <JavaScriptCore/JavaScriptCore.h>
 
-
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef enum : NSUInteger {
-    log_level_debug=1,
+    log_level_debug = 1,
     log_level_info,
     log_level_error,
 } log_level;
@@ -28,7 +26,7 @@ typedef enum : NSUInteger {
 
 - (JSValue *)messageQueue;
 
-@property(nonatomic,weak) id<TTLogProtocol> logDelegate;
+@property (nonatomic, weak) id<TTLogProtocol> logDelegate;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
 typedef enum {
     // Set to true on blocks that have captures (and thus are not true
     // global blocks) but are known not to escape for various other
@@ -18,15 +17,13 @@ typedef enum {
     // BLOCK_IS_NOESCAPE is set, BLOCK_IS_GLOBAL is set too. Copying a
     // non-escaping block returns the original block and releasing such a
     // block is a no-op, which is exactly how global blocks are handled.
-    TTDFKit_BLOCK_IS_NOESCAPE      =  (1 << 23),
-    
-    TTDFKit_BLOCK_HAS_COPY_DISPOSE =  (1 << 25),
-    TTDFKit_BLOCK_HAS_CTOR =          (1 << 26), // helpers have C++ code
-    TTDFKit_BLOCK_IS_GLOBAL =         (1 << 28),
-    TTDFKit_BLOCK_HAS_STRET =         (1 << 29), // IFF BLOCK_HAS_SIGNATURE
-    TTDFKit_BLOCK_HAS_SIGNATURE =     (1 << 30),
+    TTDFKit_BLOCK_IS_NOESCAPE = (1 << 23),
+    TTDFKit_BLOCK_HAS_COPY_DISPOSE = (1 << 25),
+    TTDFKit_BLOCK_HAS_CTOR = (1 << 26),  // helpers have C++ code
+    TTDFKit_BLOCK_IS_GLOBAL = (1 << 28),
+    TTDFKit_BLOCK_HAS_STRET = (1 << 29),  // IFF BLOCK_HAS_SIGNATURE
+    TTDFKit_BLOCK_HAS_SIGNATURE = (1 << 30),
 } TTDFKit_BLOCK_FLAGS;
-
 
 struct TTDFKitBlock {
     void *isa;
