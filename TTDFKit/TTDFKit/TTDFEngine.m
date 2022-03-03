@@ -231,9 +231,7 @@ static id WrapOcToJsInvocationResult(NSInvocation *invocation, NSMethodSignature
             [invocation getReturnValue:&result];
             if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
                 returnValue = (__bridge_transfer id)result;
-                if ([TTDFEntry shareInstance].config.isOpenLog) {
-                    TTLog(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
-                }
+                TTLog_Info(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
             } else {
                 returnValue = (__bridge id)result;
             }
@@ -349,11 +347,10 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *className, BOOL 
 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
-        if ([TTDFEntry shareInstance].config.isOpenLog) {
-            TTLog(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %@ \n "
-                  @"-----------------------------------",
-                method, signature.numberOfArguments, arguments);
-        }
+        TTLog_Info(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %@ \n "
+                   @"-----------------------------------",
+            method, signature.numberOfArguments, arguments);
+
         [invocation retainArguments];
         [invocation setTarget:classOrInstance];
         [invocation setSelector:sel_method];
@@ -437,15 +434,11 @@ static void AddPropertys(NSString *className, NSString *superClassName, NSArray 
                                                                             withString:[[propertyName substringToIndex:1] capitalizedString]];
 
         if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
-            if ([TTDFEntry shareInstance].config.isOpenLog) {
-                TTLog(@"Get添加成功:%@", propertyForSetter);
-            }
+            TTLog_Info(@"Get添加成功:%@", propertyForSetter);
         }
         if (class_addMethod(
                 aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:", propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
-            if ([TTDFEntry shareInstance].config.isOpenLog) {
-                TTLog(@"Set添加成功:set%@", propertyForSetter);
-            }
+            TTLog_Info(@"Set添加成功:set%@", propertyForSetter);
         }
     }
 
@@ -808,9 +801,8 @@ static void HookClassMethodWithSignature(
         NSCAssert(NO, errorDescription);
     }
 
-    if ([TTDFEntry shareInstance].config.isOpenLog) {
-        TTLog(@"%@替换 %@ %@", className, isInstanceMethod ? @"-" : @"+", method);
-    }
+    TTLog_Info(@"%@替换 %@ %@", className, isInstanceMethod ? @"-" : @"+", method);
+
     Class aClass = NSClassFromString(className);
     SEL original_SEL = NSSelectorFromString(method);
     Method originalMethodInfo = class_getInstanceMethod(aClass, original_SEL);
@@ -845,11 +837,9 @@ static void HookClassMethodWithSignature(
         Protocol *pro = NSProtocolFromString(aProtocol);
         if (!class_conformsToProtocol(NSClassFromString([classAndSuper firstObject]), NSProtocolFromString(aProtocol))) {
             if (class_addProtocol(cls, pro)) {
-                if ([TTDFEntry shareInstance].config.isOpenLog)
-                    TTLog_Info(@"添加协议成功");
+                [TTDFLogModule log_info:@"添加协议成功"];
             } else {
-                if ([TTDFEntry shareInstance].config.isOpenLog)
-                    TTLog_Info(@"添加协议失败");
+                [TTDFLogModule log_info:@"添加协议失败"];
             }
         } else {
         }

@@ -20,7 +20,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // 初始化SDK
     [TTDFEntry initSDK];
-    [TTDFEntry shareInstance].logDelegate = self;
+    [[TTDFEntry shareInstance] addLogDelegate:self];
     TTDFKitConfigModel *config = [TTDFKitConfigModel new];
     config.isOpenLog = YES;  //打开日志输出, release下可关闭.
     [[TTDFEntry shareInstance] projectConfig:config];
@@ -49,7 +49,7 @@
 }
 
 - (void)log:(NSString *)log level:(log_level)level {
-    NSLog(@"%@", log);
+    NSLog(@"日志回调.%@", log);
 }
 
 - (void)testSocket {

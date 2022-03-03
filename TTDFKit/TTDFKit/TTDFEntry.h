@@ -35,8 +35,11 @@
 
 - (void)projectConfig:(TTDFKitConfigModel *)config;
 
+/// 添加回调, 可将日志写入文件
+/// @param logDelegate 代理
+- (void)addLogDelegate:(id<TTLogProtocol>)logDelegate;
+
 @property (nonatomic, strong, readonly) TTContext *context;
 @property (nonatomic, strong, readonly) TTDFKitConfigModel *config;
-
-@property (nonatomic, weak) id<TTLogProtocol> logDelegate;
+@property (nonatomic, weak, readonly) id<TTLogProtocol> logDelegate;
 @end

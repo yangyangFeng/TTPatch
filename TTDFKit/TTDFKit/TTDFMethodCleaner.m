@@ -7,8 +7,10 @@
 //
 
 #import "TTDFMethodCleaner.h"
+
 #import <objc/runtime.h>
 #import <objc/message.h>
+
 #import "TTDFKit.h"
 #import "TTDFEntry.h"
 #import "TTDFEngine.h"
@@ -29,10 +31,8 @@
 
         NSString *selectorName = node.methodName;
         NSString *originalSelectorName = [NSString stringWithFormat:@"%@%@", TTDFKitChangeMethodPrefix, selectorName];
+        TTLog_Info(@"class:%@ message:[%@] cleaned", node.clsName, selectorName);
 
-#if 1
-        TTLog(@"class:%@ message:[%@] cleaned", node.clsName, selectorName);
-#endif
         SEL selector = NSSelectorFromString(selectorName);
         SEL originalSelector = NSSelectorFromString(originalSelectorName);
         IMP originalImp = class_respondsToSelector(cls, originalSelector) ? class_getMethodImplementation(cls, originalSelector) : NULL;

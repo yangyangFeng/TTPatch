@@ -7,20 +7,21 @@
 //
 
 #import "TTDFEntry.h"
+
 #import "TTDFKit.h"
 
-static NSRegularExpression* _regex;
+static NSRegularExpression *_regex;
 static TTDFEntry *instance = nil;
 
 @interface TTDFEntry ()
-
-@property(nonatomic,strong)TTContext *context;
-@property(nonatomic,strong)TTDFKitConfigModel *config;
+@property (nonatomic, strong) TTContext *context;
+@property (nonatomic, strong) TTDFKitConfigModel *config;
+@property (nonatomic, weak) id<TTLogProtocol> logDelegate;
 @end
 
 @implementation TTDFEntry
 
-+ (void)initSDK{
++ (void)initSDK {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         instance = [TTDFEntry new];
@@ -28,35 +29,35 @@ static TTDFEntry *instance = nil;
     [instance loadTTJSKit];
 }
 
-+ (void)deInitSDK{
++ (void)deInitSDK {
     [[TTDFEntry shareInstance] clearContext];
 }
 
-+ (TTDFEntry *)shareInstance{
++ (TTDFEntry *)shareInstance {
     return instance;
 }
 
-- (void)evaluateScript:(NSString *)script{
+- (void)evaluateScript:(NSString *)script {
     [self evaluateScript:script withSourceURL:nil];
 }
 
-- (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL{
-    guard(script != nil && script.length) else{
-        TTAssert(NO, @"执行脚本为空,请检查");
+- (void)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL {
+    guard(script != nil && script.length) else {
+        NSCAssert(NO, @"执行脚本为空,请检查");
     }
     if (sourceURL) {
         [self.context evaluateScript:script withSourceURL:sourceURL];
-    }else{
+    } else {
         [self.context evaluateScript:script];
     }
 }
 
-- (void)clearContext{
+- (void)clearContext {
     [TTDFMethodCleaner clean];
     self.context = nil;
 }
 
-- (void)loadTTJSKit{
+- (void)loadTTJSKit {
     if (!_context) {
         _context = [TTContext new];
         [_context configJSBrigeActions];
@@ -65,16 +66,16 @@ static TTDFEntry *instance = nil;
     }
 }
 
-- (void)runMainJS{
+- (void)runMainJS {
     [self evaluateScript:dfKitCore() withSourceURL:[NSURL URLWithString:@"TTDF_Core.js"]];
 }
 
-- (void)projectConfig:(TTDFKitConfigModel *)config{
-    self.config=config;
+- (void)projectConfig:(TTDFKitConfigModel *)config {
+    self.config = config;
 }
 
-- (void)setLogDelegate:(id<TTLogProtocol>)logDelegate{
-    self.context.logDelegate = logDelegate;
+- (void)addLogDelegate:(id<TTLogProtocol>)logDelegate {
+    self.logDelegate = logDelegate;
 }
 
 NSString *dfKitCore(){

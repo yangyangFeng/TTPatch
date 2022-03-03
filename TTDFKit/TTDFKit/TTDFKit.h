@@ -8,13 +8,9 @@
 
 #ifndef TTDFKitKit_h
 #define TTDFKitKit_h
-#define guard(condfion) if(condfion){}
-
-#define TTLog(ARGS, ...) NSLog((@"[%s:%d] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
-#define TTLog_Info(ARGS, ...) NSLog((@"[%s:%d] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
-#define TTLog_Error(ARGS, ...) NSLog((@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
-#define TTAssert(con,ARGS, ...) NSAssert(con,(@"[%s:%d][error] " ARGS), __FILE__, __LINE__, ##__VA_ARGS__);
-
+#define guard(condfion) \
+    if (condfion) {     \
+    }
 
 #import <Foundation/Foundation.h>
 #import <JavaScriptCore/JavaScriptCore.h>
@@ -26,5 +22,6 @@
 #import "TTDFModels.h"
 #import "TTDFBlockHelper.h"
 #import "TTDFMethodCleaner.h"
+#import "TTDFLogModule.h"
 
 #endif /* TTDFKitKit_h */
