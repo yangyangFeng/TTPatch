@@ -51,6 +51,7 @@
 |**支持`Native`代码转成`JS`脚本**                        | [在线地址](https://yangyangfeng.github.io/TTPatch_Convertor/)|
 |**支持原生网络请求**                        |[使用示例](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95#2-%E5%A6%82%E6%9E%9C%E5%86%99%E4%B8%80%E4%B8%AA%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82) |
 |**支持自定义插件**                        |[使用示例](https://github.com/yangyangFeng/TTPatch/wiki/%E8%BF%9B%E9%98%B6%E7%94%A8%E6%B3%95#1-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8F%92%E4%BB%B6) |
+|**支持日志输出**                        |`debug/info/error` 方便错误排查,异常上报|
 
 
 ## 2. 安装
