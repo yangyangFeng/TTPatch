@@ -52,12 +52,11 @@ struct TTDFKitBlockDescriptor {
 
 @class JSValue;
 @interface TTDFBlockHelper : NSObject
-- (id)initWithTypeEncoding:(NSString *)typeEncoding callbackFunction:(JSValue *)func;
-
-- (void *)blockPtr;
-
 @property (nonatomic, copy) NSString *typeEncoding;
 @property (nonatomic, strong) JSValue *func;
+
+- (id)initWithTypeEncoding:(NSString *)typeEncoding callbackFunction:(JSValue *)func;
+- (void *)blockPtr;
 @end
 
 NS_ASSUME_NONNULL_END

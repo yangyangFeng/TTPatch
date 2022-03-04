@@ -49,7 +49,10 @@
 }
 
 - (void)log:(NSString *)log level:(log_level)level {
-    NSLog(@"日志回调.%@", log);
+    //如需调试,请将全部日志输出
+    if (level > log_level_debug) {
+        NSLog(@"%@", log);
+    }
 }
 
 - (void)testSocket {

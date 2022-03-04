@@ -9,22 +9,44 @@
 /* Begin PBXBuildFile section */
 		1046079024DBB60500F97096 /* TTDFKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1046078624DBB60500F97096 /* TTDFKit.framework */; };
 		1046079524DBB60500F97096 /* TTDFKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1046079424DBB60500F97096 /* TTDFKitTests.m */; };
-		1046079724DBB60500F97096 /* TTDFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 1046078924DBB60500F97096 /* TTDFKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607B124DBB64100F97096 /* TTDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A024DBB64000F97096 /* TTDFUtils.m */; };
-		104607B224DBB64100F97096 /* TTDFEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607A124DBB64000F97096 /* TTDFEntry.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607B424DBB64100F97096 /* TTDFMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A324DBB64000F97096 /* TTDFMethodCleaner.m */; };
-		104607B524DBB64100F97096 /* TTDFModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A424DBB64000F97096 /* TTDFModels.m */; };
-		104607B624DBB64100F97096 /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A524DBB64100F97096 /* TTContext.m */; };
-		104607B724DBB64100F97096 /* TTDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A624DBB64100F97096 /* TTDFEngine.m */; };
-		104607B824DBB64100F97096 /* TTContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607A724DBB64100F97096 /* TTContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607B924DBB64100F97096 /* TTDFMethodCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607A824DBB64100F97096 /* TTDFMethodCleaner.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607BA24DBB64100F97096 /* TTDFEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607A924DBB64100F97096 /* TTDFEntry.m */; };
-		104607BC24DBB64100F97096 /* TTDFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607AB24DBB64100F97096 /* TTDFUtils.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607BD24DBB64100F97096 /* TTDFModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607AC24DBB64100F97096 /* TTDFModels.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607BE24DBB64100F97096 /* TTDFBlockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 104607AD24DBB64100F97096 /* TTDFBlockHelper.m */; };
-		104607C024DBB64100F97096 /* TTDFBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607AF24DBB64100F97096 /* TTDFBlockHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		104607C124DBB64100F97096 /* TTDFEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607B024DBB64100F97096 /* TTDFEngine.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		104607DB24DBB70200F97096 /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 104607DA24DBB70200F97096 /* JavaScriptCore.framework */; };
+		10F7468F27D1BEEE008EC97D /* TTDFUtilsTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7468E27D1BEEE008EC97D /* TTDFUtilsTest.m */; };
+		10F746A527D1C05E008EC97D /* TTDFEntry.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469427D1C05D008EC97D /* TTDFEntry.h */; };
+		10F746A627D1C05E008EC97D /* TTDFBlockHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469527D1C05D008EC97D /* TTDFBlockHelper.h */; };
+		10F746A727D1C05E008EC97D /* TTDFModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469627D1C05D008EC97D /* TTDFModels.m */; };
+		10F746A827D1C05E008EC97D /* TTDFModels.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469627D1C05D008EC97D /* TTDFModels.m */; };
+		10F746A927D1C05E008EC97D /* TTContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469727D1C05D008EC97D /* TTContext.h */; };
+		10F746AA27D1C05E008EC97D /* TTDFBlockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469827D1C05D008EC97D /* TTDFBlockHelper.m */; };
+		10F746AB27D1C05E008EC97D /* TTDFBlockHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469827D1C05D008EC97D /* TTDFBlockHelper.m */; };
+		10F746AC27D1C05E008EC97D /* TTDFModels.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469927D1C05D008EC97D /* TTDFModels.h */; };
+		10F746AD27D1C05E008EC97D /* TTDFEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469A27D1C05D008EC97D /* TTDFEntry.m */; };
+		10F746AE27D1C05E008EC97D /* TTDFEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469A27D1C05D008EC97D /* TTDFEntry.m */; };
+		10F746AF27D1C05E008EC97D /* TTDFLogModule.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469B27D1C05D008EC97D /* TTDFLogModule.h */; };
+		10F746B027D1C05E008EC97D /* TTDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469C27D1C05D008EC97D /* TTDFEngine.m */; };
+		10F746B127D1C05E008EC97D /* TTDFEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469C27D1C05D008EC97D /* TTDFEngine.m */; };
+		10F746B227D1C05E008EC97D /* TTDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469D27D1C05D008EC97D /* TTDFUtils.m */; };
+		10F746B327D1C05E008EC97D /* TTDFUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F7469D27D1C05D008EC97D /* TTDFUtils.m */; };
+		10F746B427D1C05E008EC97D /* TTDFMethodCleaner.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469E27D1C05D008EC97D /* TTDFMethodCleaner.h */; };
+		10F746B527D1C05E008EC97D /* TTDFEngine.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F7469F27D1C05D008EC97D /* TTDFEngine.h */; };
+		10F746B627D1C05E008EC97D /* TTDFKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F746A027D1C05E008EC97D /* TTDFKit.h */; };
+		10F746B727D1C05E008EC97D /* TTDFMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A127D1C05E008EC97D /* TTDFMethodCleaner.m */; };
+		10F746B827D1C05E008EC97D /* TTDFMethodCleaner.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A127D1C05E008EC97D /* TTDFMethodCleaner.m */; };
+		10F746B927D1C05E008EC97D /* TTDFUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 10F746A227D1C05E008EC97D /* TTDFUtils.h */; };
+		10F746BA27D1C05E008EC97D /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A327D1C05E008EC97D /* TTContext.m */; };
+		10F746BB27D1C05E008EC97D /* TTContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A327D1C05E008EC97D /* TTContext.m */; };
+		10F746BC27D1C05E008EC97D /* TTDFLogModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A427D1C05E008EC97D /* TTDFLogModule.mm */; };
+		10F746BD27D1C05E008EC97D /* TTDFLogModule.mm in Sources */ = {isa = PBXBuildFile; fileRef = 10F746A427D1C05E008EC97D /* TTDFLogModule.mm */; };
+		10F746BE27D1C081008EC97D /* ffitarget.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C424DBB64F00F97096 /* ffitarget.h */; };
+		10F746BF27D1C088008EC97D /* ffi_i386.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C624DBB64F00F97096 /* ffi_i386.h */; };
+		10F746C027D1C088008EC97D /* ffi_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C824DBB64F00F97096 /* ffi_x86_64.h */; };
+		10F746C127D1C088008EC97D /* ffitarget_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C324DBB64F00F97096 /* ffitarget_arm64.h */; };
+		10F746C227D1C088008EC97D /* ffitarget_x86_64.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C724DBB64F00F97096 /* ffitarget_x86_64.h */; };
+		10F746C327D1C088008EC97D /* ffitarget_i386.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607CA24DBB64F00F97096 /* ffitarget_i386.h */; };
+		10F746C427D1C088008EC97D /* ffi_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C524DBB64F00F97096 /* ffi_arm.h */; };
+		10F746C527D1C088008EC97D /* ffi.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607CC24DBB64F00F97096 /* ffi.h */; };
+		10F746C627D1C088008EC97D /* ffi_arm64.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607CD24DBB64F00F97096 /* ffi_arm64.h */; };
+		10F746C727D1C088008EC97D /* libffi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 104607CB24DBB64F00F97096 /* libffi.a */; };
+		10F746C827D1C088008EC97D /* ffitarget_arm.h in Headers */ = {isa = PBXBuildFile; fileRef = 104607C924DBB64F00F97096 /* ffitarget_arm.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,25 +61,10 @@
 
 /* Begin PBXFileReference section */
 		1046078624DBB60500F97096 /* TTDFKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TTDFKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		1046078924DBB60500F97096 /* TTDFKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TTDFKit.h; sourceTree = "<group>"; };
 		1046078A24DBB60500F97096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1046078F24DBB60500F97096 /* TTDFKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TTDFKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1046079424DBB60500F97096 /* TTDFKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTDFKitTests.m; sourceTree = "<group>"; };
 		1046079624DBB60500F97096 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		104607A024DBB64000F97096 /* TTDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFUtils.m; sourceTree = "<group>"; };
-		104607A124DBB64000F97096 /* TTDFEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFEntry.h; sourceTree = "<group>"; };
-		104607A324DBB64000F97096 /* TTDFMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFMethodCleaner.m; sourceTree = "<group>"; };
-		104607A424DBB64000F97096 /* TTDFModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFModels.m; sourceTree = "<group>"; };
-		104607A524DBB64100F97096 /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
-		104607A624DBB64100F97096 /* TTDFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFEngine.m; sourceTree = "<group>"; };
-		104607A724DBB64100F97096 /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
-		104607A824DBB64100F97096 /* TTDFMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFMethodCleaner.h; sourceTree = "<group>"; };
-		104607A924DBB64100F97096 /* TTDFEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFEntry.m; sourceTree = "<group>"; };
-		104607AB24DBB64100F97096 /* TTDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFUtils.h; sourceTree = "<group>"; };
-		104607AC24DBB64100F97096 /* TTDFModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFModels.h; sourceTree = "<group>"; };
-		104607AD24DBB64100F97096 /* TTDFBlockHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFBlockHelper.m; sourceTree = "<group>"; };
-		104607AF24DBB64100F97096 /* TTDFBlockHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFBlockHelper.h; sourceTree = "<group>"; };
-		104607B024DBB64100F97096 /* TTDFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFEngine.h; sourceTree = "<group>"; };
 		104607C324DBB64F00F97096 /* ffitarget_arm64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget_arm64.h; sourceTree = "<group>"; };
 		104607C424DBB64F00F97096 /* ffitarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffitarget.h; sourceTree = "<group>"; };
 		104607C524DBB64F00F97096 /* ffi_arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ffi_arm.h; sourceTree = "<group>"; };
@@ -72,6 +79,24 @@
 		104607DA24DBB70200F97096 /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		1046083B24DBC58800F97096 /* TTDF.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TTDF.js; sourceTree = "<group>"; };
 		10F3A7E4257DD77F0008E4CE /* buildExe.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = buildExe.sh; sourceTree = SOURCE_ROOT; };
+		10F7468E27D1BEEE008EC97D /* TTDFUtilsTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TTDFUtilsTest.m; sourceTree = "<group>"; };
+		10F7469427D1C05D008EC97D /* TTDFEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFEntry.h; sourceTree = "<group>"; };
+		10F7469527D1C05D008EC97D /* TTDFBlockHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFBlockHelper.h; sourceTree = "<group>"; };
+		10F7469627D1C05D008EC97D /* TTDFModels.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFModels.m; sourceTree = "<group>"; };
+		10F7469727D1C05D008EC97D /* TTContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTContext.h; sourceTree = "<group>"; };
+		10F7469827D1C05D008EC97D /* TTDFBlockHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFBlockHelper.m; sourceTree = "<group>"; };
+		10F7469927D1C05D008EC97D /* TTDFModels.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFModels.h; sourceTree = "<group>"; };
+		10F7469A27D1C05D008EC97D /* TTDFEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFEntry.m; sourceTree = "<group>"; };
+		10F7469B27D1C05D008EC97D /* TTDFLogModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFLogModule.h; sourceTree = "<group>"; };
+		10F7469C27D1C05D008EC97D /* TTDFEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFEngine.m; sourceTree = "<group>"; };
+		10F7469D27D1C05D008EC97D /* TTDFUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFUtils.m; sourceTree = "<group>"; };
+		10F7469E27D1C05D008EC97D /* TTDFMethodCleaner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFMethodCleaner.h; sourceTree = "<group>"; };
+		10F7469F27D1C05D008EC97D /* TTDFEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFEngine.h; sourceTree = "<group>"; };
+		10F746A027D1C05E008EC97D /* TTDFKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFKit.h; sourceTree = "<group>"; };
+		10F746A127D1C05E008EC97D /* TTDFMethodCleaner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTDFMethodCleaner.m; sourceTree = "<group>"; };
+		10F746A227D1C05E008EC97D /* TTDFUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTDFUtils.h; sourceTree = "<group>"; };
+		10F746A327D1C05E008EC97D /* TTContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTContext.m; sourceTree = "<group>"; };
+		10F746A427D1C05E008EC97D /* TTDFLogModule.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TTDFLogModule.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +105,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				104607DB24DBB70200F97096 /* JavaScriptCore.framework in Frameworks */,
+				10F746C727D1C088008EC97D /* libffi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,23 +143,25 @@
 			isa = PBXGroup;
 			children = (
 				1046083B24DBC58800F97096 /* TTDF.js */,
-				1046078924DBB60500F97096 /* TTDFKit.h */,
-				104607A724DBB64100F97096 /* TTContext.h */,
-				104607A524DBB64100F97096 /* TTContext.m */,
-				104607AF24DBB64100F97096 /* TTDFBlockHelper.h */,
-				104607AD24DBB64100F97096 /* TTDFBlockHelper.m */,
-				104607B024DBB64100F97096 /* TTDFEngine.h */,
-				104607A624DBB64100F97096 /* TTDFEngine.m */,
-				104607A124DBB64000F97096 /* TTDFEntry.h */,
-				104607A924DBB64100F97096 /* TTDFEntry.m */,
-				104607A824DBB64100F97096 /* TTDFMethodCleaner.h */,
-				104607A324DBB64000F97096 /* TTDFMethodCleaner.m */,
-				104607AC24DBB64100F97096 /* TTDFModels.h */,
-				104607A424DBB64000F97096 /* TTDFModels.m */,
-				104607AB24DBB64100F97096 /* TTDFUtils.h */,
-				104607A024DBB64000F97096 /* TTDFUtils.m */,
 				1046078A24DBB60500F97096 /* Info.plist */,
 				10F3A7E4257DD77F0008E4CE /* buildExe.sh */,
+				10F7469727D1C05D008EC97D /* TTContext.h */,
+				10F746A327D1C05E008EC97D /* TTContext.m */,
+				10F7469527D1C05D008EC97D /* TTDFBlockHelper.h */,
+				10F7469827D1C05D008EC97D /* TTDFBlockHelper.m */,
+				10F7469F27D1C05D008EC97D /* TTDFEngine.h */,
+				10F7469C27D1C05D008EC97D /* TTDFEngine.m */,
+				10F7469427D1C05D008EC97D /* TTDFEntry.h */,
+				10F7469A27D1C05D008EC97D /* TTDFEntry.m */,
+				10F746A027D1C05E008EC97D /* TTDFKit.h */,
+				10F7469B27D1C05D008EC97D /* TTDFLogModule.h */,
+				10F746A427D1C05E008EC97D /* TTDFLogModule.mm */,
+				10F7469E27D1C05D008EC97D /* TTDFMethodCleaner.h */,
+				10F746A127D1C05E008EC97D /* TTDFMethodCleaner.m */,
+				10F7469927D1C05D008EC97D /* TTDFModels.h */,
+				10F7469627D1C05D008EC97D /* TTDFModels.m */,
+				10F746A227D1C05E008EC97D /* TTDFUtils.h */,
+				10F7469D27D1C05D008EC97D /* TTDFUtils.m */,
 				104607C224DBB64F00F97096 /* libffi */,
 			);
 			path = TTDFKit;
@@ -143,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				1046079424DBB60500F97096 /* TTDFKitTests.m */,
+				10F7468E27D1BEEE008EC97D /* TTDFUtilsTest.m */,
 				1046079624DBB60500F97096 /* Info.plist */,
 			);
 			path = TTDFKitTests;
@@ -181,14 +210,25 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				104607BC24DBB64100F97096 /* TTDFUtils.h in Headers */,
-				104607B824DBB64100F97096 /* TTContext.h in Headers */,
-				104607C124DBB64100F97096 /* TTDFEngine.h in Headers */,
-				104607C024DBB64100F97096 /* TTDFBlockHelper.h in Headers */,
-				104607B924DBB64100F97096 /* TTDFMethodCleaner.h in Headers */,
-				104607BD24DBB64100F97096 /* TTDFModels.h in Headers */,
-				104607B224DBB64100F97096 /* TTDFEntry.h in Headers */,
-				1046079724DBB60500F97096 /* TTDFKit.h in Headers */,
+				10F746B427D1C05E008EC97D /* TTDFMethodCleaner.h in Headers */,
+				10F746C027D1C088008EC97D /* ffi_x86_64.h in Headers */,
+				10F746C327D1C088008EC97D /* ffitarget_i386.h in Headers */,
+				10F746C427D1C088008EC97D /* ffi_arm.h in Headers */,
+				10F746C227D1C088008EC97D /* ffitarget_x86_64.h in Headers */,
+				10F746B627D1C05E008EC97D /* TTDFKit.h in Headers */,
+				10F746B927D1C05E008EC97D /* TTDFUtils.h in Headers */,
+				10F746C627D1C088008EC97D /* ffi_arm64.h in Headers */,
+				10F746AC27D1C05E008EC97D /* TTDFModels.h in Headers */,
+				10F746A627D1C05E008EC97D /* TTDFBlockHelper.h in Headers */,
+				10F746BF27D1C088008EC97D /* ffi_i386.h in Headers */,
+				10F746C127D1C088008EC97D /* ffitarget_arm64.h in Headers */,
+				10F746A927D1C05E008EC97D /* TTContext.h in Headers */,
+				10F746A527D1C05E008EC97D /* TTDFEntry.h in Headers */,
+				10F746B527D1C05E008EC97D /* TTDFEngine.h in Headers */,
+				10F746AF27D1C05E008EC97D /* TTDFLogModule.h in Headers */,
+				10F746BE27D1C081008EC97D /* ffitarget.h in Headers */,
+				10F746C827D1C088008EC97D /* ffitarget_arm.h in Headers */,
+				10F746C527D1C088008EC97D /* ffi.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,13 +329,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				104607B124DBB64100F97096 /* TTDFUtils.m in Sources */,
-				104607BE24DBB64100F97096 /* TTDFBlockHelper.m in Sources */,
-				104607B424DBB64100F97096 /* TTDFMethodCleaner.m in Sources */,
-				104607BA24DBB64100F97096 /* TTDFEntry.m in Sources */,
-				104607B524DBB64100F97096 /* TTDFModels.m in Sources */,
-				104607B724DBB64100F97096 /* TTDFEngine.m in Sources */,
-				104607B624DBB64100F97096 /* TTContext.m in Sources */,
+				10F746BA27D1C05E008EC97D /* TTContext.m in Sources */,
+				10F746A727D1C05E008EC97D /* TTDFModels.m in Sources */,
+				10F746BC27D1C05E008EC97D /* TTDFLogModule.mm in Sources */,
+				10F746AA27D1C05E008EC97D /* TTDFBlockHelper.m in Sources */,
+				10F746B227D1C05E008EC97D /* TTDFUtils.m in Sources */,
+				10F746B727D1C05E008EC97D /* TTDFMethodCleaner.m in Sources */,
+				10F746AD27D1C05E008EC97D /* TTDFEntry.m in Sources */,
+				10F746B027D1C05E008EC97D /* TTDFEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,7 +344,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10F746AE27D1C05E008EC97D /* TTDFEntry.m in Sources */,
 				1046079524DBB60500F97096 /* TTDFKitTests.m in Sources */,
+				10F746BD27D1C05E008EC97D /* TTDFLogModule.mm in Sources */,
+				10F746AB27D1C05E008EC97D /* TTDFBlockHelper.m in Sources */,
+				10F746B827D1C05E008EC97D /* TTDFMethodCleaner.m in Sources */,
+				10F746BB27D1C05E008EC97D /* TTContext.m in Sources */,
+				10F7468F27D1BEEE008EC97D /* TTDFUtilsTest.m in Sources */,
+				10F746A827D1C05E008EC97D /* TTDFModels.m in Sources */,
+				10F746B327D1C05E008EC97D /* TTDFUtils.m in Sources */,
+				10F746B127D1C05E008EC97D /* TTDFEngine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

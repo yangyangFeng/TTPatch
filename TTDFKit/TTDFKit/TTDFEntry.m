@@ -129,11 +129,14 @@ NSString *dfKitCore(){
     log_level_error = 3;
 
     Utils.log_error = function (params) {
-        Utils_Log(log_level_error, params);
+        if(params instanceof TypeError){
+          params='[' + params.sourceURL +':' + params.line + '.' + params.column + ']' +params.message;
+        }
+        Utils.log(params);
     };
 
     Utils.log_info = function (params) {
-        Utils_Log(log_level_info, "[TTDFKit_JS]"+params);
+        Utils_Log(log_level_info, params);
         Utils.log(params);
     };
 

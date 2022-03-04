@@ -42,14 +42,14 @@ static void blockIMP(ffi_cif *cif, void *ret, void **args, void *userdata) {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (int i = 1; i < signature.numberOfArguments; i++) {
         const char *type = [signature getArgumentTypeAtIndex:i];
-        id value = [TTDFEngine GetParamFromArgs:args argumentType:type index:i];
+        id value = [TTDFEngine getParamFromArgs:args argumentType:type index:i];
         [array addObject:value ? value : [NSNull null]];
     }
 
     if (func) {
         JSValue *value = [func callWithArguments:array];
         if (value && ![value isUndefined]) {
-            [TTDFEngine ConvertReturnValue:[signature methodReturnType] jsValue:value retPointer:ret];
+            [TTDFEngine convertReturnValue:[signature methodReturnType] jsValue:value retPointer:ret];
         }
         return;
     }

@@ -100,7 +100,7 @@ defineClass(
         let width = screenWidth / 3.5;
         let react = new TTReact(
           10 + (i % 3) * (width + 10),
-          120 + 64 + 15 + parseInt(i / 3) * (width + 10),
+          100 + 64 + 15 + parseInt(i / 3) * (width + 10),
           width,
           width
         );
@@ -138,13 +138,22 @@ defineClass(
       }
     }),
     btnDidAction_: dynamic(",id", function (btn) {
+      //测试代码
+
       // tap.view().setBackgroundColor_(UIColor.whiteColor());
-      // var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
-      // Utils.log_info('uuid->' + uuid);
-      // let str = self.name();
-      // btn.setTitle_forState_(uuid, 0);
-      // btn.setBackgroundColor_(UIColor.systemGreenColor());
-      // self.testFunc();
+      var uuid = UIDevice.currentDevice().identifierForVendor().UUIDString();
+      Utils.log_info('uuid->' + uuid);
+      
+      try {
+        btn.setTitle_forState_(str, 0);
+      } catch (error) {
+        Utils.log_info('[' + error.name +':' + error.line + '.' + error.column + ']' +error.message);
+      }
+
+      btn.setBackgroundColor_(UIColor.systemGreenColor());
+      self.testFunc();
+
+      //json解析
       // var dic = JSON.parse("{\"id\":1,\"name\":\"jb51\",\"email\":\"admin@jb51.net\",\"interest\":[\"wordpress\",\"php\"]}");
       // Utils.log_info(dic.name);
 
@@ -156,6 +165,8 @@ defineClass(
       // self.tttestBlockString_(function(p1){
       //     Utils.log_info('[unit-test] testBlockString_:' + p1);
       // });
+
+      //网络请求
       var url =
         "https://yangyangfeng.github.io/TTPatch_Convertor_Flutter/js/JPConvertor.js";
       var req = NSURLRequest.requestWithURL_(NSURL.URLWithString_(url));

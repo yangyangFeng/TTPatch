@@ -14,6 +14,9 @@
  *TTDFKit 声明周期,初始化u入口
  */
 @interface TTDFEntry : NSObject
+@property (nonatomic, strong, readonly) TTContext *context;
+@property (nonatomic, strong, readonly) TTDFKitConfigModel *config;
+@property (nonatomic, weak, readonly) id<TTLogProtocol> logDelegate;
 
 /// SDK 初始化, 建议程序启动时优先初始化,以保证能修复更多场景
 + (void)initSDK;
@@ -38,8 +41,4 @@
 /// 添加回调, 可将日志写入文件
 /// @param logDelegate 代理
 - (void)addLogDelegate:(id<TTLogProtocol>)logDelegate;
-
-@property (nonatomic, strong, readonly) TTContext *context;
-@property (nonatomic, strong, readonly) TTDFKitConfigModel *config;
-@property (nonatomic, weak, readonly) id<TTLogProtocol> logDelegate;
 @end

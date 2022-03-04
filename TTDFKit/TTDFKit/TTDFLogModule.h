@@ -20,11 +20,11 @@ typedef enum : NSUInteger {
 @end
 
 @interface TTDFLogModule : NSObject
++ (void)logFileName:(NSString *)fileName line:(NSInteger)line level:(log_level)level fprmat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
 + (void)log:(NSString *)message level:(log_level)level;
 + (void)log_debug:(NSString *)message;
 + (void)log_info:(NSString *)message;
 + (void)log_error:(NSString *)message;
-+ (void)logFileName:(NSString *)fileName line:(NSInteger)line level:(log_level)level fprmat:(NSString *)format, ... NS_REQUIRES_NIL_TERMINATION;
 @end
 
 NS_ASSUME_NONNULL_END

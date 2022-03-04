@@ -231,7 +231,7 @@ static id WrapOcToJsInvocationResult(NSInvocation *invocation, NSMethodSignature
             [invocation getReturnValue:&result];
             if ([method isEqualToString:@"alloc"] || [method isEqualToString:@"new"]) {
                 returnValue = (__bridge_transfer id)result;
-                TTLog_Info(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
+                TTLog_Debug(@"Alloc Retain count is %ld", CFGetRetainCount((__bridge CFTypeRef)returnValue));
             } else {
                 returnValue = (__bridge id)result;
             }
@@ -347,8 +347,8 @@ static id DynamicMethodInvocation(id classOrInstance, NSString *className, BOOL 
 
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:signature];
     if ([classOrInstance respondsToSelector:sel_method]) {
-        TTLog_Info(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %@ \n "
-                   @"-----------------------------------",
+        TTLog_Debug(@"\n -----------------Message Queue Call Native ---------------\n | %@ \n | 参数个数:%ld \n | %@ \n "
+                    @"-----------------------------------",
             method, signature.numberOfArguments, arguments);
 
         [invocation retainArguments];
@@ -434,11 +434,11 @@ static void AddPropertys(NSString *className, NSString *superClassName, NSArray 
                                                                             withString:[[propertyName substringToIndex:1] capitalizedString]];
 
         if (class_addMethod(aClass, NSSelectorFromString(propertyName), (IMP)TT_Patch_Property_getter, "@@:")) {
-            TTLog_Info(@"Get添加成功:%@", propertyForSetter);
+            TTLog_Info(@"[Getter]%@.%@ add success!!!", NSStringFromClass(aClass), propertyForSetter);
         }
         if (class_addMethod(
                 aClass, NSSelectorFromString([NSString stringWithFormat:@"set%@:", propertyForSetter]), (IMP)TT_Patch_Property_Setter, "v@:@")) {
-            TTLog_Info(@"Set添加成功:set%@", propertyForSetter);
+            TTLog_Info(@"[Setter]%@.%@ add success!!!", NSStringFromClass(aClass), propertyForSetter);
         }
     }
 
@@ -800,8 +800,7 @@ static void HookClassMethodWithSignature(
         NSString *errorDescription = [NSString stringWithFormat:@"Selector %@ is blacklisted.", method];
         NSCAssert(NO, errorDescription);
     }
-
-    TTLog_Info(@"%@替换 %@ %@", className, isInstanceMethod ? @"-" : @"+", method);
+    TTLog_Info(@"%@.%@%@ replace success!!!", className, isInstanceMethod ? @"-" : @"+", method);
 
     Class aClass = NSClassFromString(className);
     SEL original_SEL = NSSelectorFromString(method);
@@ -886,16 +885,16 @@ static void HookClassMethodWithSignature(
     return typeEncodingToFfiType(typeEncoding);
 }
 
-+ (id)GenJsBlockSignature:(NSString *)signature block:(JSValue *)block {
++ (id)genJsBlockSignature:(NSString *)signature block:(JSValue *)block {
     TTDFBlockHelper *blockHelper = [[TTDFBlockHelper alloc] initWithTypeEncoding:CreateSignatureWithString(signature, YES) callbackFunction:block];
     return blockHelper;
 }
 
-+ (id)GetParamFromArgs:(void **)args argumentType:(const char *)argumentType index:(int)index {
++ (id)getParamFromArgs:(void **)args argumentType:(const char *)argumentType index:(int)index {
     return WrapParamsWithTypeChar(args, argumentType, index);
 }
 
-+ (void)ConvertReturnValue:(const char *)methodSignature jsValue:(JSValue *)jsValue retPointer:(void *)retPointer {
++ (void)convertReturnValue:(const char *)methodSignature jsValue:(JSValue *)jsValue retPointer:(void *)retPointer {
     return ConvertReturnValue(methodSignature, jsValue, retPointer);
 }
 

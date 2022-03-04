@@ -11,100 +11,96 @@
 #import <TTDFKit/TTDFKit.h>
 #import "TTDFKitHotRefrshTool.h"
 @interface RootViewController ()
-@property(nonatomic,strong)SGDirWatchdog *watchDog;
+@property (nonatomic, strong) SGDirWatchdog *watchDog;
 @end
 
 @implementation RootViewController
 
-- (NSString *)jsFileName{
+- (NSString *)jsFileName {
     return @"";
 }
 
--(void)dealloc{
+- (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    NSLog(@"----");
+    NSLog(@"%@,%s", self, __func__);
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:@"TTDFKit-Refresh" object:nil];
-    NSLog(@"super---%@",self);
 }
 
-- (void)refresh{
-    
+- (void)refresh {
 }
 
-- (void)updateResource:(void(^)(void))callback
-{
+- (void)updateResource:(void (^)(void))callback {
     NSURLSession *session = [NSURLSession sharedSession];
-    NSURLRequest *req = [NSURLRequest requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@",
-                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
-                                                                           [TTDFKitHotRefrshTool shareInstance].getLocaServerPort,
-                                                                           self.jsFileName]]];
+    NSURLRequest *req = [NSURLRequest
+        requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@", [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
+                                                      [TTDFKitHotRefrshTool shareInstance].getLocaServerPort, self.jsFileName]]];
     if (!self.jsFileName.length) {
         return;
     }
-    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:req completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (data && (error == nil)) {
-            // 网络访问成功
-            NSLog(@"data=%@",[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-            NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-            [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
-            if (callback) {
-                callback();
-            }
-        } else {
-            // 网络访问失败
-            NSLog(@"error=%@",error);
-        }
-    }];
+    NSURLSessionDataTask *dataTask =
+        [session dataTaskWithRequest:req
+                   completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+                       if (data && (error == nil)) {
+                           // 网络访问成功
+                           NSLog(@"data=%@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+                           NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                           [[TTDFEntry shareInstance] evaluateScript:result withSourceURL:[NSURL URLWithString:self.jsFileName]];
+                           if (callback) {
+                               callback();
+                           }
+                       } else {
+                           // 网络访问失败
+                           NSLog(@"error=%@", error);
+                       }
+                   }];
     [dataTask resume];
 }
 
-- (void)initJSContxtPath{
+- (void)initJSContxtPath {
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
     NSString *path = [rootPath stringByAppendingPathComponent:@"../JS/TTDFKit.js"];
 
     NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
     NSArray *contentOfFolder = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:scriptRootPath error:NULL];
 
-
     for (NSString *aPath in contentOfFolder) {
         if ([aPath isEqualToString:@"Playground.js"]) {
-            NSString * fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
+            NSString *fullPath = [scriptRootPath stringByAppendingPathComponent:aPath];
             [self watchFolder:fullPath mainScriptPath:path];
         }
     }
-    
 }
 
-- (void)watch{
-    
+- (void)watch {
     NSString *rootPath = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"rootPath"];
     NSString *scriptRootPath = [rootPath stringByAppendingPathComponent:@"../JS/outputs"];
     NSString *srcPath = [scriptRootPath stringByAppendingPathComponent:self.jsFileName];
-    
+
     NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath] encoding:NSUTF8StringEncoding];
     if (jsCode.length) {
         [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:self.jsFileName]];
     }
-    
+
     [self loadJSCode];
 }
 
-- (void)watchFolder:(NSString *)folderPath mainScriptPath:(NSString *)mainScriptPath
-{
-    SGDirWatchdog *watchDog = [[SGDirWatchdog alloc] initWithPath:folderPath update:^{
-        NSLog(@"--------------------\n reload");
-        [self watch];
-    }];
+- (void)watchFolder:(NSString *)folderPath mainScriptPath:(NSString *)mainScriptPath {
+    SGDirWatchdog *watchDog = [[SGDirWatchdog alloc] initWithPath:folderPath
+                                                           update:^{
+                                                               NSLog(@"--------------------\n reload");
+                                                               [self watch];
+                                                           }];
     [watchDog start];
     self.watchDog = watchDog;
-//    [self.watchDogs addObject:watchDog];
+    //    [self.watchDogs addObject:watchDog];
 }
 
-- (void)loadJSCode{}
+- (void)loadJSCode {
+}
 /*
 #pragma mark - Navigation
 

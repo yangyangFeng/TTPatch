@@ -23,7 +23,6 @@ extern NSString *_Nonnull const kIsOpenJSLog;
 
 @class JSValue, TTDFKitBlockModel;
 
-//@class ffi_type;
 /// JS上下文与Native交互 核心管理类
 @interface TTDFEngine : NSObject
 + (id)defineClass:(NSString *)interface;
@@ -52,11 +51,11 @@ extern NSString *_Nonnull const kIsOpenJSLog;
 
 + (void)addPropertys:(NSString *)className superClassName:(NSString *)superClassName propertys:(NSArray *)propertys;
 
-+ (id)GetParamFromArgs:(void **)args argumentType:(const char *)argumentType index:(int)index;
++ (id)getParamFromArgs:(void **)args argumentType:(const char *)argumentType index:(int)index;
 
-+ (void)ConvertReturnValue:(const char *)methodSignature jsValue:(JSValue *)jsValue retPointer:(void *)retPointer;
++ (void)convertReturnValue:(const char *)methodSignature jsValue:(JSValue *)jsValue retPointer:(void *)retPointer;
 
-+ (id)GenJsBlockSignature:(NSString *)signature block:(JSValue *)block;
++ (id)genJsBlockSignature:(NSString *)signature block:(JSValue *)block;
 
 + (void *)typeEncodingToFfiType:(const char *)typeEncoding;
 
