@@ -57,7 +57,7 @@
     };
 
     self[kMessageQueue_oc_genBlock] = ^(NSString *signature, JSValue *func) {
-        return [TTDFEngine GenJsBlockSignature:signature block:func];
+        return [TTDFEngine genJsBlockSignature:signature block:func];
     };
 
     self[kAPP_IsDebug] = ^(NSString *className, NSString *superClassName, NSArray *propertys) {
