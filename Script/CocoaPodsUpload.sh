@@ -5,6 +5,7 @@ git tag "$1"
 show_result $? "tag:$1"
 git push origin "$1" 
 show_result $? "push"
+# pod trunk push ./TTDFKit.podspec --allow-warnings --verbose
 pod trunk push ./TTDFKit/TTDFKit.podspec --allow-warnings
 show_result $? "push CocoaPods $1"
 

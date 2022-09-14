@@ -78,7 +78,7 @@
         requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://%@:%@/%@", [TTDFKitHotRefrshTool shareInstance].getLocaServerIP,
                                                       [TTDFKitHotRefrshTool shareInstance].getLocaServerPort, filename]]];
 
-    NSLog(@"更新Path:%@", [req URL].absoluteString);
+    NSLog(@"[TTDFKit] 本地更新URL:%@", [req URL].absoluteString);
     NSURLSessionDataTask *dataTask =
         [session dataTaskWithRequest:req
                    completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
@@ -95,13 +95,14 @@
                                callback();
                            }
                        } else {
+                           NSLog(@"[TTDFKit] 加载localPatch");
                            // 本地代理未开启,加载本地bundle资源,无法实时预览
                            NSString *srcPath = [[NSBundle mainBundle] pathForResource:@"hotfixPatch" ofType:@"js"];
 
                            NSString *jsCode = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:srcPath]
                                                                     encoding:NSUTF8StringEncoding];
 
-                           [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"hotfixPatch.js"]];
+                           [[TTDFEntry shareInstance] evaluateScript:jsCode withSourceURL:[NSURL URLWithString:@"localPatch.js"]];
                        }
                    }];
     [dataTask resume];

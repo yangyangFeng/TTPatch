@@ -7,9 +7,7 @@ defineClass('HomeViewController:UIViewController', {
 
             var adbundle = NSBundle.bundleWithPath_("/System/Library/Frameworks/SafariServices.framework");
             adbundle.load();
-
-            let dataSource = ['加载下发模块', 'JS-OC间block', '点击加载更多', ];
-
+            
             self.view().setBackgroundColor_(UIColor.whiteColor());
             Utils.log('js调用 viewDidLoad');
             self.setTitle_('TTPatch.js');
