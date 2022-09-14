@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "TTDFKit"
-  spec.version      = "2.1.8"
+  spec.version      = "2.1.9"
   spec.summary      = "一款基于javaScript脚本的轻量级热修复工具"
 
   # This description is used to generate tags and improve search results.
@@ -25,11 +25,11 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = '热修复、热更新、JS代码动态下发、动态创建类
-功能特性	
+功能特性
 替换指定ObjectC方法实现
-支持block	
-支持添加属性	
-支持基础数据类型	
+支持block
+支持添加属性
+支持基础数据类型
 支持下发纯JS页面'
 
   spec.homepage     = "https://github.com/yangyangFeng/TTPatch"
@@ -96,8 +96,8 @@ Pod::Spec.new do |spec|
 
   # spec.public_header_files = "TTDFKit/*.h","libffi/*.h"
   # spec.source_files = 'TTDFKit/*','libffi/*'
-  spec.public_header_files = "TTDFKit/*.h"
-  spec.source_files = 'TTDFKit/*.{h,m,mm}',"TTDFKit/libffi/*.h"
+  spec.public_header_files = "TTDFKit/TTDFKit/*.h"
+  spec.source_files = 'TTDFKit/TTDFKit/*.{h,m,mm}',"TTDFKit/libffi/*.h"
 
   # ――― Resources ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
   #
